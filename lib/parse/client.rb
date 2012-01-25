@@ -37,7 +37,6 @@ module Parse
       end
 
       response = @session.request(method, uri, {}, options)
-      ap response
       if response.status >= 400
         raise ParseProtocolError, response
       else
