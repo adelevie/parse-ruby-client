@@ -26,15 +26,29 @@ module Parse
       @session.headers[Protocol::HEADER_APP_ID]   = @application_id
     end
 
-    def get(uri)
-      response = @session.get(uri)
+    # Perform an HTTP request for the given uri and method
+    # with common basic response handling. Will raise a
+    # ParseProtocolError if the response has an error status code,
+    # and will return the parsed JSON body on success, if there is one.
+    def request(uri, method = :get, body = nil)
+      options = {}
+      if body
+        options[:data] = body
+      end
+
+      response = @session.request(method, uri, {}, options)
       if response.status >= 400
         raise ParseProtocolError, response
+      else
+        if response.body
+          JSON.parse response.body
+        end
       end
-      parse_response response
     end
 
-    def parse_response(response)
+    # Interpret a parsed JSON object, instantiating new instances
+    # of Parse::Object as appropriate.
+    def parse_response(data)
       if response.body
         data = JSON.parse response.body
         if data.size == 1 && data[Protocol::RESPONSE_KEY_RESULTS]
@@ -44,18 +58,28 @@ module Parse
         end
       end
     end
-    private :parse_response
 
   end
 
-  # A singleton client for use by methods in Object
+  def get(uri)
+    request(uri)
+  end
+
+  # Module methods
+  # ------------------------------------------------------------
+
+  # A singleton client for use by methods in Object.
+  # Always use Parse.client to retrieve the client object.
   @@client = nil
 
-  def self.init(data)
+  # Initialize the singleton instance of Client which is used
+  # by all API methods. Parse.init must be called before saving
+  # or retrieving any objects.
+  def Parse.init(data)
     @@client = Client.new(data)
   end
 
-  def self.client
+  def Parse.client
     if !@@client
       raise ParseError, "API not initialized"
     end
@@ -64,17 +88,9 @@ module Parse
 
   # Perform a simple retrieval of a simple object, or all objects of a
   # given class.
-  def self.get(class_name, object_id = nil)
-    uri = Protocol.class_uri(class_name, object_id)
-    response = self.client.session.get(uri)
-    if response.status == 200
-      data = JSON.parse response.body
-      if data.size == 1 && data["results"].is_a?( Array )
-        data["results"].collect { |hash| Parse::Object.new class_name, hash }
-      else
-        Parse::Object.new class_name, data
-      end
-    end
+  def Parse.get(class_name, object_id = nil)
+    data = Parse.client.get( Protocol.class_uri(class_name, object_id) )
+    Parse.client.parse_response data
   end
 
 end
