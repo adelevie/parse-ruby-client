@@ -3,14 +3,18 @@ require "awesome_print"
 Parse.init :application_id  => "your_application_id",
            :api_key         => "your_api_key"
 
-test_object = Parse::Object.new "TestObject"
-test_object["foo"] = "bar"
-test_object["bar"] = "foo"
-test_object["array"] = [10,11,12,13]
-test_object["hash"] = {"thing" => true, "other-thing" => false}
-test_object["count"] = 10
+profile = Parse::Object.new "Profile"
+profile["first_name"]    = "John"
+profile["last_name"]     = "Doe"
+profile["username"]      = "jdoe"
+profile["email_address"] = "jdoe@blahblahblah"
 
-rsp = test_object.parse_save
-ap rsp
+profile.parse_save
 
-rsp = Parse.get "TestObject"
+profile.parse_refresh
+
+profile.parse_object_id
+
+profile.created_at
+
+profile.parse_increment "login_count", -2
