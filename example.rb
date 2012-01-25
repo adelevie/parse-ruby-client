@@ -1,7 +1,7 @@
 require "awesome_print"
 
-Parse.init :application_id  => "YhwZHZsMPetWV77ZtpnhawPKjyyb29ZJDmhxzjsc",
-           :api_key         => "EvH9lAcr7fzvd87CO6GoQD4kt2eNJl2vknwi1h9g"
+Parse.init :application_id  => "your_application_id",
+           :api_key         => "your_api_key"
 
 test_object = Parse::Object.new "TestObject"
 test_object["foo"] = "bar"
