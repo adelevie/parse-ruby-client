@@ -37,11 +37,12 @@ module Parse
       end
 
       response = @session.request(method, uri, {}, options)
+      ap response
       if response.status >= 400
         raise ParseProtocolError, response
       else
         if response.body
-          JSON.parse response.body
+          return JSON.parse response.body
         end
       end
     end
@@ -49,8 +50,7 @@ module Parse
     # Interpret a parsed JSON object, instantiating new instances
     # of Parse::Object as appropriate.
     def parse_response(data)
-      if response.body
-        data = JSON.parse response.body
+      if data
         if data.size == 1 && data[Protocol::RESPONSE_KEY_RESULTS]
           data[Protocol::RESPONSE_KEY_RESULTS].collect { |o| Parse::Object.new o}
         else
@@ -59,11 +59,24 @@ module Parse
       end
     end
 
+    def get(uri)
+      request(uri)
+    end
+
+    def post(uri, body)
+      request(uri, :post, body)
+    end
+
+    def put(uri, body)
+      request(uri, :put, body)
+    end
+
+    def delete(uri)
+      request(uri, :delete)
+    end
+
   end
 
-  def get(uri)
-    request(uri)
-  end
 
   # Module methods
   # ------------------------------------------------------------
