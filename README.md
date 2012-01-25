@@ -27,6 +27,15 @@ obj.parse_save
 
 Load the data browser on parse.com and you should see your object!
 
+## TODO
+
+- Add some form of debug logging
+- Support for Date, Pointer, and Bytes API [data types](https://www.parse.com/docs/rest#objects-types)
+- Users
+- ACLs
+- Login
+
+
 ## Resources
 
-parse.com REST API documentation: https://parse.com/docs/rest
+[parse.com REST API documentation](https://parse.com/docs/rest)
