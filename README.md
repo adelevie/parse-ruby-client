@@ -18,9 +18,9 @@ Parse.init :application_id => "<your_app_id>",
            :api_key        => "<your_api_key>"
 
 obj = Parse::Object.new "MyClass"
-obj["IsFrob"] => true
-obj["FrobCount"] => 10
-obj["FrobName"] => "Framistat"
+obj["IsFrob"]    = true
+obj["FrobCount"] = 10
+obj["FrobName"]  = "Framistat"
 
 obj.parse_save
 ```
