@@ -192,8 +192,14 @@ module Parse
       body = self.to_json
       response = Parse.client.session.request(method, uri, {}, :data => body)
       if response.status >= 200 && response.status <= 300
-        data = JSON.parse response.body
-        parse data
+        if response.body
+          data = JSON.parse response.body
+          parse data
+        end
+        if response.status == 201 # Created
+          location = response.headers["Location"]
+          @parse_object_id = location.split("/").last
+        end
       end
       response
     end
