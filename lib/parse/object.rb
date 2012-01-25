@@ -27,15 +27,18 @@ module Parse
     # merge the hash keys, and then insure that the reserved
     # fields do not occur in the underlying hash storage.
     def parse(data)
-      @parse_object_id = data[Protocol::KEY_OBJECT_ID]
-      @created_at      = data[Protocol::KEY_CREATED_AT]
-      if @created_at
-        @created_at = DateTime.parse @created_at
+      if !data
+        return
       end
 
-      @updated_at      = data[Protocol::KEY_UPDATED_AT]
-      if @updated_at
-        @updated_at = DateTime.parse @updated_at
+      @parse_object_id ||= data[Protocol::KEY_OBJECT_ID]
+
+      if data[Protocol::KEY_CREATED_AT]
+        @created_at = DateTime.parse data[Protocol::KEY_CREATED_AT]
+      end
+
+      if data[Protocol::KEY_UPDATED_AT]
+        @updated_at = DateTime.parse data[Protocol::KEY_UPDATED_AT]
       end
 
       self.merge! data
@@ -62,23 +65,46 @@ module Parse
 
     def parse_refresh
       if @parse_object_id
-        data = Protocol.client.get(@class_name, @parse_object_id)
+        data = Parse.client.get(Protocol.class_uri(@class_name, @parse_object_id))
         if data
           parse data
         end
-      self
       end
+      self
     end
 
     def parse_delete
       if @parse_object_id
         uri      = Protocol.class_uri @class_name, @parse_object_id
 
-        response = parse.client.session.request(:delete, uri, {})
+        response = Parse.client.request(:delete, uri, {})
         response
       end
       nil
     end
+
+    def parse_increment(field, amount = 1)
+      value = (self[field] || 0) + amount
+      self[field] = value
+      if !@parse_object_id
+        # TODO - warn that the object must be stored first
+        return nil
+      end
+
+      if amount != 0
+        op = amount > 0 ? Protocol::OP_INCREMENT : Protocol::OP_DECREMENT
+        body = "{\"#{field}\": {\"__op\": \"#{op}\", \"amount\" : #{amount.abs}}}"
+        puts body
+        data = Parse.client.request( Protocol.class_uri(@class_name, @parse_object_id), :put, body)
+        parse data
+      end
+      self
+    end
+
+    def parse_decrement(field, amount = 1)
+      parse_increment field, -amount
+    end
+
   end
 
 end

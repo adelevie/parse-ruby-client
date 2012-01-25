@@ -31,6 +31,12 @@
     # to indicate that the response contains an array of objects.
     RESPONSE_KEY_RESULTS = "results"
 
+    # Operation name for incrementing an objects field value remotely
+    OP_INCREMENT = "Increment"
+
+    # Operation name for decrementing an objects field value remotely
+    OP_DECREMENT = "Decrement"
+
     # Construct a uri referencing a given Parse object
     # class or instance (of object_id is non-nil).
     def self.class_uri(class_name, object_id = nil)
