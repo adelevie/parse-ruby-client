@@ -51,10 +51,6 @@ module Parse
           data = JSON.parse response.body
           parse data
         end
-        if response.status == 201 # Created
-          location = response.headers["Location"]
-          @parse_object_id = location.split("/").last
-        end
       end
       response
     end
