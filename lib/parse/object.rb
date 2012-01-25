@@ -22,6 +22,10 @@ module Parse
       end
     end
 
+    def uri
+      Protocol.class_uri @class_name, @parse_object_id
+    end
+
     # Merge a hash parsed from the JSON representation into
     # this instance. This will extract the reserved fields,
     # merge the hash keys, and then insure that the reserved
@@ -52,11 +56,10 @@ module Parse
     private :parse
 
     def parse_save
-      uri      = Protocol.class_uri @class_name, @parse_object_id
       method   = @parse_object_id ? :put : :post
       body     = self.to_json
 
-      data = Parse.client.request(uri, method, body)
+      data = Parse.client.request(self.uri, method, body)
       if data
         parse data
       end
@@ -65,7 +68,7 @@ module Parse
 
     def parse_refresh
       if @parse_object_id
-        data = Parse.client.get(Protocol.class_uri(@class_name, @parse_object_id))
+        data = Parse.client.get self.uri
         if data
           parse data
         end
@@ -75,10 +78,7 @@ module Parse
 
     def parse_delete
       if @parse_object_id
-        uri      = Protocol.class_uri @class_name, @parse_object_id
-
-        response = Parse.client.request(:delete, uri, {})
-        response
+        response = Parse.client.request(:delete, self.uri, {})
       end
       nil
     end
@@ -95,7 +95,7 @@ module Parse
         op = amount > 0 ? Protocol::OP_INCREMENT : Protocol::OP_DECREMENT
         body = "{\"#{field}\": {\"__op\": \"#{op}\", \"amount\" : #{amount.abs}}}"
         puts body
-        data = Parse.client.request( Protocol.class_uri(@class_name, @parse_object_id), :put, body)
+        data = Parse.client.request( self.uri, :put, body)
         parse data
       end
       self

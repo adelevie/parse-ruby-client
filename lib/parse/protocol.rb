@@ -39,11 +39,21 @@
 
     # Construct a uri referencing a given Parse object
     # class or instance (of object_id is non-nil).
-    def self.class_uri(class_name, object_id = nil)
+    def Protocol.class_uri(class_name, object_id = nil)
       if object_id
         "/#{VERSION}/classes/#{class_name}/#{object_id}"
       else
         "/#{VERSION}/classes/#{class_name}"
+      end
+    end
+
+    # Construct a uri referencing a give Parse user
+    # instance or the users category.
+    def Protocol.user_uri(user_id = nil)
+      if user_id
+        "/#{VERSION}/users/#{user_id}"
+      else
+        "/#{VERSION}/users"
       end
     end
 
