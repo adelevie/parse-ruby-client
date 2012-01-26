@@ -9,6 +9,7 @@
 require 'json'
 require 'patron'
 require 'date'
+require 'cgi'
 
 cwd = Pathname(__FILE__).dirname
 $:.unshift(cwd.to_s) unless $:.include?(cwd.to_s) || $:.include?(cwd.expand_path.to_s)

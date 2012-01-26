@@ -21,7 +21,7 @@ module Parse
     end
 
     # Retrieve the Parse object referenced by this pointer.
-    def parse_get
+    def get
       Parse.get @class_name, @parse_object_id
     end
   end

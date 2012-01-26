@@ -28,7 +28,7 @@ obj["FrobName"]  = "Framistat"
 obj.save
 ```
 
-### Queries
+## Queries
 
 Queries are supported by the Parse::Query class.
 
