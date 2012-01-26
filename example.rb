@@ -24,6 +24,7 @@ profile.increment "login_count", -2
 (1..100).each { |i|
   score = Parse::Object.new "Score"
   score["score"] = i
+  score.save
 }
 
 q = Parse::Query.new("Score")   \
