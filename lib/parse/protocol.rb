@@ -1,11 +1,17 @@
   # A module which encapsulates the specifics of Parse's REST API.
   module Protocol
 
+    # Basics
+    # ----------------------------------------
+
     # The default hostname for communication with the Parse API.
     HOST            = "api.parse.com"
 
     # The version of the REST API implemented by this module.
     VERSION         = 1
+
+    # HTTP Headers
+    # ----------------------------------------
 
     # The HTTP header used for passing your application ID to the
     # Parse API.
@@ -14,6 +20,13 @@
     # The HTTP header used for passing your API key to the
     # Parse API.
     HEADER_API_KEY  = "X-Parse-REST-API-Key"
+
+    # JSON Keys
+    # ----------------------------------------
+
+    # The JSON key used to store the class name of an object
+    # in a Pointer datatype.
+    KEY_CLASS_NAME  = "className"
 
     # The JSON key used to store the ID of Parse objects
     # in their JSON representation.
@@ -31,11 +44,51 @@
     # to indicate that the response contains an array of objects.
     RESPONSE_KEY_RESULTS = "results"
 
+    # The JSON key used to identify an operator in the increment/decrement
+    # API call.
+    KEY_OP          = "__op"
+
+    # The JSON key used to identify the datatype of a special value.
+    KEY_TYPE        = "__type"
+
+    # The JSON key used to specify the numerical value in the
+    # increment/decrement API call.
+    KEY_AMOUNT      = "amount"
+
+    # Other Constants
+    # ----------------------------------------
+
     # Operation name for incrementing an objects field value remotely
-    OP_INCREMENT = "Increment"
+    OP_INCREMENT    = "Increment"
 
     # Operation name for decrementing an objects field value remotely
-    OP_DECREMENT = "Decrement"
+    OP_DECREMENT    = "Decrement"
+
+
+    # The data type name for special JSON objects representing a reference
+    # to another Parse object.
+    TYPE_POINTER    = "Pointer"
+
+    # The data type name for special JSON objects containing an array of
+    # encoded bytes.
+    TYPE_BYTES      = "Bytes"
+
+    # The data type name for special JSON objects representing a date/time.
+    TYPE_DATE       = "Date"
+
+    # The data type name for special JSON objects representing a
+    # location specified as a latitude/longitude pair.
+    TYPE_GEOPOINT   = "GeoPoint"
+
+    # The data type name for special JSON objects representing
+    # a file.
+    TYPE_FILE       = "File"
+
+    # The class name for User objects, when referenced by a Pointer.
+    CLASS_USER      = "_User"
+
+    # URI Helpers
+    # ----------------------------------------
 
     # Construct a uri referencing a given Parse object
     # class or instance (of object_id is non-nil).
@@ -47,7 +100,7 @@
       end
     end
 
-    # Construct a uri referencing a give Parse user
+    # Construct a uri referencing a given Parse user
     # instance or the users category.
     def Protocol.user_uri(user_id = nil)
       if user_id
@@ -55,6 +108,11 @@
       else
         "/#{VERSION}/users"
       end
+    end
+
+    # Construct a uri referencing a file stored by the API.
+    def Protocol.file_uri(file_name)
+      "/#{VERSION}/files/#{file_name}"
     end
 
   end

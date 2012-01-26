@@ -9,12 +9,31 @@ profile["last_name"]     = "Doe"
 profile["username"]      = "jdoe"
 profile["email_address"] = "jdoe@blahblahblah"
 
-profile.parse_save
+profile.save
 
-profile.parse_refresh
+profile.refresh
 
 profile.parse_object_id
 
 profile.created_at
 
-profile.parse_increment "login_count", -2
+profile.increment "login_count", -2
+
+
+# Queries
+(1..100).each { |i|
+  score = Parse::Object.new "Score"
+  score["score"] = i
+}
+
+q = Parse::Query.new("Score")   \
+  .greater_eq("score", 10)  \
+  .less_eq("score", 20)
+
+q.get
+
+q = Parse::Query.new("Score") \
+  .value_in("score", [10, 20, 30, 40])
+
+q.get
+

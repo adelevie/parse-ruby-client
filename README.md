@@ -1,6 +1,9 @@
 # Ruby Client for parse.com REST API
 
 This file implements a simple Ruby client library for using Parse's REST API.
+Rather than try to implement an ActiveRecord-compatible library, it tries to
+match the structure of the iOS and Android SDKs from Parse.
+
 So far it supports simple GET, PUT, and POST operations on objects. Enough
 to read & write simple data.
 
@@ -22,10 +25,33 @@ obj["IsFrob"]    = true
 obj["FrobCount"] = 10
 obj["FrobName"]  = "Framistat"
 
-obj.parse_save
+obj.save
 ```
 
-Load the data browser on parse.com and you should see your object!
+### Queries
+
+Queries are supported by the Parse::Query class.
+
+```ruby
+# Create some simple objects to query
+(1..100).each { |i|
+  score = Parse::Object.new "Score"
+  score["score"] = i
+  score.save
+}
+
+# Retrieve all scores between 10 & 20 inclusive
+Parse::Query.new("Score")   \
+  .greater_eq("score", 10)  \
+  .less_eq("score", 20)     \
+  .get
+
+# Retrieve a set of specific scores
+q = Parse::Query.new("Score")           \
+  .value_in("score", [10, 20, 30, 40])  \
+  .get
+
+```
 
 ## TODO
 

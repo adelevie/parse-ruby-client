@@ -30,10 +30,13 @@ module Parse
     # with common basic response handling. Will raise a
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
-    def request(uri, method = :get, body = nil)
+    def request(uri, method = :get, body = nil, query = nil)
       options = {}
       if body
         options[:data] = body
+      end
+      if query
+        options[:query] = query
       end
 
       response = @session.request(method, uri, {}, options)
@@ -47,13 +50,14 @@ module Parse
     end
 
     # Interpret a parsed JSON object, instantiating new instances
-    # of Parse::Object as appropriate.
-    def parse_response(data)
+    # of Parse::Object as appropriate. Does not handle datatypes
+    # recursively (nor does it need to be an instance method) yet
+    def parse_response(class_name, data)
       if data
         if data.size == 1 && data[Protocol::RESPONSE_KEY_RESULTS]
-          data[Protocol::RESPONSE_KEY_RESULTS].collect { |o| Parse::Object.new o}
+          data[Protocol::RESPONSE_KEY_RESULTS].collect { |o| Parse::Object.new class_name, o }
         else
-          Parse::Object.new data
+          Parse::Object.new class_name, data
         end
       end
     end
@@ -99,10 +103,12 @@ module Parse
   end
 
   # Perform a simple retrieval of a simple object, or all objects of a
-  # given class.
+  # given class. If object_id is supplied, a single object will be
+  # retrieved. If object_id is not supplied, then all objects of the
+  # given class will be retrieved and returned in an Array.
   def Parse.get(class_name, object_id = nil)
     data = Parse.client.get( Protocol.class_uri(class_name, object_id) )
-    Parse.client.parse_response data
+    Parse.client.parse_response class_name, data
   end
 
 end

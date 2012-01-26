@@ -5,15 +5,11 @@ require 'parse/error'
 module Parse
 
   # Represents an individual Parse API object.
-  # Methods that interact with the parse.com REST API are named
-  # with the prefix parse_ to distinguish them and avoid conflicts
-  # (i.e. such as with Hash.delete)
   class Object  < Hash
     attr_reader :parse_object_id
     attr_reader :class_name
     attr_reader :created_at
     attr_reader :updated_at
-    attr_reader :acl
 
     def initialize(class_name, data = nil)
       @class_name = class_name
@@ -55,7 +51,10 @@ module Parse
     end
     private :parse
 
-    def parse_save
+    # Write the current state of the local object to the API.
+    # If the object has never been saved before, this will create
+    # a new object, otherwise it will update the existing stored object.
+    def save
       method   = @parse_object_id ? :put : :post
       body     = self.to_json
 
@@ -66,7 +65,9 @@ module Parse
       self
     end
 
-    def parse_refresh
+    # Update the fields of the local Parse object with the current
+    # values from the API.
+    def refresh
       if @parse_object_id
         data = Parse.client.get self.uri
         if data
@@ -76,14 +77,16 @@ module Parse
       self
     end
 
+    # Delete the remote Parse API object.
     def parse_delete
       if @parse_object_id
-        response = Parse.client.request(:delete, self.uri, {})
+        response = Parse.client.delete self.uri
       end
       nil
     end
 
-    def parse_increment(field, amount = 1)
+    # Increment the given field by an amount, which defaults to 1.
+    def increment(field, amount = 1)
       value = (self[field] || 0) + amount
       self[field] = value
       if !@parse_object_id
@@ -93,16 +96,17 @@ module Parse
 
       if amount != 0
         op = amount > 0 ? Protocol::OP_INCREMENT : Protocol::OP_DECREMENT
-        body = "{\"#{field}\": {\"__op\": \"#{op}\", \"amount\" : #{amount.abs}}}"
-        puts body
+        body = "{\"#{field}\": {\"#{Protocol::KEY_OP}\": \"#{op}\", \"#{Protocol::KEY_AMOUNT}\" : #{amount.abs}}}"
         data = Parse.client.request( self.uri, :put, body)
         parse data
       end
       self
     end
 
-    def parse_decrement(field, amount = 1)
-      parse_increment field, -amount
+    # Decrement the given field by an amount, which defaults to 1.
+    # A synonym for increment(field, -amount).
+    def decrement(field, amount = 1)
+      increment field, -amount
     end
 
   end
