@@ -33,11 +33,11 @@ module Parse
 
       @parse_object_id ||= data[Protocol::KEY_OBJECT_ID]
 
-      if data[Protocol::KEY_CREATED_AT]
+      if data.has_key? Protocol::KEY_CREATED_AT
         @created_at = DateTime.parse data[Protocol::KEY_CREATED_AT]
       end
 
-      if data[Protocol::KEY_UPDATED_AT]
+      if data.has_key? Protocol::KEY_UPDATED_AT
         @updated_at = DateTime.parse data[Protocol::KEY_UPDATED_AT]
       end
 

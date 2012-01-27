@@ -1,5 +1,6 @@
 require 'parse/protocol'
 require 'parse/error'
+require 'parse/util'
 
 module Parse
 
@@ -45,19 +46,6 @@ module Parse
       else
         if response.body
           return JSON.parse response.body
-        end
-      end
-    end
-
-    # Interpret a parsed JSON object, instantiating new instances
-    # of Parse::Object as appropriate. Does not handle datatypes
-    # recursively (nor does it need to be an instance method) yet
-    def parse_response(class_name, data)
-      if data
-        if data.size == 1 && data[Protocol::RESPONSE_KEY_RESULTS]
-          data[Protocol::RESPONSE_KEY_RESULTS].collect { |o| Parse::Object.new class_name, o }
-        else
-          Parse::Object.new class_name, data
         end
       end
     end
@@ -108,7 +96,7 @@ module Parse
   # given class will be retrieved and returned in an Array.
   def Parse.get(class_name, object_id = nil)
     data = Parse.client.get( Protocol.class_uri(class_name, object_id) )
-    Parse.client.parse_response class_name, data
+    Parse.parse_json class_name, data
   end
 
 end

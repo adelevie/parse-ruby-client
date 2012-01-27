@@ -33,7 +33,13 @@ module Parse
     attr_accessor :value
 
     def initialize(data)
-      value = DateTime.parse data["iso"]
+      if data.is_a? DateTime
+        @value = data
+      elsif data.is_a? Hash
+        @value = DateTime.parse data["iso"]
+      elsif data.is_a? String
+        @value = DateTime.parse data
+      end
     end
 
     def to_json(*a)
