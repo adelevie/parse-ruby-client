@@ -22,6 +22,10 @@ module Parse
       Protocol.class_uri @class_name, @parse_object_id
     end
 
+    def pointer
+      Parse::Pointer.new self
+    end
+
     # Merge a hash parsed from the JSON representation into
     # this instance. This will extract the reserved fields,
     # merge the hash keys, and then insure that the reserved
