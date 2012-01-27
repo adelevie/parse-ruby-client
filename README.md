@@ -25,7 +25,7 @@ Parse.init :application_id => "<your_app_id>",
 
 ## Creating and Saving Objects
 
-Create an instance of Parse::Object with your class name supplied as a string, set some keys, and call save().
+Create an instance of ```Parse::Object``` with your class name supplied as a string, set some keys, and call ```save()```.
 
 ```ruby
 game_score = Parse::Object.new "GameScore"
@@ -44,7 +44,7 @@ game_score = Parse::Object.new "GameScore", {
 ```
 
 Or if you prefer, you can use symbols for the hash keys - they will be converted to strings
-by Parse::Object.initialize().
+by ```Parse::Object.initialize()```.
 
 ```ruby
 game_score = Parse::Object.new "GameScore", {
@@ -54,7 +54,7 @@ game_score = Parse::Object.new "GameScore", {
 
 ## Retrieving Objects
 
-Individual objects can be retrieved with a single call to Parse.get() supplying the class and object id.
+Individual objects can be retrieved with a single call to ```Parse.get()``` supplying the class and object id.
 
 ```ruby
 game_score = Parse.get "GameScore", "xWMyZ4YEGZ"
@@ -92,7 +92,7 @@ Parse::Query.new("GameScore")           \
 
 ```
 
-## TODO
+# TODO
 
 - Add some form of debug logging
 - ~~Support for Date, Pointer, and Bytes API [data types](https://www.parse.com/docs/rest#objects-types)~~
@@ -101,8 +101,8 @@ Parse::Query.new("GameScore")           \
 - Login
 
 
-## Resources
+# Resources
 
 - parse.com [REST API documentation](https://parse.com/docs/rest)
-- [parse_resource]https://github.com/adelevie/parse_resource , an ActiveRecord-compatible wrapper
+- [parse_resource](https://github.com/adelevie/parse_resource) , an ActiveRecord-compatible wrapper
   for the API for seamless integration into Rails.
