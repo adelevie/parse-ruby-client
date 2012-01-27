@@ -56,7 +56,7 @@ q = Parse::Query.new("Score")           \
 ## TODO
 
 - Add some form of debug logging
-- Support for Date, Pointer, and Bytes API [data types](https://www.parse.com/docs/rest#objects-types)
+- ~~Support for Date, Pointer, and Bytes API [data types](https://www.parse.com/docs/rest#objects-types)~~
 - Users
 - ACLs
 - Login
@@ -64,4 +64,6 @@ q = Parse::Query.new("Score")           \
 
 ## Resources
 
-[parse.com REST API documentation](https://parse.com/docs/rest)
+- parse.com [REST API documentation](https://parse.com/docs/rest)
+- [parse_resource]https://github.com/adelevie/parse_resource , an ActiveRecord-compatible wrapper
+  for the API for seamless integration into Rails.
