@@ -1,3 +1,5 @@
+require 'base64'
+
 module Parse
 
   # Pointer
@@ -58,15 +60,13 @@ module Parse
 
     def initialize(data)
       bytes = data["base64"]
-      # TODO - decode base64
-      value = []
+      value = Base64.decode(bytes)
     end
 
     def to_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_BYTES,
-          # TODO - encode base64
-          "base64" => ""
+          "base64" => Base64.encode(@value)
       }.to_json(*a)
     end
   end
