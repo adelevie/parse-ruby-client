@@ -45,13 +45,14 @@ module Parse
         @updated_at = DateTime.parse data[Protocol::KEY_UPDATED_AT]
       end
 
-      self.merge! data
-
-      # Remove the reserved keys, so they won't be serialized
-      # on save'
-      self.delete Protocol::KEY_CREATED_AT
-      self.delete Protocol::KEY_OBJECT_ID
-      self.delete Protocol::KEY_UPDATED_AT
+			data.each { |k,v|
+				if k.is_a? Symbol
+					k = k.to_s
+				end
+				if !Protocol::RESERVED_KEYS.include? k
+					self[k] = v
+				end
+			}
     end
     private :parse
 

@@ -1,3 +1,4 @@
+module Parse
   # A module which encapsulates the specifics of Parse's REST API.
   module Protocol
 
@@ -54,6 +55,8 @@
     # The JSON key used to specify the numerical value in the
     # increment/decrement API call.
     KEY_AMOUNT      = "amount"
+
+		RESERVED_KEYS = [ KEY_CLASS_NAME, KEY_CREATED_AT, KEY_OBJECT_ID ]
 
     # Other Constants
     # ----------------------------------------
@@ -116,3 +119,4 @@
     end
 
   end
+end
