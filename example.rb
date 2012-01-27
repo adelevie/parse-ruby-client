@@ -1,5 +1,3 @@
-require "awesome_print"
-
 Parse.init :application_id  => "your_application_id",
            :api_key         => "your_api_key"
 
@@ -7,34 +5,26 @@ profile = Parse::Object.new "Profile"
 profile["first_name"]    = "John"
 profile["last_name"]     = "Doe"
 profile["username"]      = "jdoe"
-profile["email_address"] = "jdoe@blahblahblah"
-
+profile["email_address"] = "jdoe@fubar.com"
+profile["birthday"]      = Parse::Date.new "1980-12-25"
 profile.save
 
-profile.refresh
-
-profile.parse_object_id
-
-profile.created_at
-
-profile.increment "login_count", -2
-
+profile.increment "login_count"
 
 # Queries
+cls = "GameScore"
 (1..100).each { |i|
-  score = Parse::Object.new "Score"
+  score = Parse::Object.new cls
   score["score"] = i
   score.save
 }
 
-q = Parse::Query.new("Score")   \
+Parse::Query.new(cls)       \
   .greater_eq("score", 10)  \
-  .less_eq("score", 20)
+  .less_eq("score", 20)     \
+  .get
 
-q.get
-
-q = Parse::Query.new("Score") \
-  .value_in("score", [10, 20, 30, 40])
-
-q.get
+Parse::Query.new(cls)                   \
+  .value_in("score", [10, 20, 30, 40])  \
+  .get
 
