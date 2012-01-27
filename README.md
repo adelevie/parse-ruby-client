@@ -11,7 +11,9 @@ to read & write simple data.
 
 This currently depends on the gems 'json' and 'patron' for JSON support and HTTP, respectively.
 
-## Getting Started
+# Getting Started
+
+---
 
 To get started, load the parse.rb file and call Parse.init to initialize the client object with
 your application ID and API key values, which you can obtain from the parse.com dashboard.
@@ -19,35 +21,72 @@ your application ID and API key values, which you can obtain from the parse.com 
 ```ruby
 Parse.init :application_id => "<your_app_id>",
            :api_key        => "<your_api_key>"
+```
 
-obj = Parse::Object.new "MyClass"
-obj["IsFrob"]    = true
-obj["FrobCount"] = 10
-obj["FrobName"]  = "Framistat"
+## Creating and Saving Objects
 
-obj.save
+Create an instance of Parse::Object with your class name supplied as a string, set some keys, and call save().
+
+```ruby
+game_score = Parse::Object.new "GameScore"
+game_score["score"] 		= 1337
+game_score["playerName"]	= "Sean Plott"
+game_score["cheatMode"] 	= false
+game_score.save
+```
+
+Alternatively, you can initialize the object's initial values with a hash.
+
+```ruby
+game_score = Parse::Object.new "GameScore", {
+	"score" => 1337, "playerName" => "Sean Plott", "cheatMode" => false
+}
+```
+
+Or if you prefer, you can use symbols for the hash keys - they will be converted to strings
+by Parse::Object.initialize().
+
+```ruby
+game_score = Parse::Object.new "GameScore", {
+		:score => 1337, :playerName => "Sean Plott", :cheatMode => false
+}
+```
+
+## Retrieving Objects
+
+Individual objects can be retrieved with a single call to Parse.get() supplying the class and object id.
+
+```ruby
+game_score = Parse.get "GameScore", "xWMyZ4YEGZ"
+```
+
+All the objects in a given class can be retrieved by omitting the object ID. Use caution if you have lots
+and lots of objects of that class though.
+
+```ruby
+all_scores = Parse.get "GameScore"
 ```
 
 ## Queries
 
-Queries are supported by the Parse::Query class.
+Queries are supported by the ```Parse::Query``` class.
 
 ```ruby
 # Create some simple objects to query
 (1..100).each { |i|
-  score = Parse::Object.new "Score"
+  score = Parse::Object.new "GameScore"
   score["score"] = i
   score.save
 }
 
 # Retrieve all scores between 10 & 20 inclusive
-Parse::Query.new("Score")   \
-  .greater_eq("score", 10)  \
-  .less_eq("score", 20)     \
+Parse::Query.new("GameScore")   \
+  .greater_eq("score", 10)      \
+  .less_eq("score", 20)         \
   .get
 
 # Retrieve a set of specific scores
-q = Parse::Query.new("Score")           \
+Parse::Query.new("GameScore")           \
   .value_in("score", [10, 20, 30, 40])  \
   .get
 
