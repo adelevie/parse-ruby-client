@@ -17,10 +17,10 @@ Jeweler::Tasks.new do |gem|
   gem.name = "parse-ruby-client-1"
   gem.homepage = "http://github.com/adelevie/parse-ruby-client-1"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A simple Ruby client for the parse.com REST API}
+  gem.description = %Q{A simple Ruby client for the parse.com REST API}
   gem.email = "adelevie@gmail.com"
-  gem.authors = ["Alan deLevie"]
+  gem.authors = ["Alan deLevie", "Adam Alpern"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
