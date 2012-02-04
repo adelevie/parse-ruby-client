@@ -32,11 +32,13 @@ Gem::Specification.new do |s|
     "lib/parse/protocol.rb",
     "lib/parse/query.rb",
     "lib/parse/util.rb",
+    "parse-ruby-client-1.gemspec",
     "pkg/parse-ruby-client-1-.gem",
+    "pkg/parse-ruby-client-1-0.0.1.gem",
     "test/helper.rb",
     "test/test_parse-ruby-client.rb"
   ]
-  s.homepage = "http://github.com/adelevie/parse-ruby-client-1"
+  s.homepage = "http://github.com/adelevie/parse-ruby-client"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.10"
