@@ -15,7 +15,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "parse-ruby-client-1"
-  gem.homepage = "http://github.com/adelevie/parse-ruby-client-1"
+  gem.homepage = "http://github.com/adelevie/parse-ruby-client"
   gem.license = "MIT"
   gem.summary = %Q{A simple Ruby client for the parse.com REST API}
   gem.description = %Q{A simple Ruby client for the parse.com REST API}
@@ -47,7 +47,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "parse-ruby-client-1 #{version}"
+  rdoc.title = "parse-ruby-client #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
