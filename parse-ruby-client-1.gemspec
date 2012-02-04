@@ -33,8 +33,8 @@ Gem::Specification.new do |s|
     "lib/parse/query.rb",
     "lib/parse/util.rb",
     "parse-ruby-client-1.gemspec",
-    "pkg/parse-ruby-client-1-.gem",
-    "pkg/parse-ruby-client-1-0.0.1.gem",
+    "pkg/parse-ruby-client-0.0.1.gem",
+    "pkg/parse-ruby-client.gem",
     "test/helper.rb",
     "test/test_parse-ruby-client.rb"
   ]
