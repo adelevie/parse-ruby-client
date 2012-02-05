@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "parse-ruby-client-1"
+  s.name = "parse-ruby-client"
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2012-02-04"
+  s.date = "2012-02-05"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -32,8 +32,9 @@ Gem::Specification.new do |s|
     "lib/parse/protocol.rb",
     "lib/parse/query.rb",
     "lib/parse/util.rb",
-    "parse-ruby-client-1.gemspec",
+    "parse-ruby-client.gemspec",
     "pkg/parse-ruby-client-0.0.1.gem",
+    "pkg/parse-ruby-client-1-0.0.1.gem",
     "pkg/parse-ruby-client.gem",
     "test/helper.rb",
     "test/test_parse-ruby-client.rb"
