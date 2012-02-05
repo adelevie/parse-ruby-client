@@ -5,6 +5,8 @@
 ## See https://parse.com/docs/rest for full documentation on the API.
 ##
 ## ----------------------------------------------------------------------
+require "rubygems"
+require "bundler/setup"
 
 require 'json'
 require 'patron'

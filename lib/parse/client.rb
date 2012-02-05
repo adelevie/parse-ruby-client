@@ -1,6 +1,7 @@
 require 'parse/protocol'
 require 'parse/error'
 require 'parse/util'
+require 'patron'
 
 module Parse
 
