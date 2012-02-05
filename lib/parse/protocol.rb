@@ -44,6 +44,7 @@ module Parse
     # The JSON key used in the top-level response object
     # to indicate that the response contains an array of objects.
     RESPONSE_KEY_RESULTS = "results"
+    KEY_RESULTS = RESPONSE_KEY_RESULTS
 
     # The JSON key used to identify an operator in the increment/decrement
     # API call.

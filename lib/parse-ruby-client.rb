@@ -19,3 +19,5 @@ $:.unshift(cwd.to_s) unless $:.include?(cwd.to_s) || $:.include?(cwd.expand_path
 require 'parse/object'
 require 'parse/query'
 require 'parse/datatypes'
+require 'parse/util'
+require 'parse/protocol'

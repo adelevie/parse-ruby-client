@@ -12,7 +12,7 @@ require 'shoulda'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'parse-ruby-client-1'
+require 'parse-ruby-client'
 
 class Test::Unit::TestCase
 end

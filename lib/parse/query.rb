@@ -71,7 +71,7 @@ module Parse
       query = { "where" => CGI.escape(@where.to_json) }
 
       response = Parse.client.request uri, :get, nil, query
-      Parse.client.parse_response class_name, response
+      Parse.parse_json class_name, response
     end
 
   end
