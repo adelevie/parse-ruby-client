@@ -15,12 +15,18 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 # Getting Started
 
+## Installation
+
+`gem "parse-ruby-client", "~> 0.0.2"`
+
 ---
 
 To get started, load the parse.rb file and call Parse.init to initialize the client object with
 your application ID and API key values, which you can obtain from the parse.com dashboard.
 
 ```ruby
+require 'parse'
+
 Parse.init :application_id => "<your_app_id>",
            :api_key        => "<your_api_key>"
 ```
