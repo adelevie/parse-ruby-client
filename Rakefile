@@ -14,7 +14,7 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "parse-ruby-client-1"
+  gem.name = "parse-ruby-client"
   gem.homepage = "http://github.com/adelevie/parse-ruby-client"
   gem.license = "MIT"
   gem.summary = %Q{A simple Ruby client for the parse.com REST API}
