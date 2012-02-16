@@ -49,6 +49,8 @@ module Parse
     # The JSON key used to identify an operator in the increment/decrement
     # API call.
     KEY_OP          = "__op"
+    KEY_INCREMENT   = "Increment"
+    KEY_DECREMENT   = "Decrement"
 
     # The JSON key used to identify the datatype of a special value.
     KEY_TYPE        = "__type"

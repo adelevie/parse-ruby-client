@@ -60,13 +60,45 @@ module Parse
 
     def initialize(data)
       bytes = data["base64"]
-      value = Base64.decode(bytes)
+      @value = Base64.decode64(bytes)
     end
 
     def to_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_BYTES,
-          "base64" => Base64.encode(@value)
+          "base64" => Base64.encode64(@value)
+      }.to_json(*a)
+    end
+  end
+  
+  class Increment
+    # '{"score": {"__op": "Increment", "amount": 1 } }'
+    attr_accessor :amount
+    
+    def initialize(amount)
+      @amount = amount
+    end
+    
+    def to_json(*a)
+      {
+          Protocol::KEY_OP => Protocol::KEY_INCREMENT,
+          Protocol::KEY_AMOUNT => @amount
+      }.to_json(*a)
+    end
+  end
+  
+  class Decrement
+    # '{"score": {"__op": "Decrement", "amount": 1 } }'
+    attr_accessor :amount
+    
+    def initialize(amount)
+      @amount = amount
+    end
+    
+    def to_json(*a)
+      {
+          Protocol::KEY_OP => Protocol::KEY_DECREMENT,
+          Protocol::KEY_AMOUNT => @amount
       }.to_json(*a)
     end
   end
