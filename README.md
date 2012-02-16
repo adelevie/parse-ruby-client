@@ -25,7 +25,7 @@ To get started, load the parse.rb file and call Parse.init to initialize the cli
 your application ID and API key values, which you can obtain from the parse.com dashboard.
 
 ```ruby
-require 'parse'
+require 'parse-ruby-client'
 
 Parse.init :application_id => "<your_app_id>",
            :api_key        => "<your_api_key>"
