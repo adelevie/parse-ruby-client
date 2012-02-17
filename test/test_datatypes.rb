@@ -34,12 +34,27 @@ class TestDatatypes < Test::Unit::TestCase
   def test_increment
     amount = 5
     increment = Parse::Increment.new amount
+    
     assert_equal increment.to_json, "{\"__op\":\"Increment\",\"amount\":#{amount}}"
   end
   
   def test_decrement
     amount = 5
     increment = Parse::Decrement.new amount
+    
     assert_equal increment.to_json, "{\"__op\":\"Decrement\",\"amount\":#{amount}}"
+  end
+  
+  def test_geopoint
+    # '{"location": {"__type":"GeoPoint", "latitude":40.0, "longitude":-30.0}}'
+    data = {
+      "longitude" => 40.0,
+      "latitude" => -30.0
+    }
+    gp = Parse::GeoPoint.new data
+    
+    assert_equal JSON.parse(gp.to_json)["longitude"], data["longitude"] 
+    assert_equal JSON.parse(gp.to_json)["latitude"], data["latitude"]
+    assert_equal JSON.parse(gp.to_json)[Parse::Protocol::KEY_TYPE], Parse::Protocol::TYPE_GEOPOINT
   end
 end

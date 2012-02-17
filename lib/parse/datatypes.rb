@@ -71,6 +71,9 @@ module Parse
     end
   end
   
+  # Increment and Decrement
+  # ------------------------------------------------------------
+  
   class Increment
     # '{"score": {"__op": "Increment", "amount": 1 } }'
     attr_accessor :amount
@@ -102,5 +105,32 @@ module Parse
       }.to_json(*a)
     end
   end
+  
+  # GeoPoint
+  # ------------------------------------------------------------
+  
+  class GeoPoint
+    # '{"location": {"__type":"GeoPoint", "latitude":40.0, "longitude":-30.0}}'
+    attr_accessor :longitude, :latitude
+    
+    def initialize(data)
+      @longitude = data["longitude"]
+      @latitude  = data["latitude"]
+      
+      if !@longitude && !@latitude
+        @longitude = data[:longitude]
+        @latitude  = data[:latitude]
+      end
+    end
+    
+    def to_json(*a)
+      {
+          Protocol::KEY_TYPE => Protocol::TYPE_GEOPOINT,
+          "latitude" => @latitude,
+          "longitude" => @longitude
+      }.to_json(*a)
+    end
+  end
+  
 
 end
