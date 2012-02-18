@@ -24,7 +24,7 @@ module Parse
         where[field] = constraint
       end
     end
-    private :add_constraint
+    #private :add_constraint
 
     def eq(field, value)
       add_constraint field, value
