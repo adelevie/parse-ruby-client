@@ -31,7 +31,7 @@ Parse.init :application_id => "<your_app_id>",
            :api_key        => "<your_api_key>"
 ```
 
-If you don't like pasting this stuff in every time you fire up irb, save your api keys to `.base_profile` or similar:
+If you don't like pasting this stuff in every time you fire up irb, save your api keys to `.bash_profile` or similar:
 
 ```bash
 export PARSE_APPLICATION_ID="12345678"
