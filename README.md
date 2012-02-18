@@ -44,7 +44,7 @@ Now you can just do this:
 Parse.init
 ```
 
-The test folder assumes this naming convention for environment variables, so if you want to run the tests `parse-ruby-client`, you *must* do this. But it's easy. And good for you, too.
+The test folder assumes this naming convention for environment variables, so if you want to run the tests, you *must* do this. But it's easy. And good for you, too.
 
 ## Creating and Saving Objects
 
