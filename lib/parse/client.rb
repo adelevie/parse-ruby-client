@@ -79,7 +79,7 @@ module Parse
   # Initialize the singleton instance of Client which is used
   # by all API methods. Parse.init must be called before saving
   # or retrieving any objects.
-  def Parse.init(data)
+  def Parse.init(data = {:application_id => $PARSE_APPLICATION_ID, :api_key => $PARSE_REST_API_KEY})
     @@client = Client.new(data)
   end
 

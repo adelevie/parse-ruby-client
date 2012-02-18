@@ -31,6 +31,21 @@ Parse.init :application_id => "<your_app_id>",
            :api_key        => "<your_api_key>"
 ```
 
+If you don't like pasting this stuff in every time you fire up irb, save your api keys to `.base_profile` or similar:
+
+```bash
+export PARSE_APPLICATION_ID="12345678"
+export PARSE_REST_API_KEY="ABCDEFGH"
+```
+
+Now you can just do this:
+
+```ruby
+Parse.init
+```
+
+The test folder assumes this naming convention for environment variables, so if you want to run the tests `parse-ruby-client`, you *must* do this. But it's easy. And good for you, too.
+
 ## Creating and Saving Objects
 
 Create an instance of ```Parse::Object``` with your class name supplied as a string, set some keys, and call ```save()```.
