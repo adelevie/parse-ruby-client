@@ -28,7 +28,7 @@ module Parse
 
     # Merge a hash parsed from the JSON representation into
     # this instance. This will extract the reserved fields,
-    # merge the hash keys, and then insure that the reserved
+    # merge the hash keys, and then ensure that the reserved
     # fields do not occur in the underlying hash storage.
     def parse(data)
       if !data
@@ -92,26 +92,34 @@ module Parse
 
     # Increment the given field by an amount, which defaults to 1.
     def increment(field, amount = 1)
-      value = (self[field] || 0) + amount
-      self[field] = value
-      if !@parse_object_id
-        # TODO - warn that the object must be stored first
-        return nil
-      end
+      #value = (self[field] || 0) + amount
+      #self[field] = value
+      #if !@parse_object_id
+      #  # TODO - warn that the object must be stored first
+      #  return nil
+      #end
 
-      if amount != 0
-        op = amount > 0 ? Protocol::OP_INCREMENT : Protocol::OP_DECREMENT
-        body = "{\"#{field}\": {\"#{Protocol::KEY_OP}\": \"#{op}\", \"#{Protocol::KEY_AMOUNT}\" : #{amount.abs}}}"
-        data = Parse.client.request( self.uri, :put, body)
-        parse data
-      end
+      #if amount != 0
+      #  op = amount > 0 ? Protocol::OP_INCREMENT : Protocol::OP_DECREMENT
+      #  body = "{\"#{field}\": {\"#{Protocol::KEY_OP}\": \"#{op}\", \"#{Protocol::KEY_AMOUNT}\" : #{amount.abs}}}"
+      #  data = Parse.client.request( self.uri, :put, body)
+      #  parse data
+      #end
+      #self
+      body = {field => Parse::Increment.new(amount)}.to_json
+      data = Parse.client.request(self.uri, :put, body)
+      parse data
       self
     end
 
     # Decrement the given field by an amount, which defaults to 1.
     # A synonym for increment(field, -amount).
     def decrement(field, amount = 1)
-      increment field, -amount
+      #increment field, -amount
+      body = {field => Parse::Decrement.new(amount)}.to_json
+      data = Parse.client.request(self.uri, :put, body)
+      parse data
+      self
     end
 
   end
