@@ -58,6 +58,7 @@ game_score["cheatMode"] 	= false
 game_score.save
 ```
 
+# Coming soon in the next version (0.0.3)
 Alternatively, you can initialize the object's initial values with a hash.
 
 ```ruby
