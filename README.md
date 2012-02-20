@@ -17,7 +17,7 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.0.2"`
+`gem "parse-ruby-client", "~> 0.0.3"`
 
 ---
 
@@ -58,7 +58,6 @@ game_score["cheatMode"] 	= false
 game_score.save
 ```
 
-# Coming soon in the next version (0.0.3)
 Alternatively, you can initialize the object's initial values with a hash.
 
 ```ruby
