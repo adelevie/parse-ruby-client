@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2012-02-05"
+  s.date = "2012-02-20"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
+    ".travis.yml",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -34,11 +35,14 @@ Gem::Specification.new do |s|
     "lib/parse/util.rb",
     "parse-ruby-client.gemspec",
     "pkg/parse-ruby-client-0.0.1.gem",
+    "pkg/parse-ruby-client-0.0.2.gem",
     "pkg/parse-ruby-client-1-0.0.1.gem",
     "pkg/parse-ruby-client.gem",
     "test/helper.rb",
     "test/test_client.rb",
-    "test/test_parse-ruby-client.rb"
+    "test/test_datatypes.rb",
+    "test/test_init.rb",
+    "test/test_query.rb"
   ]
   s.homepage = "http://github.com/adelevie/parse-ruby-client"
   s.licenses = ["MIT"]
