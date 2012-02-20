@@ -18,6 +18,7 @@ module Parse
       @application_id = data[:application_id]
       @api_key        = data[:api_key]
       @session        = Patron::Session.new
+      @session.timeout = 10
 
       @session.base_url                 = "https://#{host}"
       @session.headers["Content-Type"]  = "application/json"
@@ -42,9 +43,9 @@ module Parse
 
       response = @session.request(method, uri, {}, options)
       if response.status >= 400
-        raise ParseProtocolError, response
+        raise ParseError, "#{JSON.parse(response.body)['code']}: #{JSON.parse(response.body)['error']}"
       else
-        if response.body
+        if response
           return JSON.parse response.body
         end
       end
@@ -79,8 +80,14 @@ module Parse
   # Initialize the singleton instance of Client which is used
   # by all API methods. Parse.init must be called before saving
   # or retrieving any objects.
-  def Parse.init(data = {:application_id => $PARSE_APPLICATION_ID, :api_key => $PARSE_REST_API_KEY})
+  def Parse.init(data = {:application_id => ENV["PARSE_APPLICATION_ID"], :api_key => ENV["PARSE_REST_API_KEY"]})
     @@client = Client.new(data)
+  end
+  
+  # Used mostly for testing. Lets you delete the api key global vars.
+  def Parse.destroy
+    @@client = nil
+    self
   end
 
   def Parse.client
