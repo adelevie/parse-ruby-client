@@ -19,6 +19,7 @@ module Parse
       @api_key        = data[:api_key]
       @session        = Patron::Session.new
       @session.timeout = 10
+      @session.connect_timeout = 10
 
       @session.base_url                 = "https://#{host}"
       @session.headers["Content-Type"]  = "application/json"
