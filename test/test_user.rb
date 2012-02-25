@@ -27,8 +27,6 @@ class TestUser < Test::Unit::TestCase
     user = Parse::User.new(data)
     user.save
     
-    puts user.inspect
-    
     assert_equal user["username"], u
     assert_equal user[Parse::Protocol::KEY_USER_SESSION_TOKEN].class, String
     
