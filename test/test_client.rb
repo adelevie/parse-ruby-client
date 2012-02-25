@@ -29,4 +29,13 @@ class TestClient < Test::Unit::TestCase
     assert_equal foo["age"], 40
     assert_equal foo[Parse::Protocol::KEY_UPDATED_AT].class, String
   end
+  
+  def test_destroy
+    d = Parse::Object.new "toBeDeleted"
+    d["foo"] = "bar"
+    d.save
+    d.parse_delete
+    
+    assert_equal d.keys.length, 0
+  end
 end
