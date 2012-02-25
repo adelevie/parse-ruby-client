@@ -90,7 +90,9 @@ module Parse
       if @parse_object_id
         response = Parse.client.delete self.uri
       end
-      nil
+      
+      self.clear
+      self
     end
 
     # Increment the given field by an amount, which defaults to 1.
