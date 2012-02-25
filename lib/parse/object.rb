@@ -5,7 +5,7 @@ require 'parse/error'
 module Parse
 
   # Represents an individual Parse API object.
-  class Object  < Hash
+  class Object < Hash
     attr_reader :parse_object_id
     attr_reader :class_name
     attr_reader :created_at
@@ -70,6 +70,13 @@ module Parse
       if data
         parse data
       end
+      
+      if @class_name == Parse::Protocol::CLASS_USER
+        self.delete("password")
+        self.delete(:username)
+        self.delete(:password)
+      end
+      
       self
     end
 
@@ -82,6 +89,7 @@ module Parse
           parse data
         end
       end
+      
       self
     end
 
