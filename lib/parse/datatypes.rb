@@ -14,12 +14,16 @@ module Parse
       @parse_object_id  = data[Protocol::KEY_OBJECT_ID]
     end
 
-    def to_json(*a)
+    def as_json(*a)
       {
           Protocol::KEY_TYPE        => Protocol::TYPE_POINTER,
           Protocol::KEY_CLASS_NAME  => @class_name,
           Protocol::KEY_OBJECT_ID   => @parse_object_id
-      }.to_json(*a)
+      }
+    end
+    
+    def to_json(*a)
+        as_json.to_json(*a)
     end
 
     # Retrieve the Parse object referenced by this pointer.
@@ -44,11 +48,15 @@ module Parse
       end
     end
 
-    def to_json(*a)
+    def as_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_DATE,
           "iso"              => value.iso8601
-      }.to_json(*a)
+      }
+    end
+    
+    def to_json(*a)
+        as_json.to_json(*a)
     end
   end
 
@@ -63,11 +71,15 @@ module Parse
       @value = Base64.decode64(bytes)
     end
 
-    def to_json(*a)
+    def as_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_BYTES,
           "base64" => Base64.encode64(@value)
-      }.to_json(*a)
+      }
+    end
+    
+    def to_json(*a)
+        as_json.to_json(*a)
     end
   end
   
@@ -82,11 +94,15 @@ module Parse
       @amount = amount
     end
     
-    def to_json(*a)
+    def as_json(*a)
       {
           Protocol::KEY_OP => Protocol::KEY_INCREMENT,
           Protocol::KEY_AMOUNT => @amount
-      }.to_json(*a)
+      }
+    end
+  
+    def to_json(*a)
+        as_json.to_json(*a)
     end
   end
   
@@ -98,11 +114,15 @@ module Parse
       @amount = amount
     end
     
-    def to_json(*a)
+    def as_json(*a)
       {
           Protocol::KEY_OP => Protocol::KEY_DECREMENT,
           Protocol::KEY_AMOUNT => @amount
-      }.to_json(*a)
+      }
+    end
+    
+    def to_json(*a)
+        as_json.to_json(*a)
     end
   end
   
@@ -123,12 +143,16 @@ module Parse
       end
     end
     
-    def to_json(*a)
+    def as_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_GEOPOINT,
           "latitude" => @latitude,
           "longitude" => @longitude
-      }.to_json(*a)
+      }
+    end
+    
+    def to_json(*a)
+        as_json.to_json(*a)
     end
   end
   
