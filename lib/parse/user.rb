@@ -11,7 +11,8 @@ module Parse
         "username" => username,
         "password" => password
       }
-      response = Parse.client.request(Parse::Protocol::USER_LOGIN_URI, :get, body)
+
+      response = Parse.client.request(Parse::Protocol::USER_LOGIN_URI, :get, nil, body)
       
       new(response)
     end

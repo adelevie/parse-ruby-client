@@ -24,7 +24,9 @@ class TestUser < Test::Unit::TestCase
       :username => u, 
       :password => "secret"
     }
+
     user = Parse::User.new(data)
+
     user.save
     
     assert_equal user["username"], u
@@ -32,8 +34,8 @@ class TestUser < Test::Unit::TestCase
     
     login = Parse::User.authenticate(u, "secret")
     
-    #assert_equal login["username"], "alan123"
-    #assert_equal login["sessionToken"].class, String
+    assert_equal login["username"], user["username"]
+    assert_equal login["sessionToken"].class, String
   end
 
 end
