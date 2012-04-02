@@ -3,6 +3,18 @@ require 'helper'
 Parse.init
 
 class TestQuery < Test::Unit::TestCase
+
+  def test_get
+    post = Parse::Object.new "Post"
+    post["title"] = "foo"
+    post.save
+
+    q = Parse.get("Post", post.id)
+
+    assert_equal q.id, post.id
+    assert_equal q["title"], post["title"]
+  end
+
   def test_add_contraint
     # I know this method *should* be private.
     # But then it would be a PITA to test.
