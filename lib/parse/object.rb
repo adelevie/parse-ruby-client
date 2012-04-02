@@ -10,6 +10,7 @@ module Parse
     attr_reader :class_name
     attr_reader :created_at
     attr_reader :updated_at
+    alias :id :parse_object_id
 
     def initialize(class_name, data = nil)
       @class_name = class_name
@@ -45,17 +46,22 @@ module Parse
         @updated_at = DateTime.parse data[Protocol::KEY_UPDATED_AT]
       end
 
-      self.merge! data
+      data.each do |k,v|
+        if k.is_a? Symbol
+          k = k.to_s
+        end
+				#if Protocol::RESERVED_KEYS.include? k
+        self[k] = v
+				#end
+      end
 
-			#data.each { |k,v|
-			#	if k.is_a? Symbol
-			#		k = k.to_s
-			#	end
-			#	if !Protocol::RESERVED_KEYS.include? k
-			#		self[k] = v
-			#	end
-			#}
+      self
     end
+
+    def new?
+      self["objectId"].nil?
+    end
+
     private :parse
 
     # Write the current state of the local object to the API.
@@ -63,10 +69,12 @@ module Parse
     # a new object, otherwise it will update the existing stored object.
     def save
       method   = @parse_object_id ? :put : :post
+
       Protocol::RESERVED_KEYS.each { |k| self.delete(k) }
       body     = self.to_json
 
       data = Parse.client.request(self.uri, method, body)
+
       if data
         parse data
       end
