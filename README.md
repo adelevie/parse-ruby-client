@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/adelevie/parse-ruby-client.png?branch=master)](http://travis-ci.org/adelevie/parse-ruby-client)
+
 The original creator of parse-ruby-client, [aalpern](http://github.com/aalpern), has decided to stop work on the project. I'm going to give the project new life, first by maintaining the project as a gem, and second by eventually making it power [parse_resource](http://github.com/adelevie/parse_resource) under the hood.
 
 # Ruby Client for parse.com REST API
