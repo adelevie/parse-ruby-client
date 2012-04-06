@@ -13,4 +13,3 @@ group :development do
 end
 
 gem "patron"
-gem "json"
