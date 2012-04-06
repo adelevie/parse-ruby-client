@@ -9,3 +9,6 @@ rvm:
   # - rbx-19mode # currently in active development, may or may not work for your project
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
+
+env: 
+ - PARSE_APPLICATION_ID=Slw1ACyMSVguo79pWvfIq15pkUjfwTLNPpL4984b PARSE_REST_API_KEY=qJKM8CGOAn70WOyR16f16YbyKWM0nBJCEbbtAMOm
