@@ -117,9 +117,12 @@ Parse::Query.new("GameScore")           \
 
 ```
 
-# Pushes
-push = Parse::Push.new({ "alert"=> "I'm sending this push to all my app users!" })
+## Push Notifications
+
+```ruby
+push = Parse::Push.new({"alert" => "I'm sending this push to all my app users!"})
 push.save
+```
 
 
 # TODO
