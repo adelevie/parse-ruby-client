@@ -15,7 +15,7 @@ module Parse
       @channel = channel
     end
 
-    def send
+    def save
       uri   = Protocol.push_uri
       
       body = { :data => @data, :channel => @channel }
