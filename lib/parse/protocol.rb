@@ -125,5 +125,9 @@ module Parse
       "/#{VERSION}/files/#{file_name}"
     end
 
+    # Construct a uri to send a push notification via the API.
+    def Protocol.push_uri
+      "/#{VERSION}/push"
+    end
   end
 end
