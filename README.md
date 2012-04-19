@@ -117,11 +117,15 @@ Parse::Query.new("GameScore")           \
 
 ```
 
+# Pushes
+push = Parse::Push.new({ "alert"=> "I'm sending this push to all my app users!" })
+push.save
+
+
 # TODO
 
 - Add some form of debug logging
 - ~~Support for Date, Pointer, and Bytes API [data types](https://www.parse.com/docs/rest#objects-types)~~
-- Users
 - ACLs
 - Login
 

@@ -28,3 +28,7 @@ Parse::Query.new(cls)                   \
   .value_in("score", [10, 20, 30, 40])  \
   .get
 
+# Pushes
+push = Parse::Push.new({ "alert"=> "I'm sending this push to all my app users!" })
+push.save
+  
