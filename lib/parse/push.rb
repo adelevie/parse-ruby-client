@@ -12,13 +12,16 @@ module Parse
 
     def initialize(data, channel = "")
       @data = data
-      @channel = channel || ""
+      @channel = channel
     end
 
     def send
       uri   = Protocol.push_uri
       body = { :data => @data, :channel => @channel }
-      body.merge({ :channels => @channels }) if @channels && @channel.nil?
+      if @channel == "" && @channels
+        body.merge({ :channels => @channels }) 
+        body.delete :channel
+      end
       body.merge({ :expiration_time_interval => @expiration_time_interval }) if @expiration_time_interval
       body.merge({ :expiration_time => @expiration_time }) if @expiration_time && @expiration_time_interval.nil?
       body.merge({ :type => @type }) if @type
