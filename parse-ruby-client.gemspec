@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2012-04-19"
+  s.date = "2012-04-20"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/adelevie/parse-ruby-client"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.22"
   s.summary = "A simple Ruby client for the parse.com REST API"
 
   if s.respond_to? :specification_version then
