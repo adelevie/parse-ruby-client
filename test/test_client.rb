@@ -30,6 +30,20 @@ class TestClient < Test::Unit::TestCase
     assert_equal foo[Parse::Protocol::KEY_UPDATED_AT].class, String
   end
   
+  def test_server_update
+    foo = Parse::Object.new("TestSave").save 
+    foo["name"] = 'john'
+    foo.save
+    
+    bar = Parse.get("TestSave",foo.id) # pull it from the server
+    assert_equal bar["name"], 'john'
+    bar["name"] = 'dave'
+    bar.save
+    
+    bat = Parse.get("TestSave",foo.id)
+    assert_equal bar["name"], 'dave'
+  end
+  
   def test_destroy
     d = Parse::Object.new "toBeDeleted"
     d["foo"] = "bar"
