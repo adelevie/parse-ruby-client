@@ -59,7 +59,7 @@ module Parse
     # increment/decrement API call.
     KEY_AMOUNT      = "amount"
 
-	RESERVED_KEYS = [ KEY_CLASS_NAME, KEY_CREATED_AT, KEY_OBJECT_ID ]
+	RESERVED_KEYS = [ KEY_CLASS_NAME, KEY_CREATED_AT, KEY_OBJECT_ID, KEY_UPDATED_AT]
 
     # Other Constants
     # ----------------------------------------
