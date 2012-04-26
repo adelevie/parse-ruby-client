@@ -19,7 +19,12 @@ module Parse
       uri   = Protocol.push_uri
       
       body = { :data => @data, :channel => @channel }
-      body.merge!({ :channels => @channels }) if @channels
+      
+      if @channels
+        body.merge!({ :channels => @channels })
+        body.delete :channel
+      end
+      
       body.merge!({ :expiration_time_interval => @expiration_time_interval }) if @expiration_time_interval
       body.merge!({ :expiration_time => @expiration_time }) if @expiration_time 
       body.merge!({ :type => @type }) if @type
