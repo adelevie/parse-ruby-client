@@ -17,6 +17,11 @@ module Parse
       new(response)
     end
 
+    def self.reset_password(email)
+      body = {"email" => email}
+      Parse.client.post(Parse::Protocol::PASSWORD_RESET_URI, body)
+    end
+
     def initialize(data = nil)
       @class_name = Parse::Protocol::CLASS_USER
       
