@@ -93,6 +93,7 @@ module Parse
     # The class name for User objects, when referenced by a Pointer.
     CLASS_USER      = "_User"
     USER_LOGIN_URI  = "/#{VERSION}/login"
+    PASSWORD_RESET_URI = "/#{VERSION}/requestPasswordReset"
     
     KEY_USER_SESSION_TOKEN = "sessionToken"
 
