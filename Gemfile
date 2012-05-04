@@ -13,3 +13,4 @@ group :development do
 end
 
 gem "patron"
+gem "vcr"
