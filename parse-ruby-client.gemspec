@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2012-05-04"
+  s.date = "2012-05-23"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
