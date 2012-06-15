@@ -24,7 +24,7 @@ module Parse
     end
 
     def pointer
-      Parse::Pointer.new self
+      Parse::Pointer.new self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)
     end
 
     # Merge a hash parsed from the JSON representation into
