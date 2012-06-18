@@ -69,9 +69,19 @@ module Parse
     def get
       uri   = Protocol.class_uri @class_name
       query = { "where" => CGI.escape(@where.to_json) }
+      set_order(query)
 
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
+    end
+
+    private
+
+    def set_order(query)
+      return unless @order_by
+      order_string = @order_by
+      order_string = "-#{order_string}" if @order == :descending
+      query.merge!(:order => order_string)
     end
 
   end
