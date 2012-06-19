@@ -33,7 +33,7 @@ module Parse
     # with common basic response handling. Will raise a
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
-    def request(uri, method = :get, body = nil, query = nil)
+    def request(uri, method = :get, body = nil, query = nil, max_retries = 2)
       options = {}
       if body
         options[:data] = body
@@ -47,7 +47,7 @@ module Parse
         response = @session.request(method, uri, {}, options)
       rescue Patron::TimeoutError
         num_tries += 1
-        if num_tries < 3
+        if num_tries <= max_retries
           retry 
         else
           raise Patron::TimeoutError
