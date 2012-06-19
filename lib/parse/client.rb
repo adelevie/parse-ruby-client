@@ -42,7 +42,18 @@ module Parse
         options[:query] = query
       end
 
-      response = @session.request(method, uri, {}, options)
+      num_tries = 0
+      begin
+        response = @session.request(method, uri, {}, options)
+      rescue Patron::TimeoutError
+        num_tries += 1
+        if num_tries < 3
+          retry 
+        else
+          raise Patron::TimeoutError
+        end
+      end
+
       if response.status >= 400
         raise ParseError, "#{JSON.parse(response.body)['code']}: #{JSON.parse(response.body)['error']}"
       else
