@@ -1,5 +1,5 @@
 Parse.init :application_id  => "your_application_id",
-           :api_key         => "your_api_key"
+           :api_key         => "your_REST_API_Key"
 
 profile = Parse::Object.new "Profile"
 profile["first_name"]    = "John"
