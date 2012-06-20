@@ -18,8 +18,8 @@ module Parse
       @application_id = data[:application_id]
       @api_key        = data[:api_key]
       @session        = Patron::Session.new
-      @session.timeout = 10
-      @session.connect_timeout = 10
+      @session.timeout = 30
+      @session.connect_timeout = 30
 
       @session.base_url                 = "https://#{host}"
       @session.headers["Content-Type"]  = "application/json"
@@ -33,7 +33,7 @@ module Parse
     # with common basic response handling. Will raise a
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
-    def request(uri, method = :get, body = nil, query = nil)
+    def request(uri, method = :get, body = nil, query = nil, max_retries = 2)
       options = {}
       if body
         options[:data] = body
@@ -42,7 +42,18 @@ module Parse
         options[:query] = query
       end
 
-      response = @session.request(method, uri, {}, options)
+      num_tries = 0
+      begin
+        response = @session.request(method, uri, {}, options)
+      rescue Patron::TimeoutError
+        num_tries += 1
+        if num_tries <= max_retries
+          retry 
+        else
+          raise Patron::TimeoutError
+        end
+      end
+
       if response.status >= 400
         raise ParseError, "#{JSON.parse(response.body)['code']}: #{JSON.parse(response.body)['error']}"
       else
