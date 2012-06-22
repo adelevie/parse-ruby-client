@@ -19,7 +19,7 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.0.8"`
+`gem "parse-ruby-client", "~> 0.1.0"`
 
 ---
 
