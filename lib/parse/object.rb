@@ -70,21 +70,22 @@ module Parse
     def save
       method   = @parse_object_id ? :put : :post
 
-      Protocol::RESERVED_KEYS.each { |k| self.delete(k) }
-      body     = self.to_json
+      without_reserved = self.dup
+      Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
+      body     = without_reserved.to_json
 
       data = Parse.client.request(self.uri, method, body)
 
       if data
         parse data
       end
-      
+
       if @class_name == Parse::Protocol::CLASS_USER
         self.delete("password")
         self.delete(:username)
         self.delete(:password)
       end
-      
+
       self
     end
 
@@ -97,7 +98,7 @@ module Parse
           parse data
         end
       end
-      
+
       self
     end
 
@@ -106,7 +107,7 @@ module Parse
       if @parse_object_id
         response = Parse.client.delete self.uri
       end
-      
+
       self.clear
       self
     end
