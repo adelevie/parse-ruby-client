@@ -47,7 +47,7 @@ class TestClient < Test::Unit::TestCase
     bar.save
 
     bat = Parse.get("TestSave",foo.id)
-    assert_equal bar["name"], 'dave'
+    assert_equal bat["name"], 'dave'
   end
 
   def test_destroy
