@@ -11,6 +11,10 @@ match the structure of the iOS and Android SDKs from Parse.
 So far it supports simple GET, PUT, and POST operations on objects. Enough
 to read & write simple data.
 
+## New in 0.1.1
+* query ordering
+* reserved keys no longer deleted on update
+
 ## Dependencies
 
 This currently depends on the gems 'json' and 'patron' for JSON support and HTTP, respectively.
@@ -19,7 +23,7 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.1.0"`
+`gem "parse-ruby-client", "~> 0.1.1"`
 
 ---
 
