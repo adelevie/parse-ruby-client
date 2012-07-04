@@ -9,6 +9,7 @@ module Parse
     attr_accessor :order
     attr_accessor :limit
     attr_accessor :skip
+    attr_accessor :count
 
     def initialize(cls_name)
       @class_name = cls_name
@@ -66,14 +67,35 @@ module Parse
       self
     end
 
+    def count
+      @count = true
+      self
+    end
+
     def get
       uri   = Protocol.class_uri @class_name
       query = { "where" => CGI.escape(@where.to_json) }
+      set_order(query)
+      [:count, :limit].each {|a| merge_attribute(a, query)}
 
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
     end
 
+    private
+
+    def set_order(query)
+      return unless @order_by
+      order_string = @order_by
+      order_string = "-#{order_string}" if @order == :descending
+      query.merge!(:order => order_string)
+    end
+
+    def merge_attribute(attribute, query)
+      value = self.instance_variable_get("@#{attribute.to_s}")
+      return if value.nil?
+      query.merge!(attribute => value)
+    end
   end
 
 end
