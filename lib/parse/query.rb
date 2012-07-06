@@ -76,7 +76,7 @@ module Parse
       uri   = Protocol.class_uri @class_name
       query = { "where" => CGI.escape(@where.to_json) }
       set_order(query)
-      [:count, :limit].each {|a| merge_attribute(a, query)}
+      [:count, :limit, :skip].each {|a| merge_attribute(a, query)}
 
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
