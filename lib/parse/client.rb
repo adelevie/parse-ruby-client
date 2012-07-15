@@ -17,6 +17,7 @@ module Parse
       @host           = data[:host] || Protocol::HOST
       @application_id = data[:application_id]
       @api_key        = data[:api_key]
+      @master_key     = data[:master_key]
       @session        = Patron::Session.new
       @session.timeout = 30
       @session.connect_timeout = 30
@@ -25,6 +26,7 @@ module Parse
       @session.headers["Content-Type"]  = "application/json"
       @session.headers["Accept"]        = "application/json"
       @session.headers["User-Agent"]    = "Parse for Ruby, 0.0"
+      @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
       @session.headers[Protocol::HEADER_API_KEY]  = @api_key
       @session.headers[Protocol::HEADER_APP_ID]   = @application_id
     end

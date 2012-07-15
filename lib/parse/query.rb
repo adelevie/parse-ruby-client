@@ -74,6 +74,11 @@ module Parse
 
     def get
       uri   = Protocol.class_uri @class_name
+      if @class_name == Parse::Protocol::CLASS_USER
+        uri = Protocol.user_uri
+      end
+        
+
       query = { "where" => CGI.escape(@where.to_json) }
       set_order(query)
       [:count, :limit, :skip].each {|a| merge_attribute(a, query)}
