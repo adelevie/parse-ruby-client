@@ -22,6 +22,10 @@ module Parse
     # Parse API.
     HEADER_API_KEY  = "X-Parse-REST-API-Key"
 
+    # The HTTP header used for passing your API Master key to the
+    # Parse API.
+    HEADER_MASTER_KEY  = "X-Parse-Master-Key"
+
     # JSON Keys
     # ----------------------------------------
 
@@ -89,6 +93,10 @@ module Parse
     # The data type name for special JSON objects representing
     # a file.
     TYPE_FILE       = "File"
+
+    # The data type name for special JSON objects representing
+    # a Relation.
+    TYPE_RELATION   = "Relation"
 
     # The class name for User objects, when referenced by a Pointer.
     CLASS_USER      = "_User"

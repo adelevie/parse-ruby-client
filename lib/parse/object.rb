@@ -72,8 +72,17 @@ module Parse
 
       without_reserved = self.dup
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
-      body     = without_reserved.to_json
-
+      
+      without_relations = without_reserved
+      without_relations.each { |k,v|
+          if v.is_a? Hash 
+            if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION 
+              without_relations.delete(k) 
+            end
+          end
+      }
+      
+      body     = without_relations.to_json
       data = Parse.client.request(self.uri, method, body)
 
       if data
