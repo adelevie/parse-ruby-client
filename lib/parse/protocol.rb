@@ -100,9 +100,12 @@ module Parse
 
     # The class name for User objects, when referenced by a Pointer.
     CLASS_USER      = "_User"
+
+    CLASS_INSTALLATION = "_Installation"
+
     USER_LOGIN_URI  = "/#{VERSION}/login"
     PASSWORD_RESET_URI = "/#{VERSION}/requestPasswordReset"
-    
+
     KEY_USER_SESSION_TOKEN = "sessionToken"
 
     # URI Helpers
@@ -117,7 +120,7 @@ module Parse
         "/#{VERSION}/classes/#{class_name}"
       end
     end
-    
+
 
     # Construct a uri referencing a given Parse user
     # instance or the users category.

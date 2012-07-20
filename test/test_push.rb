@@ -12,7 +12,7 @@ class TestPush < Test::Unit::TestCase
     pf_push = Parse::Push.new(data, "some_chan")
     pf_push.type = 'ios'
 
-    query = Parse::Query.new('_Installation').eq('deviceToken', 'baz')
+    query = Parse::Query.new(Parse::Protocol::CLASS_INSTALLATION).eq('deviceToken', 'baz')
     pf_push.where = query.where
 
     Parse::Client.any_instance.expects(:request).with do |uri, method, body, query|
