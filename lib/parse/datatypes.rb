@@ -71,6 +71,18 @@ module Parse
       value.hash
     end
 
+    def method_missing(method)
+      if value.respond_to?(method)
+        value.send(method)
+      else
+        super(method)
+      end
+    end
+
+    def respond_to?(method, include_private = false)
+      super || value.respond_to?(method, include_private)
+    end
+
     def as_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_DATE,
@@ -103,6 +115,18 @@ module Parse
 
     def hash
       value.hash
+    end
+
+    def method_missing(method)
+      if value.respond_to?(method)
+        value.send(method)
+      else
+        super(method)
+      end
+    end
+
+    def respond_to?(method, include_private = false)
+      super || value.respond_to?(method, include_private)
     end
 
     def as_json(*a)
