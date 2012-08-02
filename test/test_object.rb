@@ -64,4 +64,16 @@ class TestObject < Test::Unit::TestCase
     end
   end
 
+  def test_deep_parse
+    other = Parse::Object.new "Post"
+    other.save
+    post = Parse::Object.new "Post"
+    post["other"] = other.pointer
+    post.save
+
+    q = Parse.get("Post", post.id)
+    assert_equal Parse::Pointer, q["other"].class
+    assert_equal other.pointer, q["other"]
+  end
+
 end
