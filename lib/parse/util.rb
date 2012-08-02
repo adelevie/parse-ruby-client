@@ -9,9 +9,6 @@ module Parse
 
     if obj.nil?
       nil
-    # String
-    elsif obj.is_a? String
-      parse_json class_name, JSON.parse(obj)
 
     # Array
     elsif obj.is_a? Array
@@ -26,9 +23,10 @@ module Parse
       elsif obj.size == 1 && obj.has_key?(Protocol::KEY_RESULTS) && obj[Protocol::KEY_RESULTS].is_a?(Array)
         obj[Protocol::KEY_RESULTS].collect { |o| parse_json(class_name, o) }
       else # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
-        Parse::Object.new class_name, Hash[obj.map{|k,v| [k, v.is_a?(String) ? v : parse_json(nil, v)]}]
+        Parse::Object.new class_name, Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
       end
 
+    # primitive
     else
       obj
     end
