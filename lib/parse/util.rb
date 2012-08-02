@@ -25,8 +25,8 @@ module Parse
         parse_datatype obj
       elsif obj.size == 1 && obj.has_key?(Protocol::KEY_RESULTS) && obj[Protocol::KEY_RESULTS].is_a?(Array)
         obj[Protocol::KEY_RESULTS].collect { |o| parse_json(class_name, o) }
-      else # otherwise it must be a regular object
-        Parse::Object.new class_name, obj
+      else # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
+        Parse::Object.new class_name, Hash[obj.map{|k,v| [k, v.is_a?(String) ? v : parse_json(nil, v)]}]
       end
 
     else
