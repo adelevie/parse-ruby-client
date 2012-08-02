@@ -71,9 +71,9 @@ module Parse
       value.hash
     end
 
-    def method_missing(method)
+    def method_missing(method, *args, &block)
       if value.respond_to?(method)
-        value.send(method)
+        value.send(method, *args, &block)
       else
         super(method)
       end
@@ -117,9 +117,9 @@ module Parse
       value.hash
     end
 
-    def method_missing(method)
+    def method_missing(method, *args, &block)
       if value.respond_to?(method)
-        value.send(method)
+        value.send(method, *args, &block)
       else
         super(method)
       end
