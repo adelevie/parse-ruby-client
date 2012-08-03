@@ -71,6 +71,10 @@ module Parse
       value.hash
     end
 
+    def <=>(other)
+      value <=> other.value
+    end
+
     def method_missing(method, *args, &block)
       if value.respond_to?(method)
         value.send(method, *args, &block)
@@ -115,6 +119,10 @@ module Parse
 
     def hash
       value.hash
+    end
+
+    def <=>(other)
+      value <=> other.value
     end
 
     def method_missing(method, *args, &block)
