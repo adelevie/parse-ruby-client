@@ -40,7 +40,7 @@ module Parse
 
     # Retrieve the Parse object referenced by this pointer.
     def get
-      Parse.get @class_name, @parse_object_id
+      Parse.get @class_name, @parse_object_id if @parse_object_id
     end
   end
 
