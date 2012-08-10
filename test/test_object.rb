@@ -22,8 +22,7 @@ class TestObject < Test::Unit::TestCase
 
   def test_pointer
     post = Parse::Object.new "Post"
-    pointer = post.pointer
-    assert_equal pointer.class_name, post.class_name
+    assert_nil post.pointer
 
     post.save
     pointer = post.pointer

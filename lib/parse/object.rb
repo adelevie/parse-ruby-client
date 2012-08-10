@@ -102,7 +102,7 @@ module Parse
     # values from the API.
     def refresh
       if @parse_object_id
-        data = Parse.client.get self.uri
+        data = Parse.get @class_name, @parse_object_id
         if data
           parse data
         end
