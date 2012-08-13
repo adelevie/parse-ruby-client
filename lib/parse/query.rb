@@ -67,6 +67,11 @@ module Parse
       self
     end
 
+    def in_query(field, query)
+      query_hash = {Parse::Protocol::KEY_CLASS_NAME => query.class_name, "where" => query.where}
+      add_constraint(field, "$inQuery" => query_hash)
+    end
+
     def count
       @count = true
       self
@@ -77,7 +82,7 @@ module Parse
       if @class_name == Parse::Protocol::CLASS_USER
         uri = Protocol.user_uri
       end
-        
+
 
       query = { "where" => CGI.escape(@where.to_json) }
       set_order(query)

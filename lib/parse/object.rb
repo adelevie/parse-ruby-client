@@ -24,7 +24,7 @@ module Parse
     end
 
     def pointer
-      Parse::Pointer.new self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)
+      Parse::Pointer.new(self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)) unless new?
     end
 
     # Merge a hash parsed from the JSON representation into
@@ -72,16 +72,16 @@ module Parse
 
       without_reserved = self.dup
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
-      
+
       without_relations = without_reserved
       without_relations.each { |k,v|
-          if v.is_a? Hash 
-            if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION 
-              without_relations.delete(k) 
+          if v.is_a? Hash
+            if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
+              without_relations.delete(k)
             end
           end
       }
-      
+
       body     = without_relations.to_json
       data = Parse.client.request(self.uri, method, body)
 
@@ -102,7 +102,7 @@ module Parse
     # values from the API.
     def refresh
       if @parse_object_id
-        data = Parse.client.get self.uri
+        data = Parse.get @class_name, @parse_object_id
         if data
           parse data
         end
