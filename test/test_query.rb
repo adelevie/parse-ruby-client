@@ -52,4 +52,12 @@ class TestQuery < Test::Unit::TestCase
     Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns({}.to_json)
     q.get
   end
+
+  def test_in_query
+    outer_query = Parse::Query.new "Outer"
+    inner_query = Parse::Query.new "Inner"
+    inner_query.eq("foo", "bar")
+    outer_query.in_query("inner", inner_query)
+    assert_equal({"inner"=>{"$inQuery"=>{"className"=>"Inner", "where"=>{"foo"=>"bar"}}}}, outer_query.where)
+  end
 end
