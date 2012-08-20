@@ -26,6 +26,9 @@ module Parse
     # Parse API.
     HEADER_MASTER_KEY  = "X-Parse-Master-Key"
 
+    # The HTTP header used for passing your authenticated session
+    HEADER_SESSION_TOKEN = "X-Parse-Session-Token"
+
     # JSON Keys
     # ----------------------------------------
 
