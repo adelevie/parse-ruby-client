@@ -11,6 +11,8 @@ module Parse
     attr_accessor :host
     attr_accessor :application_id
     attr_accessor :api_key
+    attr_accessor :master_key
+    attr_accessor :session_token
     attr_accessor :session
 
     def initialize(data = {})
@@ -18,6 +20,7 @@ module Parse
       @application_id = data[:application_id]
       @api_key        = data[:api_key]
       @master_key     = data[:master_key]
+      @session_token  = data[:session_token]
       @session        = Patron::Session.new
       @session.timeout = 30
       @session.connect_timeout = 30
@@ -26,9 +29,6 @@ module Parse
       @session.headers["Content-Type"]  = "application/json"
       @session.headers["Accept"]        = "application/json"
       @session.headers["User-Agent"]    = "Parse for Ruby, 0.0"
-      @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
-      @session.headers[Protocol::HEADER_API_KEY]  = @api_key
-      @session.headers[Protocol::HEADER_APP_ID]   = @application_id
     end
 
     # Perform an HTTP request for the given uri and method
@@ -36,6 +36,11 @@ module Parse
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
     def request(uri, method = :get, body = nil, query = nil, max_retries = 2)
+      @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
+      @session.headers[Protocol::HEADER_API_KEY]  = @api_key
+      @session.headers[Protocol::HEADER_APP_ID]   = @application_id
+      @session.headers[Protocol::HEADER_SESSION_TOKEN]   = @session_token
+
       options = {}
       if body
         options[:data] = body
@@ -50,7 +55,7 @@ module Parse
       rescue Patron::TimeoutError
         num_tries += 1
         if num_tries <= max_retries
-          retry 
+          retry
         else
           raise Patron::TimeoutError
         end
@@ -94,10 +99,17 @@ module Parse
   # Initialize the singleton instance of Client which is used
   # by all API methods. Parse.init must be called before saving
   # or retrieving any objects.
-  def Parse.init(data = {:application_id => ENV["PARSE_APPLICATION_ID"], :api_key => ENV["PARSE_REST_API_KEY"]})
-    @@client = Client.new(data)
+  def Parse.init(data = {})
+    defaulted = {:application_id => ENV["PARSE_APPLICATION_ID"],
+                 :api_key => ENV["PARSE_REST_API_KEY"]}
+    defaulted.merge!(data)
+
+    # use less permissive key if both are specified
+    defaulted[:master_key] = ENV["PARSE_MASTER_API_KEY"] unless data[:master_key] || defaulted[:api_key]
+
+    @@client = Client.new(defaulted)
   end
-  
+
   # Used mostly for testing. Lets you delete the api key global vars.
   def Parse.destroy
     @@client = nil
