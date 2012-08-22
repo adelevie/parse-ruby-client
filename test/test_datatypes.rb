@@ -76,6 +76,6 @@ class TestDatatypes < Test::Unit::TestCase
     post["avatar"] = file
     post.save
     q = Parse.get("Post", post.id)
-    assert_equal file, q["avatar"]
+    assert_equal file.name, q["avatar"].name
   end
 end

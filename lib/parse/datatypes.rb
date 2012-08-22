@@ -264,28 +264,31 @@ module Parse
   # ------------------------------------------------------------
 
   class File
-    # '{"avatar": {"__type":"File", "name":"...profile.png"}}'
+    # '{"avatar": {"__type":"File", "name":"profile.png", "url"=>"http://files.parse.com/blah/profile.png"}}'
     attr_accessor :name
+    attr_accessor :url
 
     def initialize(data)
       @name = data["name"]
+      @url = data["url"]
     end
 
     def eql?(other)
       self.class.equal?(other.class) &&
-        name == other.name
+        url == other.url
     end
 
     alias == eql?
 
     def hash
-      name.hash
+      url.hash
     end
 
     def as_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_FILE,
-          "name" => @name
+          "name" => @name,
+          "url" => @url
       }
     end
 
