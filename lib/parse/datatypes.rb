@@ -260,5 +260,39 @@ module Parse
     end
   end
 
+  # File
+  # ------------------------------------------------------------
+
+  class File
+    # '{"avatar": {"__type":"File", "name":"...profile.png"}}'
+    attr_accessor :name
+
+    def initialize(data)
+      @name = data["name"]
+    end
+
+    def eql?(other)
+      self.class.equal?(other.class) &&
+        name == other.name
+    end
+
+    alias == eql?
+
+    def hash
+      name.hash
+    end
+
+    def as_json(*a)
+      {
+          Protocol::KEY_TYPE => Protocol::TYPE_FILE,
+          "name" => @name
+      }
+    end
+
+    def to_json(*a)
+        as_json.to_json(*a)
+    end
+  end
+
 
 end
