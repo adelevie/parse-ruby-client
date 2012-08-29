@@ -15,9 +15,11 @@ module Parse
       @class_name = cls_name
       @where = {}
       @order = :ascending
+      @ors = []
     end
 
     def add_constraint(field, constraint)
+      raise ArgumentError, "cannot add constraint to an $or query" if @ors.size > 0
       current = where[field]
       if current && current.is_a?(Hash) && constraint.is_a?(Hash)
         current.merge! constraint
@@ -26,6 +28,12 @@ module Parse
       end
     end
     #private :add_constraint
+
+    def or(query)
+      raise ArgumentError, "you must pass an entire #{self.class} to \#or" unless query.is_a?(self.class)
+      @ors << query
+      self
+    end
 
     def eq(field, value)
       add_constraint field, value
@@ -77,6 +85,14 @@ module Parse
       self
     end
 
+    def where_as_json
+      if @ors.size > 0
+        {"$or" => [self.where] + @ors.map{|query| query.where_as_json}}
+      else
+        @where
+      end
+    end
+
     def get
       uri   = Protocol.class_uri @class_name
       if @class_name == Parse::Protocol::CLASS_USER
@@ -84,7 +100,7 @@ module Parse
       end
 
 
-      query = { "where" => CGI.escape(@where.to_json) }
+      query = { "where" => CGI.escape(where_as_json.to_json) }
       set_order(query)
       [:count, :limit, :skip].each {|a| merge_attribute(a, query)}
 

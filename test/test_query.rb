@@ -53,6 +53,23 @@ class TestQuery < Test::Unit::TestCase
     q.get
   end
 
+  def test_or
+    foo = Parse::Object.new "Post"
+    foo["random"] = rand
+    foo.save
+    foo_query = Parse::Query.new("Post").eq("random", foo["random"])
+    assert_equal 1, foo_query.get.size
+
+    bar = Parse::Object.new "Post"
+    bar["random"] = rand
+    bar.save
+    bar_query = Parse::Query.new("Post").eq("random", bar["random"])
+    assert_equal 1, foo_query.get.size
+
+    query = foo_query.or(bar_query)
+    assert_equal 2, query.get.size
+  end
+
   def test_in_query
     outer_query = Parse::Query.new "Outer"
     inner_query = Parse::Query.new "Inner"
