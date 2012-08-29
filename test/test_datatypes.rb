@@ -65,4 +65,17 @@ class TestDatatypes < Test::Unit::TestCase
     q = Parse.get("Post", post.id)
     assert_equal gp, q["location"]
   end
+
+  def test_file
+    data = {"name" => "blah.png"}
+    file = Parse::File.new(data)
+    assert_equal JSON.parse(file.to_json)["name"], data["name"]
+    assert_equal JSON.parse(file.to_json)[Parse::Protocol::KEY_TYPE], Parse::Protocol::TYPE_FILE
+
+    post = Parse::Object.new("Post")
+    post["avatar"] = file
+    post.save
+    q = Parse.get("Post", post.id)
+    assert_equal file.name, q["avatar"].name
+  end
 end
