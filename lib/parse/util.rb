@@ -44,6 +44,8 @@ module Parse
         Parse::Date.new obj
       when Protocol::TYPE_GEOPOINT
         Parse::GeoPoint.new obj
+      when Protocol::TYPE_FILE
+        Parse::File.new obj
     end
   end
 end
