@@ -17,7 +17,7 @@ class TestDatatypes < Test::Unit::TestCase
     parse_date = Parse::Date.new data
 
     assert_equal parse_date.value, date_time
-    assert_equal JSON.parse(parse_date.to_json)["iso"], date_time.iso8601
+    assert_equal JSON.parse(parse_date.to_json)["iso"], date_time.iso8601(3)
     assert_equal 0, parse_date <=> parse_date
     assert_equal 0, Parse::Date.new(data) <=> Parse::Date.new(data)
   end

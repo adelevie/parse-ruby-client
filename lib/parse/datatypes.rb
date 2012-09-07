@@ -94,7 +94,7 @@ module Parse
     def as_json(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_DATE,
-          "iso"              => value.iso8601
+          "iso"              => value.iso8601(3)
       }
     end
 
