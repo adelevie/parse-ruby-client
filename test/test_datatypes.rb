@@ -25,7 +25,10 @@ class TestDatatypes < Test::Unit::TestCase
     post["time"] = parse_date
     post.save
     q = Parse.get("Post", post.id)
-    assert_equal parse_date.utc, q["time"].utc
+
+    # time zone from parse is utc so string formats don't compare equal,
+    # also floating points vary a bit so only equality after rounding to millis is guaranteed
+    assert_equal parse_date.to_time.utc.to_datetime.iso8601(3), q["time"].to_time.utc.to_datetime.iso8601(3)
   end
 
   def test_bytes
