@@ -20,6 +20,12 @@ class TestDatatypes < Test::Unit::TestCase
     assert_equal JSON.parse(parse_date.to_json)["iso"], date_time.iso8601(3)
     assert_equal 0, parse_date <=> parse_date
     assert_equal 0, Parse::Date.new(data) <=> Parse::Date.new(data)
+
+    post = Parse::Object.new("Post")
+    post["time"] = parse_date
+    post.save
+    q = Parse.get("Post", post.id)
+    assert_equal parse_date.utc, q["time"].utc
   end
 
   def test_bytes
