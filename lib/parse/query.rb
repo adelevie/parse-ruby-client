@@ -39,6 +39,11 @@ module Parse
       add_constraint field, value
       self
     end
+    
+    def not_eq(field, value)
+      add_constraint field, { "$ne" => value }
+      self
+    end
 
     def regex(field, expression)
       add_constraint field, { "$regex" => expression }
