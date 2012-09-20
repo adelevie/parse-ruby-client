@@ -17,9 +17,18 @@ class TestDatatypes < Test::Unit::TestCase
     parse_date = Parse::Date.new data
 
     assert_equal parse_date.value, date_time
-    assert_equal JSON.parse(parse_date.to_json)["iso"], date_time.iso8601
+    assert_equal JSON.parse(parse_date.to_json)["iso"], date_time.iso8601(3)
     assert_equal 0, parse_date <=> parse_date
     assert_equal 0, Parse::Date.new(data) <=> Parse::Date.new(data)
+
+    post = Parse::Object.new("Post")
+    post["time"] = parse_date
+    post.save
+    q = Parse.get("Post", post.id)
+
+    # time zone from parse is utc so string formats don't compare equal,
+    # also floating points vary a bit so only equality after rounding to millis is guaranteed
+    assert_equal parse_date.to_time.utc.to_datetime.iso8601(3), q["time"].to_time.utc.to_datetime.iso8601(3)
   end
 
   def test_bytes
