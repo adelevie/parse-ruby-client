@@ -83,6 +83,7 @@ module Parse
     def in_query(field, query)
       query_hash = {Parse::Protocol::KEY_CLASS_NAME => query.class_name, "where" => query.where}
       add_constraint(field, "$inQuery" => query_hash)
+      self
     end
 
     def count
