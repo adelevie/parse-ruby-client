@@ -61,15 +61,8 @@ module Parse
     def new?
       self["objectId"].nil?
     end
-
-    private :parse
-
-    # Write the current state of the local object to the API.
-    # If the object has never been saved before, this will create
-    # a new object, otherwise it will update the existing stored object.
-    def save
-      method   = @parse_object_id ? :put : :post
-
+    
+    def safe_json
       without_reserved = self.dup
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
 
@@ -82,7 +75,17 @@ module Parse
           end
       }
 
-      body     = without_relations.to_json
+      without_relations.to_json
+    end
+
+    private :parse
+
+    # Write the current state of the local object to the API.
+    # If the object has never been saved before, this will create
+    # a new object, otherwise it will update the existing stored object.
+    def save
+      method   = @parse_object_id ? :put : :post
+      body = safe_json
       data = Parse.client.request(self.uri, method, body)
 
       if data
