@@ -39,6 +39,11 @@ module Parse
       add_constraint field, value
       self
     end
+    
+    def not_eq(field, value)
+      add_constraint field, { "$ne" => value }
+      self
+    end
 
     def regex(field, expression)
       add_constraint field, { "$regex" => expression }
@@ -78,6 +83,7 @@ module Parse
     def in_query(field, query)
       query_hash = {Parse::Protocol::KEY_CLASS_NAME => query.class_name, "where" => query.where}
       add_constraint(field, "$inQuery" => query_hash)
+      self
     end
 
     def count
