@@ -75,4 +75,12 @@ class TestObject < Test::Unit::TestCase
     assert_equal other.pointer, q["other"]
   end
 
+  def test_nils_delete_keys
+    post = Parse::Object.new "Post"
+    post["title"] = "hello"
+    post.save    
+    post["title"] = nil
+    post.save
+    assert_false post.refresh.keys.include?("title")
+  end
 end
