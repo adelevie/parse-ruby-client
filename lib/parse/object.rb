@@ -101,11 +101,22 @@ module Parse
       self
     end
 
+    def as_json(*a)
+      Hash[self.map do |key, value|
+        [key, value.nil? ? Protocol::DELETE_OP : value]
+      end]
+    end
+
+    def to_json(*a)
+      as_json.to_json(*a)
+    end
+
     # Update the fields of the local Parse object with the current
     # values from the API.
     def refresh
       if @parse_object_id
         data = Parse.get @class_name, @parse_object_id
+        clear
         if data
           parse data
         end

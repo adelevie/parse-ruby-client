@@ -58,6 +58,9 @@ module Parse
     KEY_OP          = "__op"
     KEY_INCREMENT   = "Increment"
     KEY_DECREMENT   = "Decrement"
+    KEY_DELETE      = "Delete"
+
+    DELETE_OP       = { KEY_OP => KEY_DELETE }
 
     # The JSON key used to identify the datatype of a special value.
     KEY_TYPE        = "__type"
