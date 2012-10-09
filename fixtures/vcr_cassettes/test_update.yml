@@ -1,0 +1,161 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/TestSave
+    body:
+      encoding: UTF-8
+      string: ! '{"age":20}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
+      X-Parse-Application-Id:
+      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: !binary |-
+        Q3JlYXRlZA==
+    headers:
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VHVlLCAwOSBPY3QgMjAxMiAyMTo0NToyMCBHTVQ=
+      !binary "TG9jYXRpb24=":
+      - !binary |-
+        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9UZXN0U2F2ZS9LOWRB
+        M0FnMUlo
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
+        SWxPV00xTURneE5ERXdNMlUzWW1Ka1l6aGhZalJtT0RVMVptTTNOREJpWXpZ
+        JTNELS00ZGEyZDM2YTZhNGYzYjM4ODFkNmQ4NTI1ZTJiMDNjMjdmNGQ3NDg2
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVN1biwgMDkt
+        T2N0LTIwMjIgMjE6NDU6MjAgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAxIENyZWF0ZWQ=
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4xMTM2NjE=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NjQ=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjcmVhdGVkQXQiOiIyMDEyLTEwLTA5VDIxOjQ1OjIwLjcyNloiLCJvYmpl
+        Y3RJZCI6Iks5ZEEzQWcxSWgifQ==
+    http_version: 
+  recorded_at: Tue, 09 Oct 2012 21:45:21 GMT
+- request:
+    method: put
+    uri: https://api.parse.com/1/classes/TestSave/K9dA3Ag1Ih
+    body:
+      encoding: UTF-8
+      string: ! '{"age":40}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
+      X-Parse-Application-Id:
+      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VHVlLCAwOSBPY3QgMjAxMiAyMTo0NToyNCBHTVQ=
+      !binary "RXRhZw==":
+      - !binary |-
+        Ijg4YmNhYjgxNDczMjI1MmRhMDY5MTliYmUxYTcyOWRhIg==
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
+        SWxPR013TWprME1XUTBZelppTjJNMk1EVTJNVFZpTVRobVlXSmhOalJpTkRr
+        JTNELS0yNmU3YTJjZjE5N2U4MzFiNDkzODIwM2VhMWYxMGNiMjg0NTc3MDg4
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVN1biwgMDkt
+        T2N0LTIwMjIgMjE6NDU6MjQgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4xNTE0ODc=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NDA=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ1cGRhdGVkQXQiOiIyMDEyLTEwLTA5VDIxOjQ1OjI0Ljc2MFoifQ==
+    http_version: 
+  recorded_at: Tue, 09 Oct 2012 21:45:25 GMT
+recorded_with: VCR 2.0.1

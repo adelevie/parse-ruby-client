@@ -19,9 +19,11 @@ class TestCloud < Test::Unit::TestCase
 	end
 
 	def test_cloud_function
-		function = Parse::Cloud::Function.new("trivial")
-		params = {}
-		resp = function.call(params)
-		assert_equal resp, params
+		VCR.use_cassette('test_cloud_function', :record => :new_episodes) do
+			function = Parse::Cloud::Function.new("trivial")
+			params = {"foo" => "bar"}
+			resp = function.call(params)
+			assert_equal resp, params
+		end
 	end
 end

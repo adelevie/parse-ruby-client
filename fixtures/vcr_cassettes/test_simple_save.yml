@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/TestSave
+    body:
+      encoding: UTF-8
+      string: ! '{"foo":"bar"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
+      X-Parse-Application-Id:
+      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: !binary |-
+        Q3JlYXRlZA==
+    headers:
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VHVlLCAwOSBPY3QgMjAxMiAyMTo0NToxOSBHTVQ=
+      !binary "TG9jYXRpb24=":
+      - !binary |-
+        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9UZXN0U2F2ZS9EOFpY
+        MlFkV0tW
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
+        SWxNbVl3WTJFeE16STRPV1JrT1RnNE5qUmxaV0psWWpka01qWmpZekZrTm1J
+        JTNELS00MGI2MGE3ZmM3ZGRiZmU2NzBmYzdmNWQwOGNmODAwMDVkMGY5MmY5
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVN1biwgMDkt
+        T2N0LTIwMjIgMjE6NDU6MTkgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAxIENyZWF0ZWQ=
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4wMzE3Mjg=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NjQ=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjcmVhdGVkQXQiOiIyMDEyLTEwLTA5VDIxOjQ1OjE5LjUxOVoiLCJvYmpl
+        Y3RJZCI6IkQ4WlgyUWRXS1YifQ==
+    http_version: 
+  recorded_at: Tue, 09 Oct 2012 21:45:19 GMT
+recorded_with: VCR 2.0.1

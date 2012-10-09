@@ -5,14 +5,16 @@ Parse.init
 class TestQuery < Test::Unit::TestCase
 
   def test_get
-    post = Parse::Object.new "Post"
-    post["title"] = "foo"
-    post.save
+    VCR.use_cassette('test_get', :record => :new_episodes) do
+      post = Parse::Object.new "Post"
+      post["title"] = "foo"
+      post.save
 
-    q = Parse.get("Post", post.id)
+      q = Parse.get("Post", post.id)
 
-    assert_equal q.id, post.id
-    assert_equal q["title"], post["title"]
+      assert_equal q.id, post.id
+      assert_equal q["title"], post["title"]
+    end
   end
 
   def test_add_contraint
@@ -37,37 +39,43 @@ class TestQuery < Test::Unit::TestCase
   end
 
   def test_limit_skip
-    q = Parse::Query.new "TestQuery"
-    q.limit = 2
-    q.skip = 3
-    query_matcher = has_entries(:limit =>  2, :skip => 3)
-    Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns({}.to_json)
-    q.get
+    VCR.use_cassette('test_limit_skip', :record => :new_episodes) do
+      q = Parse::Query.new "TestQuery"
+      q.limit = 2
+      q.skip = 3
+      query_matcher = has_entries(:limit =>  2, :skip => 3)
+      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns({}.to_json)
+      q.get
+    end
   end
 
   def test_count
-    q = Parse::Query.new "TestQuery"
-    q.count = true
-    query_matcher = has_entries(:count => true)
-    Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns({}.to_json)
-    q.get
+    VCR.use_cassette('test_count', :record => :new_episodes) do
+      q = Parse::Query.new "TestQuery"
+      q.count = true
+      query_matcher = has_entries(:count => true)
+      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns({}.to_json)
+      q.get
+    end
   end
 
   def test_or
-    foo = Parse::Object.new "Post"
-    foo["random"] = rand
-    foo.save
-    foo_query = Parse::Query.new("Post").eq("random", foo["random"])
-    assert_equal 1, foo_query.get.size
+    #VCR.use_cassette('test_or', :record => :new_episodes) do
+      foo = Parse::Object.new "Post"
+      foo["random"] = rand
+      foo.save
+      foo_query = Parse::Query.new("Post").eq("random", foo["random"])
+      assert_equal 1, foo_query.get.size
 
-    bar = Parse::Object.new "Post"
-    bar["random"] = rand
-    bar.save
-    bar_query = Parse::Query.new("Post").eq("random", bar["random"])
-    assert_equal 1, foo_query.get.size
+      bar = Parse::Object.new "Post"
+      bar["random"] = rand
+      bar.save
+      bar_query = Parse::Query.new("Post").eq("random", bar["random"])
+      assert_equal 1, foo_query.get.size
 
-    query = foo_query.or(bar_query)
-    assert_equal 2, query.get.size
+      query = foo_query.or(bar_query)
+      assert_equal 2, query.get.size
+    #end
   end
 
   def test_in_query

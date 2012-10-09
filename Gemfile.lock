@@ -1,6 +1,8 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.3.2)
+    crack (0.3.1)
     git (1.2.5)
     jeweler (1.6.4)
       bundler (~> 1.0)
@@ -15,12 +17,15 @@ GEM
     shoulda (2.11.3)
     test-unit (2.5.0)
     vcr (2.0.1)
+    webmock (1.8.10)
+      addressable (>= 2.2.7)
+      crack (>= 0.1.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.0.0)
+  bundler (~> 1.1.5)
   jeweler (~> 1.6.4)
   mocha (= 0.12.0)
   patron
@@ -28,3 +33,4 @@ DEPENDENCIES
   shoulda
   test-unit (= 2.5.0)
   vcr
+  webmock
