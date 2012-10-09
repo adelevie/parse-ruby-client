@@ -131,6 +131,7 @@ push.save
 ## Cloud Code
 
 ```ruby
+# assumes you have a function named "trivial"
 function = Parse::Cloud::Function.new("trivial")
 params = {"foo" => "bar"}
 function.call(params)
