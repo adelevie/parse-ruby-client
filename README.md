@@ -128,6 +128,14 @@ push = Parse::Push.new({"alert" => "I'm sending this push to all my app users!"}
 push.save
 ```
 
+## Cloud Code
+
+```ruby
+function = Parse::Cloud::Function.new("trivial")
+params = {"foo" => "bar"}
+function.call(params)
+```
+
 
 # TODO
 
