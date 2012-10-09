@@ -28,6 +28,7 @@ module Parse
 
       if @where
         body.merge!({ :where => @where })
+        body.delete :channel
       end
 
       body.merge!({ :expiration_time_interval => @expiration_time_interval }) if @expiration_time_interval
