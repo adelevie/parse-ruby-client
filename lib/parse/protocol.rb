@@ -69,7 +69,7 @@ module Parse
     # increment/decrement API call.
     KEY_AMOUNT      = "amount"
 
-	RESERVED_KEYS = [ KEY_CLASS_NAME, KEY_CREATED_AT, KEY_OBJECT_ID, KEY_UPDATED_AT]
+  RESERVED_KEYS = [ KEY_CLASS_NAME, KEY_CREATED_AT, KEY_OBJECT_ID, KEY_UPDATED_AT]
 
     # Other Constants
     # ----------------------------------------
@@ -114,6 +114,8 @@ module Parse
 
     KEY_USER_SESSION_TOKEN = "sessionToken"
 
+    CLOUD_FUNCTIONS_PATH = "functions"
+
     # URI Helpers
     # ----------------------------------------
 
@@ -146,6 +148,10 @@ module Parse
     # Construct a uri to send a push notification via the API.
     def Protocol.push_uri
       "/#{VERSION}/push"
+    end
+
+    def Protocol.cloud_function_uri(function_name)
+      "/#{VERSION}/#{CLOUD_FUNCTIONS_PATH}/#{function_name}"
     end
   end
 end
