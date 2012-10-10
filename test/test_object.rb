@@ -25,7 +25,7 @@ class TestObject < Test::Unit::TestCase
   end
 
   def test_pointer
-    VCR.use_cassette('test_pointer', :record => :new_episodes) do    
+    VCR.use_cassette('test_pointer', :record => :new_episodes) do
       post = Parse::Object.new "Post"
       assert_nil post.pointer
 
@@ -89,11 +89,19 @@ class TestObject < Test::Unit::TestCase
     end
   end
 
+  def test_deep_as_json
+    VCR.use_cassette('test_deep_as_json', :record => :new_episodes) do
+      other = Parse::Object.new "Post"
+      other['date'] = Parse::Date.new(DateTime.now)
+      assert other.as_json['date']['iso']
+    end
+  end
+
   def test_nils_delete_keys
     VCR.use_cassette('test_nils_delete_keys', :record => :new_episodes) do
       post = Parse::Object.new "Post"
       post["title"] = "hello"
-      post.save    
+      post.save
       post["title"] = nil
       post.save
       assert_false post.refresh.keys.include?("title")
