@@ -61,7 +61,7 @@ module Parse
     def new?
       self["objectId"].nil?
     end
-    
+
     def safe_json
       without_reserved = self.dup
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
@@ -103,7 +103,13 @@ module Parse
 
     def as_json(*a)
       Hash[self.map do |key, value|
-        [key, value.nil? ? Protocol::DELETE_OP : value]
+        value = if value
+          value.respond_to?(:as_json) ? value.as_json : value
+        else
+          Protocol::DELETE_OP
+        end
+
+        [key, value]
       end]
     end
 

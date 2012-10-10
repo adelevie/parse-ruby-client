@@ -75,10 +75,6 @@ module Parse
       value <=> other.value
     end
 
-    def to_s
-      value.to_s
-    end
-
     def method_missing(method, *args, &block)
       if value.respond_to?(method)
         value.send(method, *args, &block)
