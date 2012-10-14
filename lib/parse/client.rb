@@ -110,6 +110,16 @@ module Parse
     @@client = Client.new(defaulted)
   end
 
+  # A convenience method for using global.json
+  def Parse.init_from_cloud_code(path="../config/global.json")
+    global = JSON.parse(Object::File.open(path).read) # warning: toplevel constant File referenced by Parse::Object::File
+    application_name = global["applications"]["_default"]["link"]
+    application_id = global["applications"][application_name]["applicationId"]
+    master_key = global["applications"][application_name]["masterKey"]
+    Parse.init :application_id => application_id,
+               :master_key     => master_key
+  end
+
   # Used mostly for testing. Lets you delete the api key global vars.
   def Parse.destroy
     @@client = nil

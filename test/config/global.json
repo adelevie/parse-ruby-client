@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "_default": {
+            "link": "FakeApp"
+        }, 
+        "FakeApp": {
+            "applicationId": "fakeApplicationId", 
+            "masterKey": "fakeMasterKey"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.0.23"
+    }
+}
