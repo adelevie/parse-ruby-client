@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2012-10-09"
+  s.date = "2012-10-14"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -57,11 +57,13 @@ Gem::Specification.new do |s|
     "pkg/parse-ruby-client-1-0.0.1.gem",
     "pkg/parse-ruby-client.gem",
     "test/cloud_functions/MyCloudCode/cloud/main.js",
+    "test/config/global.json",
     "test/helper.rb",
     "test/test_client.rb",
     "test/test_cloud.rb",
     "test/test_datatypes.rb",
     "test/test_init.rb",
+    "test/test_init_from_cloud_code.rb",
     "test/test_object.rb",
     "test/test_push.rb",
     "test/test_query.rb",
