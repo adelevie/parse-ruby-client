@@ -48,6 +48,14 @@ Parse.init
 
 The test folder assumes this naming convention for environment variables, so if you want to run the tests, you *must* do this. But it's easy. And good for you, too.
 
+### New: Load API keys from `global.json` created by Cloud Code
+
+```ruby
+Parse.init_from_cloud_code("path/to/global.json")
+```
+
+The path defaults to `"../config/global.json"`. So if you create a folder inside the root of a Cloud Code directory, and in that folder is a `.rb` file, just call `Parse.init_from_cloud_code` with no arguments and you're set.
+
 ## Creating and Saving Objects
 
 Create an instance of ```Parse::Object``` with your class name supplied as a string, set some keys, and call ```save()```.
@@ -132,7 +140,6 @@ function = Parse::Cloud::Function.new("trivial")
 params = {"foo" => "bar"}
 function.call(params)
 ```
-
 
 # TODO
 
