@@ -107,4 +107,19 @@ class TestObject < Test::Unit::TestCase
       assert_false post.refresh.keys.include?("title")
     end
   end
+
+  def test_array_add
+    VCR.use_cassette('test_array_add', :record => :new_episodes) do
+      post = Parse::Object.new "Post"
+      post.array_add("chapters", "hello")
+      assert_equal ["hello"], post["chapters"]
+      post.save
+      assert_equal ["hello"], post["chapters"]
+
+      post.array_add("chapters", "goodbye")
+      assert_equal ["hello", "goodbye"], post["chapters"]
+      post.save
+      assert_equal ["hello", "goodbye"], post["chapters"]
+    end
+  end
 end
