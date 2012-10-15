@@ -53,12 +53,18 @@ module Parse
     RESPONSE_KEY_RESULTS = "results"
     KEY_RESULTS = RESPONSE_KEY_RESULTS
 
-    # The JSON key used to identify an operator in the increment/decrement
-    # API call.
+    # The JSON key used to identify an operator
     KEY_OP          = "__op"
+
     KEY_INCREMENT   = "Increment"
     KEY_DECREMENT   = "Decrement"
     KEY_DELETE      = "Delete"
+
+    # array ops
+    KEY_OBJECTS     = "objects"
+    KEY_ADD         = "Add"
+    KEY_ADD_UNIQUE  = "AddUnique"
+    KEY_REMOVE      = "Remove"
 
     DELETE_OP       = { KEY_OP => KEY_DELETE }
 
