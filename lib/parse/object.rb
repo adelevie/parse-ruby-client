@@ -14,6 +14,7 @@ module Parse
 
     def initialize(class_name, data = nil)
       @class_name = class_name
+      @op_fields = {}
       if data
         parse data
       end
@@ -84,7 +85,13 @@ module Parse
     # If the object has never been saved before, this will create
     # a new object, otherwise it will update the existing stored object.
     def save
-      method   = @parse_object_id ? :put : :post
+      if @parse_object_id
+        method = :put
+        self.merge!(@op_fields) # use operations instead of our own view of the columns
+      else
+        method = :post
+      end
+
       body = safe_json
       data = Parse.client.request(self.uri, method, body)
 
@@ -141,7 +148,19 @@ module Parse
       self
     end
 
-    # Increment the given field by an amount, which defaults to 1.
+    def array_add(field, value)
+      array_op(field, Protocol::KEY_ADD, value)
+    end
+
+    def array_add_unique(field, value)
+      array_op(field, Protocol::KEY_ADD_UNIQUE, value)
+    end
+
+    def array_remove(field, value)
+      array_op(field, Protocol::KEY_REMOVE, value)
+    end
+
+    # Increment the given field by an amount, which defaults to 1. Saves immediately to reflect incremented
     def increment(field, amount = 1)
       #value = (self[field] || 0) + amount
       #self[field] = value
@@ -163,7 +182,7 @@ module Parse
       self
     end
 
-    # Decrement the given field by an amount, which defaults to 1.
+    # Decrement the given field by an amount, which defaults to 1. Saves immediately to reflect decremented
     # A synonym for increment(field, -amount).
     def decrement(field, amount = 1)
       #increment field, -amount
@@ -173,6 +192,28 @@ module Parse
       self
     end
 
-  end
+    private
 
+    def array_op(field, operation, value)
+      raise "field #{field} not an array" if self[field] && !self[field].is_a?(Array)
+
+      if @parse_object_id
+        @op_fields[field] ||= ArrayOp.new(operation, [])
+        raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
+        @op_fields[field].objects << value
+      end
+
+      # parse doesn't return column values on initial POST creation so we must maintain them ourselves
+      case operation
+      when Protocol::KEY_ADD
+        self[field] ||= []
+        self[field] << value
+      when Protocol::KEY_ADD_UNIQUE
+        self[field] ||= []
+        self[field] << value unless self[field].include?(value)
+      when Protocol::KEY_REMOVE
+        self[field].delete(value) if self[field]
+      end
+    end
+  end
 end
