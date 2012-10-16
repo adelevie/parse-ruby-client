@@ -1,5 +1,5 @@
 /coverage
-/pkg
+pkg
 
 lib/.DS_Store
 lib/parse/.DS_Store
