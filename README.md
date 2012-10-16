@@ -56,6 +56,8 @@ Parse.init_from_cloud_code("path/to/global.json")
 
 The path defaults to `"../config/global.json"`. So if you create a folder inside the root of a Cloud Code directory, and in that folder is a `.rb` file, just call `Parse.init_from_cloud_code` with no arguments and you're set.
 
+You with `Parse::init_from_cloud_code`, you can easily write Ruby [tests for Cloud Code functions](https://github.com/adelevie/ParseCloudTest). 
+
 ## Creating and Saving Objects
 
 Create an instance of ```Parse::Object``` with your class name supplied as a string, set some keys, and call ```save()```.
