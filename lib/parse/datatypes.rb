@@ -214,6 +214,40 @@ module Parse
     end
   end
 
+  class ArrayOp
+    # '{"myArray": {"__op": "Add", "objects": ["something", "something else"] } }'
+    attr_accessor :operation
+    attr_accessor :objects
+
+    def initialize(operation, objects)
+      @operation = operation
+      @objects = objects
+    end
+
+    def eql?(other)
+      self.class.equal?(other.class) &&
+        operation == other.operation &&
+        objects == other.objects
+    end
+
+    alias == eql?
+
+    def hash
+      operation.hash ^ objects.hash
+    end
+
+    def as_json(*a)
+      {
+          Protocol::KEY_OP => operation,
+          Protocol::KEY_OBJECTS => @objects
+      }
+    end
+
+    def to_json(*a)
+        as_json.to_json(*a)
+    end
+  end
+
   # GeoPoint
   # ------------------------------------------------------------
 
