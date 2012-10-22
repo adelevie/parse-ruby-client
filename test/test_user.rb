@@ -43,7 +43,7 @@ class TestUser < Test::Unit::TestCase
   end
 
   def test_reset_password
-      u =  "adelevie@gmail.com" 
+      u =  "alan" + rand(10000000000000).to_s + "@gmail.com" 
       data = {
         :username => u, 
         :password => "secret"
