@@ -14,15 +14,10 @@ module Parse
 
     def initialize(class_name, data = nil)
       @class_name = class_name
-      shared_initialize(data)
-    end
-
-    def shared_initialize(data = nil)
       @op_fields = {}
       if data
         parse data
       end
-      self
     end
 
     def uri
