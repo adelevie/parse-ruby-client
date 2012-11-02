@@ -24,16 +24,10 @@ module Parse
 
     def initialize(data = nil)
       @class_name = Parse::Protocol::CLASS_USER
-      
       #stringify symbol keys
       data["username"] = data[:username] if data[:username]
       data["password"] = data[:password] if data[:password]
-      
-      if data
-        parse data
-      end
-    
-      self
+      shared_initialize(data)
     end
     
     def uri
