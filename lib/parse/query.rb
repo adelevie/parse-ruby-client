@@ -85,6 +85,17 @@ module Parse
       add_constraint(field, "$inQuery" => query_hash)
       self
     end
+    
+    def limit(num)
+      @limit = num
+      self
+    end
+    
+    def order(field, order = :ascending)
+      @order_by = field
+      @order = order
+      self
+    end
 
     def count
       @count = true
