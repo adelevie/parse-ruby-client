@@ -91,9 +91,9 @@ module Parse
       self
     end
     
-    def order(field, order)
+    def order(field, order = :ascending)
       @order_by = field
-      @order = order ||= :ascending
+      @order = order
       self
     end
 
