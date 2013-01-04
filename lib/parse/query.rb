@@ -39,7 +39,7 @@ module Parse
       add_constraint field, value
       self
     end
-    
+
     def not_eq(field, value)
       add_constraint field, { "$ne" => value }
       self
@@ -72,6 +72,11 @@ module Parse
 
     def value_in(field, values)
       add_constraint field, { "$in" => values }
+      self
+    end
+
+    def value_not_in(field, values)
+      add_constraint field, { "$nin" => values }
       self
     end
 
