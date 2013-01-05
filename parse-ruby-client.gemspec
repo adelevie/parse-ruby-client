@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_deep_parse.yml",
     "fixtures/vcr_cassettes/test_destroy.yml",
     "fixtures/vcr_cassettes/test_get.yml",
+    "fixtures/vcr_cassettes/test_new_model.yml",
     "fixtures/vcr_cassettes/test_new_object.yml",
     "fixtures/vcr_cassettes/test_nils_delete_keys.yml",
     "fixtures/vcr_cassettes/test_object_id.yml",
@@ -46,6 +47,7 @@ Gem::Specification.new do |s|
     "lib/parse/cloud.rb",
     "lib/parse/datatypes.rb",
     "lib/parse/error.rb",
+    "lib/parse/model.rb",
     "lib/parse/object.rb",
     "lib/parse/protocol.rb",
     "lib/parse/push.rb",
@@ -61,6 +63,7 @@ Gem::Specification.new do |s|
     "test/test_datatypes.rb",
     "test/test_init.rb",
     "test/test_init_from_cloud_code.rb",
+    "test/test_model.rb",
     "test/test_object.rb",
     "test/test_push.rb",
     "test/test_query.rb",
