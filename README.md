@@ -157,6 +157,8 @@ push.save
 
 ## Batch Requests
 
+Basic:
+
 ```ruby
 batch = Parse::Batch.new
 batch.add_request({
