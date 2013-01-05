@@ -48,7 +48,7 @@ Parse.init
 
 The test folder assumes this naming convention for environment variables, so if you want to run the tests, you *must* do this. But it's easy. And good for you, too.
 
-### New: Load API keys from `global.json` created by Cloud Code
+### Load API keys from `global.json` created by Cloud Code
 
 ```ruby
 Parse.init_from_cloud_code("path/to/global.json")
@@ -153,6 +153,21 @@ Parse::Query.new("GameScore")           \
 ```ruby
 push = Parse::Push.new({"alert" => "I'm sending this push to all my app users!"})
 push.save
+```
+
+## Batch Requests
+
+```ruby
+batch = Parse::Batch.new
+batch.add_request({
+  "method" => "POST",
+  "path" => "/1/classes/GameScore",
+  "body" => {
+    "score" => 1337,
+    "playerName" => "Sean Plott"
+  }
+})
+resp = batch.run!
 ```
 
 ## Cloud Code
