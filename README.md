@@ -19,7 +19,7 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.1.5"`
+`gem "parse-ruby-client", "~> 0.1.7"`
 
 ---
 
@@ -85,6 +85,27 @@ by ```Parse::Object.initialize()```.
 game_score = Parse::Object.new "GameScore", {
 		:score => 1337, :playerName => "Sean Plott", :cheatMode => false
 }
+```
+
+### ActiveRecord-style Models
+
+I like ActiveRecord-style models, but I also want to avoid ActiveRecord-style model bloat. `Parse::Model` is just a subclass of `Parse::Object` that passes the class name into the `initialize` method.
+
+```ruby
+class Post < Parse::Model
+end
+```
+
+The entire source for `Parse::Model` is just seven lines of simple Ruby:
+
+```ruby
+module Parse
+  class Model < Parse::Object
+    def initialize
+      super(self.class.to_s)
+    end
+  end
+end
 ```
 
 ## Retrieving Objects
