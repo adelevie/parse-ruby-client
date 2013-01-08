@@ -69,7 +69,7 @@ class TestObject < Test::Unit::TestCase
 
       post.parse_delete
 
-      assert_raise Parse::ParseError do
+      assert_raise Parse::ParseProtocolError do
         q = Parse.get("Post", post.id)
       end
     end
