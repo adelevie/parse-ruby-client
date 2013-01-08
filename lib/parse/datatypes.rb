@@ -8,10 +8,16 @@ module Parse
   class Pointer
     attr_accessor :parse_object_id
     attr_accessor :class_name
+    alias :id :parse_object_id
 
     def initialize(data)
       @class_name       = data[Protocol::KEY_CLASS_NAME]
       @parse_object_id  = data[Protocol::KEY_OBJECT_ID]
+    end
+
+    # make it easier to deal with the ambiguity of whether you're passed a pointer or object
+    def pointer
+      self
     end
 
     def eql?(other)
