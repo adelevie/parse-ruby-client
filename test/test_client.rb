@@ -2,7 +2,19 @@ require 'helper'
 
 class TestClient < Test::Unit::TestCase
   def setup
-    Parse.init
+    @client = Parse.init
+  end
+
+  def test_request
+    VCR.use_cassette('test_request', :record => :new_episodes) do
+      response = mock()
+      response.stubs(:body).returns({'code' => Parse::Protocol::ERROR_TIMEOUT}.to_json)
+      response.stubs(:status).returns(400)
+      @client.session.expects(:request).times(Parse::Client::DEFAULT_RETRIES + 1).returns(response)
+      assert_raise do
+       @client.request(nil)
+      end
+    end
   end
 
   def test_simple_save
