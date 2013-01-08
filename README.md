@@ -19,7 +19,7 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.1.5"`
+`gem "parse-ruby-client", "~> 0.1.8"`
 
 ---
 
@@ -48,7 +48,7 @@ Parse.init
 
 The test folder assumes this naming convention for environment variables, so if you want to run the tests, you *must* do this. But it's easy. And good for you, too.
 
-### New: Load API keys from `global.json` created by Cloud Code
+### Load API keys from `global.json` created by Cloud Code
 
 ```ruby
 Parse.init_from_cloud_code("path/to/global.json")
@@ -85,6 +85,27 @@ by ```Parse::Object.initialize()```.
 game_score = Parse::Object.new "GameScore", {
 		:score => 1337, :playerName => "Sean Plott", :cheatMode => false
 }
+```
+
+### ActiveRecord-style Models
+
+I like ActiveRecord-style models, but I also want to avoid ActiveRecord-style model bloat. `Parse::Model` is just a subclass of `Parse::Object` that passes the class name into the `initialize` method.
+
+```ruby
+class Post < Parse::Model
+end
+```
+
+The entire source for `Parse::Model` is just seven lines of simple Ruby:
+
+```ruby
+module Parse
+  class Model < Parse::Object
+    def initialize
+      super(self.class.to_s)
+    end
+  end
+end
 ```
 
 ## Retrieving Objects
@@ -132,6 +153,23 @@ Parse::Query.new("GameScore")           \
 ```ruby
 push = Parse::Push.new({"alert" => "I'm sending this push to all my app users!"})
 push.save
+```
+
+## Batch Requests
+
+Basic:
+
+```ruby
+batch = Parse::Batch.new
+batch.add_request({
+  "method" => "POST",
+  "path" => "/1/classes/GameScore",
+  "body" => {
+    "score" => 1337,
+    "playerName" => "Sean Plott"
+  }
+})
+resp = batch.run!
 ```
 
 ## Cloud Code

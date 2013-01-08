@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/batch
+    body:
+      encoding: UTF-8
+      string: ! '{"requests":[{"method":"POST","path":"/1/classes/GameScore","body":{"score":1337,"playerName":"Sean
+        Plott"}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
+      X-Parse-Application-Id:
+      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        U2F0LCAwNSBKYW4gMjAxMyAyMjo1NToyMSBHTVQ=
+      !binary "RXRhZw==":
+      - !binary |-
+        IjYyYTEwM2MzYmY1ZGFlMDM4M2ZkYWQ4NTM1MTE0ZmUzIg==
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
+        SWxOV05qTlRnNU1XWTVNVEEzWVRRMU9UQmlOak15WmpNd1lXTXdNMkUyTVdJ
+        JTNELS03YTZlOGQyNmFhMTlhOWMzNTJiNWMzYzgxZGNjNWE0ZGY5NTgxYWRk
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVRodSwgMDUt
+        SmFuLTIwMjMgMjI6NTU6MjEgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC44NjczMjQ=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        Nzg=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3sic3VjY2VzcyI6eyJjcmVhdGVkQXQiOiIyMDEzLTAxLTA1VDIyOjU1OjIx
+        LjA3NloiLCJvYmplY3RJZCI6Imh4dTVaeVdNZDgifX1d
+    http_version: 
+  recorded_at: Sat, 05 Jan 2013 22:55:24 GMT
+recorded_with: VCR 2.0.1

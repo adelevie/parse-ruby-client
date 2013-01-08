@@ -122,6 +122,8 @@ module Parse
 
     CLOUD_FUNCTIONS_PATH = "functions"
 
+    BATCH_REQUEST_URI = "batch"
+
     # URI Helpers
     # ----------------------------------------
 
@@ -158,6 +160,10 @@ module Parse
 
     def Protocol.cloud_function_uri(function_name)
       "/#{VERSION}/#{CLOUD_FUNCTIONS_PATH}/#{function_name}"
+    end
+
+    def Protocol.batch_request_uri
+      "/#{VERSION}/#{BATCH_REQUEST_URI}"
     end
   end
 end

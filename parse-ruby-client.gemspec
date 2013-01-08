@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.1.5"
+  s.version = "0.1.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2012-10-14"
+  s.date = "2013-01-05"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -25,11 +25,14 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "example.rb",
+    "fixtures/vcr_cassettes/test_array_add.yml",
+    "fixtures/vcr_cassettes/test_batch_run.yml",
     "fixtures/vcr_cassettes/test_cloud_function.yml",
     "fixtures/vcr_cassettes/test_created_at.yml",
     "fixtures/vcr_cassettes/test_deep_parse.yml",
     "fixtures/vcr_cassettes/test_destroy.yml",
     "fixtures/vcr_cassettes/test_get.yml",
+    "fixtures/vcr_cassettes/test_new_model.yml",
     "fixtures/vcr_cassettes/test_new_object.yml",
     "fixtures/vcr_cassettes/test_nils_delete_keys.yml",
     "fixtures/vcr_cassettes/test_object_id.yml",
@@ -41,10 +44,12 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_updated_at.yml",
     "fixtures/vcr_cassettes/test_user_save.yml",
     "lib/parse-ruby-client.rb",
+    "lib/parse/batch.rb",
     "lib/parse/client.rb",
     "lib/parse/cloud.rb",
     "lib/parse/datatypes.rb",
     "lib/parse/error.rb",
+    "lib/parse/model.rb",
     "lib/parse/object.rb",
     "lib/parse/protocol.rb",
     "lib/parse/push.rb",
@@ -52,18 +57,16 @@ Gem::Specification.new do |s|
     "lib/parse/user.rb",
     "lib/parse/util.rb",
     "parse-ruby-client.gemspec",
-    "pkg/parse-ruby-client-0.0.1.gem",
-    "pkg/parse-ruby-client-0.0.2.gem",
-    "pkg/parse-ruby-client-1-0.0.1.gem",
-    "pkg/parse-ruby-client.gem",
     "test/cloud_functions/MyCloudCode/cloud/main.js",
     "test/config/global.json",
     "test/helper.rb",
+    "test/test_batch.rb",
     "test/test_client.rb",
     "test/test_cloud.rb",
     "test/test_datatypes.rb",
     "test/test_init.rb",
     "test/test_init_from_cloud_code.rb",
+    "test/test_model.rb",
     "test/test_object.rb",
     "test/test_push.rb",
     "test/test_query.rb",
