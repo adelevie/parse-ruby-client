@@ -48,6 +48,8 @@ module Parse
     # of Parse objects in their JSON representation.
     KEY_UPDATED_AT  = "updatedAt"
 
+    KEY_USER_SESSION_TOKEN = "sessionToken"
+
     # The JSON key used in the top-level response object
     # to indicate that the response contains an array of objects.
     RESPONSE_KEY_RESULTS = "results"
@@ -75,7 +77,7 @@ module Parse
     # increment/decrement API call.
     KEY_AMOUNT      = "amount"
 
-  RESERVED_KEYS = [ KEY_CLASS_NAME, KEY_CREATED_AT, KEY_OBJECT_ID, KEY_UPDATED_AT]
+    RESERVED_KEYS = [ KEY_CLASS_NAME, KEY_CREATED_AT, KEY_OBJECT_ID, KEY_UPDATED_AT, KEY_USER_SESSION_TOKEN]
 
     # Other Constants
     # ----------------------------------------
@@ -117,8 +119,6 @@ module Parse
 
     USER_LOGIN_URI  = "/#{VERSION}/login"
     PASSWORD_RESET_URI = "/#{VERSION}/requestPasswordReset"
-
-    KEY_USER_SESSION_TOKEN = "sessionToken"
 
     CLOUD_FUNCTIONS_PATH = "functions"
 

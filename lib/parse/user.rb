@@ -5,7 +5,7 @@ require 'parse/object'
 
 module Parse
   class User < Parse::Object
-    
+
     def self.authenticate(username, password)
       body = {
         "username" => username,
@@ -13,7 +13,8 @@ module Parse
       }
 
       response = Parse.client.request(Parse::Protocol::USER_LOGIN_URI, :get, nil, body)
-      
+      Parse.client.session_token = response[Parse::Protocol::KEY_USER_SESSION_TOKEN]
+
       new(response)
     end
 
@@ -27,10 +28,10 @@ module Parse
       data["password"] = data[:password] if data[:password]
       super(Parse::Protocol::CLASS_USER, data)
     end
-    
+
     def uri
       Protocol.user_uri @parse_object_id
     end
-    
+
   end
 end

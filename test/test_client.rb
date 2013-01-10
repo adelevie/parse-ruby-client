@@ -10,7 +10,7 @@ class TestClient < Test::Unit::TestCase
       response = mock()
       response.stubs(:body).returns({'code' => Parse::Protocol::ERROR_TIMEOUT}.to_json)
       response.stubs(:status).returns(400)
-      @client.session.expects(:request).times(Parse::Client::DEFAULT_RETRIES + 1).returns(response)
+      @client.session.expects(:request).times(@client.max_retries + 1).returns(response)
       assert_raise do
        @client.request(nil)
       end
