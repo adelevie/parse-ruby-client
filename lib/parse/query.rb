@@ -86,12 +86,12 @@ module Parse
       self
     end
     
-    def limit(num)
+    def set_limit(num)
       @limit = num
       self
     end
     
-    def order(field, order = :ascending)
+    def set_order(field, order = :ascending)
       @order_by = field
       @order = order
       self
