@@ -8,14 +8,13 @@ module Parse
   # API server. Currently uses the Patron library for low-level HTTP
   # communication.
   class Client
-    DEFAULT_RETRIES = 2
-
     attr_accessor :host
     attr_accessor :application_id
     attr_accessor :api_key
     attr_accessor :master_key
     attr_accessor :session_token
     attr_accessor :session
+    attr_accessor :max_retries
 
     def initialize(data = {})
       @host           = data[:host] || Protocol::HOST
@@ -23,6 +22,7 @@ module Parse
       @api_key        = data[:api_key]
       @master_key     = data[:master_key]
       @session_token  = data[:session_token]
+      @max_retries    = data[:max_retries] || 3
       @session        = Patron::Session.new
       @session.timeout = 30
       @session.connect_timeout = 30
@@ -37,7 +37,7 @@ module Parse
     # with common basic response handling. Will raise a
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
-    def request(uri, method = :get, body = nil, query = nil, max_retries = DEFAULT_RETRIES)
+    def request(uri, method = :get, body = nil, query = nil)
       @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
       @session.headers[Protocol::HEADER_API_KEY]  = @api_key
       @session.headers[Protocol::HEADER_APP_ID]   = @application_id
