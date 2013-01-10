@@ -15,15 +15,12 @@ module Parse
     attr_accessor :response
 
     def initialize(response)
-      #@response = response
-      #if response.body
-      #  data = JSON.parse response.body
-      #  @code = data["code"]
-      #  @message = data["error"]
-      #end
-      
-      #{}"#{@code}: #{@message}"
+      @response = response
+      @code = response["code"]
+      @error = response["error"]
+
+      super("#{@code}: #{@error}")
     end
   end
-  
+
 end

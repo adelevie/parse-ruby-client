@@ -8,6 +8,8 @@ module Parse
   # API server. Currently uses the Patron library for low-level HTTP
   # communication.
   class Client
+    DEFAULT_RETRIES = 2
+
     attr_accessor :host
     attr_accessor :application_id
     attr_accessor :api_key
@@ -35,7 +37,7 @@ module Parse
     # with common basic response handling. Will raise a
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
-    def request(uri, method = :get, body = nil, query = nil, max_retries = 2)
+    def request(uri, method = :get, body = nil, query = nil, max_retries = DEFAULT_RETRIES)
       @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
       @session.headers[Protocol::HEADER_API_KEY]  = @api_key
       @session.headers[Protocol::HEADER_APP_ID]   = @application_id
@@ -51,22 +53,21 @@ module Parse
 
       num_tries = 0
       begin
-        response = @session.request(method, uri, {}, options)
-      rescue Patron::TimeoutError
         num_tries += 1
-        if num_tries <= max_retries
-          retry
-        else
-          raise Patron::TimeoutError
-        end
-      end
+        response = @session.request(method, uri, {}, options)
+        parsed = JSON.parse(response.body)
 
-      if response.status >= 400
-        raise ParseError, "#{JSON.parse(response.body)['code']}: #{JSON.parse(response.body)['error']}"
-      else
-        if response
-          return JSON.parse response.body
+        if response.status >= 400
+          raise ParseProtocolError.new(parsed)
         end
+
+        return parsed
+      rescue Patron::TimeoutError
+        retry if num_tries <= max_retries
+        raise
+      rescue ParseProtocolError => e
+        retry if e.code == Protocol::ERROR_TIMEOUT && num_tries <= max_retries
+        raise
       end
     end
 

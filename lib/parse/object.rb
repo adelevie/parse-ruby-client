@@ -28,6 +28,11 @@ module Parse
       Parse::Pointer.new(self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)) unless new?
     end
 
+    # make it easier to deal with the ambiguity of whether you're passed a pointer or object
+    def get
+      self
+    end
+
     # Merge a hash parsed from the JSON representation into
     # this instance. This will extract the reserved fields,
     # merge the hash keys, and then ensure that the reserved
