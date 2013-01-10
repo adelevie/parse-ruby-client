@@ -9,8 +9,36 @@ module Parse
     end
 
     def add_request(request)
-      request = request.to_hash if request.is_a?(Parse::Batch::Request)
       @requests << request
+    end
+
+    def create_object(object)
+      method = "POST"
+      path = Parse::Protocol.class_uri(object.class_name)
+      body = object.safe_hash
+      add_request({
+        "method" => method,
+        "path" => path,
+        "body" => body
+      })
+    end
+
+    def update_object(object)
+      method = "PUT"
+      path = Parse::Protocol.class_uri(object.class_name, object.id)
+      body = object.safe_hash
+      add_request({
+        "method" => method,
+        "path" => path,
+        "body" => body
+      })
+    end
+
+    def delete_object(object)
+      add_request({
+        "method" => "DELETE",
+        "path" => Parse::Protocol.class_uri(object.class_name, object.id)
+      })
     end
 
     def run!
@@ -19,21 +47,7 @@ module Parse
       Parse.client.request(uri, :post, body)
     end
 
-    class Request
-      attr_accessor :method
-      attr_accessor :path
-      attr_accessor :body
 
-      def initialize(params={})
-        @method = params[:method] if params[:method]
-        @path   = params[:path] if params[:path]
-        @body   = params[:body] if params[:body]
-      end
-
-      def to_hash
-        {"method" => @method, "path" => @path, "body" => @body}
-      end
-    end
   end
 
 end

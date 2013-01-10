@@ -19,7 +19,7 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.1.8"`
+`gem "parse-ruby-client", "~> 0.1.9"`
 
 ---
 
@@ -157,7 +157,23 @@ push.save
 
 ## Batch Requests
 
-Basic:
+Automagic:
+
+```ruby
+posts = Parse::Query.new("Post").get
+update_batch = Parse::Batch.new
+posts.each_slice(20) do |posts_slice|
+  posts_slice.each do |post|
+    post["title"] = "Updated title!"
+    update_batch.update_object(post)
+  end
+end
+update_batch.run!
+```
+
+`Parse::Batch` also has `#create_object` and `delete_object` methods. Both take instances of `Parse::Object` as the only argument.
+
+Manual:
 
 ```ruby
 batch = Parse::Batch.new

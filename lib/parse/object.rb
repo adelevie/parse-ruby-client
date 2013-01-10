@@ -63,7 +63,7 @@ module Parse
       self["objectId"].nil?
     end
 
-    def safe_json
+    def safe_hash
       without_reserved = self.dup
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
 
@@ -76,7 +76,11 @@ module Parse
           end
       }
 
-      without_relations.to_json
+      without_relations
+    end
+
+    def safe_json
+      safe_hash.to_json
     end
 
     private :parse
