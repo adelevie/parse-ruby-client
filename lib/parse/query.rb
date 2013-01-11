@@ -10,6 +10,7 @@ module Parse
     attr_accessor :limit
     attr_accessor :skip
     attr_accessor :count
+    attr_accessor :includes
 
     def initialize(cls_name)
       @class_name = cls_name
@@ -28,6 +29,11 @@ module Parse
       end
     end
     #private :add_constraint
+
+    def includes(class_name)
+      @includes = class_name
+      self
+    end
 
     def or(query)
       raise ArgumentError, "you must pass an entire #{self.class} to \#or" unless query.is_a?(self.class)
@@ -91,16 +97,16 @@ module Parse
       self
     end
     
-    def set_limit(num)
-      @limit = num
-      self
-    end
+    #def set_limit(num)
+    #  @limit = num
+    #  self
+    #end
     
-    def set_order(field, order = :ascending)
-      @order_by = field
-      @order = order
-      self
-    end
+    #def set_order(field, order = :ascending)
+    #  @order_by = field
+    #  @order = order
+    #  self
+    #end
 
     def count
       @count = true
@@ -120,12 +126,9 @@ module Parse
       if @class_name == Parse::Protocol::CLASS_USER
         uri = Protocol.user_uri
       end
-
-
       query = { "where" => CGI.escape(where_as_json.to_json) }
       set_order(query)
       [:count, :limit, :skip].each {|a| merge_attribute(a, query)}
-
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
     end
