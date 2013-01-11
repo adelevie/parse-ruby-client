@@ -59,6 +59,25 @@ class TestQuery < Test::Unit::TestCase
     end
   end
 
+  def test_include_fields
+    VCR.use_cassette('test_include_fields', :record => :new_episodes) do
+      post_1 = Parse::Object.new "Post"
+      post_1['title'] = 'foo'
+      post_1.save
+
+      post_2 = Parse::Object.new "Post"
+      post_2['title'] = 'bar'
+      post_2['other'] = post_1.pointer
+      post_2.save
+
+      q = Parse::Query.new "Post"
+      q.eq('objectId', post_2.parse_object_id)
+      q.include_fields = 'other'
+
+      assert_equal 'foo', q.get.first['other']['title']
+    end
+  end
+
   def test_or
     #VCR.use_cassette('test_or', :record => :new_episodes) do
       foo = Parse::Object.new "Post"

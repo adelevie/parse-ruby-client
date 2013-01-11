@@ -10,6 +10,7 @@ module Parse
     attr_accessor :limit
     attr_accessor :skip
     attr_accessor :count
+    attr_accessor :include_fields
 
     def initialize(cls_name)
       @class_name = cls_name
@@ -90,12 +91,12 @@ module Parse
       add_constraint(field, "$inQuery" => query_hash)
       self
     end
-    
+
     def set_limit(num)
       @limit = num
       self
     end
-    
+
     def set_order(field, order = :ascending)
       @order_by = field
       @order = order
@@ -104,6 +105,11 @@ module Parse
 
     def count
       @count = true
+      self
+    end
+
+    def include_fields(fields)
+      @include_fields = fields
       self
     end
 
@@ -125,6 +131,7 @@ module Parse
       query = { "where" => CGI.escape(where_as_json.to_json) }
       set_order(query)
       [:count, :limit, :skip].each {|a| merge_attribute(a, query)}
+      merge_attribute(:include_fields, query, :include)
 
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
@@ -139,10 +146,10 @@ module Parse
       query.merge!(:order => order_string)
     end
 
-    def merge_attribute(attribute, query)
+    def merge_attribute(attribute, query, query_field = nil)
       value = self.instance_variable_get("@#{attribute.to_s}")
       return if value.nil?
-      query.merge!(attribute => value)
+      query.merge!((query_field || attribute) => value)
     end
   end
 

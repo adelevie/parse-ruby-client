@@ -6,7 +6,6 @@ module Parse
   # @param class_name [Object]
   # @param obj [Object]
   def Parse.parse_json(class_name, obj)
-
     if obj.nil?
       nil
 
@@ -46,6 +45,8 @@ module Parse
         Parse::GeoPoint.new obj
       when Protocol::TYPE_FILE
         Parse::File.new obj
+      when Protocol::TYPE_OBJECT
+        Parse::Object.new obj[Protocol::KEY_CLASS_NAME], Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
     end
   end
 end

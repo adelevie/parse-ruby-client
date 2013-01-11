@@ -88,6 +88,8 @@ module Parse
     # Operation name for decrementing an objects field value remotely
     OP_DECREMENT    = "Decrement"
 
+    # The data type name for special JSON objects representing a full object
+    TYPE_OBJECT     = "Object"
 
     # The data type name for special JSON objects representing a reference
     # to another Parse object.
