@@ -133,8 +133,6 @@ module Parse
       [:count, :limit, :skip].each {|a| merge_attribute(a, query)}
       merge_attribute(:include_fields, query, :include)
 
-      puts query.to_json
-
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
     end

@@ -6,8 +6,6 @@ module Parse
   # @param class_name [Object]
   # @param obj [Object]
   def Parse.parse_json(class_name, obj)
-    puts obj.inspect
-
     if obj.nil?
       nil
 
