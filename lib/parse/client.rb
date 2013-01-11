@@ -54,6 +54,7 @@ module Parse
       num_tries = 0
       begin
         num_tries += 1
+        
         response = @session.request(method, uri, {}, options)
         parsed = JSON.parse(response.body)
 
