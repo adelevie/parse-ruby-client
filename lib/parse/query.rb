@@ -10,7 +10,7 @@ module Parse
     attr_accessor :limit
     attr_accessor :skip
     attr_accessor :count
-    attr_accessor :includes
+    attr_accessor :include
 
     def initialize(cls_name)
       @class_name = cls_name
@@ -91,22 +91,11 @@ module Parse
       self
     end
 
-    def in_query(field, query)
+    def in_query(field, query=nil)
       query_hash = {Parse::Protocol::KEY_CLASS_NAME => query.class_name, "where" => query.where}
       add_constraint(field, "$inQuery" => query_hash)
       self
     end
-    
-    #def set_limit(num)
-    #  @limit = num
-    #  self
-    #end
-    
-    #def set_order(field, order = :ascending)
-    #  @order_by = field
-    #  @order = order
-    #  self
-    #end
 
     def count
       @count = true
@@ -128,7 +117,7 @@ module Parse
       end
       query = { "where" => CGI.escape(where_as_json.to_json) }
       set_order(query)
-      [:count, :limit, :skip].each {|a| merge_attribute(a, query)}
+      [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
     end

@@ -1,3 +1,4 @@
+require 'pp'
 module Parse
 
   # Parse a JSON representation into a fully instantiated
@@ -46,6 +47,8 @@ module Parse
         Parse::GeoPoint.new obj
       when Protocol::TYPE_FILE
         Parse::File.new obj
+      when Protocol::TYPE_OBJECT # used for relation queries, e.g. "?include=post"
+        Parse::Object.new(obj[Parse::Protocol::KEY_CLASS_NAME], obj)
     end
   end
 end
