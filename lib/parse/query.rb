@@ -87,8 +87,7 @@ module Parse
     end
 
     def related_to(field,value)
-      h = {"object" => value}
-      h["key"] = field
+      h = {"object" => value, "key" => field} 
       add_constraint("$relatedTo", h )
     end
 
