@@ -161,6 +161,10 @@ module Parse
       array_op(field, Protocol::KEY_ADD, value)
     end
 
+    def array_add_relation(field, value)
+      array_op(field, Protocol::KEY_ADD_RELATION, value)
+    end
+
     def array_add_unique(field, value)
       array_op(field, Protocol::KEY_ADD_UNIQUE, value)
     end
@@ -217,6 +221,9 @@ module Parse
       when Protocol::KEY_ADD
         self[field] ||= []
         self[field] << value
+      when Protocol::KEY_ADD_RELATION
+        self[field] ||= []
+        self[field] << value.pointer
       when Protocol::KEY_ADD_UNIQUE
         self[field] ||= []
         self[field] << value unless self[field].include?(value)

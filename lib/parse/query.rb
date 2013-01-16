@@ -86,6 +86,12 @@ module Parse
       self
     end
 
+    def related_to(field,value)
+      h = {"object" => value}
+      h["key"] = field
+      add_constraint("$relatedTo", h )
+    end
+
     def exists(field, value = true)
       add_constraint field, { "$exists" => value }
       self
