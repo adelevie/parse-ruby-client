@@ -73,8 +73,6 @@ module Parse
     # The JSON key used to identify the datatype of a special value.
     KEY_TYPE        = "__type"
 
-    TYPE_OBJECT     = "Object"
-
     # The JSON key used to specify the numerical value in the
     # increment/decrement API call.
     KEY_AMOUNT      = "amount"
