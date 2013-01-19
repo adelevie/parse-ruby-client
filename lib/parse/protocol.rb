@@ -74,8 +74,6 @@ module Parse
     # The JSON key used to identify the datatype of a special value.
     KEY_TYPE        = "__type"
 
-    TYPE_OBJECT     = "Object"
-
     # The JSON key used to specify the numerical value in the
     # increment/decrement API call.
     KEY_AMOUNT      = "amount"
@@ -91,6 +89,8 @@ module Parse
     # Operation name for decrementing an objects field value remotely
     OP_DECREMENT    = "Decrement"
 
+    # The data type name for special JSON objects representing a full object
+    TYPE_OBJECT     = "Object"
 
     # The data type name for special JSON objects representing a reference
     # to another Parse object.
