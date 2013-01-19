@@ -30,6 +30,16 @@ class TestQuery < Test::Unit::TestCase
     assert_equal q.where["player"], { "$regex" => "regex voodoo"}
   end
 
+  def test_related_to
+    q = Parse::Query.new "Comment"
+    pointer = Parse::Pointer.new(class_name: "Post", parse_object_id: '1234')
+    q.related_to("comments", pointer)
+
+    assert_not_nil q.where["$relatedTo"]
+    assert_equal pointer, q.where["$relatedTo"]["object"]
+    assert_equal q.where["$relatedTo"]["key"], "comments"
+  end
+
   def test_eq
     q = Parse::Query.new "TestQuery"
     q.eq("points", 5)
