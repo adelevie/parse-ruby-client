@@ -223,7 +223,7 @@ module Parse
         self[field] << value
       when Protocol::KEY_ADD_RELATION
         self[field] ||= []
-        self[field] << value.pointer
+        self[field] << value
       when Protocol::KEY_ADD_UNIQUE
         self[field] ||= []
         self[field] << value unless self[field].include?(value)
