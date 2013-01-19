@@ -65,6 +65,7 @@ module Parse
     # array ops
     KEY_OBJECTS     = "objects"
     KEY_ADD         = "Add"
+    KEY_ADD_RELATION= "AddRelation"
     KEY_ADD_UNIQUE  = "AddUnique"
     KEY_REMOVE      = "Remove"
 

@@ -122,4 +122,22 @@ class TestObject < Test::Unit::TestCase
       assert_equal ["hello", "goodbye"], post["chapters"]
     end
   end
+
+  def test_array_add_relation
+    VCR.use_cassette('test_array_add_relation', :record => :new_episodes) do
+      post = Parse::Object.new "Post"
+      post.save
+
+      comment = Parse::Object.new "Comment"
+      comment.save
+
+      post.array_add_relation("comments", comment.pointer)
+      post.save
+      
+      q = Parse::Query.new("Comment")
+      q.related_to("comments", post.pointer)
+      comments = q.get
+      assert_equal comments.first["objectId"], comment["objectId"] 
+    end
+  end
 end
