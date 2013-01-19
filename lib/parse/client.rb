@@ -55,7 +55,6 @@ module Parse
       begin
         num_tries += 1
         response = @session.request(method, uri, {}, options)
-        puts "** Response: #{response.inspect}"
         parsed = JSON.parse(response.body)
 
         if response.status >= 400
