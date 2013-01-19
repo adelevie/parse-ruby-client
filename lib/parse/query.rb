@@ -136,10 +136,10 @@ module Parse
       query.merge!(:order => order_string)
     end
 
-    def merge_attribute(attribute, query)
+    def merge_attribute(attribute, query, query_field = nil)
       value = self.instance_variable_get("@#{attribute.to_s}")
       return if value.nil?
-      query.merge!(attribute => value)
+      query.merge!((query_field || attribute) => value)
     end
   end
 
