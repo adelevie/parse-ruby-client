@@ -48,6 +48,10 @@ module Parse
     def get
       Parse.get @class_name, @parse_object_id if @parse_object_id
     end
+
+    def to_s
+      "#{@class_name}:#{@parse_object_id}:Pointer"
+    end
   end
 
   # Date
@@ -293,6 +297,10 @@ module Parse
 
     def to_json(*a)
         as_json.to_json(*a)
+    end
+
+    def to_s
+      "(#{latitude}, #{longitude})"
     end
   end
 

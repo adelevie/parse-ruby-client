@@ -133,8 +133,8 @@ module Parse
       as_json.to_json(*a)
     end
 
-    def inspect
-      "#{@class_name}:#{@parse_object_id} #{super}"
+    def to_s
+      "#{@class_name}:#{@parse_object_id}:Object"
     end
 
     # Update the fields of the local Parse object with the current
