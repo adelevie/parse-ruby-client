@@ -137,6 +137,10 @@ module Parse
       "#{@class_name}:#{@parse_object_id} #{super}"
     end
 
+    def inspect
+      "#{@class_name}:#{@parse_object_id} #{super}"
+    end
+
     # Update the fields of the local Parse object with the current
     # values from the API.
     def refresh
