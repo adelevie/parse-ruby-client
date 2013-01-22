@@ -50,7 +50,7 @@ module Parse
     end
 
     def to_s
-      "#{@class_name}:#{@parse_object_id}:Pointer"
+      "#{@class_name}:#{@parse_object_id}"
     end
   end
 

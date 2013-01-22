@@ -134,7 +134,7 @@ module Parse
     end
 
     def to_s
-      "#{@class_name}:#{@parse_object_id}:Object"
+      "#{@class_name}:#{@parse_object_id} #{super}"
     end
 
     # Update the fields of the local Parse object with the current
