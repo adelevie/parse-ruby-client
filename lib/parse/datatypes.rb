@@ -306,15 +306,23 @@ module Parse
 
   # File
   # ------------------------------------------------------------
-
+  # tf = Parse::File.new(:body => "Hello World!", :local_filename => "hello.txt")
+  # tf.save
   class File
     # '{"avatar": {"__type":"File", "name":"profile.png", "url"=>"http://files.parse.com/blah/profile.png"}}'
-    attr_accessor :name
+    attr_accessor :local_filename # eg "hello.txt"
+    attr_accessor :parse_filename # eg "12-4-532d-d-g3-3-hello.text"
+    attr_accessor :content_type
+    attr_accessor :body
     attr_accessor :url
 
     def initialize(data)
-      @name = data["name"]
-      @url = data["url"]
+      data = Hash[data.map{ |k, v| [k.to_s, v] }] # convert hash keys to strings
+      @local_filename = data["local_filename"] if data["local_filename"]
+      @parse_filename = data["parse_filename"] if data["parse_filename"]
+      @content_type   = data["content_type"]   if data["content_type"]
+      @url            = data["url"]            if data["url"]
+      @body           = data["body"]           if data["body"]
     end
 
     def eql?(other)
@@ -328,10 +336,18 @@ module Parse
       url.hash
     end
 
+    def save
+      uri = Parse::Protocol.file_uri(@local_filename)
+      resp = Parse.client.request(uri, :post, @body, nil, @content_type)
+      @parse_filename = resp["name"]
+      @url = resp["url"]
+      resp
+    end
+
     def as_json(*a)
       {
         Protocol::KEY_TYPE => Protocol::TYPE_FILE,
-        "name" => @name,
+        "name" => @parse_filename,
         "url" => @url
       }
     end
@@ -340,29 +356,5 @@ module Parse
       as_json.to_json(*a)
     end
   end
-
-
-  # TextFile - A convenience class for uploading text files
-  # ------------------------------------------------------------
-  # tf = Parse::TextFile.new(:text => "Hello World!", :filename => "hello.txt")
-  # tf.save
-  class TextFile < Parse::File
-    attr_accessor :text
-    attr_accessor :filename
-
-    def initialize(params={})
-      @text     = params[:text]     if params[:text]
-      @filename = params[:filename] if params[:filename]
-    end
-
-    def save
-      uri = Parse::Protocol.file_uri(@filename)
-      resp = Parse.client.request(uri, :post, @text, nil, "text/plain")
-      self.name = resp["name"]
-      self.url = resp["url"]
-      resp
-    end
-  end
-
 
 end

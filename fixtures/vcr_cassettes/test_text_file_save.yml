@@ -84,4 +84,87 @@ http_interactions:
         In0=
     http_version: 
   recorded_at: Thu, 24 Jan 2013 23:39:59 GMT
+- request:
+    method: post
+    uri: https://api.parse.com/1/files/hello.txt
+    body:
+      encoding: US-ASCII
+      string: Hello World!
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
+      X-Parse-Application-Id:
+      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: !binary |-
+        Q3JlYXRlZA==
+    headers:
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VGh1LCAyNCBKYW4gMjAxMyAyMzo1MDoxMiBHTVQ=
+      !binary "TG9jYXRpb24=":
+      - !binary |-
+        aHR0cDovL2ZpbGVzLnBhcnNlLmNvbS8zNzJmY2JiOS03ZWFlLTRiOWEtYWJj
+        OC02ZGE5N2ZjYWM1MGQvYzJjMTI1YTQtMDU5Ni00ZmEwLTljYWEtZGQzYTAy
+        MDQ3NmVhLWhlbGxvLnR4dA==
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
+        SWxabU5pT1RjeE56VTVaR1l3T0RGbE5EazJaREkwTm1ZMVl6VmpaakF5WkRr
+        JTNELS0zMmY3NThhZmVjMDM4OGE4ZDI1ZGJkMmMwZmFmMzIwODk0MmU1ZWQ4
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVR1ZSwgMjQt
+        SmFuLTIwMjMgMjM6NTA6MTIgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAxIENyZWF0ZWQ=
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4xMTg5ODE=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        MTcy
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJ1cmwiOiJodHRwOi8vZmlsZXMucGFyc2UuY29tLzM3MmZjYmI5LTdlYWUt
+        NGI5YS1hYmM4LTZkYTk3ZmNhYzUwZC9jMmMxMjVhNC0wNTk2LTRmYTAtOWNh
+        YS1kZDNhMDIwNDc2ZWEtaGVsbG8udHh0IiwibmFtZSI6ImMyYzEyNWE0LTA1
+        OTYtNGZhMC05Y2FhLWRkM2EwMjA0NzZlYS1oZWxsby50eHQifQ==
+    http_version: 
+  recorded_at: Thu, 24 Jan 2013 23:50:12 GMT
 recorded_with: VCR 2.0.1

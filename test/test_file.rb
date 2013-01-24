@@ -5,15 +5,16 @@ class TestFile < Test::Unit::TestCase
     Parse.init
   end
 
-  def test_text_file_save
+  def test_file_save
     VCR.use_cassette('test_text_file_save', :record => :new_episodes) do
-      tf = Parse::TextFile.new(:text => "Testing Hello World!", :filename => "hello_test.txt")
+      tf = Parse::File.new(:body => "Hello World!", :local_filename => "hello.txt")
       tf.save
 
-      assert tf.name
+      assert tf.local_filename
       assert tf.url
-      assert tf.filename
-      assert tf.text
+      assert tf.parse_filename
+      assert tf.body
+      assert tf.to_json
     end
   end
 
