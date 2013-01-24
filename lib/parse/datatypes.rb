@@ -330,14 +330,37 @@ module Parse
 
     def as_json(*a)
       {
-          Protocol::KEY_TYPE => Protocol::TYPE_FILE,
-          "name" => @name,
-          "url" => @url
+        Protocol::KEY_TYPE => Protocol::TYPE_FILE,
+        "name" => @name,
+        "url" => @url
       }
     end
 
     def to_json(*a)
-        as_json.to_json(*a)
+      as_json.to_json(*a)
+    end
+  end
+
+
+  # TextFile - A convenience class for uploading text files
+  # ------------------------------------------------------------
+  # tf = Parse::TextFile.new(:text => "Hello World!", :filename => "hello.txt")
+  # tf.save
+  class TextFile < Parse::File
+    attr_accessor :text
+    attr_accessor :filename
+
+    def initialize(params={})
+      @text     = params[:text]     if params[:text]
+      @filename = params[:filename] if params[:filename]
+    end
+
+    def save
+      uri = Parse::Protocol.file_uri(@filename)
+      resp = Parse.client.request(uri, :post, @text, nil, "text/plain")
+      self.name = resp["name"]
+      self.url = resp["url"]
+      resp
     end
   end
 

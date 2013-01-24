@@ -37,11 +37,15 @@ module Parse
     # with common basic response handling. Will raise a
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
-    def request(uri, method = :get, body = nil, query = nil)
+    def request(uri, method = :get, body = nil, query = nil, content_type = nil)
       @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
       @session.headers[Protocol::HEADER_API_KEY]  = @api_key
       @session.headers[Protocol::HEADER_APP_ID]   = @application_id
       @session.headers[Protocol::HEADER_SESSION_TOKEN]   = @session_token
+
+      if content_type
+        @session.headers["Content-Type"] = content_type
+      end
 
       options = {}
       if body
