@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.1.10"
+  s.version = "0.1.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2013-01-12"
+  s.date = "2013-01-24"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "example.rb",
+    "features.md",
     "fixtures/vcr_cassettes/test_array_add.yml",
+    "fixtures/vcr_cassettes/test_array_add_relation.yml",
     "fixtures/vcr_cassettes/test_batch_create_object.yml",
     "fixtures/vcr_cassettes/test_batch_delete_object.yml",
     "fixtures/vcr_cassettes/test_batch_run.yml",
@@ -35,6 +37,7 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_deep_parse.yml",
     "fixtures/vcr_cassettes/test_destroy.yml",
     "fixtures/vcr_cassettes/test_get.yml",
+    "fixtures/vcr_cassettes/test_include.yml",
     "fixtures/vcr_cassettes/test_new_model.yml",
     "fixtures/vcr_cassettes/test_new_object.yml",
     "fixtures/vcr_cassettes/test_nils_delete_keys.yml",
