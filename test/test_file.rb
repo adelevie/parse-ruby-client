@@ -7,7 +7,11 @@ class TestFile < Test::Unit::TestCase
 
   def test_file_save
     VCR.use_cassette('test_text_file_save', :record => :new_episodes) do
-      tf = Parse::File.new(:body => "Hello World!", :local_filename => "hello.txt")
+      tf = Parse::File.new({
+        :body => "Hello World!", 
+        :local_filename => "hello.txt", 
+        :content_type => "text/plain"
+      })
       tf.save
 
       assert tf.local_filename
