@@ -19,7 +19,9 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.1.10"`
+[![Gem Version](https://badge.fury.io/rb/parse-ruby-client.png)](http://badge.fury.io/rb/parse-ruby-client)
+
+`gem "parse-ruby-client"`
 
 ---
 
@@ -146,6 +148,24 @@ Parse::Query.new("GameScore")           \
   .value_in("score", [10, 20, 30, 40])  \
   .get
 
+```
+
+### Relational Data
+
+```ruby
+post = Parse::Object.new "Post"
+post.save
+
+comment = Parse::Object.new "Comment"
+comment.save
+
+post.array_add_relation("comments", comment.pointer)
+post.save
+
+q = Parse::Query.new("Comment")
+q.related_to("comments", post.pointer)
+comments = q.get
+assert_equal comments.first["objectId"], comment["objectId"]
 ```
 
 ## Push Notifications
