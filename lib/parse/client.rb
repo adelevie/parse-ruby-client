@@ -65,6 +65,10 @@ module Parse
           raise ParseProtocolError.new(parsed)
         end
 
+        if content_type
+          @session.headers["Content-Type"] = "application/json"
+        end
+
         return parsed
       rescue Patron::TimeoutError
         retry if num_tries <= max_retries
