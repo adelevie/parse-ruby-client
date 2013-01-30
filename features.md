@@ -185,17 +185,17 @@ parse-ruby-client provides a "manual" way to construct Batch Operations, as well
 ```ruby
 batch = Parse::Batch.new
 batch.add_request({
-	"method" => "POST",
-	"path"   => "/1/classes/GameScore"
-	"body"   => {
+  "method" => "POST",
+  "path"   => "/1/classes/GameScore"
+  "body"   => {
     "score"      => 1337,
     "playerName" => "Sean Plott"
   }
 })
 batch.add_request({
-	"method" => "POST",
-	"path"   => "/1/classes/GameScore"
-	"body"   => {
+  "method" => "POST",
+  "path"   => "/1/classes/GameScore"
+  "body"   => {
     "score"      => 1338,
     "playerName" => "ZeroCool"
   }
@@ -215,7 +215,7 @@ end
 
 batch = Parse::Batch.new
 game_scores.each do |gs|
-	batch.create_object(gs)
+  batch.create_object(gs)
 end
 batch.run!
 ```
@@ -350,42 +350,42 @@ query = Parse::Query.new("GameScore").eq("playerName", "Sean Plott")
 Other constraint methods include:
 
 <table>
-	<tr>
-		<td>`Parse::Query#less_than`</td>
-		<td>Less Than</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#less_eq`</td>
-		<td>Less Than or Equal To</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#greater_than`</td>
-		<td>Greater Than</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#greater_eq`</td>
-		<td>Greater Than Or Equal To</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#not_eq`</td>
-		<td>Not Equal To</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#value_in`</td>
-		<td>Contained In</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#value_not_in`</td>
-		<td>Not Contained in</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#exists`</td>
-		<td>A value is set for the key</td>
-	</tr>
-	<tr>
-		<td>`Parse::Query#select`</td>
-		<td>TODO: `$select` not yet implemented. This matches a value for a key in the result of a different query</td>
-	</tr>	
+  <tr>
+    <td>`Parse::Query#less_than`</td>
+    <td>Less Than</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#less_eq`</td>
+    <td>Less Than or Equal To</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#greater_than`</td>
+    <td>Greater Than</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#greater_eq`</td>
+    <td>Greater Than Or Equal To</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#not_eq`</td>
+    <td>Not Equal To</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#value_in`</td>
+    <td>Contained In</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#value_not_in`</td>
+    <td>Not Contained in</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#exists`</td>
+    <td>A value is set for the key</td>
+  </tr>
+  <tr>
+    <td>`Parse::Query#select`</td>
+    <td>TODO: `$select` not yet implemented. This matches a value for a key in the result of a different query</td>
+  </tr> 
 </table>
 
 ## Users
