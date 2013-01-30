@@ -1,6 +1,25 @@
-[![Build Status](https://secure.travis-ci.org/adelevie/parse-ruby-client.png?branch=master)](http://travis-ci.org/adelevie/parse-ruby-client)
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
-The original creator of parse-ruby-client, [aalpern](http://github.com/aalpern), has decided to stop work on the project. I'm going to give the project new life, first by maintaining the project as a gem, and second by eventually making it power [parse_resource](http://github.com/adelevie/parse_resource) under the hood.
+- [Ruby Client for parse.com REST API](#ruby-client-for-parsecom-rest-api)
+	- [Dependencies](#dependencies)
+- [Getting Started](#getting-started)
+	- [Installation](#installation)
+		- [Load API keys from `global.json` created by Cloud Code](#load-api-keys-from-globaljson-created-by-cloud-code)
+	- [Creating and Saving Objects](#creating-and-saving-objects)
+		- [ActiveRecord-style Models](#activerecord-style-models)
+	- [Retrieving Objects](#retrieving-objects)
+	- [Queries](#queries)
+- [Create some simple objects to query](#create-some-simple-objects-to-query)
+- [Retrieve all scores between 10 & 20 inclusive](#retrieve-all-scores-between-10-&-20-inclusive)
+- [Retrieve a set of specific scores](#retrieve-a-set-of-specific-scores)
+		- [Relational Data](#relational-data)
+	- [Push Notifications](#push-notifications)
+	- [Batch Requests](#batch-requests)
+	- [Cloud Code](#cloud-code)
+- [assumes you have a function named "trivial"](#assumes-you-have-a-function-named-"trivial")
+- [TODO](#todo)
+- [Resources](#resources)
+	- [](#)
 
 # Ruby Client for parse.com REST API
 
