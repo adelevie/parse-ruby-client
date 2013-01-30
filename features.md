@@ -203,7 +203,7 @@ batch.add_request({
 batch.run!
 ```
 
-Because manually constructing `"path"` values is repetitive, you can use `Parse::Batch#create_object`, `Parse::Batch#update_object`, and `Parse::Batch#delete_object`. Each of these methods takes an instance of `Parse::Object` as the only argument. Then you just call `Parse::Batch#run!`.For example:
+Because manually constructing `"path"` values is repetitive, you can use `Parse::Batch#create_object`, `Parse::Batch#update_object`, and `Parse::Batch#delete_object`. Each of these methods takes an instance of `Parse::Object` as the only argument. Then you just call `Parse::Batch#run!`. For example:
 
 ```ruby
 # making a few GameScore objects
@@ -220,7 +220,7 @@ end
 batch.run!
 ```
 
-The response from batch will be an `Array` with the same number of elements as the input list. Each item in the `Array` with be a `HAsh` with either the `"success"` or `"error"` field set. The value of success will be the normal response to the equivalent REST command:
+The response from batch will be an `Array` with the same number of elements as the input list. Each item in the `Array` with be a `Hash` with either the `"success"` or `"error"` field set. The value of success will be the normal response to the equivalent REST command:
 
 ```ruby
 {
@@ -285,6 +285,12 @@ pointer = Parse::Pointer.new({"className => gameScore", "objectId" => "GeqPWJdNq
 ```
 
 Pointers to `user` objects have a `className` of `_User`. Prefixing with an underscore is forbidden for developer-defined classes and signifies the class is a special built-in.
+
+If you already have a `Parse::Object`, you can get its `Pointer` very easily:
+
+```ruby
+game_score.pointer
+```
 
 #### Relation
 
