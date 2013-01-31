@@ -48,41 +48,6 @@ parse-ruby-client lets you interact with Parse using Ruby. There are many uses. 
 - You can download recent data to run your own custom analytics.
 - You can export all of your data if you no longer want to use Parse.
 
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
-
-  - [Summary](#summary)
-    - [Quick Reference](#quick-reference)
-      - [Installation](#installation)
-      - [Configuration](#configuration)
-  - [Objects](#objects)
-    - [Creating Objects](#creating-objects)
-    - [Retrieving Objects](#retrieving-objects)
-    - [Updating Objects](#updating-objects)
-      - [Counters](#counters)
-      - [Arrays](#arrays)
-      - [Relations](#relations)
-- [TODO: This method is not yet implemented.](#todo:-this-method-is-not-yet-implemented)
-    - [Deleting Objects](#deleting-objects)
-- [TODO: This method is not yet implemented.](#todo:-this-method-is-not-yet-implemented)
-    - [Batch Operations](#batch-operations)
-- [making a few GameScore objects](#making-a-few-gamescore-objects)
-    - [Data Types](#data-types)
-      - [Dates](#dates)
-      - [Bytes](#bytes)
-      - [Pointers](#pointers)
-      - [Relation](#relation)
-- [TODO: There is no Ruby object representation of this type, yet.](#todo:-there-is-no-ruby-object-representation-of-this-type-yet)
-      - [Future data types and namespacing](#future-data-types-and-namespacing)
-  - [Queries](#queries)
-    - [Basic Queries](#basic-queries)
-    - [Query Contraints](#query-contraints)
-  - [Users](#users)
-  - [Roles](#roles)
-  - [Files](#files)
-  - [Push Notifications](#push-notifications)
-  - [Installations](#installations)
-  - [Geopoints](#geopoints)
-
 ### Quick Reference
 
 #### Installation
