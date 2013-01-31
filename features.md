@@ -1,3 +1,44 @@
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+	- [Summary](#summary)
+		- [Quick Reference](#quick-reference)
+			- [Installation](#installation)
+			- [Configuration](#configuration)
+	- [Objects](#objects)
+		- [Creating Objects](#creating-objects)
+		- [Retrieving Objects](#retrieving-objects)
+		- [Updating Objects](#updating-objects)
+			- [Counters](#counters)
+			- [Arrays](#arrays)
+			- [Relations](#relations)
+- [TODO: This method is not yet implemented.](#todo:-this-method-is-not-yet-implemented)
+		- [Deleting Objects](#deleting-objects)
+- [TODO: This method is not yet implemented.](#todo:-this-method-is-not-yet-implemented)
+		- [Batch Operations](#batch-operations)
+- [making a few GameScore objects](#making-a-few-gamescore-objects)
+		- [Data Types](#data-types)
+			- [Dates](#dates)
+			- [Bytes](#bytes)
+			- [Pointers](#pointers)
+			- [Relation](#relation)
+- [TODO: There is no Ruby object representation of this type, yet.](#todo:-there-is-no-ruby-object-representation-of-this-type-yet)
+			- [Future data types and namespacing](#future-data-types-and-namespacing)
+	- [Queries](#queries)
+		- [Basic Queries](#basic-queries)
+		- [Query Contraints](#query-contraints)
+		- [Queries on Array Values](#queries-on-array-values)
+		- [Relational Queries](#relational-queries)
+		- [Counting Objects](#counting-objects)
+		- [Compound Queries](#compound-queries)
+	- [Users](#users)
+		- [Signing Up](#signing-up)
+		- [Logging In](#logging-in)
+	- [Roles](#roles)
+	- [Files](#files)
+	- [Push Notifications](#push-notifications)
+	- [Installations](#installations)
+	- [Geopoints](#geopoints)
+
 ## Summary
 
 parse-ruby-client lets you interact with Parse using Ruby. There are many uses. For example:
@@ -392,35 +433,35 @@ Other constraint methods include:
 
 <table>
   <tr>
-    <td>`Parse::Query#less_than`</td>
+    <td>`Parse::Query#less_than(field, value)`</td>
     <td>Less Than</td>
   </tr>
   <tr>
-    <td>`Parse::Query#less_eq`</td>
+    <td>`Parse::Query#less_eq(field, value)`</td>
     <td>Less Than or Equal To</td>
   </tr>
   <tr>
-    <td>`Parse::Query#greater_than`</td>
+    <td>`Parse::Query#greater_than(field, value)`</td>
     <td>Greater Than</td>
   </tr>
   <tr>
-    <td>`Parse::Query#greater_eq`</td>
+    <td>`Parse::Query#greater_eq(field, value)`</td>
     <td>Greater Than Or Equal To</td>
   </tr>
   <tr>
-    <td>`Parse::Query#not_eq`</td>
+    <td>`Parse::Query#not_eq(field, value)`</td>
     <td>Not Equal To</td>
   </tr>
   <tr>
-    <td>`Parse::Query#value_in`</td>
+    <td>`Parse::Query#value_in(field, values)`</td>
     <td>Contained In</td>
   </tr>
   <tr>
-    <td>`Parse::Query#value_not_in`</td>
+    <td>`Parse::Query#value_not_in(field, values)`</td>
     <td>Not Contained in</td>
   </tr>
   <tr>
-    <td>`Parse::Query#exists`</td>
+    <td>`Parse::Query#exists(field, value=true)`</td>
     <td>A value is set for the key</td>
   </tr>
   <tr>
@@ -429,7 +470,284 @@ Other constraint methods include:
   </tr> 
 </table>
 
+For example, to retrieve scores between 1000 and 3000, including the endpoints, we could issue:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.greater_eq("score", 1000)
+  q.less_eq("score", 3000)
+end.get
+```
+
+To retrieve scores equal to an odd number below 10, we could issue:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.value_in("score", [1,3,5,7,9])
+end.get
+```
+
+To retrieve scores not by a given list of players we could issue:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.value_not_in("playerName", ["Jonathan Walsh","Dario Wunsch","Shawn Simon"])
+end.get
+```
+
+To retrieve documents with the score set, we could issue:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.exists("score") # defaults to `true`
+end.get
+```
+
+To retrieve documents without the score set, we could issue:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.exists("score", false)
+end.get
+```
+
+If you have a class containing sports teams and you store a user's hometown in the user class, you can issue one query to find the list of users whose hometown teams have winning records. The query would look like:
+
+```ruby
+users = Parse::Query.new("_User").tap do |users_query|
+  users_query.eq("hometown", {
+    "$select" => {
+      "query" => {
+        "className" => "Team",
+        "where" => {
+          "winPct" => {"$gt" => 0.5}
+        }
+      },
+    "key" => "city"
+    }
+  })
+end.get
+```
+
+Currently, there is no convenience method provided for `$select` queries. However, they are still possible. This is a good example of the flexibility of parse-ruby-client. You usually do not need to wait for a feature to be added in order to user it. If you have a good idea on what a convencience method for this should look like, please file an issue, or even better, submit a pull request.
+
+You can use the `Parse::Query#order_by` method to specify a field to sort by. By default, everything is ordered ascending. Thus, to retrieve scores in ascending order:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.order_by = "score"
+end.get
+```
+
+And to retrieve scores in descending order:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.order_by = "score"
+  q.order = :descending
+end.get
+```
+
+You can sort by multiple fields by passing order a comma-separated list. Currently, there is no convenience method to accomplish this. However, you can still manually construct an `order` string. To retrieve documents that are ordered by scores in ascending order and the names in descending order:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.order_by = "score,-name"
+end.get
+```
+
+You can use the `limit` and `skip` parameters for pagination. `limit` defaults to 100, but anything from 1 to 1000 is a valid limit. Thus, to retrieve 200 objects after skipping the first 400:
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.limit = 200
+  q.skip = 400
+end.get
+```
+
+All of these parameters can be used in combination with each other.
+
+### Queries on Array Values
+
+For keys with an array type, you can find objects where the key's array value contains 2 by:
+
+```ruby
+randos = Parse::Query.new("RandomObject").eq("arrayKey", 2).get
+```
+
+### Relational Queries
+
+There are several ways to issue queries for relational data. For example, if each `Comment` has a `Post` object in its `post` field, you can fetch comments for a particular `Post`:
+
+```ruby
+comments = Parse::Query.new("Comment").tap do |q|
+  q.eq("post", Parse::Pointer.new({
+    "className" => "Post",
+    "objectId"  => "8TOXdXf3tz"
+  }))
+end.get
+```
+
+If you want to retrieve objects where a field contains an object that matches another query, you can use the `Parse::Query#in_query(field, query=nil)` method. Note that the default limit of 100 and maximum limit of 1000 apply to the inner query as well, so with large data sets you may need to construct queries carefully to get the desired behavior. For example, imagine you have `Post` class and a `Comment` class, where each `Comment` has a relation to its parent `Post`. You can find comments on posts with images by doing:
+
+```ruby
+comments = Parse::Query.new("Comment").tap do |comments_query|
+  comments_query.in_query("post", Parse::Query.new("Post").tap do |posts_query|
+    posts_query.exists("image")
+  end)
+end.get
+```
+
+Note: You must pass an instance of `Parse::Query` as the second argument for `Parse::Query#query_in`. You cannot manually construct queries for this.
+
+TODO: Implement this:
+```
+If you want to retrieve objects where a field contains an object that does not match another query, you can use the $notInQuery operator. Imagine you have Post class and a Comment class, where each Comment has a relation to its parent Post. You can find comments on posts without images by doing:
+```
+
+If you want to retrieve objects that are members of `Relation` field of a parent object, you can use the `Parse::Query#related_to(field, value)` method. Imagine you have a `Post `class and `User` class, where each `Post` can be liked by many users. If the `Users` that liked a Post was stored in a `Relation` on the post under the key likes, you, can the find the users that liked a particular post by:
+
+```ruby
+users = Parse::Query.new("_User").tap do |q|
+  q.related_to("likes", Parse::Pointer.new({
+    "className" => "Post",
+    "objectId" => "8TOXdXf3tz"
+  }))
+end.get
+```
+
+In some situations, you want to return multiple types of related objects in one query. You can do this by passing the field to include in the `include` parameter. For example, let's say you are retrieving the last ten comments, and you want to retrieve their related posts at the same time:
+
+```ruby
+comments = Parse::Query.new("Comment").tap do |q|
+  q.order_by = "createdAt"
+  q.order    = :descending
+  q.limit    = 10
+  q.include  = "post"
+end.get
+```
+
+Instead of being represented as a `Pointer`, the `post` field is now expanded into the whole object. `__type` is set to `Object` and `className` is provided as well. For example, a `Pointer` to a `Post` could be represented as:
+
+```ruby
+{
+  "__type" => "Pointer",
+  "className" => "Post",
+  "objectId" => "8TOXdXf3tz"
+}
+```
+
+When the query is issued with an `include` parameter for the key holding this pointer, the pointer will be expanded to:
+
+```ruby
+{
+  "__type" => "Object",
+  "className" => "Post",
+  "objectId" => "8TOXdXf3tz",
+  "createdAt" => "2011-12-06T20:59:34.428Z",
+  "updatedAt" => "2011-12-06T20:59:34.428Z",
+  "otherFields" => "willAlsoBeIncluded"
+}
+```
+
+You can also do multi level includes using dot notation. If you wanted to include the post for a comment and the post's author as well you can do:
+
+```ruby
+comments = Parse::Query.new("Comment").tap do |q|
+  q.order_by = "createdAt"
+  q.order    = :descending
+  q.limit    = 10
+  q.include  = "post.author"
+end.get
+```
+
+You can issue a query with multiple fields included by passing a comma-separated list of keys as the include parameter:
+
+```ruby
+comments = Parse::Query.new("Comment").tap do |q|
+  q.include("post,author")
+end.get
+```
+
+### Counting Objects
+
+If you are limiting your query, or if there are a very large number of results, and you want to know how many total results there are without returning them all, you can use the `count` parameter. For example, if you only care about the number of games played by a particular player:
+
+```ruby
+count = Parse::Query.new("GameScore").tap do |q|
+  q.eq("playerName", "Jonathan Walsh")
+  q.limit = 0
+  q.count
+end.get
+```
+
+With a nonzero limit, that request would return results as well as the count.
+
+### Compound Queries
+
+If you want to find objects that match one of several queries, you can use `Parse::Quer#or` method, with an `Array` as its value. For instance, if you want to find players with either have a lot of wins or a few wins, you can do:
+
+```ruby
+
+players = Parse::Query.new("Player").tap do |q|
+  q.greater_than("wins", 150)
+  q.or(Parse::Query.new("Player").tap do |or_query|
+    or_query.less_than("wins, 5")
+  end)
+end.get
+```
+
 ## Users
+
+Many apps have a unified login that works across the mobile app and other systems. Accessing user accounts through parse-ruby-client lets you build this functionality on top of Parse.
+
+In general, users have the same features as other objects, such as the flexible schema. The differences are that user objects must have a username and password, the password is automatically encrypted and stored securely, and Parse enforces the uniqueness of the `username` and `email` fields.
+
+### Signing Up
+
+Signing up a new user differs from creating a generic object in that the `username` and `password` fields are required. The password field is handled differently than the others; it is encrypted when stored in the Parse Cloud and never returned to any client request.
+
+You can ask Parse to verify user email addresses in your application settings page. With this setting enabled, all new user registrations with an `email` field will generate an email confirmation at that address. You can check whether the user has verified their `email` with the `emailVerified` field.
+
+To sign up a new user, create a new `Parse::User` object and then call `#save` on it:
+
+```ruby
+user = Parse::User.new({
+  :username => "cooldude6", 
+  :password => "p_n7!-e8",
+  :phone => "415-392-0202"
+})
+user.save
+```
+
+The response body is a `Parse::User` object containing the `objectId`, the `createdAt` timestamp of the newly-created object, and the `sessionToken` which can be used to authenticate subsequent requests as this user:
+
+```ruby
+{"username"=>"cooldude6",
+ "phone"=>"415-392-0202",
+ "createdAt"=>"2013-01-31T15:22:40.339Z",
+ "objectId"=>"2bMfWZQ9Ob",
+ "sessionToken"=>"zrGuvs3psdndaqswhf0smupsodflkqbFdwRs"}
+```
+
+### Logging In
+
+After you allow users to sign up, you need to let them log in to their account with a username and password in the future. To do this, call `Parse::User#authenticate(username, password)`:
+
+```ruby
+user = Parse::User.authenticate("cooldude6", "p_n7!-e8")
+```
+
+The response body is a `Parse::User` object containing all the user-provided fields except `password`. It also contains the `createdAt`, `updatedAt`, `objectId`, and `sessionToken` fields:
+
+```ruby
+{"username"=>"cooldude6",
+ "phone"=>"415-392-0202",
+ "createdAt"=>"2013-01-31T15:22:40.339Z",
+ "updatedAt"=>"2013-01-31T15:22:40.339Z",
+ "objectId"=>"2bMfWZQ9Ob",
+ "sessionToken"=>"uvs3aspasdnlksdasqu178qaq0smupso"}
+```
 
 ## Roles
 
