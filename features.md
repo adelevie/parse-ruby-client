@@ -33,11 +33,33 @@
 	- [Users](#users)
 		- [Signing Up](#signing-up)
 		- [Logging In](#logging-in)
+		- [Verifying Emails](#verifying-emails)
+		- [Requesting A Password Reset](#requesting-a-password-reset)
+		- [Retrieving Users](#retrieving-users)
+		- [Updating Users](#updating-users)
+		- [Querying](#querying)
+		- [Deleting Users](#deleting-users)
+		- [Linking Users](#linking-users)
+			- [Signing Up and Logging In](#signing-up-and-logging-in)
+- [should look something like this:](#should-look-something-like-this:)
+			- [Linking](#linking)
+- [should look something like this:](#should-look-something-like-this:)
+- [or](#or)
+			- [Unlinking](#unlinking)
+- [should look something like this:](#should-look-something-like-this:)
+		- [Security](#security)
 	- [Roles](#roles)
 	- [Files](#files)
+		- [Uploading Files](#uploading-files)
+		- [Associating with Objects](#associating-with-objects)
+		- [Deleting Files](#deleting-files)
 	- [Push Notifications](#push-notifications)
 	- [Installations](#installations)
-	- [Geopoints](#geopoints)
+	- [GeoPoints](#geopoints)
+		- [GeoPoint](#geopoint)
+		- [GeoQueries](#geoqueries)
+- [should look something like this:](#should-look-something-like-this:)
+		- [Caveats](#caveats)
 
 ## Summary
 
@@ -714,12 +736,376 @@ The response body is a `Parse::User` object containing all the user-provided fie
  "sessionToken"=>"uvs3aspasdnlksdasqu178qaq0smupso"}
 ```
 
+### Verifying Emails
+
+Enabling email verification in an application's settings allows the application to reserve part of its experience for users with confirmed email addresses. Email verification adds the `emailVerified` field to the `User` object. When a `User`'s `email` is set or modified, `emailVerified` is set to false. Parse then emails the user a link which will set `emailVerified` to `true`.
+
+There are three `emailVerified` states to consider:
+
+1. `true` - the user confirmed his or her email address by clicking on the link Parse emailed them. `Users` can never have a `true` value when the user account is first created.
+
+2. `false` - at the time the `User` object was last refreshed, the user had not confirmed his or her email address. If `emailVerified` is `false`, consider refreshing the `User` object.
+
+3. *missing* - the `User` was created when email verification was off or the `User` does not have an `email`.
+
+### Requesting A Password Reset
+
+You can initiate password resets for users who have emails associated with their account. To do this, use `Parse::User::reset_password`:
+
+```ruby
+resp = Parse::User.reset_password("coolguy@iloveapps.com")
+puts resp #=> {}
+```
+
+If successful, the response body is an empty `Hash` object.
+
+### Retrieving Users
+
+You can also retrieve the contents of a user object by using `Parse::Query`. For example, to retrieve the user created above:
+
+```ruby
+user = Parse::Query.new("_User").eq("objectId", "2bMfWZQ9Ob").get.first
+```
+
+The response body is a `Parse::User` object containing all the user-provided fields except `password`. It also contains the `createdAt`, `updatedAt`, and `objectId` fields:
+
+```ruby
+{"username"=>"cooldude6",
+ "phone"=>"415-392-0202",
+ "createdAt"=>"2013-01-31T15:22:40.339Z",
+ "updatedAt"=>"2013-01-31T15:22:40.339Z",
+ "objectId"=>"2bMfWZQ9Ob"}
+```
+
+### Updating Users
+
+TODO: Implement this!
+
+In normal usage, nobody except the user is allowed to modify their own data. To authenticate themselves, the user must add a `X-Parse-Session-Token` header to the request with the session token provided by the signup or login method.
+
+To change the data on a user that already exists, send a PUT request to the user URL. Any keys you don't specify will remain unchanged, so you can update just a subset of the user's data. `username` and `password` may be changed, but the new username must not already be in use.
+
+For example, if we wanted to change the phone number for cooldude6:
+
+```ruby
+user = Parse::Query.new("_User").eq("objectId", "2bMfWZQ9Ob").get.first
+user["phone"] = "415-369-6201"
+user.save
+```
+
+Currently returns the following error:
+
+```
+Parse::ParseProtocolError: 206: Parse::UserCannotBeAlteredWithoutSessionError
+```
+
+### Querying
+
+You can retrieve multiple users at once by using `Parse::Query`:
+
+```ruby
+users = Parse::Query.new("_User").get
+```
+
+The return value is an `Array` of `Parse::User` objects:
+
+```ruby
+[{"username"=>"fake_person",
+  "createdAt"=>"2012-04-20T20:07:32.295Z",
+  "updatedAt"=>"2012-04-20T20:07:32.295Z",
+  "objectId"=>"AAVwfClOx9"},
+ {"username"=>"fake_person222",
+  "createdAt"=>"2012-04-20T20:07:32.946Z",
+  "updatedAt"=>"2012-04-20T20:07:32.946Z",
+  "objectId"=>"0W1Gj1CXqU"}]
+```
+
+All of the options for queries that work for regular objects also work for user objects, so check the section on Querying Objects for more details.
+
+### Deleting Users
+
+TODO: Implement this! 
+
+Proposed api:
+
+To delete a user from the Parse Cloud, call `#parse_delete` on it:
+
+```ruby
+user.parse_delete
+```
+
+### Linking Users
+
+TODO: Implement this! See https://parse.com/docs/rest#users-linking
+
+Parse allows you to link your users with services like Twitter and Facebook, enabling your users to sign up or log into your application using their existing identities. This is accomplished through the sign-up and update REST endpoints by providing authentication data for the service you wish to link to a user in the authData field. Once your user is associated with a service, the authData for the service will be stored with the user and is retrievable by logging in.
+
+authData is a JSON object with keys for each linked service containing the data below. In each case, you are responsible for completing the authentication flow (e.g. OAuth 1.0a) to obtain the information the the service requires for linking.
+
+Facebook authData contents:
+
+```ruby
+{
+  "facebook" => {
+    "id" => "user's Facebook id number as a string",
+    "access_token" => "an authorized Facebook access token for the user",
+    "expiration_date" => "token expiration date of the format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+  }
+}
+```
+
+Twitter authData contents:
+
+```ruby
+{
+  "twitter" => {
+    "id" => "user's Twitter id number as a string",
+    "screen_name" => "user's Twitter screen name",
+    "consumer_key" => "your application's consumer key",
+    "consumer_secret" => "your application's consumer secret",
+    "auth_token" => "an authorized Twitter token for the user with your application",
+    "auth_token_secret" => "the secret associated with the auth_token"
+  }
+}
+```
+
+Anonymous user authData contents:
+
+```ruby
+{
+  "anonymous" => {
+    "id" => "random UUID with lowercase hexadecimal digits"
+  }
+}
+```
+
+#### Signing Up and Logging In
+
+Todo: Implement this!
+
+Signing a user up with a linked service and logging them in with that service uses the same POST request, in which the authData for the user is specified. For example, to sign up or log in with a user's Twitter account:
+
+```ruby
+# should look something like this:
+twitter_user = Parse::User::Twitter.new({
+  "id" => "12345678",
+  "screen_name" => "ParseIt",
+  "consumer_key" => "SaMpLeId3X7eLjjLgWEw",
+  "consumer_secret" => "SaMpLew55QbMR0vTdtOACfPXa5UdO2THX1JrxZ9s3c",
+  "auth_token" => "12345678-SaMpLeTuo3m2avZxh5cjJmIrAfx4ZYyamdofM7IjU",
+  "auth_token_secret" => "SaMpLeEb13SpRzQ4DAIzutEkCE2LBIm2ZQDsP3WUU"
+})
+twitter_user.save
+```
+
+Parse then verifies that the provided authData is valid and checks to see if a user is already associated with this data. If so, it returns a status code of 200 OK and the details (including a sessionToken for the user).
+
+With a response body like:
+
+```ruby
+{
+  "username" => "Parse",
+  "createdAt" => "2012-02-28T23:49:36.353Z",
+  "updatedAt" => "2012-02-28T23:49:36.353Z",
+  "objectId" => "uMz0YZeAqc",
+  "sessionToken" => "samplei3l83eerhnln0ecxgy5",
+  "authData" => {
+    "twitter" => {
+      "id" => "12345678",
+      "screen_name" => "ParseIt",
+      "consumer_key" => "SaMpLeId3X7eLjjLgWEw",
+      "consumer_secret" => "SaMpLew55QbMR0vTdtOACfPXa5UdO2THX1JrxZ9s3c",
+      "auth_token" => "12345678-SaMpLeTuo3m2avZxh5cjJmIrAfx4ZYyamdofM7IjU",
+      "auth_token_secret" => "SaMpLeEb13SpRzQ4DAIzutEkCE2LBIm2ZQDsP3WUU"
+    }
+  }
+}
+```
+
+If the user has never been linked with this account, you will instead receive a status code of 201 Created, indicating that a new user was created.
+
+The body of the response will contain the objectId, createdAt, sessionToken, and an automatically-generated unique username. For example:
+
+```ruby
+{
+  "username" => "iwz8sna7sug28v4eyu7t89fij",
+  "createdAt" => "2012-02-28T23:49:36.353Z",
+  "objectId" => "uMz0YZeAqc",
+  "sessionToken" => "samplei3l83eerhnln0ecxgy5"
+}
+```
+
+#### Linking
+
+TODO: Implement this!
+
+Linking an existing user with a service like Facebook or Twitter uses a PUT request to associate authData with the user. For example, linking a user with a Facebook account would use a request like this:
+
+```ruby
+# should look something like this:
+
+user = Parse::Query.new("_User").eq("objectId", "2bMfWZQ9Ob").get.first
+user.link_to_facebook!({
+  "id" => "123456789",
+  "access_token" => "SaMpLeAAibS7Q55FSzcERWIEmzn6rosftAr7pmDME10008bWgyZAmv7mziwfacNOhWkgxDaBf8a2a2FCc9Hbk9wAsqLYZBLR995wxBvSGNoTrEaL",
+  "expiration_date" => "2012-02-28T23:49:36.353Z"
+})
+
+# or
+
+user.link_to_twitter!({...})
+```
+
+After linking your user to a service, you can authenticate them using matching authData.
+
+
+#### Unlinking
+
+TODO: Implement this!
+
+Unlinking an existing user with a service also uses a PUT request to clear authData from the user by setting the authData for the service to null. For example, unlinking a user with a Facebook account would use a request like this:
+
+```ruby
+# should look something like this:
+
+user = Parse::Query.new("_User").eq("objectId", "2bMfWZQ9Ob").get.first
+user.unlink_from_facebook!
+```
+
+### Security
+
+TODO: Implement this!
+
+When you access Parse via the REST API key, access can be restricted by ACL just like in the iOS and Android SDKs. You can still read and modify acls via the REST API, just be accessing the "ACL" key of an object.
+
+The ACL is formatted as a JSON object where the keys are either object ids or the special key "*" to indicate public access permissions. The values of the ACL are "permission objects", JSON objects whose keys are the permission name and the value is always true.
+
+For example, if you want the user with id "3KmCvT7Zsb" to have read and write access to an object, plus the object should be publicly readable, that corresponds to an ACL of:
+
+```json
+{
+  "3KmCvT7Zsb": {
+    "read": true,
+    "write": true
+  },
+  "*": {
+    "read": true
+  }
+}
+```
+
+If you want to access your data ignoring all ACLs, you can use the master key provided on the Dashboard. Instead of the X-Parse-REST-API-Key header, set the X-Parse-Master-Key header. For backward compatibility, you can also do master-level authentication using HTTP Basic Auth, passing the application id as the username and the master key as the password. For security, the master key should not be distributed to end users, but if you are running code in a trusted environment, feel free to use the master key for authentication.
+
 ## Roles
+
+TODO: Implement this!
+
+See https://parse.com/docs/rest#roles
 
 ## Files
 
+### Uploading Files
+
+To upload a file to Parse, use `Parse::File`. You must include the `"Content-Type"` parameter when instantiating. Keep in mind that files are limited to 10 megabytes. Here's a simple example that'll create a file named `hello.txt` containing a string:
+
+```ruby
+file = Parse::File.new({
+  :body => "Hello World!", 
+  :local_filename => "hello.txt", 
+  :content_type => "text/plain"
+})
+file.save
+```
+
+The response body is a `Hash` object containing the name of the file, which is the original file name prefixed with a unique identifier in order to prevent name collisions. This means, you can save files by the same name, and the files will not overwrite one another.
+
+```ruby
+{"url"=>
+  "http://files.parse.com/372fcbb9-7eae-4b9a-abc8-6da97fcac50d/98f06e15-d6e6-42a9-a9cd-7d28ec98052c-hello.txt",
+ "name"=>"98f06e15-d6e6-42a9-a9cd-7d28ec98052c-hello.txt"}
+```
+
+To upload an image, the syntax is a little bit different. Here's an example that will upload the image parsers.jpg from the current directory:
+
+```ruby
+photo = Parse::File.new({
+  :body => IO.read("test/parsers.jpg"), 
+  :local_filename => "parsers.jpg", 
+  :content_type => "image/jpeg"
+})
+photo.save
+```
+
+### Associating with Objects
+
+After files are uploaded, you can associate them with Parse objects:
+
+```ruby
+photo = Parse::File.new({
+  :body => IO.read("test/parsers.jpg"), 
+  :local_filename => "parsers.jpg", 
+  :content_type => "image/jpeg"
+})
+photo.save
+player_profile = Parse::Object.new("PlayerProfile").tap do |p|
+  p["name"] = "All the Parsers"
+  p["picture"] = photo
+end.save
+```
+
+### Deleting Files
+
+TODO: Implement this!
+
 ## Push Notifications
+
+For now, see https://github.com/adelevie/parse-ruby-client/blob/master/test/test_push.rb for examples.
+
+Also, for config/installation: https://parse.com/docs/rest#push and https://parse.com/docs/push_guide#top/REST
 
 ## Installations
 
-## Geopoints
+TODO: Implement this!
+
+## GeoPoints
+
+Parse allows you to associate real-world latitude and longitude coordinates with an object. Adding a GeoPoint data type to a class allows queries to take into account the proximity of an object to a reference point. This allows you to easily do things like find out what user is closest to another user or which places are closest to a user.
+
+### GeoPoint
+
+To associate a point with an object you will need to embed a GeoPoint data type into your object. This is done by using a JSON object with __type set to the string GeoPoint and numeric values being set for the latitude and longitude keys. For example, to create an object containing a point under the "location" key with a latitude of 40.0 degrees and -30.0 degrees longitude:
+
+```ruby
+place = Parse::Object.new("PlaceObject").tap do |p|
+  p["location"] = Parse::GeoPoint.new({
+    "latitude" => 40.0,
+    "longitude" => -30.0
+  })
+end.save
+```
+
+### GeoQueries
+
+TODO: Implement this!
+
+Now that you have a bunch of objects with spatial coordinates, it would be nice to find out which objects are closest to a point. This can be done by using a GeoPoint data type with query on the field using $nearSphere. Getting a list of ten places that are closest to a user may look something like:
+
+```ruby
+# should look something like this:
+places = Parse::Query.new("PlaceObject").tap do |q|
+  q.near("location", {
+    "latitude" => 30.0,
+    "longitude" => -20.0
+  })
+end.get
+```
+
+See https://parse.com/docs/rest#geo-query for the rest of the geo query types to implement.
+
+### Caveats
+
+At the moment there are a couple of things to watch out for:
+
+1. Each PFObject class may only have one key with a PFGeoPoint object.
+
+2. Points should not equal or exceed the extreme ends of the ranges. Latitude should not be -90.0 or 90.0. Longitude should not be -180.0 or 180.0. Attempting to use GeoPoint's with latitude and/or longitude outside these ranges will cause an error.
