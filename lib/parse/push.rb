@@ -31,7 +31,7 @@ module Parse
         body.delete :channel
       end
 
-      body.merge!({ :expiration_time_interval => @expiration_time_interval }) if @expiration_time_interval
+      body.merge!({ :expiration_interval => @expiration_time_interval }) if @expiration_time_interval
       body.merge!({ :expiration_time => @expiration_time }) if @expiration_time
       body.merge!({ :type => @type }) if @type
 
