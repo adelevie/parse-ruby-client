@@ -15,6 +15,7 @@ module Parse
     def initialize(class_name, data = nil)
       @class_name = class_name
       @op_fields = {}
+      @changes = {}
       if data
         parse data
       end
@@ -61,6 +62,8 @@ module Parse
 				#end
       end
 
+      @changes = {}
+
       self
     end
 
@@ -69,7 +72,14 @@ module Parse
     end
 
     def safe_hash
-      without_reserved = self.dup
+      without_reserved = nil
+
+      if @changes.length == 0 then
+        without_reserved = self.dup
+      else
+        without_reserved = @changes.dup
+      end
+
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
 
       without_relations = without_reserved
@@ -96,7 +106,7 @@ module Parse
     def save
       if @parse_object_id
         method = :put
-        self.merge!(@op_fields) # use operations instead of our own view of the columns
+        @changes.merge!(@op_fields) # use operations instead of our own view of the columns
       else
         method = :post
       end
@@ -211,6 +221,11 @@ module Parse
       data = Parse.client.request(self.uri, :put, body)
       parse data
       self
+    end
+
+    def []=(key, value)
+        super(key, value)
+        @changes[key] = value
     end
 
     private
