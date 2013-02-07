@@ -2,6 +2,8 @@ require 'parse/protocol'
 require 'parse/error'
 require 'parse/util'
 
+require 'iron_mq'
+
 module Parse
 
   # A class which encapsulates the HTTPS communication with the Parse
@@ -26,6 +28,11 @@ module Parse
       @session        = Patron::Session.new
       @session.timeout = 30
       @session.connect_timeout = 30
+
+      @queue = IronMQ::Client.new({
+        :project_id => data[:ironio_project_id],
+        :token => data[:ironio_token]
+      }).client("concurrent_parse_requests")
 
       @session.base_url                 = "https://#{host}"
       @session.headers["Content-Type"]  = "application/json"
@@ -58,7 +65,18 @@ module Parse
       num_tries = 0
       begin
         num_tries += 1
+
+        # add to queue before request
+
+        @queue.post("1")
+
         response = @session.request(method, uri, {}, options)
+
+        # delete from queue after request
+
+        msg = @queue.get()
+        msg.delete
+
         parsed = JSON.parse(response.body)
 
         if response.status >= 400
@@ -115,6 +133,7 @@ module Parse
 
     # use less permissive key if both are specified
     defaulted[:master_key] = ENV["PARSE_MASTER_API_KEY"] unless data[:master_key] || defaulted[:api_key]
+
 
     @@client = Client.new(defaulted)
   end

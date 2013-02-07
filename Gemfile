@@ -17,3 +17,4 @@ group :development do
 end
 
 gem "patron"
+gem "iron_mq"
