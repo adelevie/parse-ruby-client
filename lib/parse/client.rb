@@ -29,10 +29,14 @@ module Parse
       @session.timeout = 30
       @session.connect_timeout = 30
 
-      @queue = IronMQ::Client.new({
-        :project_id => data[:ironio_project_id],
-        :token => data[:ironio_token]
-      }).queue("concurrent_parse_requests")
+      if data[:ironio_project_id] && data[:ironio_token]
+
+        @queue = IronMQ::Client.new({
+          :project_id => data[:ironio_project_id],
+          :token => data[:ironio_token]
+        }).queue("concurrent_parse_requests")
+
+      end
 
       @session.base_url                 = "https://#{host}"
       @session.headers["Content-Type"]  = "application/json"
@@ -67,15 +71,13 @@ module Parse
         num_tries += 1
 
         # add to queue before request
-
-        @queue.post("1")
+        @queue.post("1") if @queue
 
         response = @session.request(method, uri, {}, options)
 
         # delete from queue after request
-
-        msg = @queue.get()
-        msg.delete
+        msg = @queue.get() if @queue
+        msg.delete if @queue
 
         parsed = JSON.parse(response.body)
 
