@@ -31,6 +31,12 @@ module Parse
 
       if data[:ironio_project_id] && data[:ironio_token]
 
+        if data[:max_concurrent_requests]
+          @max_concurrent_requests = data[:max_concurrent_requests]
+        else
+          @max_concurrent_requests = 50
+        end
+
         @queue = IronMQ::Client.new({
           :project_id => data[:ironio_project_id],
           :token => data[:ironio_token]
@@ -70,14 +76,22 @@ module Parse
       begin
         num_tries += 1
 
-        # add to queue before request
-        @queue.post("1") if @queue
-
-        response = @session.request(method, uri, {}, options)
-
-        # delete from queue after request
-        msg = @queue.get() if @queue
-        msg.delete if @queue
+        if @queue
+          while true 
+            if @queue.reload.size >= @max_concurrent_requests
+              sleep 1
+            else 
+              # add to queue before request
+              @queue.post("1")
+              response = @session.request(method, uri, {}, options)
+              # delete from queue after request
+              msg = @queue.get()
+              msg.delete
+            end
+          end
+        else
+          response = @session.request(method, uri, {}, options)
+        end
 
         parsed = JSON.parse(response.body)
 
