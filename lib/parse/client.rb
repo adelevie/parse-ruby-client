@@ -32,7 +32,7 @@ module Parse
       @queue = IronMQ::Client.new({
         :project_id => data[:ironio_project_id],
         :token => data[:ironio_token]
-      }).client("concurrent_parse_requests")
+      }).queue("concurrent_parse_requests")
 
       @session.base_url                 = "https://#{host}"
       @session.headers["Content-Type"]  = "application/json"
