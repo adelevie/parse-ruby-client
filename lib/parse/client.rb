@@ -77,18 +77,19 @@ module Parse
         num_tries += 1
 
         if @queue
-          while true 
-            if @queue.reload.size >= @max_concurrent_requests
-              sleep 1
-            else 
+
+          #while true 
+          #  if @queue.reload.size >= @max_concurrent_requests
+          #    sleep 1
+          #  else 
               # add to queue before request
               @queue.post("1")
               response = @session.request(method, uri, {}, options)
               # delete from queue after request
               msg = @queue.get()
               msg.delete
-            end
-          end
+          #  end
+          #end
         else
           response = @session.request(method, uri, {}, options)
         end
