@@ -21,6 +21,10 @@
 - [Resources](#resources)
 	- [](#)
 
+## Warning
+
+There is an undocumented feature I've been working on, where if you provide IronMQ API keys, you will get a rate-limited rest client. This feature is broken and you should not provide such keys and/or use such a feature until this warning is removed. The feature only existed in 0.1.13 and has been removed in 0.1.14. If you don't provide the keys when calling Parse.init, you will be fine. I'm posting this out of extra caution.
+
 # Ruby Client for parse.com REST API
 
 This file implements a simple Ruby client library for using Parse's REST API.
