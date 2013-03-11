@@ -56,9 +56,10 @@ module Parse
         if k.is_a? Symbol
           k = k.to_s
         end
-				#if Protocol::RESERVED_KEYS.include? k
-        self[k] = v
-				#end
+
+        if k != Parse::Protocol::KEY_TYPE
+          self[k] = v
+        end
       end
 
       self
@@ -101,11 +102,24 @@ module Parse
         method = :post
       end
 
+      objects_to_return = self.inject({}) do |memo, (key, value)|
+        if value.is_a?(Parse::Object) && value.class_name # parse-ruby-client makes hashes Parse::Object (like the ACL)
+          memo[key] = value
+          self[key] = value.pointer
+        end
+
+        memo
+      end
+
       body = safe_json
       data = Parse.client.request(self.uri, method, body)
 
       if data
         parse data
+      end
+
+      objects_to_return.each do |key, value|
+        self[key] = value
       end
 
       if @class_name == Parse::Protocol::CLASS_USER

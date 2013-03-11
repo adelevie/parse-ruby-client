@@ -133,11 +133,35 @@ class TestObject < Test::Unit::TestCase
 
       post.array_add_relation("comments", comment.pointer)
       post.save
-      
+
       q = Parse::Query.new("Comment")
       q.related_to("comments", post.pointer)
       comments = q.get
-      assert_equal comments.first["objectId"], comment["objectId"] 
+      assert_equal comments.first["objectId"], comment["objectId"]
+    end
+  end
+
+  def test_save_with_sub_objects
+    VCR.use_cassette('test_save_with_sub_objects', :record => :new_episodes) do
+      bar = Parse::Object.new("Bar", "foobar" => "foobar")
+      bar.save
+
+      foo = Parse::Object.new("Foo", "bar" => bar)
+      foo.save
+
+      assert_equal "foobar", foo['bar']['foobar']
+
+      foo = Parse::Query.new("Foo").eq("objectId", foo.id).tap { |q| q.include = 'bar' }.get.first
+
+      foo.save
+
+      assert_equal "foobar", foo['bar']['foobar']
+
+      bar = foo['bar']
+      bar['baz'] = 'baz'
+      bar.save
+
+      assert_equal 'baz', bar['baz']
     end
   end
 end
