@@ -73,7 +73,7 @@ module Parse
 
   def Parse.object_pointer_equality?(a, b)
     classes = [Parse::Object, Parse::Pointer]
-    return false unless classes.include?(a.class) && classes.include?(b.class)
+    return false unless classes.any? { |c| a.kind_of?(c) } && classes.any? { |c| b.kind_of?(c) }
     return true if a.equal?(b)
     return false if a.new? || b.new?
 
