@@ -244,7 +244,11 @@ module Parse
       if @parse_object_id
         @op_fields[field] ||= ArrayOp.new(operation, [])
         raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
-        @op_fields[field].objects << value
+        @op_fields[field].objects << if value.kind_of?(Parse::Object) && value.class_name
+          value.pointer
+        else
+          value
+        end
       end
 
       # parse doesn't return column values on initial POST creation so we must maintain them ourselves

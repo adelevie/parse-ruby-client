@@ -123,6 +123,24 @@ class TestObject < Test::Unit::TestCase
     end
   end
 
+  def test_array_add_pointerizing
+    VCR.use_cassette('test_array_add_pointerizing', :record => :new_episodes) do
+      post = Parse::Object.new "Post"
+
+      comment = Parse::Object.new("Comment", "text" => "great post!")
+      comment.save
+      post.array_add("comments", comment)
+      assert_equal "great post!", post['comments'][0]['text']
+      post.save
+      assert_equal "great post!", post['comments'][0]['text']
+
+      post = Parse::Query.new("Post").eq("objectId", post.id).tap { |q| q.include = 'comments' }.get.first
+      assert_equal "great post!", post['comments'][0]['text']
+      post.save
+      assert_equal "great post!", post['comments'][0]['text']
+    end
+  end
+
   def test_array_add_relation
     VCR.use_cassette('test_array_add_relation', :record => :new_episodes) do
       post = Parse::Object.new "Post"
