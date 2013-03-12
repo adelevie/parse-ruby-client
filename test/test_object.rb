@@ -146,16 +146,18 @@ class TestObject < Test::Unit::TestCase
       bar = Parse::Object.new("Bar", "foobar" => "foobar")
       bar.save
 
-      foo = Parse::Object.new("Foo", "bar" => bar)
+      foo = Parse::Object.new("Foo", "bar" => bar, "bars" => [bar])
       foo.save
 
       assert_equal "foobar", foo['bar']['foobar']
+      assert_equal bar.pointer, foo['bars'][0]
 
-      foo = Parse::Query.new("Foo").eq("objectId", foo.id).tap { |q| q.include = 'bar' }.get.first
+      foo = Parse::Query.new("Foo").eq("objectId", foo.id).tap { |q| q.include = 'bar,bars' }.get.first
 
       foo.save
 
       assert_equal "foobar", foo['bar']['foobar']
+      assert_equal bar.pointer, foo['bars'][0]
 
       bar = foo['bar']
       bar['baz'] = 'baz'

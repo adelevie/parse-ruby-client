@@ -106,6 +106,14 @@ module Parse
         if value.is_a?(Parse::Object) && value.class_name # parse-ruby-client makes hashes Parse::Object (like the ACL)
           memo[key] = value
           self[key] = value.pointer
+        elsif value.is_a?(Array)
+          self[key] = value.map do |inner_value|
+            if inner_value.is_a?(Parse::Object) && inner_value.class_name
+              inner_value.pointer
+            else
+              inner_value
+            end
+          end
         end
 
         memo
