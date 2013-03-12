@@ -103,18 +103,12 @@ module Parse
       end
 
       objects_to_return = self.inject({}) do |memo, (key, value)|
-        if value.is_a?(Parse::Object) && value.class_name # parse-ruby-client makes hashes Parse::Object (like the ACL)
+        if Parse.can_pointerize?(value)
           memo[key] = value
           self[key] = value.pointer
         elsif value.is_a?(Array)
           memo[key] = value
-          self[key] = value.map do |inner_value|
-            if inner_value.is_a?(Parse::Object) && inner_value.class_name
-              inner_value.pointer
-            else
-              inner_value
-            end
-          end
+          self[key] = value.map { |v| Parse.pointerize_value(v) }
         end
 
         memo
@@ -244,11 +238,7 @@ module Parse
       if @parse_object_id
         @op_fields[field] ||= ArrayOp.new(operation, [])
         raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
-        @op_fields[field].objects << if value.kind_of?(Parse::Object) && value.class_name
-          value.pointer
-        else
-          value
-        end
+        @op_fields[field].objects << Parse.pointerize_value(value)
       end
 
       # parse doesn't return column values on initial POST creation so we must maintain them ourselves

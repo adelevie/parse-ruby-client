@@ -50,4 +50,15 @@ module Parse
         Parse::Object.new obj[Protocol::KEY_CLASS_NAME], Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
     end
   end
+
+  def Parse.can_pointerize?(value)
+    value.kind_of?(Parse::Object) && value.class_name
+  end
+
+  def Parse.pointerize_value(value)
+    if Parse.can_pointerize?(value)
+      return value.pointer
+    end
+    value
+  end
 end
