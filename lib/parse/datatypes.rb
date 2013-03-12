@@ -21,9 +21,10 @@ module Parse
     end
 
     def eql?(other)
-      self.class.equal?(other.class) &&
-        class_name == other.class_name &&
-        parse_object_id == other.parse_object_id
+      return true if self.equal?(other)
+      return false if other.kind_of?(Parse::Object) && other.new?
+      (other.kind_of?(Parse::Object) || other.kind_of?(Parse::Pointer)) &&
+        self.class_name == other.class_name && self.id == other.id
     end
 
     alias == eql?

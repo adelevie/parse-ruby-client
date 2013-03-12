@@ -36,6 +36,32 @@ class TestObject < Test::Unit::TestCase
     end
   end
 
+  def test_equality
+    VCR.use_cassette('test_equality', :record => :new_episodes) do
+      foo_1 = Parse::Object.new("Foo")
+      foo_2 = Parse::Object.new("Foo")
+
+      assert foo_1 != foo_2
+      assert foo_1 == foo_1
+
+      foo_1.save
+      assert foo_1 != foo_2
+      assert foo_2 != foo_1
+      assert foo_1.pointer != foo_2
+      assert foo_2 != foo_1.pointer
+      foo_2.save
+
+      assert foo_1 == foo_1
+      assert foo_1 != foo_2
+
+      assert foo_1 == foo_1.pointer
+      assert foo_1.pointer == foo_1
+
+      other_foo_1 = Parse.get("Foo", foo_1.id)
+      assert foo_1 == other_foo_1
+    end
+  end
+
   def test_created_at
     VCR.use_cassette('test_created_at', :record => :new_episodes) do
       post = Parse::Object.new "Post"

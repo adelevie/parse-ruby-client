@@ -20,6 +20,23 @@ module Parse
       end
     end
 
+    def eql?(other)
+      return true if self.equal?(other)
+      return false if self.new? || other.kind_of?(Parse::Object) && other.new?
+      (other.kind_of?(Parse::Object) || other.kind_of?(Parse::Pointer)) &&
+        self.class_name == other.class_name && self.id == other.id
+    end
+
+    alias == eql?
+
+    def hash
+      if new?
+        object_id
+      else
+        class_name.hash ^ id.hash
+      end
+    end
+
     def uri
       Protocol.class_uri @class_name, @parse_object_id
     end
