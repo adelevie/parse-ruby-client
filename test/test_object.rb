@@ -210,4 +210,17 @@ class TestObject < Test::Unit::TestCase
       assert_equal 'baz', bar['baz']
     end
   end
+
+  def test_circular_save
+    VCR.use_cassette('test_circular_save', :record => :new_episodes) do
+      bar = Parse::Object.new("CircularBar", "text" => "bar")
+      bar_2 = Parse::Object.new("CircularBar", "bar" => bar, "text" => "bar_2")
+      bar_2.save
+      bar['bar'] = bar_2
+      assert bar.save
+
+      assert_equal "bar_2", bar["bar"]["text"]
+      assert_equal "bar", bar["bar"]["bar"]["text"]
+    end
+  end
 end

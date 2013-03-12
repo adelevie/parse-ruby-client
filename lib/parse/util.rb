@@ -90,6 +90,10 @@ module Parse
 
   def Parse.store_objects_by_pointer(obj, store={})
     if obj.is_a?(Parse::Object) && !obj.new?
+      if store[obj.pointer] # don't recurse if you have circular objects
+        return store
+      end
+
       store[obj.pointer] = obj
     end
 
@@ -106,10 +110,16 @@ module Parse
     store
   end
 
-  def Parse.restore_objects!(obj, store)
+  def Parse.restore_objects!(obj, store, already_restored={})
+    if already_restored[obj]
+      return obj
+    end
+
+    already_restored[obj] = true
+
     if obj.is_a?(Hash) # Parse::Object or Hash, we'll actually modify the object
       obj.each do |k, v|
-        obj[k] = Parse.restore_objects!(v, store)
+        obj[k] = Parse.restore_objects!(v, store, already_restored)
       end
 
       obj
@@ -117,7 +127,7 @@ module Parse
       store[obj]
     elsif obj.is_a?(Array)
       obj.map do |v|
-        Parse.restore_objects!(v, store)
+        Parse.restore_objects!(v, store, already_restored)
       end
     else
       obj
