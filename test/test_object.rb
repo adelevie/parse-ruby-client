@@ -150,14 +150,14 @@ class TestObject < Test::Unit::TestCase
       foo.save
 
       assert_equal "foobar", foo['bar']['foobar']
-      assert_equal bar.pointer, foo['bars'][0]
+      assert_equal "foobar", foo['bars'][0]['foobar']
 
       foo = Parse::Query.new("Foo").eq("objectId", foo.id).tap { |q| q.include = 'bar,bars' }.get.first
 
       foo.save
 
       assert_equal "foobar", foo['bar']['foobar']
-      assert_equal bar.pointer, foo['bars'][0]
+      assert_equal "foobar", foo['bars'][0]['foobar']
 
       bar = foo['bar']
       bar['baz'] = 'baz'

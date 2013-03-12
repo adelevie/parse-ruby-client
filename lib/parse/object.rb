@@ -107,6 +107,7 @@ module Parse
           memo[key] = value
           self[key] = value.pointer
         elsif value.is_a?(Array)
+          memo[key] = value
           self[key] = value.map do |inner_value|
             if inner_value.is_a?(Parse::Object) && inner_value.class_name
               inner_value.pointer
