@@ -75,7 +75,7 @@ module Parse
     if v.new?
       v.object_id
     else
-      v.class_name ^ v.id
+      v.class_name.hash ^ v.id.hash
     end
   end
 end
