@@ -84,13 +84,17 @@ module Parse
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
 
       without_relations = without_reserved
-      without_relations.each { |k,v|
+      without_relations.each do |k,v|
           if v.is_a? Hash
             if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
               without_relations.delete(k)
             end
           end
-      }
+      end
+
+      without_relations.each do |k, v|
+        without_relations[k] = Parse.pointerize_value(v)
+      end
 
       without_relations
     end
@@ -112,17 +116,7 @@ module Parse
         method = :post
       end
 
-      objects_to_return = self.inject({}) do |memo, (key, value)|
-        if Parse.can_pointerize?(value)
-          memo[key] = value
-          self[key] = value.pointer
-        elsif value.is_a?(Array)
-          memo[key] = value
-          self[key] = value.map { |v| Parse.pointerize_value(v) }
-        end
-
-        memo
-      end
+      object_store = Parse.store_objects_by_pointer(self)
 
       body = safe_json
       data = Parse.client.request(self.uri, method, body)
@@ -131,9 +125,7 @@ module Parse
         parse data
       end
 
-      objects_to_return.each do |key, value|
-        self[key] = value
-      end
+      Parse.restore_objects!(self, object_store)
 
       if @class_name == Parse::Protocol::CLASS_USER
         self.delete("password")
