@@ -141,6 +141,12 @@ module Parse
   def Parse.get(class_name, object_id = nil)
     data = Parse.client.get( Protocol.class_uri(class_name, object_id) )
     Parse.parse_json class_name, data
+  rescue ParseProtocolError => e
+    if e.code == Protocol::ERROR_OBJECT_NOT_FOUND_FOR_GET
+      e.message += ": #{class_name}:#{object_id}"
+    end
+
+    raise
   end
 
 end
