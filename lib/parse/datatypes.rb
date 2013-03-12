@@ -10,6 +10,13 @@ module Parse
     attr_accessor :class_name
     alias :id :parse_object_id
 
+    def self.make(class_name, object_id)
+      Pointer.new(
+        Protocol::KEY_CLASS_NAME => class_name,
+        Protocol::KEY_OBJECT_ID => object_id
+      )
+    end
+
     def initialize(data)
       @class_name       = data[Protocol::KEY_CLASS_NAME]
       @parse_object_id  = data[Protocol::KEY_OBJECT_ID]

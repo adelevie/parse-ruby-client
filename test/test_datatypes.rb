@@ -11,6 +11,12 @@ class TestDatatypes < Test::Unit::TestCase
     assert_equal p.to_json, "{\"__type\":\"Pointer\",\"#{Parse::Protocol::KEY_CLASS_NAME}\":\"DatatypeTestClass\",\"#{Parse::Protocol::KEY_OBJECT_ID}\":\"12345abcd\"}"
   end
 
+  def test_pointer_make
+    p = Parse::Pointer.make("SomeClass", "someId")
+    assert_equal "SomeClass", p.class_name
+    assert_equal "someId", p.id
+  end
+
   def test_date
     date_time = DateTime.now
     data = date_time
