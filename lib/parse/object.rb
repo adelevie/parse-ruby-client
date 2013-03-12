@@ -20,6 +20,16 @@ module Parse
       end
     end
 
+    def eql?(other)
+      Parse.object_pointer_equality?(self, other)
+    end
+
+    alias == eql?
+
+    def hash
+      Parse.object_pointer_hash(self)
+    end
+
     def uri
       Protocol.class_uri @class_name, @parse_object_id
     end
@@ -56,9 +66,10 @@ module Parse
         if k.is_a? Symbol
           k = k.to_s
         end
-				#if Protocol::RESERVED_KEYS.include? k
-        self[k] = v
-				#end
+
+        if k != Parse::Protocol::KEY_TYPE
+          self[k] = v
+        end
       end
 
       self
@@ -101,11 +112,27 @@ module Parse
         method = :post
       end
 
+      objects_to_return = self.inject({}) do |memo, (key, value)|
+        if Parse.can_pointerize?(value)
+          memo[key] = value
+          self[key] = value.pointer
+        elsif value.is_a?(Array)
+          memo[key] = value
+          self[key] = value.map { |v| Parse.pointerize_value(v) }
+        end
+
+        memo
+      end
+
       body = safe_json
       data = Parse.client.request(self.uri, method, body)
 
       if data
         parse data
+      end
+
+      objects_to_return.each do |key, value|
+        self[key] = value
       end
 
       if @class_name == Parse::Protocol::CLASS_USER
@@ -221,7 +248,7 @@ module Parse
       if @parse_object_id
         @op_fields[field] ||= ArrayOp.new(operation, [])
         raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
-        @op_fields[field].objects << value
+        @op_fields[field].objects << Parse.pointerize_value(value)
       end
 
       # parse doesn't return column values on initial POST creation so we must maintain them ourselves

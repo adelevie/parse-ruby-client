@@ -42,12 +42,12 @@ module Parse
     end
 
     def eq(field, value)
-      add_constraint field, value
+      add_constraint field, Parse.pointerize_value(value)
       self
     end
 
     def not_eq(field, value)
-      add_constraint field, { "$ne" => value }
+      add_constraint field, { "$ne" => Parse.pointerize_value(value) }
       self
     end
 
@@ -57,37 +57,37 @@ module Parse
     end
 
     def less_than(field, value)
-      add_constraint field, { "$lt" => value }
+      add_constraint field, { "$lt" => Parse.pointerize_value(value) }
       self
     end
 
     def less_eq(field, value)
-      add_constraint field, { "$lte" => value }
+      add_constraint field, { "$lte" => Parse.pointerize_value(value) }
       self
     end
 
     def greater_than(field, value)
-      add_constraint field, { "$gt" => value }
+      add_constraint field, { "$gt" => Parse.pointerize_value(value) }
       self
     end
 
     def greater_eq(field, value)
-      add_constraint field, { "$gte" => value }
+      add_constraint field, { "$gte" => Parse.pointerize_value(value) }
       self
     end
 
     def value_in(field, values)
-      add_constraint field, { "$in" => values }
+      add_constraint field, { "$in" => values.map { |v| Parse.pointerize_value(v) } }
       self
     end
 
     def value_not_in(field, values)
-      add_constraint field, { "$nin" => values }
+      add_constraint field, { "$nin" => values.map { |v| Parse.pointerize_value(v) } }
       self
     end
 
     def related_to(field,value)
-      h = {"object" => value, "key" => field} 
+      h = {"object" => Parse.pointerize_value(value), "key" => field}
       add_constraint("$relatedTo", h )
     end
 
