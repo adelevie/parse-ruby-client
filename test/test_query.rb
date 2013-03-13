@@ -48,6 +48,18 @@ class TestQuery < Test::Unit::TestCase
     assert_equal q.where, {"points" =>  5, "player" => "michael@jordan.com"}
   end
 
+  def test_eq_pointerize
+    VCR.use_cassette('test_eq_pointerize', :record => :new_episodes) do
+      foo = Parse::Object.new("Foo")
+      foo.save
+      bar = Parse::Object.new("Bar", "foo" => foo.pointer, "bar" => "bar")
+      bar.save
+
+      assert_equal "bar", Parse::Query.new("Bar").eq("foo", foo.pointer).get.first["bar"]
+      assert_equal "bar", Parse::Query.new("Bar").eq("foo", foo).get.first["bar"]
+    end
+  end
+
   def test_limit_skip
     VCR.use_cassette('test_limit_skip', :record => :new_episodes) do
       q = Parse::Query.new "TestQuery"

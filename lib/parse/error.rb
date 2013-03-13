@@ -23,6 +23,14 @@ module Parse
 
       super("#{@code}: #{@error}")
     end
+
+    def to_s
+      @message || super
+    end
+
+    def message=(msg)
+      @message = msg
+    end
   end
 
 end

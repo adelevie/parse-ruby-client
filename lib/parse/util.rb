@@ -50,4 +50,87 @@ module Parse
         Parse::Object.new obj[Protocol::KEY_CLASS_NAME], Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
     end
   end
+
+  def Parse.can_pointerize?(value)
+    value.kind_of?(Parse::Object) && value.class_name
+  end
+
+  def Parse.pointerize_value(obj)
+    if Parse.can_pointerize?(obj)
+      obj.pointer
+    elsif obj.is_a?(Array)
+      obj.map do |v|
+        Parse.pointerize_value(v)
+      end
+    elsif obj.is_a?(Hash)
+      Hash[obj.map do |k, v|
+        [k, Parse.pointerize_value(v)]
+      end]
+    else
+      obj
+    end
+  end
+
+  def Parse.object_pointer_equality?(a, b)
+    classes = [Parse::Object, Parse::Pointer]
+    return false unless classes.any? { |c| a.kind_of?(c) } && classes.any? { |c| b.kind_of?(c) }
+    return true if a.equal?(b)
+    return false if a.new? || b.new?
+
+    a.class_name == b.class_name && a.id == b.id
+  end
+
+  def Parse.object_pointer_hash(v)
+    if v.new?
+      v.object_id
+    else
+      v.class_name.hash ^ v.id.hash
+    end
+  end
+
+  def Parse.store_objects_by_pointer(obj, store={})
+    if obj.is_a?(Parse::Object) && !obj.new?
+      if store[obj.pointer] # don't recurse if you have circular objects
+        return store
+      end
+
+      store[obj.pointer] = obj
+    end
+
+    if obj.is_a?(Array)
+      obj.each do |v|
+        Parse.store_objects_by_pointer(v, store)
+      end
+    elsif obj.is_a?(Hash)
+      obj.each do |k, v|
+        Parse.store_objects_by_pointer(v, store)
+      end
+    end
+
+    store
+  end
+
+  def Parse.restore_objects!(obj, store, already_restored={})
+    if already_restored[obj]
+      return obj
+    end
+
+    already_restored[obj] = true
+
+    if obj.is_a?(Hash) # Parse::Object or Hash, we'll actually modify the object
+      obj.each do |k, v|
+        obj[k] = Parse.restore_objects!(v, store, already_restored)
+      end
+
+      obj
+    elsif obj.is_a?(Parse::Pointer) && store[obj]
+      store[obj]
+    elsif obj.is_a?(Array)
+      obj.map do |v|
+        Parse.restore_objects!(v, store, already_restored)
+      end
+    else
+      obj
+    end
+  end
 end
