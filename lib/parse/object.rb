@@ -20,6 +20,16 @@ module Parse
       end
     end
 
+    def eql?(other)
+      Parse.object_pointer_equality?(self, other)
+    end
+
+    alias == eql?
+
+    def hash
+      Parse.object_pointer_hash(self)
+    end
+
     def uri
       Protocol.class_uri @class_name, @parse_object_id
     end
@@ -56,9 +66,10 @@ module Parse
         if k.is_a? Symbol
           k = k.to_s
         end
-				#if Protocol::RESERVED_KEYS.include? k
-        self[k] = v
-				#end
+
+        if k != Parse::Protocol::KEY_TYPE
+          self[k] = v
+        end
       end
 
       self
@@ -73,13 +84,17 @@ module Parse
       Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
 
       without_relations = without_reserved
-      without_relations.each { |k,v|
+      without_relations.each do |k,v|
           if v.is_a? Hash
             if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
               without_relations.delete(k)
             end
           end
-      }
+      end
+
+      without_relations.each do |k, v|
+        without_relations[k] = Parse.pointerize_value(v)
+      end
 
       without_relations
     end
@@ -101,12 +116,16 @@ module Parse
         method = :post
       end
 
+      object_store = Parse.store_objects_by_pointer(self)
+
       body = safe_json
       data = Parse.client.request(self.uri, method, body)
 
       if data
         parse data
       end
+
+      Parse.restore_objects!(self, object_store)
 
       if @class_name == Parse::Protocol::CLASS_USER
         self.delete("password")
@@ -221,7 +240,7 @@ module Parse
       if @parse_object_id
         @op_fields[field] ||= ArrayOp.new(operation, [])
         raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
-        @op_fields[field].objects << value
+        @op_fields[field].objects << Parse.pointerize_value(value)
       end
 
       # parse doesn't return column values on initial POST creation so we must maintain them ourselves

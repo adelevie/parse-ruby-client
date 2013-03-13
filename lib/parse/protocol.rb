@@ -128,6 +128,7 @@ module Parse
     BATCH_REQUEST_URI = "batch"
 
     ERROR_TIMEOUT = 124
+    ERROR_OBJECT_NOT_FOUND_FOR_GET = 101
 
     # URI Helpers
     # ----------------------------------------

@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/SomeClass/someIdThatDoesNotExist
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - jYdptjS76YHikuIFfJEgHD8UMIjH6cp2rWz4fo2C
+      X-Parse-Application-Id:
+      - hnJRtntbYPvWfjqcqLZsdFaOKT0F3SfNU7Kc7woN
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: !binary |-
+        Tm90IEZvdW5k
+    headers:
+      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
+      - !binary |-
+        Kg==
+      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
+      - !binary |-
+        Kg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VHVlLCAxMiBNYXIgMjAxMyAyMDo0NTozNSBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjI=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
+        SWxNVFF5WldJNU1XSTRaV0kyTkRNMU9URTRPRGRqTTJVeE5tUmpaR1pqWkdR
+        JTNELS1iOWMzYWIwMTU1NTFkOThiNTkxYWY1YzlkZjQyYmFkYmZhNjdjNzdk
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVN1biwgMTIt
+        TWFyLTIwMjMgMjA6NDU6MzUgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+      !binary "U3RhdHVz":
+      - !binary |-
+        NDA0IE5vdCBGb3VuZA==
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        Mi4zMzczMjk=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NDc=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjb2RlIjoxMDEsImVycm9yIjoib2JqZWN0IG5vdCBmb3VuZCBmb3IgZ2V0
+        In0=
+    http_version: 
+  recorded_at: Tue, 12 Mar 2013 20:45:36 GMT
+recorded_with: VCR 2.0.1
