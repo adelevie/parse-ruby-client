@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.1.10"
+  s.version = "0.1.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2013-01-12"
+  s.date = "2013-02-27"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "example.rb",
+    "features.md",
     "fixtures/vcr_cassettes/test_array_add.yml",
+    "fixtures/vcr_cassettes/test_array_add_relation.yml",
     "fixtures/vcr_cassettes/test_batch_create_object.yml",
     "fixtures/vcr_cassettes/test_batch_delete_object.yml",
     "fixtures/vcr_cassettes/test_batch_run.yml",
@@ -34,7 +36,11 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_created_at.yml",
     "fixtures/vcr_cassettes/test_deep_parse.yml",
     "fixtures/vcr_cassettes/test_destroy.yml",
+    "fixtures/vcr_cassettes/test_file_save.yml",
     "fixtures/vcr_cassettes/test_get.yml",
+    "fixtures/vcr_cassettes/test_image_file_associate_with_object.yml",
+    "fixtures/vcr_cassettes/test_image_file_save.yml",
+    "fixtures/vcr_cassettes/test_include.yml",
     "fixtures/vcr_cassettes/test_new_model.yml",
     "fixtures/vcr_cassettes/test_new_object.yml",
     "fixtures/vcr_cassettes/test_nils_delete_keys.yml",
@@ -44,6 +50,7 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_request_batch.yml",
     "fixtures/vcr_cassettes/test_server_update.yml",
     "fixtures/vcr_cassettes/test_simple_save.yml",
+    "fixtures/vcr_cassettes/test_text_file_save.yml",
     "fixtures/vcr_cassettes/test_update.yml",
     "fixtures/vcr_cassettes/test_updated_at.yml",
     "fixtures/vcr_cassettes/test_user_save.yml",
@@ -64,16 +71,19 @@ Gem::Specification.new do |s|
     "test/cloud_functions/MyCloudCode/cloud/main.js",
     "test/config/global.json",
     "test/helper.rb",
+    "test/parsers.jpg",
     "test/test_batch.rb",
     "test/test_client.rb",
     "test/test_cloud.rb",
     "test/test_datatypes.rb",
+    "test/test_file.rb",
     "test/test_init.rb",
     "test/test_init_from_cloud_code.rb",
     "test/test_model.rb",
     "test/test_object.rb",
     "test/test_push.rb",
     "test/test_query.rb",
+    "test/test_throttle.rb",
     "test/test_user.rb"
   ]
   s.homepage = "http://github.com/adelevie/parse-ruby-client"
@@ -87,6 +97,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<patron>, [">= 0"])
+      s.add_runtime_dependency(%q<iron_mq>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.1.5"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<test-unit>, ["= 2.5.0"])
@@ -97,6 +108,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<vcr>, [">= 0"])
     else
       s.add_dependency(%q<patron>, [">= 0"])
+      s.add_dependency(%q<iron_mq>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.1.5"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<test-unit>, ["= 2.5.0"])
@@ -108,6 +120,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<patron>, [">= 0"])
+    s.add_dependency(%q<iron_mq>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.1.5"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<test-unit>, ["= 2.5.0"])

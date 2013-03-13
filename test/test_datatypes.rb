@@ -81,16 +81,19 @@ class TestDatatypes < Test::Unit::TestCase
     assert_equal gp, q["location"]
   end
 
-  def test_file
-    data = {"name" => "blah.png"}
-    file = Parse::File.new(data)
-    assert_equal JSON.parse(file.to_json)["name"], data["name"]
-    assert_equal JSON.parse(file.to_json)[Parse::Protocol::KEY_TYPE], Parse::Protocol::TYPE_FILE
 
-    post = Parse::Object.new("Post")
-    post["avatar"] = file
-    post.save
-    q = Parse.get("Post", post.id)
-    assert_equal file.name, q["avatar"].name
-  end
+  # deprecating -  see test_file.rb for new implementation
+  # ----------------------------
+  #def test_file
+  #  data = {"name" => "test/parsers.png"}
+  #  file = Parse::File.new(data)
+    # assert_equal JSON.parse(file.to_json)["name"], data["name"]
+    # assert_equal JSON.parse(file.to_json)[Parse::Protocol::KEY_TYPE], Parse::Protocol::TYPE_FILE
+
+  #  post = Parse::Object.new("Post")
+  #  post["avatar"] = file
+  #  post.save
+  #  q = Parse.get("Post", post.id)
+  #  assert_equal file.parse_filename, q["avatar"].parse_filename
+  #end
 end

@@ -2,6 +2,8 @@ require 'parse/protocol'
 require 'parse/error'
 require 'parse/util'
 
+require 'iron_mq'
+
 module Parse
 
   # A class which encapsulates the HTTPS communication with the Parse
@@ -27,6 +29,21 @@ module Parse
       @session.timeout = 30
       @session.connect_timeout = 30
 
+      if data[:ironio_project_id] && data[:ironio_token]
+
+        if data[:max_concurrent_requests]
+          @max_concurrent_requests = data[:max_concurrent_requests]
+        else
+          @max_concurrent_requests = 50
+        end
+
+        @queue = IronMQ::Client.new({
+          :project_id => data[:ironio_project_id],
+          :token => data[:ironio_token]
+        }).queue("concurrent_parse_requests")
+
+      end
+
       @session.base_url                 = "https://#{host}"
       @session.headers["Content-Type"]  = "application/json"
       @session.headers["Accept"]        = "application/json"
@@ -37,11 +54,15 @@ module Parse
     # with common basic response handling. Will raise a
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
-    def request(uri, method = :get, body = nil, query = nil)
+    def request(uri, method = :get, body = nil, query = nil, content_type = nil)
       @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
       @session.headers[Protocol::HEADER_API_KEY]  = @api_key
       @session.headers[Protocol::HEADER_APP_ID]   = @application_id
       @session.headers[Protocol::HEADER_SESSION_TOKEN]   = @session_token
+
+      if content_type
+        @session.headers["Content-Type"] = content_type
+      end
 
       options = {}
       if body
@@ -54,11 +75,33 @@ module Parse
       num_tries = 0
       begin
         num_tries += 1
-        response = @session.request(method, uri, {}, options)
+
+        if @queue
+
+          #while true 
+          #  if @queue.reload.size >= @max_concurrent_requests
+          #    sleep 1
+          #  else 
+              # add to queue before request
+              @queue.post("1")
+              response = @session.request(method, uri, {}, options)
+              # delete from queue after request
+              msg = @queue.get()
+              msg.delete
+          #  end
+          #end
+        else
+          response = @session.request(method, uri, {}, options)
+        end
+
         parsed = JSON.parse(response.body)
 
         if response.status >= 400
           raise ParseProtocolError.new(parsed)
+        end
+
+        if content_type
+          @session.headers["Content-Type"] = "application/json"
         end
 
         return parsed
@@ -107,6 +150,7 @@ module Parse
 
     # use less permissive key if both are specified
     defaulted[:master_key] = ENV["PARSE_MASTER_API_KEY"] unless data[:master_key] || defaulted[:api_key]
+
 
     @@client = Client.new(defaulted)
   end

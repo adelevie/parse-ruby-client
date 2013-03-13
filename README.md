@@ -1,6 +1,29 @@
-[![Build Status](https://secure.travis-ci.org/adelevie/parse-ruby-client.png?branch=master)](http://travis-ci.org/adelevie/parse-ruby-client)
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
-The original creator of parse-ruby-client, [aalpern](http://github.com/aalpern), has decided to stop work on the project. I'm going to give the project new life, first by maintaining the project as a gem, and second by eventually making it power [parse_resource](http://github.com/adelevie/parse_resource) under the hood.
+- [Ruby Client for parse.com REST API](#ruby-client-for-parsecom-rest-api)
+	- [Dependencies](#dependencies)
+- [Getting Started](#getting-started)
+	- [Installation](#installation)
+		- [Load API keys from `global.json` created by Cloud Code](#load-api-keys-from-globaljson-created-by-cloud-code)
+	- [Creating and Saving Objects](#creating-and-saving-objects)
+		- [ActiveRecord-style Models](#activerecord-style-models)
+	- [Retrieving Objects](#retrieving-objects)
+	- [Queries](#queries)
+- [Create some simple objects to query](#create-some-simple-objects-to-query)
+- [Retrieve all scores between 10 & 20 inclusive](#retrieve-all-scores-between-10-&-20-inclusive)
+- [Retrieve a set of specific scores](#retrieve-a-set-of-specific-scores)
+		- [Relational Data](#relational-data)
+	- [Push Notifications](#push-notifications)
+	- [Batch Requests](#batch-requests)
+	- [Cloud Code](#cloud-code)
+- [assumes you have a function named "trivial"](#assumes-you-have-a-function-named-"trivial")
+- [TODO](#todo)
+- [Resources](#resources)
+	- [](#)
+
+## Warning
+
+There is an undocumented feature I've been working on, where if you provide IronMQ API keys, you will get a rate-limited rest client. This feature is broken and you should not provide such keys and/or use such a feature until this warning is removed. The feature only existed in 0.1.13 and has been removed in 0.1.14. If you don't provide the keys when calling Parse.init, you will be fine. I'm posting this out of extra caution.
 
 # Ruby Client for parse.com REST API
 
@@ -19,7 +42,9 @@ This currently depends on the gems 'json' and 'patron' for JSON support and HTTP
 
 ## Installation
 
-`gem "parse-ruby-client", "~> 0.1.10"`
+[![Gem Version](https://badge.fury.io/rb/parse-ruby-client.png)](http://badge.fury.io/rb/parse-ruby-client)
+
+`gem "parse-ruby-client"`
 
 ---
 
@@ -146,6 +171,24 @@ Parse::Query.new("GameScore")           \
   .value_in("score", [10, 20, 30, 40])  \
   .get
 
+```
+
+### Relational Data
+
+```ruby
+post = Parse::Object.new "Post"
+post.save
+
+comment = Parse::Object.new "Comment"
+comment.save
+
+post.array_add_relation("comments", comment.pointer)
+post.save
+
+q = Parse::Query.new("Comment")
+q.related_to("comments", post.pointer)
+comments = q.get
+assert_equal comments.first["objectId"], comment["objectId"]
 ```
 
 ## Push Notifications
