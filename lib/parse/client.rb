@@ -110,7 +110,7 @@ module Parse
         raise
       rescue ParseProtocolError => e
         if num_tries <= max_retries
-          sleep 1 if e.code == Protocol::ERROR_EXCEEDED_BURST_LIMIT
+          sleep 60 if e.code == Protocol::ERROR_EXCEEDED_BURST_LIMIT
           retry if [Protocol::ERROR_EXCEEDED_BURST_LIMIT, Protocol::ERROR_TIMEOUT].include?(e.code)
         end
         raise
