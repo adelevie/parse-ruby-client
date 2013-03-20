@@ -78,10 +78,10 @@ module Parse
 
         if @queue
 
-          #while true 
+          #while true
           #  if @queue.reload.size >= @max_concurrent_requests
           #    sleep 1
-          #  else 
+          #  else
               # add to queue before request
               @queue.post("1")
               response = @session.request(method, uri, {}, options)
@@ -109,7 +109,10 @@ module Parse
         retry if num_tries <= max_retries
         raise
       rescue ParseProtocolError => e
-        retry if e.code == Protocol::ERROR_TIMEOUT && num_tries <= max_retries
+        if num_tries <= max_retries
+          sleep 60 if e.code == Protocol::ERROR_EXCEEDED_BURST_LIMIT
+          retry if [Protocol::ERROR_EXCEEDED_BURST_LIMIT, Protocol::ERROR_TIMEOUT].include?(e.code)
+        end
         raise
       end
     end
