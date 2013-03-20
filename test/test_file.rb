@@ -8,8 +8,8 @@ class TestFile < Test::Unit::TestCase
   def test_file_save
     VCR.use_cassette('test_text_file_save', :record => :new_episodes) do
       tf = Parse::File.new({
-        :body => "Hello World!", 
-        :local_filename => "hello.txt", 
+        :body => "Hello World!",
+        :local_filename => "hello.txt",
         :content_type => "text/plain"
       })
       tf.save
@@ -26,8 +26,8 @@ class TestFile < Test::Unit::TestCase
   def test_image_save
     #VCR.use_cassette('test_image_file_save', :record => :new_episodes) do
       tf = Parse::File.new({
-        :body => IO.read("test/parsers.jpg"), 
-        :local_filename => "parsers.jpg", 
+        :body => IO.read("test/parsers.jpg"),
+        :local_filename => "parsers.jpg",
         :content_type => "image/jpeg"
       })
       tf.save
@@ -43,8 +43,8 @@ class TestFile < Test::Unit::TestCase
   def test_associate_with_object
     #VCR.use_cassette('test_image_file_associate_with_object', :record => :new_episodes) do
       tf = Parse::File.new({
-        :body => IO.read("test/parsers.jpg"), 
-        :local_filename => "parsers.jpg", 
+        :body => IO.read("test/parsers.jpg"),
+        :local_filename => "parsers.jpg",
         :content_type => "image/jpeg"
       })
       tf.save
@@ -61,6 +61,8 @@ class TestFile < Test::Unit::TestCase
 
       assert object["photo"]
       assert object["objectId"]
+
+      object.refresh.save
     #end
   end
 
