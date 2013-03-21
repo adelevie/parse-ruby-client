@@ -328,6 +328,7 @@ module Parse
     def initialize(data)
       data = Hash[data.map{ |k, v| [k.to_s, v] }] # convert hash keys to strings
       @local_filename = data["local_filename"] if data["local_filename"]
+      @parse_filename = data["name"]           if data["name"]
       @parse_filename = data["parse_filename"] if data["parse_filename"]
       @content_type   = data["content_type"]   if data["content_type"]
       @url            = data["url"]            if data["url"]
