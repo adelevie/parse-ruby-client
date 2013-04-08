@@ -1,3 +1,31 @@
+## Summary
+
+parse-ruby-client lets you interact with Parse using Ruby. There are many uses. For example:
+
+- A webserver can show data from Parse on a website.
+- You can upload large amounts of data that will later be consumed in a mobile app.
+- You can download recent data to run your own custom analytics.
+- You can export all of your data if you no longer want to use Parse.
+
+### Quick Reference
+
+#### Installation
+
+`gem install parse-ruby-client` or add `gem "parse-ruby-client"` to your `Gemfile.`
+
+#### Configuration
+
+```ruby
+require 'parse-ruby-client'
+
+Parse.init :application_id => "<your_app_id>",
+           :api_key        => "<your_api_key>"
+```
+
+[![Gem Version](https://badge.fury.io/rb/parse-ruby-client.png)](http://badge.fury.io/rb/parse-ruby-client)
+
+[![Build Status](https://travis-ci.org/adelevie/parse-ruby-client.png?branch=master)](https://travis-ci.org/adelevie/parse-ruby-client)
+
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
 - [Summary](#summary)
@@ -60,30 +88,6 @@
     - [GeoQueries](#geoqueries)
 - [should look something like this:](#should-look-something-like-this:)
     - [Caveats](#caveats)
-
-## Summary
-
-parse-ruby-client lets you interact with Parse using Ruby. There are many uses. For example:
-
-- A webserver can show data from Parse on a website.
-- You can upload large amounts of data that will later be consumed in a mobile app.
-- You can download recent data to run your own custom analytics.
-- You can export all of your data if you no longer want to use Parse.
-
-### Quick Reference
-
-#### Installation
-
-`gem install parse-ruby-client` or add `gem "parse-ruby-client"` to your `Gemfile.`
-
-#### Configuration
-
-```ruby
-require 'parse-ruby-client'
-
-Parse.init :application_id => "<your_app_id>",
-           :api_key        => "<your_api_key>"
-```
 
 ## Objects
 
