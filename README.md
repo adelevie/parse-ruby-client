@@ -1070,8 +1070,8 @@ To send a notification to the "user_1" channel
 ```ruby
 data = { :alert => "This is a notification from Parse" }
 push = Parse::Push.new(data, "user_1")
-pf_push.type = "ios"
-pf_push.save
+push.type = "ios"
+push.save
 ```
 
 To send a notification to the "user_2" channel and only to devices where follows = true
