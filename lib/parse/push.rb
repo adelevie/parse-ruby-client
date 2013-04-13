@@ -14,6 +14,7 @@ module Parse
     def initialize(data, channel = "")
       @data = data
       @channel = channel
+      @where = where
     end
 
     def save
