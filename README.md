@@ -1074,15 +1074,6 @@ push.type = "ios"
 push.save
 ```
 
-To send a notification to the "user_2" channel and only to devices where follows = true
-
-```ruby
-data = { :alert => "Another test notification" }
-push = Parse::Push.new(data, "follows", "user_2")
-push.type = "ios"
-push.save
-```
-
 Notifications by default are set for iOS and Android. You can set certain notifications to only be sent to iOS or Android by setting the `type` to `ios` or `android`.
 
 For config/installation: https://parse.com/docs/rest#push and https://parse.com/docs/push_guide#top/REST

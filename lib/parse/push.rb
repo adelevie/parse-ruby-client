@@ -11,7 +11,7 @@ module Parse
     attr_accessor :expiration_time
     attr_accessor :data
 
-    def initialize(data, channel = "", where = nil)
+    def initialize(data, channel = "")
       @data = data
       @channel = channel
       @where = where
@@ -28,7 +28,7 @@ module Parse
       end
 
       if @where
-        body.merge!({ :where => {:channels => @channel, @where => true} })
+        body.merge!({ :where => @where })
         body.delete :channel
       end
 
