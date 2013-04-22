@@ -16,18 +16,18 @@ http_interactions:
       X-Parse-Master-Key:
       - ''
       X-Parse-Rest-Api-Key:
-      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
+      - <X-Parse-REST-API-Key>
       X-Parse-Application-Id:
-      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
+      - <X-Parse-Application-Id>
       X-Parse-Session-Token:
       - ''
       Expect:
       - ''
   response:
     status:
-      code: 200
+      code: 400
       message: !binary |-
-        T0s=
+        QmFkIFJlcXVlc3Q=
     headers:
       !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
       - !binary |-
@@ -37,45 +37,42 @@ http_interactions:
         Kg==
       !binary "Q2FjaGUtQ29udHJvbA==":
       - !binary |-
-        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+        bm8tY2FjaGU=
       !binary "Q29udGVudC1UeXBl":
       - !binary |-
         YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
       !binary "RGF0ZQ==":
       - !binary |-
-        VHVlLCAwOSBPY3QgMjAxMiAyMTo0NToyNSBHTVQ=
-      !binary "RXRhZw==":
-      - !binary |-
-        IjA4Mjc0OGIyN2FjM2RiZTJhMWQxNWMzM2RjMjFlODNkIg==
+        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowOSBHTVQ=
       !binary "U2VydmVy":
       - !binary |-
         bmdpbngvMS4yLjI=
       !binary "U2V0LUNvb2tpZQ==":
       - !binary |-
         X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxaRGxqTlRObU9HUTFabUZoTVRabU9HTmlaVEkyTldGalltRTJOamd5T1Rr
-        JTNELS1iN2U3YjFhZmEzY2M5NGVjMTk3NDk3ZTlkMDg4YmNhN2UwMmJjOWY4
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVN1biwgMDkt
-        T2N0LTIwMjIgMjE6NDU6MjUgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+        SWxaV015WXpkbU1tTTBNamMwTldNNVpEYzFPVFZpWm1JM09UWmpOREV4TmpF
+        JTNELS00MDliY2Q3YzVmOWQzNzE2MjE2NmQ1ZGE0OTEzYzg2ZjNiOTk3Y2Uw
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
+        QXByLTIwMjMgMTM6NDM6MDkgR01UOyBzZWN1cmU7IEh0dHBPbmx5
       !binary "U3RhdHVz":
       - !binary |-
-        MjAwIE9L
+        NDAwIEJhZCBSZXF1ZXN0
       !binary "WC1SdW50aW1l":
       - !binary |-
-        MC4wNDkzNjA=
+        MC4wMjAxNzU=
       !binary "WC1VYS1Db21wYXRpYmxl":
       - !binary |-
         SUU9RWRnZSxjaHJvbWU9MQ==
       !binary "Q29udGVudC1MZW5ndGg=":
       - !binary |-
-        MjQ=
+        NDE=
       !binary "Q29ubmVjdGlvbg==":
       - !binary |-
         a2VlcC1hbGl2ZQ==
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJyZXN1bHQiOnsiZm9vIjoiYmFyIn19
+        eyJjb2RlIjoxNDEsImVycm9yIjoiZnVuY3Rpb24gbm90IGZvdW5kIn0=
     http_version: 
-  recorded_at: Tue, 09 Oct 2012 21:45:25 GMT
+  recorded_at: Mon, 22 Apr 2013 13:43:09 GMT
 recorded_with: VCR 2.0.1

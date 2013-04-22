@@ -16,9 +16,9 @@ http_interactions:
       X-Parse-Master-Key:
       - ''
       X-Parse-Rest-Api-Key:
-      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
+      - <X-Parse-REST-API-Key>
       X-Parse-Application-Id:
-      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
+      - <X-Parse-Application-Id>
       X-Parse-Session-Token:
       - ''
       Expect:
@@ -43,27 +43,27 @@ http_interactions:
         YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
       !binary "RGF0ZQ==":
       - !binary |-
-        U2F0LCAwNSBKYW4gMjAxMyAxNzowOTowNCBHTVQ=
+        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzoxMSBHTVQ=
       !binary "TG9jYXRpb24=":
       - !binary |-
         aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9UZXN0TW9kZWxPYmpl
-        Y3QvUkxOVUdqSzB6TQ==
+        Y3QvSXRjUUpwaktOZA==
       !binary "U2VydmVy":
       - !binary |-
         bmdpbngvMS4yLjI=
       !binary "U2V0LUNvb2tpZQ==":
       - !binary |-
         X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxNV05qWWpBNFlUYzNZMkppWkdJNE9UVXpObUkyTUdVMk1XUXpOakZoTXpr
-        JTNELS04YWEzZWNjZGYwMWExNzNhZTdjYzBhNDlhY2MxNGU0M2FmNjk0ZWI1
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVRodSwgMDUt
-        SmFuLTIwMjMgMTc6MDk6MDQgR01UOyBzZWN1cmU7IEh0dHBPbmx5
+        SWxaV05oTVdFMVlUZzVaRGd6WlRVMU5EZzROV1JqTmpZNE1HWmxOV0l4T1Rj
+        JTNELS1hNTRlMDk1YTlmOGIyYTQ2MzI1OTBmYjcyM2VjMGE2NTQxNDY5MTA5
+        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
+        QXByLTIwMjMgMTM6NDM6MTEgR01UOyBzZWN1cmU7IEh0dHBPbmx5
       !binary "U3RhdHVz":
       - !binary |-
         MjAxIENyZWF0ZWQ=
       !binary "WC1SdW50aW1l":
       - !binary |-
-        MTAuMTk5MDMz
+        MC40ODg5ODE=
       !binary "WC1VYS1Db21wYXRpYmxl":
       - !binary |-
         SUU9RWRnZSxjaHJvbWU9MQ==
@@ -76,80 +76,8 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTAxLTA1VDE3OjA4OjU0Ljc5NFoiLCJvYmpl
-        Y3RJZCI6IlJMTlVHakswek0ifQ==
+        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjExLjUxMFoiLCJvYmpl
+        Y3RJZCI6Ikl0Y1FKcGpLTmQifQ==
     http_version: 
-  recorded_at: Sat, 05 Jan 2013 17:09:06 GMT
-- request:
-    method: get
-    uri: https://api.parse.com/1/batch
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      User-Agent:
-      - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
-      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
-      X-Parse-Application-Id:
-      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
-      code: 404
-      message: !binary |-
-        Tm90IEZvdW5k
-    headers:
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04
-      !binary "RGF0ZQ==":
-      - !binary |-
-        U2F0LCAwNSBKYW4gMjAxMyAyMjozNjo0MiBHTVQ=
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U3RhdHVz":
-      - !binary |-
-        NDA0IE5vdCBGb3VuZA==
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMDQwMzY=
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NzI4
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICA8dGl0bGU+VGhlIHBh
-        Z2UgeW91IHdlcmUgbG9va2luZyBmb3IgZG9lc24ndCBleGlzdCAoNDA0KTwv
-        dGl0bGU+CiAgPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KICAgIGJvZHkgeyBi
-        YWNrZ3JvdW5kLWNvbG9yOiAjZmZmOyBjb2xvcjogIzY2NjsgdGV4dC1hbGln
-        bjogY2VudGVyOyBmb250LWZhbWlseTogYXJpYWwsIHNhbnMtc2VyaWY7IH0K
-        ICAgIGRpdi5kaWFsb2cgewogICAgICB3aWR0aDogMjVlbTsKICAgICAgcGFk
-        ZGluZzogMCA0ZW07CiAgICAgIG1hcmdpbjogNGVtIGF1dG8gMCBhdXRvOwog
-        ICAgICBib3JkZXI6IDFweCBzb2xpZCAjY2NjOwogICAgICBib3JkZXItcmln
-        aHQtY29sb3I6ICM5OTk7CiAgICAgIGJvcmRlci1ib3R0b20tY29sb3I6ICM5
-        OTk7CiAgICB9CiAgICBoMSB7IGZvbnQtc2l6ZTogMTAwJTsgY29sb3I6ICNm
-        MDA7IGxpbmUtaGVpZ2h0OiAxLjVlbTsgfQogIDwvc3R5bGU+CjwvaGVhZD4K
-        Cjxib2R5PgogIDwhLS0gVGhpcyBmaWxlIGxpdmVzIGluIHB1YmxpYy80MDQu
-        aHRtbCAtLT4KICA8ZGl2IGNsYXNzPSJkaWFsb2ciPgogICAgPGgxPlRoZSBw
-        YWdlIHlvdSB3ZXJlIGxvb2tpbmcgZm9yIGRvZXNuJ3QgZXhpc3QuPC9oMT4K
-        ICAgIDxwPllvdSBtYXkgaGF2ZSBtaXN0eXBlZCB0aGUgYWRkcmVzcyBvciB0
-        aGUgcGFnZSBtYXkgaGF2ZSBtb3ZlZC48L3A+CiAgPC9kaXY+CjwvYm9keT4K
-        PC9odG1sPgo=
-    http_version: 
-  recorded_at: Sat, 05 Jan 2013 22:36:45 GMT
+  recorded_at: Mon, 22 Apr 2013 13:43:11 GMT
 recorded_with: VCR 2.0.1
