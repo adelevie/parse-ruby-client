@@ -1,482 +1,357 @@
----
-http_interactions:
-- request:
+--- 
+http_interactions: 
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"foo":"1"}'
-    headers:
-      Content-Type:
+      string: "{\"foo\":\"1\"}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowMSBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9CYXRjaFRlc3RPYmpl
-        Y3QvZ2V2U2o4T040ZQ==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxZV1JqWW1ZMVlXVmpZakZpTUdVME1URTRZak13WW1Jd09UbG1Nams1Tnpr
-        JTNELS1hNGU0MTY1ZjY2NGJhOWJiMmM2YTA4NzhkMTJkNjIxMjQ2MTExMmVj
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDEgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4zOTc5MjI=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:28 GMT
+      Location: 
+      - https://api.parse.com/1/classes/BatchTestObject/p3qxW1GUap
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.030993"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjAwLjgzNVoiLCJvYmpl
-        Y3RJZCI6ImdldlNqOE9ONGUifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:28.310Z\",\"objectId\":\"p3qxW1GUap\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:01 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"foo":"2"}'
-    headers:
-      Content-Type:
+      string: "{\"foo\":\"2\"}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowMSBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9CYXRjaFRlc3RPYmpl
-        Y3QvcGhCSUd3ZFVtVA==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxPVEE1TkdVM01UQTBNVGM1TnpFek1UZGxPR00zWVRCaU9EQTJObUUzWmpZ
-        JTNELS1mNjdkOWEyNWI4M2VlZDk1ZTIxMjc0ZmNkMWQ3OWY0ODg2Yzg2NTk1
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDEgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wNDM2Nzc=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:28 GMT
+      Location: 
+      - https://api.parse.com/1/classes/BatchTestObject/mFsKVyKiRv
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.029249"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjAxLjI2NFoiLCJvYmpl
-        Y3RJZCI6InBoQklHd2RVbVQifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:28.357Z\",\"objectId\":\"mFsKVyKiRv\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:01 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"foo":"3"}'
-    headers:
-      Content-Type:
+      string: "{\"foo\":\"3\"}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowMSBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9CYXRjaFRlc3RPYmpl
-        Y3QvM1FCRkVTM0lQSg==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxaREF5TVdZMk5UbGtPRGszT0RoaU9UVTFaalJrWW1NeU4yUTBNV1ZrWXpJ
-        JTNELS1iOWEyZDE2MjA1YjFjMDQxODIzZWQzNzU3MGI3OGUzMjdjZmJkNzRi
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDEgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMzI1OTc=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:28 GMT
+      Location: 
+      - https://api.parse.com/1/classes/BatchTestObject/FQnaCYjeGm
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.028755"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjAxLjMyMVoiLCJvYmpl
-        Y3RJZCI6IjNRQkZFUzNJUEoifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:28.407Z\",\"objectId\":\"FQnaCYjeGm\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:01 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"foo":"4"}'
-    headers:
-      Content-Type:
+      string: "{\"foo\":\"4\"}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowMSBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9CYXRjaFRlc3RPYmpl
-        Y3QvdDFHMnE0WTFNZg==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxOakkzT1RCbE5UTXhaVFJrWkRVeE5qbGlNelJoT1dZNVlqSTFPV000T1dJ
-        JTNELS1lMjY0NjkxNDI0OTM3Nzc4ZTE4YTdhOWEwZDE2M2NiNDk0MjUwNGJl
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDEgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMjY0Nzg=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:28 GMT
+      Location: 
+      - https://api.parse.com/1/classes/BatchTestObject/H9gTSgwX68
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.028657"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjAxLjM2M1oiLCJvYmpl
-        Y3RJZCI6InQxRzJxNFkxTWYifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:28.466Z\",\"objectId\":\"H9gTSgwX68\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:01 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"foo":"5"}'
-    headers:
-      Content-Type:
+      string: "{\"foo\":\"5\"}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowMSBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9CYXRjaFRlc3RPYmpl
-        Y3QvOXNCNFMzYWdDUw==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxNMkZrWVdVMk9EVXpZelE1T1Rnell6azJNMkk1WVRJMU5EZzNOREkxWVRn
-        JTNELS1iMTBiNzI1NzEwZTMzMmI1MDdiNGJkZGIxYzQ3YThlMWI3NzM3MTll
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDEgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4yMjA2MzE=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:28 GMT
+      Location: 
+      - https://api.parse.com/1/classes/BatchTestObject/p3jbt36nek
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.026430"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjAxLjU4NVoiLCJvYmpl
-        Y3RJZCI6IjlzQjRTM2FnQ1MifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:28.508Z\",\"objectId\":\"p3jbt36nek\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:01 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+- request: 
     method: post
     uri: https://api.parse.com/1/batch
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"requests":[{"method":"DELETE","path":"/1/classes/BatchTestObject/gevSj8ON4e"},{"method":"DELETE","path":"/1/classes/BatchTestObject/phBIGwdUmT"},{"method":"DELETE","path":"/1/classes/BatchTestObject/3QBFES3IPJ"},{"method":"DELETE","path":"/1/classes/BatchTestObject/t1G2q4Y1Mf"},{"method":"DELETE","path":"/1/classes/BatchTestObject/9sB4S3agCS"}]}'
-    headers:
-      Content-Type:
+      string: "{\"requests\":[{\"method\":\"DELETE\",\"path\":\"/1/classes/BatchTestObject/p3qxW1GUap\"},{\"method\":\"DELETE\",\"path\":\"/1/classes/BatchTestObject/mFsKVyKiRv\"},{\"method\":\"DELETE\",\"path\":\"/1/classes/BatchTestObject/FQnaCYjeGm\"},{\"method\":\"DELETE\",\"path\":\"/1/classes/BatchTestObject/H9gTSgwX68\"},{\"method\":\"DELETE\",\"path\":\"/1/classes/BatchTestObject/p3jbt36nek\"}]}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 200
-      message: !binary |-
-        T0s=
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowMiBHTVQ=
-      !binary "RXRhZw==":
-      - !binary |-
-        ImNlNzQzY2U3ODE4NTAxMjg0NWQ5MTU2YzMzNjJmMjY0Ig==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxPVEkwTlRWbE5USmxNMkZrWm1GaU5qUmxZMlZpT0RsbVl6RmhPRGRrWXpZ
-        JTNELS01YjM3YTc1Y2JhNzI0YjAyMjY4YmRiZjJjNGU4MzQ1ZmM1YTU1MmU2
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDIgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAwIE9L
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC44ODM4ODg=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        ODY=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:28 GMT
+      Etag: 
+      - "\"ce743ce78185012845d9156c3362f264\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.090913"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "86"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        W3sic3VjY2VzcyI6dHJ1ZX0seyJzdWNjZXNzIjp0cnVlfSx7InN1Y2Nlc3Mi
-        OnRydWV9LHsic3VjY2VzcyI6dHJ1ZX0seyJzdWNjZXNzIjp0cnVlfV0=
+      string: "[{\"success\":true},{\"success\":true},{\"success\":true},{\"success\":true},{\"success\":true}]"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:02 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+recorded_with: VCR 2.4.0

@@ -1,161 +1,121 @@
----
-http_interactions:
-- request:
+--- 
+http_interactions: 
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/TestSave
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"age":20}'
-    headers:
-      Content-Type:
+      string: "{\"age\":20}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowOSBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9UZXN0U2F2ZS9vb2lr
-        QTJJbkFV
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxaREJpTXpBeE5HTmtPR0U1TXpJMllXWmlaVFF6T1dObFlqRmpOREE0Tnpr
-        JTNELS01ZGU5MGY3MDU2ZGJlNmEyMzZjMDc5YzBlN2U3MWIwMDdhYzM0Mjlk
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDkgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMjgyNTA=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:30 GMT
+      Location: 
+      - https://api.parse.com/1/classes/TestSave/RFcrgm7SO9
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.033777"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjA5LjIwOVoiLCJvYmpl
-        Y3RJZCI6Im9vaWtBMkluQVUifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:30.322Z\",\"objectId\":\"RFcrgm7SO9\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:09 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:30 GMT
+- request: 
     method: put
-    uri: https://api.parse.com/1/classes/TestSave/ooikA2InAU
-    body:
+    uri: https://api.parse.com/1/classes/TestSave/RFcrgm7SO9
+    body: 
       encoding: UTF-8
-      string: ! '{"age":40}'
-    headers:
-      Content-Type:
+      string: "{\"age\":40}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 200
-      message: !binary |-
-        T0s=
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowOSBHTVQ=
-      !binary "RXRhZw==":
-      - !binary |-
-        IjZkNDYyZWMwYTE0ZDEwZmY1MThhZDBiNDgwNGQyNzRlIg==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxNV1ZqTURFNU5HWTBPRGN4T1dWallqZzFPVGd6T1dRM1pXUmtaRE13WlRZ
-        JTNELS05ODFlZWExODJjOWI5MTc3ZThiZDhlMzFlZWM1NjAwNmU2ODc0Mzhk
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDkgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAwIE9L
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wNTkzNDQ=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NDA=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:30 GMT
+      Etag: 
+      - "\"b9bc3a4925f42e13080c3918d56dfc77\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.028070"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "40"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJ1cGRhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjA5LjM1MVoifQ==
+      string: "{\"updatedAt\":\"2013-04-22T14:11:30.381Z\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:09 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Mon, 22 Apr 2013 14:11:30 GMT
+recorded_with: VCR 2.4.0

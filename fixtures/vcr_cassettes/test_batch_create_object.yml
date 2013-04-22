@@ -1,89 +1,62 @@
----
-http_interactions:
-- request:
+--- 
+http_interactions: 
+- request: 
     method: post
     uri: https://api.parse.com/1/batch
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"requests":[{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"1"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"2"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"3"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"4"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"5"}}]}'
-    headers:
-      Content-Type:
+      string: "{\"requests\":[{\"method\":\"POST\",\"path\":\"/1/classes/BatchTestObject\",\"body\":{\"foo\":\"1\"}},{\"method\":\"POST\",\"path\":\"/1/classes/BatchTestObject\",\"body\":{\"foo\":\"2\"}},{\"method\":\"POST\",\"path\":\"/1/classes/BatchTestObject\",\"body\":{\"foo\":\"3\"}},{\"method\":\"POST\",\"path\":\"/1/classes/BatchTestObject\",\"body\":{\"foo\":\"4\"}},{\"method\":\"POST\",\"path\":\"/1/classes/BatchTestObject\",\"body\":{\"foo\":\"5\"}}]}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 200
-      message: !binary |-
-        T0s=
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzowMCBHTVQ=
-      !binary "RXRhZw==":
-      - !binary |-
-        IjIzZmY3NzcxOGI2MTI3YjQwYzQ5Y2I3OTdkOTc4Njc3Ig==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxaVEF5T1dKak16VmhNalUxT1dObU16azROV0V4WldZek56UTJZemRrTVRj
-        JTNELS03MDU2ZDNkNDYzOWIxNzEwNWRhMjZlMTdlMjBjN2JlYzEyZGRiZDQ5
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MDAgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAwIE9L
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4xMjIxODQ=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        Mzg2
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:28 GMT
+      Etag: 
+      - "\"f8a531a421d9ade45238a59d5151e73c\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.111231"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "386"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        W3sic3VjY2VzcyI6eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjAw
-        LjY1MVoiLCJvYmplY3RJZCI6ImNLU2JsZEZQNXIifX0seyJzdWNjZXNzIjp7
-        ImNyZWF0ZWRBdCI6IjIwMTMtMDQtMjJUMTM6NDM6MDAuNjY4WiIsIm9iamVj
-        dElkIjoiZXB1ZThENGtjYyJ9fSx7InN1Y2Nlc3MiOnsiY3JlYXRlZEF0Ijoi
-        MjAxMy0wNC0yMlQxMzo0MzowMC42ODFaIiwib2JqZWN0SWQiOiJZakN1TGl3
-        SHFKIn19LHsic3VjY2VzcyI6eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEz
-        OjQzOjAwLjY5MloiLCJvYmplY3RJZCI6IkdYdGVtWGtVTDkifX0seyJzdWNj
-        ZXNzIjp7ImNyZWF0ZWRBdCI6IjIwMTMtMDQtMjJUMTM6NDM6MDAuNzA0WiIs
-        Im9iamVjdElkIjoiTFR2TnRHMUVQNyJ9fV0=
+      string: "[{\"success\":{\"createdAt\":\"2013-04-22T14:11:28.135Z\",\"objectId\":\"5iqSsbvh2S\"}},{\"success\":{\"createdAt\":\"2013-04-22T14:11:28.149Z\",\"objectId\":\"VZcUsFOqWS\"}},{\"success\":{\"createdAt\":\"2013-04-22T14:11:28.160Z\",\"objectId\":\"EKkHV1iv6Z\"}},{\"success\":{\"createdAt\":\"2013-04-22T14:11:28.172Z\",\"objectId\":\"t1oTuNYJL5\"}},{\"success\":{\"createdAt\":\"2013-04-22T14:11:28.184Z\",\"objectId\":\"xOc7N973lR\"}}]"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:00 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+recorded_with: VCR 2.4.0

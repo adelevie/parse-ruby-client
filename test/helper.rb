@@ -17,10 +17,13 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'parse-ruby-client'
 
+YAML::ENGINE.yamler='syck' # get ascii strings as strings in fixtures
+
 VCR.configure do |c|
   c.cassette_library_dir = 'fixtures/vcr_cassettes'
   c.hook_into :webmock # or :fakeweb
   c.allow_http_connections_when_no_cassette = true
+  c.filter_sensitive_data("<COOKIE-KEY>") { |i| [i.response.headers['Set-Cookie']].flatten.compact.first }
 
   def filter_sensitive_header(c, header)
     c.filter_sensitive_data("<#{header}>") do |interaction|

@@ -1,327 +1,239 @@
----
-http_interactions:
-- request:
+--- 
+http_interactions: 
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/Foo
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{}'
-    headers:
-      Content-Type:
+      string: "{}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzoxNiBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9Gb28vT1dhSVR3bFRx
-        aw==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxaR1U1TURkak1tWmpaRE01Tm1FMllqSTJZVGN5T0dRME9XTmpOREl3TkdR
-        JTNELS05MWY4OTljMzZkYjg4YTUwMzM3OWNlMjg0MzM4YTMwNDMyZjk0ZWY2
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MTYgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMzAwMTQ=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:35 GMT
+      Location: 
+      - https://api.parse.com/1/classes/Foo/n7IteW1nGX
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.034073"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjE2LjQxMFoiLCJvYmpl
-        Y3RJZCI6Ik9XYUlUd2xUcWsifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:35.685Z\",\"objectId\":\"n7IteW1nGX\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:16 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/Bar
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{"foo":{"__type":"Pointer","className":"Foo","objectId":"OWaITwlTqk"},"bar":"bar"}'
-    headers:
-      Content-Type:
+      string: "{\"foo\":{\"__type\":\"Pointer\",\"className\":\"Foo\",\"objectId\":\"n7IteW1nGX\"},\"bar\":\"bar\"}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzoxNiBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9CYXIvejJwZ1J1d1c4
-        aA==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxZemc1T1RSbFlqUTBaR00wTVRNNU0yTTBOR1V6TkRCa05qTXdNRGRpT1Rn
-        JTNELS01ZmY0MDMwNDZmMTYwNzA4N2JjNzU1NjU3NjY0NTNjMWZmMzFiZmNm
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MTYgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMzA1NzE=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:35 GMT
+      Location: 
+      - https://api.parse.com/1/classes/Bar/CUYBKGsYfN
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.027240"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjE2LjQ1OVoiLCJvYmpl
-        Y3RJZCI6InoycGdSdXdXOGgifQ==
+      string: "{\"createdAt\":\"2013-04-22T14:11:35.728Z\",\"objectId\":\"CUYBKGsYfN\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:16 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+- request: 
     method: get
-    uri: https://api.parse.com/1/classes/Bar?where=%7B%22foo%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Foo%22,%22objectId%22:%22OWaITwlTqk%22%7D%7D
-    body:
+    uri: https://api.parse.com/1/classes/Bar?where=%7B%22foo%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Foo%22,%22objectId%22:%22n7IteW1nGX%22%7D%7D
+    body: 
       encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
+      string: ""
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 200
-      message: !binary |-
-        T0s=
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzoxNiBHTVQ=
-      !binary "RXRhZw==":
-      - !binary |-
-        ImY5ZTU2YmUyODUwYTNhZTIzZWVkNTVhNjY0YWIzZjkxIg==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxaalpsT1RFeFkyRmhabVE1Tm1SbE4yVXpNRGszT1RRNE5EWm1PVFpqTVdZ
-        JTNELS04ODI1ZDE3YjY4NmRjMmU2YzRiMDIxMTQyYjI3ZWZkOWJmZTEwYjc1
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MTYgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAwIE9L
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMzY2NDM=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        MTk4
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:35 GMT
+      Etag: 
+      - "\"b51e2b6b241d4cf2a926d5b4bad5ca0c\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.026139"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "198"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJyZXN1bHRzIjpbeyJmb28iOnsiX190eXBlIjoiUG9pbnRlciIsImNsYXNz
-        TmFtZSI6IkZvbyIsIm9iamVjdElkIjoiT1dhSVR3bFRxayJ9LCJiYXIiOiJi
-        YXIiLCJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjE2LjQ1OVoiLCJ1
-        cGRhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjE2LjQ1OVoiLCJvYmplY3RJ
-        ZCI6InoycGdSdXdXOGgifV19
+      string: "{\"results\":[{\"foo\":{\"__type\":\"Pointer\",\"className\":\"Foo\",\"objectId\":\"n7IteW1nGX\"},\"bar\":\"bar\",\"createdAt\":\"2013-04-22T14:11:35.728Z\",\"updatedAt\":\"2013-04-22T14:11:35.728Z\",\"objectId\":\"CUYBKGsYfN\"}]}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:16 GMT
-- request:
+  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+- request: 
     method: get
-    uri: https://api.parse.com/1/classes/Bar?where=%7B%22foo%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Foo%22,%22objectId%22:%22OWaITwlTqk%22%7D%7D
-    body:
+    uri: https://api.parse.com/1/classes/Bar?where=%7B%22foo%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Foo%22,%22objectId%22:%22n7IteW1nGX%22%7D%7D
+    body: 
       encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
+      string: ""
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
       - <X-Parse-REST-API-Key>
-      X-Parse-Application-Id:
+      X-Parse-Application-Id: 
       - <X-Parse-Application-Id>
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 200
-      message: !binary |-
-        T0s=
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        TW9uLCAyMiBBcHIgMjAxMyAxMzo0MzoxNiBHTVQ=
-      !binary "RXRhZw==":
-      - !binary |-
-        ImY5ZTU2YmUyODUwYTNhZTIzZWVkNTVhNjY0YWIzZjkxIg==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxNREl4WTJabFpEbGlZbVk1TWpJM1ltWXpaV1kwTlRaaFpXRmhOVFE0WmpR
-        JTNELS1kNGQxYWU0Y2FjOWZmZmJkYjVkNjczNThjNjlkODA4NWY2ZTA4NjBm
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVNhdCwgMjIt
-        QXByLTIwMjMgMTM6NDM6MTYgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAwIE9L
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMjU5OTQ=
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        MTk4
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 14:11:35 GMT
+      Etag: 
+      - "\"b51e2b6b241d4cf2a926d5b4bad5ca0c\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.030379"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "198"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJyZXN1bHRzIjpbeyJmb28iOnsiX190eXBlIjoiUG9pbnRlciIsImNsYXNz
-        TmFtZSI6IkZvbyIsIm9iamVjdElkIjoiT1dhSVR3bFRxayJ9LCJiYXIiOiJi
-        YXIiLCJjcmVhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjE2LjQ1OVoiLCJ1
-        cGRhdGVkQXQiOiIyMDEzLTA0LTIyVDEzOjQzOjE2LjQ1OVoiLCJvYmplY3RJ
-        ZCI6InoycGdSdXdXOGgifV19
+      string: "{\"results\":[{\"foo\":{\"__type\":\"Pointer\",\"className\":\"Foo\",\"objectId\":\"n7IteW1nGX\"},\"bar\":\"bar\",\"createdAt\":\"2013-04-22T14:11:35.728Z\",\"updatedAt\":\"2013-04-22T14:11:35.728Z\",\"objectId\":\"CUYBKGsYfN\"}]}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 13:43:16 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+recorded_with: VCR 2.4.0
