@@ -1,8 +1,6 @@
 require 'helper'
 
-Parse.init
-
-class TestQuery < Test::Unit::TestCase
+class TestQuery < ParseTestCase
 
   def test_get
     VCR.use_cassette('test_get', :record => :new_episodes) do

@@ -1,9 +1,6 @@
 require 'helper'
 
-class TestBatch < Test::Unit::TestCase
-  def setup
-    Parse.init
-  end
+class TestBatch < ParseTestCase
 
   def test_initialize
     batch = Parse::Batch.new

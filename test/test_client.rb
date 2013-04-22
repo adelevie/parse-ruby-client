@@ -1,18 +1,63 @@
 require 'helper'
 
-class TestClient < Test::Unit::TestCase
-  def setup
-    @client = Parse.init
-  end
+class TestClient < ParseTestCase
 
-  def test_request
-    VCR.use_cassette('test_request', :record => :new_episodes) do
+  def test_retries
+    VCR.use_cassette('test_retries', :record => :new_episodes) do
       response = mock()
       response.stubs(:body).returns({'code' => Parse::Protocol::ERROR_TIMEOUT}.to_json)
       response.stubs(:status).returns(400)
       @client.session.expects(:request).times(@client.max_retries + 1).returns(response)
       assert_raise do
        @client.request(nil)
+      end
+    end
+  end
+
+  def test_retries_json_error
+    VCR.use_cassette('test_retries_json_error', :record => :new_episodes) do
+      bad_response = mock()
+      bad_response.stubs(:body).returns("<HTML>this is not json</HTML>")
+      bad_response.stubs(:status).returns(200)
+
+      good_response = mock()
+      good_response.stubs(:body).returns('{"foo":100}')
+      good_response.stubs(:status).returns(200)
+      @client.session.expects(:request).twice.returns(bad_response, good_response)
+
+      assert_equal({ "foo" => 100 }, @client.request(nil))
+    end
+  end
+
+  def test_retries_server_error
+    VCR.use_cassette('test_retries_server_error', :record => :new_episodes) do
+      bad_response = mock()
+      bad_response.stubs(:body).returns("{}")
+      bad_response.stubs(:status).returns(500)
+
+      good_response = mock()
+      good_response.stubs(:body).returns('{"foo":100}')
+      good_response.stubs(:status).returns(200)
+      @client.session.expects(:request).twice.returns(bad_response, good_response)
+
+      assert_equal({ "foo" => 100 }, @client.request(nil))
+    end
+  end
+
+  def test_empty_response
+    VCR.use_cassette('test_empty_response', :record => :new_episodes) do
+      bad_response = mock()
+      bad_response.stubs(:body).returns('')
+      JSON.stubs(:parse).returns(nil) # some json parsers return nil instead of raising
+      bad_response.stubs(:status).returns(403)
+
+      @client.session.stubs(:request).returns(bad_response)
+
+      begin
+        @client.request(nil)
+        raise "client error response should have raised"
+      rescue Parse::ParseProtocolError => e
+        assert_equal "HTTP Status 403 Body ", e.error
       end
     end
   end

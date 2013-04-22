@@ -1,10 +1,6 @@
 require 'helper'
 
-class TestPush < Test::Unit::TestCase
-
-  def setup
-    Parse.init
-  end
+class TestPush < ParseTestCase
 
   def test_save_without_where
     data = {:foo => 'bar',

@@ -3,10 +3,7 @@ require 'helper'
 class TestModelObject < Parse::Model
 end
 
-class TestModel < Test::Unit::TestCase
-  def setup
-    Parse.init
-  end
+class TestModel < ParseTestCase
 
   def test_new
     VCR.use_cassette('test_new_model', :record => :new_episodes) do
