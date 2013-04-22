@@ -6,7 +6,7 @@ source "http://rubygems.org"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
-	gem "bundler", "~> 1.1.5"
+	gem "bundler"
   gem "shoulda", ">= 0"
   gem "test-unit", '= 2.5.0'
   gem "mocha", '= 0.12.0', :require => false

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.parse.com/1/users
     body: 
       encoding: UTF-8
-      string: "{\"username\":\"0.40493766445323776\",\"password\":\"topsecret\"}"
+      string: "{\"username\":\"0.27216148534966633\",\"password\":\"topsecret\"}"
     headers: 
       Content-Type: 
       - application/json
@@ -16,9 +16,9 @@ http_interactions:
       X-Parse-Master-Key: 
       - ""
       X-Parse-Rest-Api-Key: 
-      - jYdptjS76YHikuIFfJEgHD8UMIjH6cp2rWz4fo2C
+      - <X-Parse-REST-API-Key>
       X-Parse-Application-Id: 
-      - hnJRtntbYPvWfjqcqLZsdFaOKT0F3SfNU7Kc7woN
+      - <X-Parse-Application-Id>
       X-Parse-Session-Token: 
       - ""
       Expect: 
@@ -37,17 +37,17 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Thu, 10 Jan 2013 17:13:29 GMT
+      - Mon, 22 Apr 2013 16:03:27 GMT
       Location: 
-      - https://api.parse.com/1/users/TjN5LVdT83
+      - https://api.parse.com/1/users/j0rFtnWhJy
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
-      - _parse_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlNDhiYjExOGE4MzY1ZmEzNGVjN2NmYjUxMzk2YjFjNzk%3D--242cb8875ea6f8b5c353b05bf1b9dcc351e5197e; domain=.parse.com; path=/; expires=Tue, 10-Jan-2023 17:13:29 GMT; secure; HttpOnly
+      - <COOKIE-KEY>
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.312384"
+      - "0.346105"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,7 +56,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-01-10T17:13:29.400Z\",\"objectId\":\"TjN5LVdT83\",\"sessionToken\":\"ltj1s0ms3rft92u1avdnys7vn\"}"
+      string: "{\"createdAt\":\"2013-04-22T16:03:27.061Z\",\"objectId\":\"j0rFtnWhJy\",\"sessionToken\":\"rmranzh72f4mb3bptat7siph1\"}"
     http_version: 
-  recorded_at: Thu, 10 Jan 2013 17:13:29 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Mon, 22 Apr 2013 16:03:27 GMT
+recorded_with: VCR 2.4.0

@@ -2,6 +2,8 @@ require 'parse/protocol'
 require 'parse/error'
 require 'parse/util'
 
+require 'logger'
+
 require 'iron_mq'
 
 module Parse
@@ -17,6 +19,7 @@ module Parse
     attr_accessor :session_token
     attr_accessor :session
     attr_accessor :max_retries
+    attr_accessor :logger
 
     def initialize(data = {})
       @host           = data[:host] || Protocol::HOST
@@ -25,6 +28,8 @@ module Parse
       @master_key     = data[:master_key]
       @session_token  = data[:session_token]
       @max_retries    = data[:max_retries] || 3
+      @logger         = data[:logger] || Logger.new(STDERR).tap{|l| l.level = Logger::INFO}
+
       @session        = Patron::Session.new
       @session.timeout = 30
       @session.connect_timeout = 30
@@ -97,7 +102,8 @@ module Parse
         parsed = JSON.parse(response.body)
 
         if response.status >= 400
-          raise ParseProtocolError.new(parsed)
+          parsed ||= {}
+          raise ParseProtocolError.new({"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed))
         end
 
         if content_type
@@ -105,13 +111,30 @@ module Parse
         end
 
         return parsed
-      rescue Patron::TimeoutError
-        retry if num_tries <= max_retries
+      rescue JSON::ParserError => e
+        if num_tries <= max_retries
+          log_retry(e, uri, query, body, response)
+          retry
+        end
+        raise
+      rescue Patron::TimeoutError => e
+        if num_tries <= max_retries
+          log_retry(e, uri, query, body, response)
+          retry
+        end
         raise
       rescue ParseProtocolError => e
         if num_tries <= max_retries
-          sleep 60 if e.code == Protocol::ERROR_EXCEEDED_BURST_LIMIT
-          retry if [Protocol::ERROR_EXCEEDED_BURST_LIMIT, Protocol::ERROR_TIMEOUT].include?(e.code)
+          if e.code
+            sleep 60 if e.code == Protocol::ERROR_EXCEEDED_BURST_LIMIT
+            if [Protocol::ERROR_INTERNAL, Protocol::ERROR_TIMEOUT, Protocol::ERROR_EXCEEDED_BURST_LIMIT].include?(e.code)
+              log_retry(e, uri, query, body, response)
+              retry
+            end
+          elsif response.status >= 500
+            log_retry(e, uri, query, body, response)
+            retry
+          end
         end
         raise
       end
@@ -133,6 +156,11 @@ module Parse
       request(uri, :delete)
     end
 
+    protected
+
+    def log_retry(e, uri, query, body, response)
+      logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response}"}
+    end
   end
 
 

@@ -1,10 +1,6 @@
 require 'helper'
 
-class TestUser < Test::Unit::TestCase
-
-  def setup
-    Parse.init
-  end
+class TestUser < ParseTestCase
 
   def test_user_save
     VCR.use_cassette('test_user_save', :record => :new_episodes) do

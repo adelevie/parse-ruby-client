@@ -123,6 +123,7 @@ module Parse
       query = { "where" => CGI.escape(where_as_json.to_json) }
       set_order(query)
       [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
+      Parse.client.logger.info{"Parse query for #{uri} #{CGI.unescape(query.inspect)}"}
       response = Parse.client.request uri, :get, nil, query
       Parse.parse_json class_name, response
     end

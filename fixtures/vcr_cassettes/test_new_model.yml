@@ -1,155 +1,62 @@
----
-http_interactions:
-- request:
+--- 
+http_interactions: 
+- request: 
     method: post
     uri: https://api.parse.com/1/classes/TestModelObject
-    body:
+    body: 
       encoding: UTF-8
-      string: ! '{}'
-    headers:
-      Content-Type:
+      string: "{}"
+    headers: 
+      Content-Type: 
       - application/json
-      Accept:
+      Accept: 
       - application/json
-      User-Agent:
+      User-Agent: 
       - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
-      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
-      X-Parse-Application-Id:
-      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
       code: 201
-      message: !binary |-
-        Q3JlYXRlZA==
-    headers:
-      !binary "QWNjZXNzLUNvbnRyb2wtQWxsb3ctT3JpZ2lu":
-      - !binary |-
-        Kg==
-      !binary "QWNjZXNzLUNvbnRyb2wtUmVxdWVzdC1NZXRob2Q=":
-      - !binary |-
-        Kg==
-      !binary "Q2FjaGUtQ29udHJvbA==":
-      - !binary |-
-        bm8tY2FjaGU=
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
-      !binary "RGF0ZQ==":
-      - !binary |-
-        U2F0LCAwNSBKYW4gMjAxMyAxNzowOTowNCBHTVQ=
-      !binary "TG9jYXRpb24=":
-      - !binary |-
-        aHR0cHM6Ly9hcGkucGFyc2UuY29tLzEvY2xhc3Nlcy9UZXN0TW9kZWxPYmpl
-        Y3QvUkxOVUdqSzB6TQ==
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U2V0LUNvb2tpZQ==":
-      - !binary |-
-        X3BhcnNlX3Nlc3Npb249QkFoN0Jra2lEM05sYzNOcGIyNWZhV1FHT2daRlJp
-        SWxNV05qWWpBNFlUYzNZMkppWkdJNE9UVXpObUkyTUdVMk1XUXpOakZoTXpr
-        JTNELS04YWEzZWNjZGYwMWExNzNhZTdjYzBhNDlhY2MxNGU0M2FmNjk0ZWI1
-        OyBkb21haW49LnBhcnNlLmNvbTsgcGF0aD0vOyBleHBpcmVzPVRodSwgMDUt
-        SmFuLTIwMjMgMTc6MDk6MDQgR01UOyBzZWN1cmU7IEh0dHBPbmx5
-      !binary "U3RhdHVz":
-      - !binary |-
-        MjAxIENyZWF0ZWQ=
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MTAuMTk5MDMz
-      !binary "WC1VYS1Db21wYXRpYmxl":
-      - !binary |-
-        SUU9RWRnZSxjaHJvbWU9MQ==
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NjQ=
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Mon, 22 Apr 2013 16:03:16 GMT
+      Location: 
+      - https://api.parse.com/1/classes/TestModelObject/K9I570yzN6
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.035273"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
       encoding: ASCII-8BIT
-      string: !binary |-
-        eyJjcmVhdGVkQXQiOiIyMDEzLTAxLTA1VDE3OjA4OjU0Ljc5NFoiLCJvYmpl
-        Y3RJZCI6IlJMTlVHakswek0ifQ==
+      string: "{\"createdAt\":\"2013-04-22T16:03:16.874Z\",\"objectId\":\"K9I570yzN6\"}"
     http_version: 
-  recorded_at: Sat, 05 Jan 2013 17:09:06 GMT
-- request:
-    method: get
-    uri: https://api.parse.com/1/batch
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      User-Agent:
-      - Parse for Ruby, 0.0
-      X-Parse-Master-Key:
-      - ''
-      X-Parse-Rest-Api-Key:
-      - D3Y8jNCQk6kpkKhpRGnWLYTrFGQ7j8dtDVnWZRnZ
-      X-Parse-Application-Id:
-      - PPVk6L5M9R1R8GVk8Ye9jT8f5SQNBIeoJUDJLmkT
-      X-Parse-Session-Token:
-      - ''
-      Expect:
-      - ''
-  response:
-    status:
-      code: 404
-      message: !binary |-
-        Tm90IEZvdW5k
-    headers:
-      !binary "Q29udGVudC1UeXBl":
-      - !binary |-
-        dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04
-      !binary "RGF0ZQ==":
-      - !binary |-
-        U2F0LCAwNSBKYW4gMjAxMyAyMjozNjo0MiBHTVQ=
-      !binary "U2VydmVy":
-      - !binary |-
-        bmdpbngvMS4yLjI=
-      !binary "U3RhdHVz":
-      - !binary |-
-        NDA0IE5vdCBGb3VuZA==
-      !binary "WC1SdW50aW1l":
-      - !binary |-
-        MC4wMDQwMzY=
-      !binary "Q29udGVudC1MZW5ndGg=":
-      - !binary |-
-        NzI4
-      !binary "Q29ubmVjdGlvbg==":
-      - !binary |-
-        a2VlcC1hbGl2ZQ==
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICA8dGl0bGU+VGhlIHBh
-        Z2UgeW91IHdlcmUgbG9va2luZyBmb3IgZG9lc24ndCBleGlzdCAoNDA0KTwv
-        dGl0bGU+CiAgPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KICAgIGJvZHkgeyBi
-        YWNrZ3JvdW5kLWNvbG9yOiAjZmZmOyBjb2xvcjogIzY2NjsgdGV4dC1hbGln
-        bjogY2VudGVyOyBmb250LWZhbWlseTogYXJpYWwsIHNhbnMtc2VyaWY7IH0K
-        ICAgIGRpdi5kaWFsb2cgewogICAgICB3aWR0aDogMjVlbTsKICAgICAgcGFk
-        ZGluZzogMCA0ZW07CiAgICAgIG1hcmdpbjogNGVtIGF1dG8gMCBhdXRvOwog
-        ICAgICBib3JkZXI6IDFweCBzb2xpZCAjY2NjOwogICAgICBib3JkZXItcmln
-        aHQtY29sb3I6ICM5OTk7CiAgICAgIGJvcmRlci1ib3R0b20tY29sb3I6ICM5
-        OTk7CiAgICB9CiAgICBoMSB7IGZvbnQtc2l6ZTogMTAwJTsgY29sb3I6ICNm
-        MDA7IGxpbmUtaGVpZ2h0OiAxLjVlbTsgfQogIDwvc3R5bGU+CjwvaGVhZD4K
-        Cjxib2R5PgogIDwhLS0gVGhpcyBmaWxlIGxpdmVzIGluIHB1YmxpYy80MDQu
-        aHRtbCAtLT4KICA8ZGl2IGNsYXNzPSJkaWFsb2ciPgogICAgPGgxPlRoZSBw
-        YWdlIHlvdSB3ZXJlIGxvb2tpbmcgZm9yIGRvZXNuJ3QgZXhpc3QuPC9oMT4K
-        ICAgIDxwPllvdSBtYXkgaGF2ZSBtaXN0eXBlZCB0aGUgYWRkcmVzcyBvciB0
-        aGUgcGFnZSBtYXkgaGF2ZSBtb3ZlZC48L3A+CiAgPC9kaXY+CjwvYm9keT4K
-        PC9odG1sPgo=
-    http_version: 
-  recorded_at: Sat, 05 Jan 2013 22:36:45 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Mon, 22 Apr 2013 16:03:16 GMT
+recorded_with: VCR 2.4.0
