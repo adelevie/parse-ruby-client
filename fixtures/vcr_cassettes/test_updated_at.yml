@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:35 GMT
+      - Mon, 22 Apr 2013 14:22:32 GMT
       Location: 
-      - https://api.parse.com/1/classes/Post/5NGfTM3uCp
+      - https://api.parse.com/1/classes/Post/qPFFO1LHMG
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.035755"
+      - "0.028254"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,12 +56,12 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:35.498Z\",\"objectId\":\"5NGfTM3uCp\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:32.176Z\",\"objectId\":\"qPFFO1LHMG\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:32 GMT
 - request: 
     method: put
-    uri: https://api.parse.com/1/classes/Post/5NGfTM3uCp
+    uri: https://api.parse.com/1/classes/Post/qPFFO1LHMG
     body: 
       encoding: UTF-8
       string: "{\"title\":\"hello 2\"}"
@@ -96,9 +96,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:35 GMT
+      - Mon, 22 Apr 2013 14:22:32 GMT
       Etag: 
-      - "\"361a6636ee43bff62c8d51b567d24738\""
+      - "\"ea59287b2bcba061045e217eae63cb4a\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.034492"
+      - "0.187728"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -115,7 +115,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"updatedAt\":\"2013-04-22T14:11:35.560Z\"}"
+      string: "{\"updatedAt\":\"2013-04-22T14:22:32.279Z\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:32 GMT
 recorded_with: VCR 2.4.0

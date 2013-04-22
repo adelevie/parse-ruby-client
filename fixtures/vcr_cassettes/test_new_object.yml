@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:34 GMT
+      - Mon, 22 Apr 2013 14:22:30 GMT
       Location: 
-      - https://api.parse.com/1/classes/Post/ANNOUHdH99
+      - https://api.parse.com/1/classes/Post/V8fP6pENZ4
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.030307"
+      - "0.032982"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,7 +56,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:34.182Z\",\"objectId\":\"ANNOUHdH99\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:30.623Z\",\"objectId\":\"V8fP6pENZ4\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:34 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:30 GMT
 recorded_with: VCR 2.4.0

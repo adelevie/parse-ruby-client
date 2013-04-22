@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:28 GMT
+      - Mon, 22 Apr 2013 14:22:25 GMT
       Location: 
-      - https://api.parse.com/1/classes/BatchTestObject/nwZmHsdBY5
+      - https://api.parse.com/1/classes/BatchTestObject/rzjtKIMHEX
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.029189"
+      - "0.026726"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,9 +56,9 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:28.847Z\",\"objectId\":\"nwZmHsdBY5\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:25.787Z\",\"objectId\":\"rzjtKIMHEX\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:25 GMT
 - request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
@@ -96,9 +96,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:28 GMT
+      - Mon, 22 Apr 2013 14:22:25 GMT
       Location: 
-      - https://api.parse.com/1/classes/BatchTestObject/XNWXXL2B3b
+      - https://api.parse.com/1/classes/BatchTestObject/Jk7WMVu7rh
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.053506"
+      - "0.103882"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -115,9 +115,9 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:28.913Z\",\"objectId\":\"XNWXXL2B3b\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:25.839Z\",\"objectId\":\"Jk7WMVu7rh\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:25 GMT
 - request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
@@ -155,9 +155,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:28 GMT
+      - Mon, 22 Apr 2013 14:22:25 GMT
       Location: 
-      - https://api.parse.com/1/classes/BatchTestObject/3duUmpmf85
+      - https://api.parse.com/1/classes/BatchTestObject/cJqyjYENfG
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -165,7 +165,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.054129"
+      - "0.029202"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -174,9 +174,9 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:28.976Z\",\"objectId\":\"3duUmpmf85\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:25.965Z\",\"objectId\":\"cJqyjYENfG\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:29 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:25 GMT
 - request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
@@ -214,9 +214,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:29 GMT
+      - Mon, 22 Apr 2013 14:22:26 GMT
       Location: 
-      - https://api.parse.com/1/classes/BatchTestObject/a8Wvg3BegN
+      - https://api.parse.com/1/classes/BatchTestObject/F6e2r303gZ
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -224,7 +224,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.025995"
+      - "0.029677"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -233,9 +233,9 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:29.035Z\",\"objectId\":\"a8Wvg3BegN\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:26.012Z\",\"objectId\":\"F6e2r303gZ\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:29 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:26 GMT
 - request: 
     method: post
     uri: https://api.parse.com/1/classes/BatchTestObject
@@ -273,9 +273,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:29 GMT
+      - Mon, 22 Apr 2013 14:22:26 GMT
       Location: 
-      - https://api.parse.com/1/classes/BatchTestObject/VuBYytUAFp
+      - https://api.parse.com/1/classes/BatchTestObject/Tdwn5CZ325
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -283,7 +283,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.027483"
+      - "0.035397"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -292,15 +292,15 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:29.073Z\",\"objectId\":\"VuBYytUAFp\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:26.064Z\",\"objectId\":\"Tdwn5CZ325\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:29 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:26 GMT
 - request: 
     method: post
     uri: https://api.parse.com/1/batch
     body: 
       encoding: UTF-8
-      string: "{\"requests\":[{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/nwZmHsdBY5\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/XNWXXL2B3b\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/3duUmpmf85\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/a8Wvg3BegN\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/VuBYytUAFp\",\"body\":{\"foo\":\"updated\"}}]}"
+      string: "{\"requests\":[{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/rzjtKIMHEX\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/Jk7WMVu7rh\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/cJqyjYENfG\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/F6e2r303gZ\",\"body\":{\"foo\":\"updated\"}},{\"method\":\"PUT\",\"path\":\"/1/classes/BatchTestObject/Tdwn5CZ325\",\"body\":{\"foo\":\"updated\"}}]}"
     headers: 
       Content-Type: 
       - application/json
@@ -332,9 +332,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:29 GMT
+      - Mon, 22 Apr 2013 14:22:26 GMT
       Etag: 
-      - "\"8a046b9d2d737d4e953e195134b93b48\""
+      - "\"7449be81a67dcf4f2c9dd8c78d5d1c4a\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -342,7 +342,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.087041"
+      - "0.140454"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -351,7 +351,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "[{\"success\":{\"updatedAt\":\"2013-04-22T14:11:29.131Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:11:29.141Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:11:29.152Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:11:29.162Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:11:29.172Z\"}}]"
+      string: "[{\"success\":{\"updatedAt\":\"2013-04-22T14:22:26.207Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:22:26.221Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:22:26.233Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:22:26.253Z\"}},{\"success\":{\"updatedAt\":\"2013-04-22T14:22:26.265Z\"}}]"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:29 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:26 GMT
 recorded_with: VCR 2.4.0

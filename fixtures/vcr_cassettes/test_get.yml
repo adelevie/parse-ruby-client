@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:35 GMT
+      - Mon, 22 Apr 2013 14:22:32 GMT
       Location: 
-      - https://api.parse.com/1/classes/Post/VGCMQtxmB0
+      - https://api.parse.com/1/classes/Post/rZ1jUSrLod
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.039656"
+      - "0.030568"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,12 +56,12 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:35.893Z\",\"objectId\":\"VGCMQtxmB0\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:32.849Z\",\"objectId\":\"rZ1jUSrLod\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:32 GMT
 - request: 
     method: get
-    uri: https://api.parse.com/1/classes/Post/VGCMQtxmB0
+    uri: https://api.parse.com/1/classes/Post/rZ1jUSrLod
     body: 
       encoding: US-ASCII
       string: ""
@@ -96,9 +96,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:35 GMT
+      - Mon, 22 Apr 2013 14:22:32 GMT
       Etag: 
-      - "\"c725f8474843a1f10bfa6e9cfd09e79a\""
+      - "\"73e2b8df943bd7505d06cc6fb3b0e392\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.030486"
+      - "0.031294"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -115,7 +115,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"title\":\"foo\",\"createdAt\":\"2013-04-22T14:11:35.893Z\",\"updatedAt\":\"2013-04-22T14:11:35.893Z\",\"objectId\":\"VGCMQtxmB0\"}"
+      string: "{\"title\":\"foo\",\"createdAt\":\"2013-04-22T14:22:32.849Z\",\"updatedAt\":\"2013-04-22T14:22:32.849Z\",\"objectId\":\"rZ1jUSrLod\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:35 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:32 GMT
 recorded_with: VCR 2.4.0

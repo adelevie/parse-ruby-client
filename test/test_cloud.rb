@@ -19,6 +19,8 @@ class TestCloud < Test::Unit::TestCase
 	end
 
 	def test_cloud_function
+		omit("this should automate the parse deploy command by committing that binary to the repo")
+
 		VCR.use_cassette('test_cloud_function', :record => :new_episodes) do
 			function = Parse::Cloud::Function.new("trivial")
 			params = {"foo" => "bar"}

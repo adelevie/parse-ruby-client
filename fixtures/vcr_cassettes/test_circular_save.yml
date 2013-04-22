@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:32 GMT
+      - Mon, 22 Apr 2013 14:22:29 GMT
       Location: 
-      - https://api.parse.com/1/classes/CircularBar/6hHaRyOWnK
+      - https://api.parse.com/1/classes/CircularBar/WnVUEfD7Yx
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.032198"
+      - "0.053870"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,15 +56,15 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:32.930Z\",\"objectId\":\"6hHaRyOWnK\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:29.836Z\",\"objectId\":\"WnVUEfD7Yx\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:32 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
 - request: 
     method: post
     uri: https://api.parse.com/1/classes/CircularBar
     body: 
       encoding: UTF-8
-      string: "{\"text\":\"bar\",\"bar\":{\"__type\":\"Pointer\",\"className\":\"CircularBar\",\"objectId\":\"6hHaRyOWnK\"}}"
+      string: "{\"text\":\"bar\",\"bar\":{\"__type\":\"Pointer\",\"className\":\"CircularBar\",\"objectId\":\"WnVUEfD7Yx\"}}"
     headers: 
       Content-Type: 
       - application/json
@@ -96,9 +96,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:32 GMT
+      - Mon, 22 Apr 2013 14:22:29 GMT
       Location: 
-      - https://api.parse.com/1/classes/CircularBar/K3EZhojCH0
+      - https://api.parse.com/1/classes/CircularBar/11YG18R1oP
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.031803"
+      - "0.029586"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -115,7 +115,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:32.977Z\",\"objectId\":\"K3EZhojCH0\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:29.894Z\",\"objectId\":\"11YG18R1oP\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:32 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
 recorded_with: VCR 2.4.0

@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:32 GMT
+      - Mon, 22 Apr 2013 14:22:29 GMT
       Location: 
-      - https://api.parse.com/1/classes/Comment/8xQRoxmCgY
+      - https://api.parse.com/1/classes/Comment/K0uMslzY0p
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.051172"
+      - "0.064208"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,15 +56,15 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:32.319Z\",\"objectId\":\"8xQRoxmCgY\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:29.446Z\",\"objectId\":\"K0uMslzY0p\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:32 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
 - request: 
     method: post
     uri: https://api.parse.com/1/classes/Post
     body: 
       encoding: UTF-8
-      string: "{\"comments\":[{\"__type\":\"Pointer\",\"className\":\"Comment\",\"objectId\":\"8xQRoxmCgY\"}]}"
+      string: "{\"comments\":[{\"__type\":\"Pointer\",\"className\":\"Comment\",\"objectId\":\"K0uMslzY0p\"}]}"
     headers: 
       Content-Type: 
       - application/json
@@ -96,9 +96,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:32 GMT
+      - Mon, 22 Apr 2013 14:22:29 GMT
       Location: 
-      - https://api.parse.com/1/classes/Post/PtGtqlTZqZ
+      - https://api.parse.com/1/classes/Post/qkOD7VzM9R
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.038627"
+      - "0.059638"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -115,12 +115,12 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:32.377Z\",\"objectId\":\"PtGtqlTZqZ\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:29.501Z\",\"objectId\":\"qkOD7VzM9R\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:32 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
 - request: 
     method: get
-    uri: https://api.parse.com/1/classes/Post?include=comments&where=%7B%22objectId%22:%22PtGtqlTZqZ%22%7D
+    uri: https://api.parse.com/1/classes/Post?include=comments&where=%7B%22objectId%22:%22qkOD7VzM9R%22%7D
     body: 
       encoding: US-ASCII
       string: ""
@@ -155,9 +155,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:32 GMT
+      - Mon, 22 Apr 2013 14:22:29 GMT
       Etag: 
-      - "\"c8afa70a0acf95e0f693f4227847a31a\""
+      - "\"61e49f3e811eff3597eb563267c6f294\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -165,7 +165,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.044779"
+      - "0.031017"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -174,15 +174,15 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"results\":[{\"comments\":[{\"text\":\"great post!\",\"createdAt\":\"2013-04-22T14:11:32.319Z\",\"updatedAt\":\"2013-04-22T14:11:32.319Z\",\"objectId\":\"8xQRoxmCgY\",\"__type\":\"Object\",\"className\":\"Comment\"}],\"createdAt\":\"2013-04-22T14:11:32.377Z\",\"updatedAt\":\"2013-04-22T14:11:32.377Z\",\"objectId\":\"PtGtqlTZqZ\"}]}"
+      string: "{\"results\":[{\"comments\":[{\"text\":\"great post!\",\"createdAt\":\"2013-04-22T14:22:29.446Z\",\"updatedAt\":\"2013-04-22T14:22:29.446Z\",\"objectId\":\"K0uMslzY0p\",\"__type\":\"Object\",\"className\":\"Comment\"}],\"createdAt\":\"2013-04-22T14:22:29.501Z\",\"updatedAt\":\"2013-04-22T14:22:29.501Z\",\"objectId\":\"qkOD7VzM9R\"}]}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:32 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
 - request: 
     method: put
-    uri: https://api.parse.com/1/classes/Post/PtGtqlTZqZ
+    uri: https://api.parse.com/1/classes/Post/qkOD7VzM9R
     body: 
       encoding: UTF-8
-      string: "{\"comments\":[{\"__type\":\"Pointer\",\"className\":\"Comment\",\"objectId\":\"8xQRoxmCgY\"}]}"
+      string: "{\"comments\":[{\"__type\":\"Pointer\",\"className\":\"Comment\",\"objectId\":\"K0uMslzY0p\"}]}"
     headers: 
       Content-Type: 
       - application/json
@@ -214,9 +214,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:32 GMT
+      - Mon, 22 Apr 2013 14:22:29 GMT
       Etag: 
-      - "\"448d931caa04cfbfa02cfdaf054a6956\""
+      - "\"873843d267257817c8cd7a4c3de87287\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -224,7 +224,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.040536"
+      - "0.025842"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -233,7 +233,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"updatedAt\":\"2013-04-22T14:11:32.513Z\"}"
+      string: "{\"updatedAt\":\"2013-04-22T14:22:29.675Z\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:32 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
 recorded_with: VCR 2.4.0

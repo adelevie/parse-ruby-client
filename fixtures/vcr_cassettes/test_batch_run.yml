@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:28 GMT
+      - Mon, 22 Apr 2013 14:22:25 GMT
       Etag: 
-      - "\"008386e9b2521285ef8ba952420b9424\""
+      - "\"d52508be81b53f321941462f0b3d9002\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.036955"
+      - "0.042474"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,7 +56,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "[{\"success\":{\"createdAt\":\"2013-04-22T14:11:28.737Z\",\"objectId\":\"mydkbIR3f4\"}}]"
+      string: "[{\"success\":{\"createdAt\":\"2013-04-22T14:22:25.666Z\",\"objectId\":\"P8VO3IlqEv\"}}]"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:28 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:25 GMT
 recorded_with: VCR 2.4.0

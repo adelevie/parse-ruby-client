@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.parse.com/1/users
     body: 
       encoding: UTF-8
-      string: "{\"username\":\"0.604130055237884\",\"password\":\"topsecret\"}"
+      string: "{\"username\":\"0.4850003626060746\",\"password\":\"topsecret\"}"
     headers: 
       Content-Type: 
       - application/json
@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:38 GMT
+      - Mon, 22 Apr 2013 14:22:35 GMT
       Location: 
-      - https://api.parse.com/1/users/aPPC7N7LL9
+      - https://api.parse.com/1/users/2IDEf13ONi
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.356032"
+      - "0.153717"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,7 +56,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:37.993Z\",\"objectId\":\"aPPC7N7LL9\",\"sessionToken\":\"w6ik99rk643iovgh31su9o4p9\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:35.161Z\",\"objectId\":\"2IDEf13ONi\",\"sessionToken\":\"5dw5j6hcfqf6szj4myc6htzg5\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:38 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:35 GMT
 recorded_with: VCR 2.4.0

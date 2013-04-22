@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:34 GMT
+      - Mon, 22 Apr 2013 14:22:30 GMT
       Location: 
-      - https://api.parse.com/1/classes/Post/O8bjToMn0Q
+      - https://api.parse.com/1/classes/Post/GT2aDPbKwW
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.025571"
+      - "0.031202"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,12 +56,12 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:34.284Z\",\"objectId\":\"O8bjToMn0Q\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:30.749Z\",\"objectId\":\"GT2aDPbKwW\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:34 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:30 GMT
 - request: 
     method: put
-    uri: https://api.parse.com/1/classes/Post/O8bjToMn0Q
+    uri: https://api.parse.com/1/classes/Post/GT2aDPbKwW
     body: 
       encoding: UTF-8
       string: "{\"title\":{\"__op\":\"Delete\"}}"
@@ -96,9 +96,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:34 GMT
+      - Mon, 22 Apr 2013 14:22:30 GMT
       Etag: 
-      - "\"7b2fb2d9745cf572c1c70bc1dd725497\""
+      - "\"331d52e267cfec26a3186ecfd0a6fcc6\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.033162"
+      - "0.025407"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -115,12 +115,12 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"updatedAt\":\"2013-04-22T14:11:34.381Z\"}"
+      string: "{\"updatedAt\":\"2013-04-22T14:22:30.847Z\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:34 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:30 GMT
 - request: 
     method: get
-    uri: https://api.parse.com/1/classes/Post/O8bjToMn0Q
+    uri: https://api.parse.com/1/classes/Post/GT2aDPbKwW
     body: 
       encoding: US-ASCII
       string: ""
@@ -155,9 +155,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:11:34 GMT
+      - Mon, 22 Apr 2013 14:22:30 GMT
       Etag: 
-      - "\"96d63716e89d99e81dcdb93924dc57bd\""
+      - "\"0486f7b573f359cce5c5a63b6c83860f\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -165,7 +165,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.028078"
+      - "0.036091"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -174,7 +174,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:11:34.284Z\",\"updatedAt\":\"2013-04-22T14:11:34.381Z\",\"objectId\":\"O8bjToMn0Q\"}"
+      string: "{\"createdAt\":\"2013-04-22T14:22:30.749Z\",\"updatedAt\":\"2013-04-22T14:22:30.847Z\",\"objectId\":\"GT2aDPbKwW\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:11:34 GMT
+  recorded_at: Mon, 22 Apr 2013 14:22:30 GMT
 recorded_with: VCR 2.4.0
