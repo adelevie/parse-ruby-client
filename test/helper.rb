@@ -39,5 +39,8 @@ VCR.configure do |c|
   filter_sensitive_header(c, Parse::Protocol::HEADER_SESSION_TOKEN)
 end
 
-class Test::Unit::TestCase
+class ParseTestCase < Test::Unit::TestCase
+  def setup
+    @client = Parse.init(:logger => Logger.new(STDERR).tap{|l| l.level = Logger::ERROR})
+  end
 end

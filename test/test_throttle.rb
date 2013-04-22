@@ -1,7 +1,5 @@
 require 'helper'
 
-Parse.init 
+class TestQuery < ParseTestCase
 
-class TestQuery < Test::Unit::TestCase
- 
 end

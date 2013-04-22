@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:22:26 GMT
+      - Mon, 22 Apr 2013 16:03:14 GMT
       Location: 
-      - https://api.parse.com/1/classes/toBeDeleted/CjBo1rVTd3
+      - https://api.parse.com/1/classes/toBeDeleted/UgkonZ2mII
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.040692"
+      - "0.102180"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,12 +56,12 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:22:26.403Z\",\"objectId\":\"CjBo1rVTd3\"}"
+      string: "{\"createdAt\":\"2013-04-22T16:03:14.108Z\",\"objectId\":\"UgkonZ2mII\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:22:26 GMT
+  recorded_at: Mon, 22 Apr 2013 16:03:14 GMT
 - request: 
     method: delete
-    uri: https://api.parse.com/1/classes/toBeDeleted/CjBo1rVTd3
+    uri: https://api.parse.com/1/classes/toBeDeleted/UgkonZ2mII
     body: 
       encoding: US-ASCII
       string: ""
@@ -96,7 +96,7 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:22:26 GMT
+      - Mon, 22 Apr 2013 16:03:14 GMT
       Etag: 
       - "\"99914b932bd37a50b983c5e7c90ae93b\""
       Server: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.046333"
+      - "0.078725"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -117,5 +117,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: "{}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:22:26 GMT
+  recorded_at: Mon, 22 Apr 2013 16:03:14 GMT
 recorded_with: VCR 2.4.0

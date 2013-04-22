@@ -37,9 +37,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:22:29 GMT
+      - Mon, 22 Apr 2013 16:03:17 GMT
       Location: 
-      - https://api.parse.com/1/classes/Post/im2f5cSmAj
+      - https://api.parse.com/1/classes/Post/NXqztkxx68
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -47,7 +47,7 @@ http_interactions:
       Status: 
       - 201 Created
       X-Runtime: 
-      - "0.028248"
+      - "0.038992"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -56,12 +56,12 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"createdAt\":\"2013-04-22T14:22:29.187Z\",\"objectId\":\"im2f5cSmAj\"}"
+      string: "{\"createdAt\":\"2013-04-22T16:03:17.004Z\",\"objectId\":\"NXqztkxx68\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
+  recorded_at: Mon, 22 Apr 2013 16:03:17 GMT
 - request: 
     method: put
-    uri: https://api.parse.com/1/classes/Post/im2f5cSmAj
+    uri: https://api.parse.com/1/classes/Post/NXqztkxx68
     body: 
       encoding: UTF-8
       string: "{\"chapters\":{\"__op\":\"Add\",\"objects\":[\"goodbye\"]}}"
@@ -96,9 +96,9 @@ http_interactions:
       Content-Type: 
       - application/json; charset=utf-8
       Date: 
-      - Mon, 22 Apr 2013 14:22:29 GMT
+      - Mon, 22 Apr 2013 16:03:17 GMT
       Etag: 
-      - "\"94501c8fd3c68054d384929ae16cbfb4\""
+      - "\"828730200fb880f8d7602dae59972493\""
       Server: 
       - nginx/1.2.2
       Set-Cookie: 
@@ -106,7 +106,7 @@ http_interactions:
       Status: 
       - 200 OK
       X-Runtime: 
-      - "0.024267"
+      - "0.026445"
       X-Ua-Compatible: 
       - IE=Edge,chrome=1
       Content-Length: 
@@ -115,7 +115,7 @@ http_interactions:
       - keep-alive
     body: 
       encoding: ASCII-8BIT
-      string: "{\"chapters\":[\"hello\",\"goodbye\"],\"updatedAt\":\"2013-04-22T14:22:29.282Z\"}"
+      string: "{\"chapters\":[\"hello\",\"goodbye\"],\"updatedAt\":\"2013-04-22T16:03:17.059Z\"}"
     http_version: 
-  recorded_at: Mon, 22 Apr 2013 14:22:29 GMT
+  recorded_at: Mon, 22 Apr 2013 16:03:17 GMT
 recorded_with: VCR 2.4.0
