@@ -1,0 +1,121 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: https://api.parse.com/1/classes/Post
+    body: 
+      encoding: UTF-8
+      string: "{\"read\":false,\"published\":true}"
+    headers: 
+      Content-Type: 
+      - application/json
+      Accept: 
+      - application/json
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
+      code: 201
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Tue, 23 Apr 2013 19:00:13 GMT
+      Location: 
+      - https://api.parse.com/1/classes/Post/Gz18MFpKTf
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.040490"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"createdAt\":\"2013-04-23T19:00:13.926Z\",\"objectId\":\"Gz18MFpKTf\"}"
+    http_version: 
+  recorded_at: Tue, 23 Apr 2013 19:00:13 GMT
+- request: 
+    method: get
+    uri: https://api.parse.com/1/classes/Post?where=%7B%22objectId%22:%22Gz18MFpKTf%22%7D
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Content-Type: 
+      - application/json
+      Accept: 
+      - application/json
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key: 
+      - ""
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token: 
+      - ""
+      Expect: 
+      - ""
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Tue, 23 Apr 2013 19:00:41 GMT
+      Etag: 
+      - "\"f0b18c76d2bf8fac854f1de08cbe253b\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.035832"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "147"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"results\":[{\"read\":false,\"published\":true,\"createdAt\":\"2013-04-23T19:00:13.926Z\",\"updatedAt\":\"2013-04-23T19:00:13.926Z\",\"objectId\":\"Gz18MFpKTf\"}]}"
+    http_version: 
+  recorded_at: Tue, 23 Apr 2013 19:00:41 GMT
+recorded_with: VCR 2.4.0
