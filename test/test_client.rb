@@ -6,7 +6,7 @@ class TestClient < ParseTestCase
     VCR.use_cassette('test_retries', :record => :new_episodes) do
       response = mock()
       response.stubs(:body).returns({'code' => Parse::Protocol::ERROR_TIMEOUT}.to_json)
-      response.stubs(:status).returns(400)
+      response.stubs(:status).returns(500)
       @client.session.expects(:request).times(@client.max_retries + 1).returns(response)
       assert_raise do
        @client.request(nil)
@@ -18,7 +18,7 @@ class TestClient < ParseTestCase
     VCR.use_cassette('test_retries_json_error', :record => :new_episodes) do
       bad_response = mock()
       bad_response.stubs(:body).returns("<HTML>this is not json</HTML>")
-      bad_response.stubs(:status).returns(200)
+      bad_response.stubs(:status).returns(500)
 
       good_response = mock()
       good_response.stubs(:body).returns('{"foo":100}')

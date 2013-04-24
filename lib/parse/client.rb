@@ -99,11 +99,12 @@ module Parse
           response = @session.request(method, uri, {}, options)
         end
 
-        if response.status >= 400
-          raise ParseProtocolError.new("error" => "HTTP Status #{response.status} Body #{response.body}")
-        end
-
         parsed = JSON.parse(response.body)
+
+        if response.status >= 400
+          parsed ||= {}
+          raise ParseProtocolError.new({"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed))
+        end
 
         if content_type
           @session.headers["Content-Type"] = "application/json"
@@ -111,7 +112,7 @@ module Parse
 
         return parsed
       rescue JSON::ParserError => e
-        if num_tries <= max_retries
+        if num_tries <= max_retries && response.status >= 500
           log_retry(e, uri, query, body, response)
           retry
         end
