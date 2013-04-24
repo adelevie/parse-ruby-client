@@ -112,7 +112,7 @@ module Parse
 
         return parsed
       rescue JSON::ParserError => e
-        if num_tries <= max_retries
+        if num_tries <= max_retries && response.status >= 500
           log_retry(e, uri, query, body, response)
           retry
         end
@@ -159,7 +159,7 @@ module Parse
     protected
 
     def log_retry(e, uri, query, body, response)
-      logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response}"}
+      logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response.inspect}"}
     end
   end
 
