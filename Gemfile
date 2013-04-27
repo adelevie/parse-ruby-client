@@ -16,5 +16,8 @@ group :development do
   gem 'vcr'
 end
 
-gem 'patron'
-gem 'iron_mq'
+gem 'faraday'
+gem 'faraday_middleware'
+
+# gem 'patron'
+# gem 'iron_mq'

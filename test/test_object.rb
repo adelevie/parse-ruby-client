@@ -135,10 +135,10 @@ class TestObject < ParseTestCase
     post = Parse::Object.new "Post"
     post["read"] = false
     post["published"] = true
-    safe_json_hash = JSON.parse post.safe_json
+    safe_json_hash = JSON.parse(post.safe_json)
     assert_equal false, safe_json_hash["read"]
     assert_equal true, safe_json_hash["published"]
-  end  
+  end
 
   def test_saving_boolean_values
     VCR.use_cassette('test_saving_boolean_values', :record => :new_episodes) do
@@ -151,7 +151,7 @@ class TestObject < ParseTestCase
       assert_equal false, retrieved_post["read"]
       assert_equal true, retrieved_post["published"]
     end
-  end  
+  end
 
   def test_array_add
     VCR.use_cassette('test_array_add', :record => :new_episodes) do

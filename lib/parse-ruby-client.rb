@@ -9,7 +9,8 @@ require "rubygems"
 require "bundler/setup"
 
 require 'json'
-require 'patron'
+require 'faraday'
+require 'faraday_middleware'
 require 'date'
 require 'cgi'
 

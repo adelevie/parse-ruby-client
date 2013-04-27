@@ -3,9 +3,6 @@ require 'parse/error'
 require 'parse/util'
 
 require 'logger'
-
-require 'iron_mq'
-
 module Parse
 
   # A class which encapsulates the HTTPS communication with the Parse
@@ -30,29 +27,29 @@ module Parse
       @max_retries    = data[:max_retries] || 3
       @logger         = data[:logger] || Logger.new(STDERR).tap{|l| l.level = Logger::INFO}
 
-      @session        = Patron::Session.new
-      @session.timeout = 30
-      @session.connect_timeout = 30
+      # @session        = Patron::Session.new
+      # @session.timeout = 30
+      # @session.connect_timeout = 30
 
-      if data[:ironio_project_id] && data[:ironio_token]
+      # @session.base_url                 = "
+      # @session.headers["Content-Type"]  = "application/json"
+      # @session.headers["Accept"]        = "application/json"
+      #
 
-        if data[:max_concurrent_requests]
-          @max_concurrent_requests = data[:max_concurrent_requests]
-        else
-          @max_concurrent_requests = 50
-        end
+      @session = Faraday.new "https://#{host}" do |c|
+        c.request :multipart
+        c.request :json
+        c.response :json
+        # c.response :logger
 
-        @queue = IronMQ::Client.new({
-          :project_id => data[:ironio_project_id],
-          :token => data[:ironio_token]
-        }).queue("concurrent_parse_requests")
+        c.headers["User-Agent"]                   = "Parse for Ruby, 0.0"
+        # c.headers[Protocol::HEADER_MASTER_KEY]    = data[:master_key]
+        c.headers[Protocol::HEADER_API_KEY]       = data[:api_key]
+        c.headers[Protocol::HEADER_APP_ID]        = data[:application_id]
+        # c.headers[Protocol::HEADER_SESSION_TOKEN] = data[:session_token]
 
+        c.adapter Faraday.default_adapter
       end
-
-      @session.base_url                 = "https://#{host}"
-      @session.headers["Content-Type"]  = "application/json"
-      @session.headers["Accept"]        = "application/json"
-      @session.headers["User-Agent"]    = "Parse for Ruby, 0.0"
     end
 
     # Perform an HTTP request for the given uri and method
@@ -60,84 +57,19 @@ module Parse
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
     def request(uri, method = :get, body = nil, query = nil, content_type = nil)
-      @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
-      @session.headers[Protocol::HEADER_API_KEY]  = @api_key
-      @session.headers[Protocol::HEADER_APP_ID]   = @application_id
-      @session.headers[Protocol::HEADER_SESSION_TOKEN]   = @session_token
-
-      if content_type
-        @session.headers["Content-Type"] = content_type
+      # puts Time.now
+      # puts "body: #{body.inspect}"
+      # puts "query: #{query.inspect}"
+      @session.headers[Protocol::HEADER_SESSION_TOKEN] = @session_token.to_s
+      @session.headers['Content-Type'] = content_type || 'application/json'
+      response = @session.send(method, uri, (query || body || {}))
+      parsed = response.body
+      if response.status >= 400
+        parsed ||= {}
+        raise ParseProtocolError.new({"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed))
       end
-
-      options = {}
-      if body
-        options[:data] = body
-      end
-      if query
-        options[:query] = query
-      end
-
-      num_tries = 0
-      begin
-        num_tries += 1
-
-        if @queue
-
-          #while true
-          #  if @queue.reload.size >= @max_concurrent_requests
-          #    sleep 1
-          #  else
-              # add to queue before request
-              @queue.post("1")
-              response = @session.request(method, uri, {}, options)
-              # delete from queue after request
-              msg = @queue.get()
-              msg.delete
-          #  end
-          #end
-        else
-          response = @session.request(method, uri, {}, options)
-        end
-
-        parsed = JSON.parse(response.body)
-
-        if response.status >= 400
-          parsed ||= {}
-          raise ParseProtocolError.new({"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed))
-        end
-
-        if content_type
-          @session.headers["Content-Type"] = "application/json"
-        end
-
-        return parsed
-      rescue JSON::ParserError => e
-        if num_tries <= max_retries && response.status >= 500
-          log_retry(e, uri, query, body, response)
-          retry
-        end
-        raise
-      rescue Patron::TimeoutError => e
-        if num_tries <= max_retries
-          log_retry(e, uri, query, body, response)
-          retry
-        end
-        raise
-      rescue ParseProtocolError => e
-        if num_tries <= max_retries
-          if e.code
-            sleep 60 if e.code == Protocol::ERROR_EXCEEDED_BURST_LIMIT
-            if [Protocol::ERROR_INTERNAL, Protocol::ERROR_TIMEOUT, Protocol::ERROR_EXCEEDED_BURST_LIMIT].include?(e.code)
-              log_retry(e, uri, query, body, response)
-              retry
-            end
-          elsif response.status >= 500
-            log_retry(e, uri, query, body, response)
-            retry
-          end
-        end
-        raise
-      end
+      # puts "result: #{parsed.inspect}"
+      parsed
     end
 
     def get(uri)
@@ -158,9 +90,9 @@ module Parse
 
     protected
 
-    def log_retry(e, uri, query, body, response)
-      logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response.inspect}"}
-    end
+    # def log_retry(e, uri, query, body, response)
+    #   logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response.inspect}"}
+    # end
   end
 
 
