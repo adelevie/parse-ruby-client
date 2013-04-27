@@ -98,62 +98,57 @@ module Parse
 
   # Module methods
   # ------------------------------------------------------------
+  class << self
+    # A singleton client for use by methods in Object.
+    # Always use Parse.client to retrieve the client object.
+    @client = nil
 
-  # A singleton client for use by methods in Object.
-  # Always use Parse.client to retrieve the client object.
-  @@client = nil
+    # Initialize the singleton instance of Client which is used
+    # by all API methods. Parse.init must be called before saving
+    # or retrieving any objects.
+    def init(data = {})
+      defaults = {:application_id => ENV["PARSE_APPLICATION_ID"], :api_key => ENV["PARSE_REST_API_KEY"]}
+      defaults.merge!(data)
 
-  # Initialize the singleton instance of Client which is used
-  # by all API methods. Parse.init must be called before saving
-  # or retrieving any objects.
-  def Parse.init(data = {})
-    defaulted = {:application_id => ENV["PARSE_APPLICATION_ID"],
-                 :api_key => ENV["PARSE_REST_API_KEY"]}
-    defaulted.merge!(data)
-
-    # use less permissive key if both are specified
-    defaulted[:master_key] = ENV["PARSE_MASTER_API_KEY"] unless data[:master_key] || defaulted[:api_key]
-
-
-    @@client = Client.new(defaulted)
-  end
-
-  # A convenience method for using global.json
-  def Parse.init_from_cloud_code(path="../config/global.json")
-    global = JSON.parse(Object::File.open(path).read) # warning: toplevel constant File referenced by Parse::Object::File
-    application_name = global["applications"]["_default"]["link"]
-    application_id = global["applications"][application_name]["applicationId"]
-    master_key = global["applications"][application_name]["masterKey"]
-    Parse.init :application_id => application_id,
-               :master_key     => master_key
-  end
-
-  # Used mostly for testing. Lets you delete the api key global vars.
-  def Parse.destroy
-    @@client = nil
-    self
-  end
-
-  def Parse.client
-    if !@@client
-      raise ParseError, "API not initialized"
-    end
-    @@client
-  end
-
-  # Perform a simple retrieval of a simple object, or all objects of a
-  # given class. If object_id is supplied, a single object will be
-  # retrieved. If object_id is not supplied, then all objects of the
-  # given class will be retrieved and returned in an Array.
-  def Parse.get(class_name, object_id = nil)
-    data = Parse.client.get( Protocol.class_uri(class_name, object_id) )
-    Parse.parse_json class_name, data
-  rescue ParseProtocolError => e
-    if e.code == Protocol::ERROR_OBJECT_NOT_FOUND_FOR_GET
-      e.message += ": #{class_name}:#{object_id}"
+      # use less permissive key if both are specified
+      defaults[:master_key] = ENV["PARSE_MASTER_API_KEY"] unless data[:master_key] || defaults[:api_key]
+      @@client = Client.new(defaults)
     end
 
-    raise
+    # A convenience method for using global.json
+    def init_from_cloud_code(path = "../config/global.json")
+      # warning: toplevel constant File referenced by Parse::Object::File
+      global = JSON.parse(Object::File.open(path).read)
+      application_name  = global["applications"]["_default"]["link"]
+      application_id    = global["applications"][application_name]["applicationId"]
+      master_key        = global["applications"][application_name]["masterKey"]
+      self.init(:application_id => application_id, :master_key => master_key)
+    end
+
+    # Used mostly for testing. Lets you delete the api key global vars.
+    def destroy
+      @@client = nil
+      self
+    end
+
+    def client
+      raise ParseError, "API not initialized" if !@@client
+      @@client
+    end
+
+    # Perform a simple retrieval of a simple object, or all objects of a
+    # given class. If object_id is supplied, a single object will be
+    # retrieved. If object_id is not supplied, then all objects of the
+    # given class will be retrieved and returned in an Array.
+    def get(class_name, object_id = nil)
+      data = self.client.get( Protocol.class_uri(class_name, object_id) )
+      self.parse_json class_name, data
+    rescue ParseProtocolError => e
+      if e.code == Protocol::ERROR_OBJECT_NOT_FOUND_FOR_GET
+        e.message += ": #{class_name}:#{object_id}"
+      end
+      raise
+    end
   end
 
 end
