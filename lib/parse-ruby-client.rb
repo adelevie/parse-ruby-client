@@ -5,10 +5,10 @@
 ## See https://parse.com/docs/rest for full documentation on the API.
 ##
 ## ----------------------------------------------------------------------
-require "rubygems"
-require "bundler/setup"
+require 'rubygems'
+require 'bundler/setup'
 
-require 'json'
+require 'yajl/json_gem'
 require 'faraday'
 require 'faraday_middleware'
 require 'date'

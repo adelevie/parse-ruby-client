@@ -16,6 +16,7 @@ group :development do
   gem 'vcr'
 end
 
+gem 'yajl-ruby', :require => 'yail'
 gem 'faraday'
 gem 'faraday_middleware'
 

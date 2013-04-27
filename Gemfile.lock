@@ -28,6 +28,7 @@ GEM
     webmock (1.8.10)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -43,3 +44,4 @@ DEPENDENCIES
   test-unit (= 2.5.0)
   vcr
   webmock
+  yajl-ruby
