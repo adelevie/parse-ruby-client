@@ -27,29 +27,15 @@ module Parse
       @max_retries    = data[:max_retries] || 3
       @logger         = data[:logger] || Logger.new(STDERR).tap{|l| l.level = Logger::INFO}
 
-      # @session        = Patron::Session.new
-      # @session.timeout = 30
-      # @session.connect_timeout = 30
-
-      # @session.base_url                 = "
-      # @session.headers["Content-Type"]  = "application/json"
-      # @session.headers["Accept"]        = "application/json"
-      #
-
-      @session = Faraday.new "https://#{host}" do |c|
+      options = {:request => {:timeout => 30, :open_timeout => 30}}
+      @session = Faraday.new "https://#{host}", options do |c|
         c.request :multipart
         c.request :json
         c.response :json
-        # c.response :logger
-
-        c.headers["User-Agent"]                   = "Parse for Ruby, 0.0"
-        # c.headers[Protocol::HEADER_MASTER_KEY]    = data[:master_key]
-        c.headers[Protocol::HEADER_API_KEY]       = data[:api_key]
-        c.headers[Protocol::HEADER_APP_ID]        = data[:application_id]
-        # c.headers[Protocol::HEADER_SESSION_TOKEN] = data[:session_token]
-
+        c.response :logger, @logger
         c.adapter Faraday.default_adapter
       end
+      set_session_headers!
     end
 
     # Perform an HTTP request for the given uri and method
@@ -57,10 +43,7 @@ module Parse
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
     def request(uri, method = :get, body = nil, query = nil, content_type = nil)
-      # puts Time.now
-      # puts "body: #{body.inspect}"
-      # puts "query: #{query.inspect}"
-      @session.headers[Protocol::HEADER_SESSION_TOKEN] = @session_token.to_s
+      set_session_headers!
       @session.headers['Content-Type'] = content_type || 'application/json'
       response = @session.send(method, uri, (query || body || {}))
       parsed = response.body
@@ -68,7 +51,6 @@ module Parse
         parsed ||= {}
         raise ParseProtocolError.new({"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed))
       end
-      # puts "result: #{parsed.inspect}"
       parsed
     end
 
@@ -89,10 +71,21 @@ module Parse
     end
 
     protected
+      def set_session_headers!
+        {
+          "User-Agent"                    => 'Parse for Ruby, 0.0',
+          Protocol::HEADER_MASTER_KEY     => @master_key,
+          Protocol::HEADER_APP_ID         => @application_id,
+          Protocol::HEADER_API_KEY        => @api_key,
+          Protocol::HEADER_SESSION_TOKEN  => @session_token
+        }.each do |key, value|
+          @session.headers[key] = value if value
+        end
+      end
 
-    # def log_retry(e, uri, query, body, response)
-    #   logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response.inspect}"}
-    # end
+      # def log_retry(e, uri, query, body, response)
+      #   logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response.inspect}"}
+      # end
   end
 
 
