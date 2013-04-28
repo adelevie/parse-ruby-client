@@ -17,8 +17,8 @@ module Parse
     def initialize(response)
       @response = response
       if response
-        @code = response["code"]
-        @error = response["error"]
+        @code   = response["code"]
+        @error  = response["error"]
       end
 
       super("#{@code}: #{@error}")

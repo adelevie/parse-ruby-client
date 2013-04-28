@@ -46,12 +46,13 @@ module Faraday
     end
 
     def call(env)
-      retries = @options.max
+      env[:retries] = retries = @options.max
       begin
         @app.call(env)
       rescue @errmatch
         if retries > 0
           retries -= 1
+          env[:retries] = retries
           sleep @options.interval if @options.interval > 0
           retry
         end
