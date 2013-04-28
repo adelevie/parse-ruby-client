@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2013-02-27"
+  s.date = "2013-04-28"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -27,33 +27,35 @@ Gem::Specification.new do |s|
     "example.rb",
     "features.md",
     "fixtures/vcr_cassettes/test_array_add.yml",
-    "fixtures/vcr_cassettes/test_array_add_relation.yml",
+    "fixtures/vcr_cassettes/test_array_add_pointerizing.yml",
     "fixtures/vcr_cassettes/test_batch_create_object.yml",
     "fixtures/vcr_cassettes/test_batch_delete_object.yml",
     "fixtures/vcr_cassettes/test_batch_run.yml",
     "fixtures/vcr_cassettes/test_batch_update_object.yml",
-    "fixtures/vcr_cassettes/test_cloud_function.yml",
+    "fixtures/vcr_cassettes/test_circular_save.yml",
     "fixtures/vcr_cassettes/test_created_at.yml",
     "fixtures/vcr_cassettes/test_deep_parse.yml",
     "fixtures/vcr_cassettes/test_destroy.yml",
-    "fixtures/vcr_cassettes/test_file_save.yml",
+    "fixtures/vcr_cassettes/test_eq_pointerize.yml",
+    "fixtures/vcr_cassettes/test_equality.yml",
     "fixtures/vcr_cassettes/test_get.yml",
-    "fixtures/vcr_cassettes/test_image_file_associate_with_object.yml",
-    "fixtures/vcr_cassettes/test_image_file_save.yml",
+    "fixtures/vcr_cassettes/test_get_missing.yml",
     "fixtures/vcr_cassettes/test_include.yml",
     "fixtures/vcr_cassettes/test_new_model.yml",
     "fixtures/vcr_cassettes/test_new_object.yml",
     "fixtures/vcr_cassettes/test_nils_delete_keys.yml",
-    "fixtures/vcr_cassettes/test_object_id.yml",
     "fixtures/vcr_cassettes/test_parse_delete.yml",
     "fixtures/vcr_cassettes/test_pointer.yml",
-    "fixtures/vcr_cassettes/test_request_batch.yml",
+    "fixtures/vcr_cassettes/test_save_with_sub_objects.yml",
+    "fixtures/vcr_cassettes/test_saving_boolean_values.yml",
     "fixtures/vcr_cassettes/test_server_update.yml",
     "fixtures/vcr_cassettes/test_simple_save.yml",
     "fixtures/vcr_cassettes/test_text_file_save.yml",
     "fixtures/vcr_cassettes/test_update.yml",
     "fixtures/vcr_cassettes/test_updated_at.yml",
     "fixtures/vcr_cassettes/test_user_save.yml",
+    "lib/faraday/better_retry.rb",
+    "lib/faraday/extended_parse_json.rb",
     "lib/parse-ruby-client.rb",
     "lib/parse/batch.rb",
     "lib/parse/client.rb",
@@ -71,6 +73,8 @@ Gem::Specification.new do |s|
     "test/cloud_functions/MyCloudCode/cloud/main.js",
     "test/config/global.json",
     "test/helper.rb",
+    "test/middleware/better_retry_test.rb",
+    "test/middleware/extend_parse_json_test.rb",
     "test/parsers.jpg",
     "test/test_batch.rb",
     "test/test_client.rb",
@@ -89,45 +93,48 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/adelevie/parse-ruby-client"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "2.0.0"
   s.summary = "A simple Ruby client for the parse.com REST API"
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<patron>, [">= 0"])
-      s.add_runtime_dependency(%q<iron_mq>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.1.5"])
+      s.add_runtime_dependency(%q<yajl-ruby>, [">= 0"])
+      s.add_runtime_dependency(%q<faraday>, [">= 0"])
+      s.add_runtime_dependency(%q<faraday_middleware>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<test-unit>, ["= 2.5.0"])
       s.add_development_dependency(%q<mocha>, ["= 0.12.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_development_dependency(%q<webmock>, [">= 0"])
+      s.add_development_dependency(%q<simplecov>, [">= 0"])
+      s.add_development_dependency(%q<webmock>, ["~> 1.9.0"])
       s.add_development_dependency(%q<vcr>, [">= 0"])
     else
-      s.add_dependency(%q<patron>, [">= 0"])
-      s.add_dependency(%q<iron_mq>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.1.5"])
+      s.add_dependency(%q<yajl-ruby>, [">= 0"])
+      s.add_dependency(%q<faraday>, [">= 0"])
+      s.add_dependency(%q<faraday_middleware>, [">= 0"])
+      s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<test-unit>, ["= 2.5.0"])
       s.add_dependency(%q<mocha>, ["= 0.12.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<webmock>, [">= 0"])
+      s.add_dependency(%q<simplecov>, [">= 0"])
+      s.add_dependency(%q<webmock>, ["~> 1.9.0"])
       s.add_dependency(%q<vcr>, [">= 0"])
     end
   else
-    s.add_dependency(%q<patron>, [">= 0"])
-    s.add_dependency(%q<iron_mq>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.1.5"])
+    s.add_dependency(%q<yajl-ruby>, [">= 0"])
+    s.add_dependency(%q<faraday>, [">= 0"])
+    s.add_dependency(%q<faraday_middleware>, [">= 0"])
+    s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<test-unit>, ["= 2.5.0"])
     s.add_dependency(%q<mocha>, ["= 0.12.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-    s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<webmock>, [">= 0"])
+    s.add_dependency(%q<simplecov>, [">= 0"])
+    s.add_dependency(%q<webmock>, ["~> 1.9.0"])
     s.add_dependency(%q<vcr>, [">= 0"])
   end
 end
