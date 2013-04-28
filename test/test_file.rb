@@ -4,7 +4,7 @@ require 'helper'
 class TestFile < ParseTestCase
 
   def test_file_save
-    # VCR.use_cassette('test_text_file_save', :record => :new_episodes) do
+    VCR.use_cassette('test_text_file_save', :record => :new_episodes) do
       tf = Parse::File.new({
         :body => "Hello World!",
         :local_filename => "hello.txt",
@@ -18,11 +18,11 @@ class TestFile < ParseTestCase
       assert tf.body
       assert tf.to_json
       assert_equal String, tf.body.class
-    # end
+    end
   end
 
   def test_image_save
-    # VCR.use_cassette('test_image_file_save', :record => :new_episodes) do
+    VCR.use_cassette('test_image_file_save', :record => :new_episodes) do
       tf = Parse::File.new({
         :body => File.open("test/parsers.jpg", "rb").read,
         :local_filename => "parsers.jpg",
@@ -35,11 +35,11 @@ class TestFile < ParseTestCase
       assert tf.parse_filename
       assert tf.body
       assert tf.to_json
-    # end
+    end
   end
 
   def test_associate_with_object
-    # VCR.use_cassette('test_image_file_associate_with_object', :record => :new_episodes) do
+    VCR.use_cassette('test_image_file_associate_with_object', :record => :new_episodes) do
       tf = Parse::File.new({
         :body => File.open("test/parsers.jpg", "rb").read,
         :local_filename => "parsers.jpg",
@@ -61,7 +61,7 @@ class TestFile < ParseTestCase
       assert object["objectId"]
 
       object.refresh.save
-    # end
+    end
   end
 
 end

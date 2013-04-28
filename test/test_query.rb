@@ -100,22 +100,20 @@ class TestQuery < ParseTestCase
   end
 
   def test_or
-    #VCR.use_cassette('test_or', :record => :new_episodes) do
-      foo = Parse::Object.new "Post"
-      foo["random"] = rand
-      foo.save
-      foo_query = Parse::Query.new("Post").eq("random", foo["random"])
-      assert_equal 1, foo_query.get.size
+    foo = Parse::Object.new "Post"
+    foo["random"] = rand
+    foo.save
+    foo_query = Parse::Query.new("Post").eq("random", foo["random"])
+    assert_equal 1, foo_query.get.size
 
-      bar = Parse::Object.new "Post"
-      bar["random"] = rand
-      bar.save
-      bar_query = Parse::Query.new("Post").eq("random", bar["random"])
-      assert_equal 1, foo_query.get.size
+    bar = Parse::Object.new "Post"
+    bar["random"] = rand
+    bar.save
+    bar_query = Parse::Query.new("Post").eq("random", bar["random"])
+    assert_equal 1, foo_query.get.size
 
-      query = foo_query.or(bar_query)
-      assert_equal 2, query.get.size
-    #end
+    query = foo_query.or(bar_query)
+    assert_equal 2, query.get.size
   end
 
   def test_in_query

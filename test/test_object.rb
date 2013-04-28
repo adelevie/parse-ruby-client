@@ -13,13 +13,13 @@ class TestObject < ParseTestCase
   end
 
   def test_object_id
-    #VCR.use_cassette('test_object_id', :record => :new_episodes) do
+    VCR.use_cassette('test_object_id', :record => :new_episodes) do
       post = Parse::Object.new "Post"
       assert_equal post.id, nil
       post["title"] = "hello world"
       post.save
       assert_equal post.id.class, String
-    #end
+    end
   end
 
   def test_pointer
