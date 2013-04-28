@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Faraday
 
   class ExtendedParseJson < FaradayMiddleware::ParseJson

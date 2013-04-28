@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Parse
 
   # Base exception class for errors thrown by the Parse

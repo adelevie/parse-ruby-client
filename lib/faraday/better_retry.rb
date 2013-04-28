@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'ostruct'
 module Faraday
   # Catches exceptions and retries each request a limited number of times.

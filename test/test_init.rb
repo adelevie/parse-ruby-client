@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'helper'
 
 #Parse.init :application_id => $PARSE_APPLICATION_ID, :api_key => $PARSE_REST_API_KEY

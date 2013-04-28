@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Parse.init :application_id  => "your_application_id",
            :api_key         => "your_REST_API_Key"
 
@@ -31,4 +32,4 @@ Parse::Query.new(cls)                   \
 # Pushes
 push = Parse::Push.new({ "alert"=> "I'm sending this push to all my app users!" })
 push.save
-  
+
