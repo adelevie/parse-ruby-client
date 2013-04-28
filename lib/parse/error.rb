@@ -33,4 +33,7 @@ module Parse
     end
   end
 
+  class ParseProtocolRetry < ParseProtocolError
+  end
+
 end

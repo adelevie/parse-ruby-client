@@ -31,8 +31,13 @@ module Parse
       @session = Faraday.new "https://#{host}", options do |c|
         c.request :multipart
         c.request :json
-        c.response :json
         c.response :logger, @logger
+        c.use Faraday::BetterRetry,
+          max: @max_retries,
+          interval: 0.5,
+          exceptions: [ 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry',
+                        'Errno::ETIMEDOUT', 'Timeout::Error', 'Error::TimeoutError' ]
+        c.use Faraday::ExtendedParseJson
         c.adapter Faraday.default_adapter
       end
       set_session_headers!
@@ -45,13 +50,7 @@ module Parse
     def request(uri, method = :get, body = nil, query = nil, content_type = nil)
       set_session_headers!
       @session.headers['Content-Type'] = content_type || 'application/json'
-      response = @session.send(method, uri, (query || body || {}))
-      parsed = response.body
-      if response.status >= 400
-        parsed ||= {}
-        raise ParseProtocolError.new({"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed))
-      end
-      parsed
+      @session.send(method, uri, (query || body || {})).body
     end
 
     def get(uri)
