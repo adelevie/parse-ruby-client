@@ -18,7 +18,7 @@ module Parse
     attr_accessor :max_retries
     attr_accessor :logger
 
-    def initialize(data = {})
+    def initialize(data = {}, &blk)
       @host           = data[:host] || Protocol::HOST
       @application_id = data[:application_id]
       @api_key        = data[:api_key]
@@ -38,6 +38,7 @@ module Parse
           exceptions: [ 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry',
                         'Errno::ETIMEDOUT', 'Timeout::Error', 'Error::TimeoutError' ]
         c.use Faraday::ExtendedParseJson
+        yield(c) if block_given?
         c.adapter Faraday.default_adapter
       end
       set_session_headers!
@@ -98,13 +99,13 @@ module Parse
     # Initialize the singleton instance of Client which is used
     # by all API methods. Parse.init must be called before saving
     # or retrieving any objects.
-    def init(data = {})
+    def init(data = {}, &blk)
       defaults = {:application_id => ENV["PARSE_APPLICATION_ID"], :api_key => ENV["PARSE_REST_API_KEY"]}
       defaults.merge!(data)
 
       # use less permissive key if both are specified
       defaults[:master_key] = ENV["PARSE_MASTER_API_KEY"] unless data[:master_key] || defaults[:api_key]
-      @@client = Client.new(defaults)
+      @@client = Client.new(defaults, &blk)
     end
 
     # A convenience method for using global.json
