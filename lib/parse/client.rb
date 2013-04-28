@@ -82,10 +82,6 @@ module Parse
           @session.headers[key] = value if value
         end
       end
-
-      # def log_retry(e, uri, query, body, response)
-      #   logger.warn{"Retrying Parse Error #{e.inspect} on request #{uri} #{CGI.unescape(query.inspect)} #{body.inspect} response #{response.inspect}"}
-      # end
   end
 
 
