@@ -25,8 +25,16 @@ module Faraday
       end
 
       def exceptions
-        Array(self[:exceptions] ||= [Errno::ETIMEDOUT, 'Timeout::Error',
-                                     Error::TimeoutError])
+        Array(self[:exceptions] ||= [Errno::ETIMEDOUT, 'Timeout::Error', Error::TimeoutError])
+      end
+
+      # define for ruby less than 2.0
+      def [](name)
+        @table[name.to_sym]
+      end
+
+      def []=(name, value)
+        modifiable[new_ostruct_member(name)] = value
       end
 
     end

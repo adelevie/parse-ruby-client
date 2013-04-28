@@ -20,26 +20,26 @@ module Middleware
 
     def test_unhandled_error
       @explode = lambda {|n| raise "boom!" }
-      assert_raises(RuntimeError) { conn.post("/unstable") }
+      assert_raise(RuntimeError) { conn.post("/unstable") }
       assert_equal 1, @times_called
     end
 
     def test_handled_error
       @explode = lambda {|n| raise Errno::ETIMEDOUT }
-      assert_raises(Errno::ETIMEDOUT) { conn.post("/unstable") }
+      assert_raise(Errno::ETIMEDOUT) { conn.post("/unstable") }
       assert_equal 3, @times_called
     end
 
     def test_new_max_retries
       @explode = lambda {|n| raise Errno::ETIMEDOUT }
-      assert_raises(Errno::ETIMEDOUT) { conn(:max => 3).post("/unstable") }
+      assert_raise(Errno::ETIMEDOUT) { conn(:max => 3).post("/unstable") }
       assert_equal 4, @times_called
     end
 
     def test_interval
       @explode = lambda {|n| raise Errno::ETIMEDOUT }
       started  = Time.now
-      assert_raises(Errno::ETIMEDOUT) {
+      assert_raise(Errno::ETIMEDOUT) {
         conn(:max => 2, :interval => 0.1).post("/unstable")
       }
       assert_in_delta 0.2, Time.now - started, 0.03
@@ -47,7 +47,7 @@ module Middleware
 
     def test_custom_exceptions
       @explode = lambda {|n| raise "boom!" }
-      assert_raises(RuntimeError) {
+      assert_raise(RuntimeError) {
         conn(:exceptions => StandardError).post("/unstable")
       }
       assert_equal 3, @times_called
