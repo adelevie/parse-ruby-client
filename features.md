@@ -1029,7 +1029,7 @@ To upload an image, the syntax is a little bit different. Here's an example that
 
 ```ruby
 photo = Parse::File.new({
-  :body => IO.read("test/parsers.jpg"), 
+  :body => File.open("test/parsers.jpg", "rb").read, 
   :local_filename => "parsers.jpg", 
   :content_type => "image/jpeg"
 })
@@ -1042,7 +1042,7 @@ After files are uploaded, you can associate them with Parse objects:
 
 ```ruby
 photo = Parse::File.new({
-  :body => IO.read("test/parsers.jpg"), 
+  :body => File.open("test/parsers.jpg", "rb").read, 
   :local_filename => "parsers.jpg", 
   :content_type => "image/jpeg"
 })

@@ -29,14 +29,12 @@ module Parse
 
       options = {:request => {:timeout => 30, :open_timeout => 30}}
       @session = Faraday.new "https://#{host}", options do |c|
-        c.request :multipart
         c.request :json
         c.response :logger, @logger
         c.use Faraday::BetterRetry,
           max: @max_retries,
           interval: 0.5,
-          exceptions: [ 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry',
-                        'Errno::ETIMEDOUT', 'Timeout::Error', 'Error::TimeoutError' ]
+          exceptions: ['Faraday::Error::TimeoutError', 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry']
         c.use Faraday::ExtendedParseJson
         yield(c) if block_given?
         c.adapter Faraday.default_adapter
