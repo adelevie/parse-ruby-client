@@ -1,5 +1,4 @@
-require 'json'
-
+# -*- encoding : utf-8 -*-
 module Parse
   class Batch
     attr_reader :requests

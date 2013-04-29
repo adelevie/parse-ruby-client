@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'parse/protocol'
 require 'parse/client'
 require 'parse/error'

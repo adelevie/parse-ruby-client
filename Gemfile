@@ -12,9 +12,10 @@ group :development do
   gem 'mocha',     '= 0.12.0', :require => false
   gem 'jeweler',   '~> 1.6.4'
   gem 'simplecov',             :require => false
-  gem 'webmock'
+  gem 'webmock',   '~> 1.9.0'
   gem 'vcr'
 end
 
-gem 'patron'
-gem 'iron_mq'
+gem 'yajl-ruby', :require => 'yail'
+gem 'faraday'
+gem 'faraday_middleware'
