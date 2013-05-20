@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/foxnewsnetwork/jeweler.git
+  revision: f05c62e168cfc29bd82cebe06df8fd11e1ef09ee
+  branch: ruby-2.0.0-ifying
+  specs:
+    jeweler (1.8.4)
+      bundler (~> 1.3.0.pre)
+      git (>= 1.2.5)
+      rake
+      rdoc
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -8,11 +19,6 @@ GEM
       rest (>= 2.2.0)
     iron_mq (2.1.3)
       iron_core (>= 0.4.2)
-    jeweler (1.8.4)
-      bundler (~> 1.0)
-      git (>= 1.2.5)
-      rake
-      rdoc
     json (1.8.0)
     metaclass (0.0.1)
     mime-types (1.20.1)
@@ -46,7 +52,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   iron_mq
-  jeweler
+  jeweler!
   mocha (= 0.12.0)
   patron
   shoulda
