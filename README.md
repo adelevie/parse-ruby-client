@@ -1124,3 +1124,22 @@ At the moment there are a couple of things to watch out for:
 1. Each PFObject class may only have one key with a PFGeoPoint object.
 
 2. Points should not equal or exceed the extreme ends of the ranges. Latitude should not be -90.0 or 90.0. Longitude should not be -180.0 or 180.0. Attempting to use GeoPoint's with latitude and/or longitude outside these ranges will cause an error.
+
+# Contributors
+
+This project would not be where it is today without the generous help provided by its many contributors:
+
+1. Adam Alpern (created this project) (https://github.com/aalpern) (https://www.gittip.com/on/github/aalpern/)
+2. Eric Jensen (https://github.com/ericcj) (https://www.gittip.com/on/github/ericcj/)
+3. Ben Cherry (https://github.com/bcherry) (https://www.gittip.com/bcherry/)
+4. Tikhon Bernstam (https://github.com/tikhon) (https://www.gittip.com/on/github/tikhon/)
+5. Tony Amoyal (https://github.com/tamoyal) (https://www.gittip.com/on/github/tamoyal/)
+6. Glenn Goodrich (https://github.com/ruprict) (https://www.gittip.com/on/github/ruprict/)
+7. Jeremy Schoenherr (https://github.com/jeremyschoenherr) (https://www.gittip.com/on/github/jeremyschoenherr/)
+8. Dean Perry (https://github.com/deanperry) (https://www.gittip.com/deanperry/)
+9. [vircheck](https://github.com/vircheck) (https://www.gittip.com/on/github/vircheck/)
+10. Jacob Eiting (https://github.com/jeiting) (https://www.gittip.com/on/github/jeiting/)
+11. Guy Maliar (https://github.com/gmaliar) (https://www.gittip.com/on/github/gmaliar/)
+12. Ivan Fuller (https://github.com/ifuller) (https://www.gittip.com/on/github/ifuller/)
+13. Leandro S. (https://github.com/lsiqueira) (https://www.gittip.com/on/github/lsiqueira/)
+14. Brian Hammond (https://github.com/fictorial) (https://www.gittip.com/on/github/fictorial/)

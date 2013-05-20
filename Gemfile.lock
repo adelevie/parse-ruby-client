@@ -10,7 +10,7 @@ GIT
       rdoc
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     addressable (2.3.2)
     crack (0.3.1)

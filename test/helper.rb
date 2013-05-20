@@ -7,6 +7,12 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
+
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/test/"
+end if ENV["COVERAGE"]
+
 require 'test/unit'
 require 'shoulda'
 require 'mocha'

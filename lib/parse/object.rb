@@ -138,7 +138,7 @@ module Parse
 
     def as_json(*a)
       Hash[self.map do |key, value|
-        value = if value
+        value = if !value.nil?
           value.respond_to?(:as_json) ? value.as_json : value
         else
           Protocol::DELETE_OP
