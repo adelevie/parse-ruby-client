@@ -13,6 +13,9 @@ require 'mocha'
 require 'vcr'
 require 'webmock/test_unit'
 
+require 'simplecov'
+SimpleCov.start if ENV['COVERAGE']
+
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'parse-ruby-client'
