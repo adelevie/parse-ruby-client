@@ -10,7 +10,7 @@ group :development do
   gem 'shoulda',   '>= 0'
   gem 'test-unit', '= 2.5.0'
   gem 'mocha',     '= 0.12.0', :require => false
-  gem 'jeweler',   '~> 1.6.4'
+  gem 'jeweler',   :git => 'https://github.com/foxnewsnetwork/jeweler.git', :branch => 'ruby-2.0.0-ifying'
   gem 'simplecov',             :require => false
   gem 'webmock'
   gem 'vcr'

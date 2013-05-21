@@ -1,4 +1,3 @@
-require 'pp'
 module Parse
 
   # Parse a JSON representation into a fully instantiated
@@ -22,8 +21,10 @@ module Parse
         parse_datatype obj
       elsif obj.size == 1 && obj.has_key?(Protocol::KEY_RESULTS) && obj[Protocol::KEY_RESULTS].is_a?(Array)
         obj[Protocol::KEY_RESULTS].collect { |o| parse_json(class_name, o) }
-      else # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
+      elsif class_name # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
         Parse::Object.new class_name, Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
+      else # plain old hash
+        obj
       end
 
     # primitive
@@ -51,12 +52,8 @@ module Parse
     end
   end
 
-  def Parse.can_pointerize?(value)
-    value.kind_of?(Parse::Object) && value.class_name
-  end
-
   def Parse.pointerize_value(obj)
-    if Parse.can_pointerize?(obj)
+    if obj.kind_of?(Parse::Object)
       obj.pointer
     elsif obj.is_a?(Array)
       obj.map do |v|
@@ -85,52 +82,6 @@ module Parse
       v.object_id
     else
       v.class_name.hash ^ v.id.hash
-    end
-  end
-
-  def Parse.store_objects_by_pointer(obj, store={})
-    if obj.is_a?(Parse::Object) && !obj.new?
-      if store[obj.pointer] # don't recurse if you have circular objects
-        return store
-      end
-
-      store[obj.pointer] = obj
-    end
-
-    if obj.is_a?(Array)
-      obj.each do |v|
-        Parse.store_objects_by_pointer(v, store)
-      end
-    elsif obj.is_a?(Hash)
-      obj.each do |k, v|
-        Parse.store_objects_by_pointer(v, store)
-      end
-    end
-
-    store
-  end
-
-  def Parse.restore_objects!(obj, store, already_restored={})
-    if already_restored[obj]
-      return obj
-    end
-
-    already_restored[obj] = true
-
-    if obj.is_a?(Hash) # Parse::Object or Hash, we'll actually modify the object
-      obj.each do |k, v|
-        obj[k] = Parse.restore_objects!(v, store, already_restored)
-      end
-
-      obj
-    elsif obj.is_a?(Parse::Pointer) && store[obj]
-      store[obj]
-    elsif obj.is_a?(Array)
-      obj.map do |v|
-        Parse.restore_objects!(v, store, already_restored)
-      end
-    else
-      obj
     end
   end
 end
