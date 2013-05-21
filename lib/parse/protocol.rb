@@ -59,7 +59,6 @@ module Parse
     KEY_OP          = "__op"
 
     KEY_INCREMENT   = "Increment"
-    KEY_DECREMENT   = "Decrement"
     KEY_DELETE      = "Delete"
 
     # array ops
@@ -85,9 +84,6 @@ module Parse
 
     # Operation name for incrementing an objects field value remotely
     OP_INCREMENT    = "Increment"
-
-    # Operation name for decrementing an objects field value remotely
-    OP_DECREMENT    = "Decrement"
 
     # The data type name for special JSON objects representing a full object
     TYPE_OBJECT     = "Object"

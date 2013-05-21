@@ -1,0 +1,180 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Post
+    body:
+      encoding: UTF-8
+      string: '{}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 May 2013 17:44:02 GMT
+      Location:
+      - https://api.parse.com/1/classes/Post/SNcYuo3t5K
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 201 Created
+      X-Runtime:
+      - '0.289539'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '64'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"createdAt":"2013-05-21T17:44:02.504Z","objectId":"SNcYuo3t5K"}'
+    http_version: 
+  recorded_at: Tue, 21 May 2013 17:44:02 GMT
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Comment
+    body:
+      encoding: UTF-8
+      string: '{"text":"great post!"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 May 2013 17:44:02 GMT
+      Location:
+      - https://api.parse.com/1/classes/Comment/lJjuzuDd6H
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 201 Created
+      X-Runtime:
+      - '0.107052'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '64'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"createdAt":"2013-05-21T17:44:02.601Z","objectId":"lJjuzuDd6H"}'
+    http_version: 
+  recorded_at: Tue, 21 May 2013 17:44:02 GMT
+- request:
+    method: put
+    uri: https://api.parse.com/1/classes/Post/SNcYuo3t5K
+    body:
+      encoding: UTF-8
+      string: '{"comments":{"__op":"AddUnique","objects":[{"__type":"Pointer","className":"Comment","objectId":"lJjuzuDd6H"}]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 May 2013 17:44:02 GMT
+      Etag:
+      - '"08c4a7d37dd1d79503cdfba1d649a71b"'
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '0.109572'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '120'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"comments":[{"__type":"Pointer","className":"Comment","objectId":"lJjuzuDd6H"}],"updatedAt":"2013-05-21T17:44:02.779Z"}'
+    http_version: 
+  recorded_at: Tue, 21 May 2013 17:44:02 GMT
+recorded_with: VCR 2.4.0

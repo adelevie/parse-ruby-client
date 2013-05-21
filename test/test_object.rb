@@ -198,6 +198,32 @@ class TestObject < ParseTestCase
     end
   end
 
+  def test_array_add_unique
+    VCR.use_cassette('test_array_add_unique', :record => :new_episodes) do
+      post = Parse::Object.new "Post"
+      post.save
+
+      comment = Parse::Object.new("Comment", "text" => "great post!")
+      comment.save
+
+      post.array_add_unique("comments", comment)
+      assert_equal "great post!", post['comments'][0]['text']
+      post.save
+      assert_equal comment, post['comments'][0]
+      assert post['comments'][0].instance_of?(Parse::Pointer) # save returns array pointerized
+    end
+  end
+
+  def test_decrement
+    VCR.use_cassette('test_decrement', :record => :new_episodes) do
+      post = Parse::Object.new "Post", 'count' => 1
+      post.save
+
+      post.decrement('count')
+      assert_equal 0, post['count']
+    end
+  end
+
   def test_array_add_relation
     omit("broken test, saving Post results in ParseProtocolError: 111: can't add a relation to an non-relation field")
 
