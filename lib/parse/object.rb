@@ -100,7 +100,6 @@ module Parse
     end
 
     def to_h(*a)
-      puts "HERE"
       Hash[self.map do |key, value|
         [key, value.respond_to?(:to_h) ? value.to_h : value]
       end]
