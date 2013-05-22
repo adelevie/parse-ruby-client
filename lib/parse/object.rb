@@ -116,16 +116,13 @@ module Parse
         method = :post
       end
 
-      object_store = Parse.store_objects_by_pointer(self)
-
       body = safe_json
       data = Parse.client.request(self.uri, method, body)
 
       if data
-        parse data
+        # array operations can return mutated view of array which needs to be parsed
+        parse Parse.parse_json(class_name, data)
       end
-
-      Parse.restore_objects!(self, object_store)
 
       if @class_name == Parse::Protocol::CLASS_USER
         self.delete("password")
@@ -209,13 +206,6 @@ module Parse
       #  return nil
       #end
 
-      #if amount != 0
-      #  op = amount > 0 ? Protocol::OP_INCREMENT : Protocol::OP_DECREMENT
-      #  body = "{\"#{field}\": {\"#{Protocol::KEY_OP}\": \"#{op}\", \"#{Protocol::KEY_AMOUNT}\" : #{amount.abs}}}"
-      #  data = Parse.client.request( self.uri, :put, body)
-      #  parse data
-      #end
-      #self
       body = {field => Parse::Increment.new(amount)}.to_json
       data = Parse.client.request(self.uri, :put, body)
       parse data
@@ -225,11 +215,7 @@ module Parse
     # Decrement the given field by an amount, which defaults to 1. Saves immediately to reflect decremented
     # A synonym for increment(field, -amount).
     def decrement(field, amount = 1)
-      #increment field, -amount
-      body = {field => Parse::Decrement.new(amount)}.to_json
-      data = Parse.client.request(self.uri, :put, body)
-      parse data
-      self
+      increment(field, -amount)
     end
 
     private

@@ -112,6 +112,18 @@ class TestObject < ParseTestCase
     end
   end
 
+  def test_acls_arent_objects
+    VCR.use_cassette('test_acls_arent_objects', :record => :new_episodes) do
+      post = Parse::Object.new("Post", "ACL" => {"*" => {"read"=>true}})
+      assert_equal Hash, post['ACL'].class
+      post.save
+      assert_equal Hash, post.refresh['ACL'].class
+
+      post = Parse.get("Post", post.id)
+      assert_equal Hash, post['ACL'].class
+    end
+  end
+
   def test_deep_as_json
     VCR.use_cassette('test_deep_as_json', :record => :new_episodes) do
       other = Parse::Object.new "Post"
@@ -138,7 +150,7 @@ class TestObject < ParseTestCase
     safe_json_hash = JSON.parse post.safe_json
     assert_equal false, safe_json_hash["read"]
     assert_equal true, safe_json_hash["published"]
-  end  
+  end
 
   def test_saving_boolean_values
     VCR.use_cassette('test_saving_boolean_values', :record => :new_episodes) do
@@ -151,7 +163,7 @@ class TestObject < ParseTestCase
       assert_equal false, retrieved_post["read"]
       assert_equal true, retrieved_post["published"]
     end
-  end  
+  end
 
   def test_array_add
     VCR.use_cassette('test_array_add', :record => :new_episodes) do
@@ -183,6 +195,32 @@ class TestObject < ParseTestCase
       assert_equal "great post!", post['comments'][0]['text']
       post.save
       assert_equal "great post!", post['comments'][0]['text']
+    end
+  end
+
+  def test_array_add_unique
+    VCR.use_cassette('test_array_add_unique', :record => :new_episodes) do
+      post = Parse::Object.new "Post"
+      post.save
+
+      comment = Parse::Object.new("Comment", "text" => "great post!")
+      comment.save
+
+      post.array_add_unique("comments", comment)
+      assert_equal "great post!", post['comments'][0]['text']
+      post.save
+      assert_equal comment, post['comments'][0]
+      assert post['comments'][0].instance_of?(Parse::Pointer) # save returns array pointerized
+    end
+  end
+
+  def test_decrement
+    VCR.use_cassette('test_decrement', :record => :new_episodes) do
+      post = Parse::Object.new "Post", 'count' => 1
+      post.save
+
+      post.decrement('count')
+      assert_equal 0, post['count']
     end
   end
 

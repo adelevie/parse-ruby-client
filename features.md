@@ -179,7 +179,7 @@ game_score["score"] = Parse::Increment.new(1)
 game_score.save
 ```
 
-You can also use `Parse::Decrement.new(amount)`.
+Use a negative amount to decrement.
 
 #### Arrays
 
@@ -243,7 +243,7 @@ You can delete a single field from an object by using the `Parse::Object#delete_
 
 To reduce the amount of time spent on network round trips, you can create, update, or delete several objects in one call, using the batch endpoint.
 
-parse-ruby-client provides a "manual" way to construct Batch Operations, as well as some convenience methods. The commands are run in the order they are given. For example, to create a couple of GameScore objects using the "manual" style, use `Parse::Batch#add_request`. `#add_request` takes a `Hash` with `"method"`, `"path"`, and `"body"` keys that specify the HTTP command that would normally be used for that command. 
+parse-ruby-client provides a "manual" way to construct Batch Operations, as well as some convenience methods. The commands are run in the order they are given. For example, to create a couple of GameScore objects using the "manual" style, use `Parse::Batch#add_request`. `#add_request` takes a `Hash` with `"method"`, `"path"`, and `"body"` keys that specify the HTTP command that would normally be used for that command.
 
 ```ruby
 batch = Parse::Batch.new
@@ -454,7 +454,7 @@ Other constraint methods include:
   <tr>
     <td>`Parse::Query#select`</td>
     <td>TODO: `$select` not yet implemented. This matches a value for a key in the result of a different query</td>
-  </tr> 
+  </tr>
 </table>
 
 For example, to retrieve scores between 1000 and 3000, including the endpoints, we could issue:
@@ -700,7 +700,7 @@ To sign up a new user, create a new `Parse::User` object and then call `#save` o
 
 ```ruby
 user = Parse::User.new({
-  :username => "cooldude6", 
+  :username => "cooldude6",
   :password => "p_n7!-e8",
   :phone => "415-392-0202"
 })
@@ -824,7 +824,7 @@ All of the options for queries that work for regular objects also work for user 
 
 ### Deleting Users
 
-TODO: Implement this! 
+TODO: Implement this!
 
 Proposed api:
 
@@ -1010,8 +1010,8 @@ To upload a file to Parse, use `Parse::File`. You must include the `"Content-Typ
 
 ```ruby
 file = Parse::File.new({
-  :body => "Hello World!", 
-  :local_filename => "hello.txt", 
+  :body => "Hello World!",
+  :local_filename => "hello.txt",
   :content_type => "text/plain"
 })
 file.save
@@ -1029,8 +1029,8 @@ To upload an image, the syntax is a little bit different. Here's an example that
 
 ```ruby
 photo = Parse::File.new({
-  :body => IO.read("test/parsers.jpg"), 
-  :local_filename => "parsers.jpg", 
+  :body => IO.read("test/parsers.jpg"),
+  :local_filename => "parsers.jpg",
   :content_type => "image/jpeg"
 })
 photo.save
@@ -1042,8 +1042,8 @@ After files are uploaded, you can associate them with Parse objects:
 
 ```ruby
 photo = Parse::File.new({
-  :body => IO.read("test/parsers.jpg"), 
-  :local_filename => "parsers.jpg", 
+  :body => IO.read("test/parsers.jpg"),
+  :local_filename => "parsers.jpg",
   :content_type => "image/jpeg"
 })
 photo.save

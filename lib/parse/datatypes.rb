@@ -202,37 +202,6 @@ module Parse
     end
   end
 
-  class Decrement
-    # '{"score": {"__op": "Decrement", "amount": 1 } }'
-    attr_accessor :amount
-
-    def initialize(amount)
-      @amount = amount
-    end
-
-    def eql?(other)
-      self.class.equal?(other.class) &&
-        amount == other.amount
-    end
-
-    alias == eql?
-
-    def hash
-      amount.hash
-    end
-
-    def as_json(*a)
-      {
-          Protocol::KEY_OP => Protocol::KEY_DECREMENT,
-          Protocol::KEY_AMOUNT => @amount
-      }
-    end
-
-    def to_json(*a)
-        as_json.to_json(*a)
-    end
-  end
-
   class ArrayOp
     # '{"myArray": {"__op": "Add", "objects": ["something", "something else"] } }'
     attr_accessor :operation
