@@ -54,7 +54,9 @@ module Parse
 
   def Parse.pointerize_value(obj)
     if obj.kind_of?(Parse::Object)
-      obj.pointer
+      p = obj.pointer
+      raise ArgumentError.new("new object used in context requiring pointer #{obj}") unless p
+      p
     elsif obj.is_a?(Array)
       obj.map do |v|
         Parse.pointerize_value(v)
