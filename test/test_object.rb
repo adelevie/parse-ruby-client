@@ -147,7 +147,7 @@ class TestObject < ParseTestCase
     post = Parse::Object.new "Post"
     post["read"] = false
     post["published"] = true
-    safe_json_hash = JSON.parse post.safe_json
+    safe_json_hash = JSON.parse post.safe_hash.to_json
     assert_equal false, safe_json_hash["read"]
     assert_equal true, safe_json_hash["published"]
   end

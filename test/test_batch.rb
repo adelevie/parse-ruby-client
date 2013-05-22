@@ -91,6 +91,21 @@ class TestBatch < ParseTestCase
     end
   end
 
+  def test_update_nils_delete_keys
+    VCR.use_cassette('test_batch_update_nils_delete_keys', :record => :new_episodes) do
+      post = Parse::Object.new("BatchTestObject")
+      post["foo"] = "1"
+      post.save
+
+      post["foo"] = nil
+      batch = Parse::Batch.new
+      batch.update_object(post)
+      batch.run!
+
+      assert_false post.refresh.keys.include?("foo")
+    end
+  end
+
   def test_delete_object
     VCR.use_cassette('test_batch_delete_object', :record => :new_episodes) do
       objects = [1, 2, 3, 4, 5].map do |i|

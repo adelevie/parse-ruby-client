@@ -43,67 +43,9 @@ module Parse
       self
     end
 
-    # Merge a hash parsed from the JSON representation into
-    # this instance. This will extract the reserved fields,
-    # merge the hash keys, and then ensure that the reserved
-    # fields do not occur in the underlying hash storage.
-    def parse(data)
-      if !data
-        return
-      end
-
-      @parse_object_id ||= data[Protocol::KEY_OBJECT_ID]
-
-      if data.has_key? Protocol::KEY_CREATED_AT
-        @created_at = DateTime.parse data[Protocol::KEY_CREATED_AT]
-      end
-
-      if data.has_key? Protocol::KEY_UPDATED_AT
-        @updated_at = DateTime.parse data[Protocol::KEY_UPDATED_AT]
-      end
-
-      data.each do |k,v|
-        if k.is_a? Symbol
-          k = k.to_s
-        end
-
-        if k != Parse::Protocol::KEY_TYPE
-          self[k] = v
-        end
-      end
-
-      self
-    end
-
     def new?
       self["objectId"].nil?
     end
-
-    def safe_hash
-      without_reserved = self.dup
-      Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
-
-      without_relations = without_reserved
-      without_relations.each do |k,v|
-          if v.is_a? Hash
-            if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
-              without_relations.delete(k)
-            end
-          end
-      end
-
-      without_relations.each do |k, v|
-        without_relations[k] = Parse.pointerize_value(v)
-      end
-
-      without_relations
-    end
-
-    def safe_json
-      safe_hash.to_json
-    end
-
-    private :parse
 
     # Write the current state of the local object to the API.
     # If the object has never been saved before, this will create
@@ -116,7 +58,7 @@ module Parse
         method = :post
       end
 
-      body = safe_json
+      body = safe_hash.to_json
       data = Parse.client.request(self.uri, method, body)
 
       if data
@@ -133,20 +75,40 @@ module Parse
       self
     end
 
-    def as_json(*a)
-      Hash[self.map do |key, value|
-        value = if !value.nil?
-          value.respond_to?(:as_json) ? value.as_json : value
-        else
-          Protocol::DELETE_OP
-        end
+    def safe_hash
+      without_reserved = self.dup
+      Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
 
-        [key, value]
-      end]
+      without_relations = without_reserved
+      without_relations.each do |k,v|
+          if v.is_a? Hash
+            if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
+              without_relations.delete(k)
+            end
+          end
+      end
+
+      without_relations.each do |k, v|
+        without_relations[k] = if v.nil?
+          Protocol::DELETE_OP
+        else
+          Parse.pointerize_value(v)
+        end
+      end
+
+      without_relations
     end
 
+    def to_h(*a)
+      puts "HERE"
+      Hash[self.map do |key, value|
+        [key, value.respond_to?(:to_h) ? value.to_h : value]
+      end]
+    end
+    alias :as_json :to_h
+
     def to_json(*a)
-      as_json.to_json(*a)
+      to_h.to_json(*a)
     end
 
     def to_s
@@ -219,6 +181,38 @@ module Parse
     end
 
     private
+
+    # Merge a hash parsed from the JSON representation into
+    # this instance. This will extract the reserved fields,
+    # merge the hash keys, and then ensure that the reserved
+    # fields do not occur in the underlying hash storage.
+    def parse(data)
+      if !data
+        return
+      end
+
+      @parse_object_id ||= data[Protocol::KEY_OBJECT_ID]
+
+      if data.has_key? Protocol::KEY_CREATED_AT
+        @created_at = DateTime.parse data[Protocol::KEY_CREATED_AT]
+      end
+
+      if data.has_key? Protocol::KEY_UPDATED_AT
+        @updated_at = DateTime.parse data[Protocol::KEY_UPDATED_AT]
+      end
+
+      data.each do |k,v|
+        if k.is_a? Symbol
+          k = k.to_s
+        end
+
+        if k != Parse::Protocol::KEY_TYPE
+          self[k] = v
+        end
+      end
+
+      self
+    end
 
     def array_op(field, operation, value)
       raise "field #{field} not an array" if self[field] && !self[field].is_a?(Array)
