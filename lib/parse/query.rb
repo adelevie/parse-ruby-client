@@ -127,7 +127,12 @@ module Parse
       response = Parse.client.request uri, :get, nil, query
 
       if response.is_a?(Hash) && response.has_key?(Protocol::KEY_RESULTS) && response[Protocol::KEY_RESULTS].is_a?(Array)
-        response[Protocol::KEY_RESULTS].map{|o| Parse.parse_json(class_name, o)}
+        parsed_results = response[Protocol::KEY_RESULTS].map{|o| Parse.parse_json(class_name, o)}
+        if response.keys.size == 1
+          parsed_results
+        else
+          response.dup.merge(Protocol::KEY_RESULTS => parsed_results)
+        end
       else
         raise ParseError.new("query response not a Hash with #{Protocol::KEY_RESULTS} key: #{response.class} #{response.inspect}")
       end

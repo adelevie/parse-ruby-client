@@ -76,8 +76,9 @@ class TestQuery < ParseTestCase
       q = Parse::Query.new "TestQuery"
       q.count = true
       query_matcher = has_entries(:count => true)
-      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns(EMPTY_QUERY_RESPONSE)
-      q.get
+      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns(EMPTY_QUERY_RESPONSE.merge("count" => 1000))
+      results = q.get
+      assert_equal 1000, results['count']
     end
   end
 
