@@ -125,7 +125,12 @@ module Parse
       [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
       Parse.client.logger.info{"Parse query for #{uri} #{CGI.unescape(query.inspect)}"}
       response = Parse.client.request uri, :get, nil, query
-      Parse.parse_json class_name, response
+
+      if response.is_a?(Hash) && response.has_key?(Protocol::KEY_RESULTS) && response[Protocol::KEY_RESULTS].is_a?(Array)
+        response[Protocol::KEY_RESULTS].map{|o| Parse.parse_json(class_name, o)}
+      else
+        raise ParseError.new("query response not a Hash with #{Protocol::KEY_RESULTS} key: #{response.class} #{response.inspect}")
+      end
     end
 
     private
