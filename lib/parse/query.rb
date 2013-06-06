@@ -116,15 +116,18 @@ module Parse
       end
     end
 
-    def get(xget = false)
+    def get
       uri   = Protocol.class_uri @class_name
       if @class_name == Parse::Protocol::CLASS_USER
         uri = Protocol.user_uri
       end
 
       query = { "where" => where_as_json.to_json }
-      unless xget
-        query['where'] = CGI.escape(query['where'])
+      escaped_where = CGI.escape(query['where'])
+      if escaped_where.size > 2000
+        xget = true # Set X-HTTP-Method-Override to GET on a POST to avoid URL length limits. See https://parse.com/questions/502-error-when-query-with-huge-contains
+      else
+        query['where'] = escaped_where
       end
       set_order(query)
       [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
