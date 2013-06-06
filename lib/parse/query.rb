@@ -1,5 +1,4 @@
 require 'cgi'
-require 'patron'
 
 module Parse
 
@@ -121,22 +120,11 @@ module Parse
       if @class_name == Parse::Protocol::CLASS_USER
         uri = Protocol.user_uri
       end
-
-      query = { "where" => where_as_json.to_json }
-      escaped_where = CGI.escape(query['where'])
-      if escaped_where.size > 2000
-        xget = true # Set X-HTTP-Method-Override to GET on a POST to avoid URL length limits. See https://parse.com/questions/502-error-when-query-with-huge-contains
-      else
-        query['where'] = escaped_where
-      end
+      query = { "where" => CGI.escape(where_as_json.to_json) }
       set_order(query)
       [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
       Parse.client.logger.info{"Parse query for #{uri} #{CGI.unescape(query.inspect)}"}
-      response = if xget
-        Parse.client.request(uri, :xget, Patron::Util.build_query_pairs_from_hash(query).join('&'), nil, 'application/x-www-form-urlencoded')
-      else
-        Parse.client.request(uri, :get, nil, query)
-      end
+      response = Parse.client.request uri, :get, nil, query
 
       if response.is_a?(Hash) && response.has_key?(Protocol::KEY_RESULTS) && response[Protocol::KEY_RESULTS].is_a?(Array)
         parsed_results = response[Protocol::KEY_RESULTS].map{|o| Parse.parse_json(class_name, o)}

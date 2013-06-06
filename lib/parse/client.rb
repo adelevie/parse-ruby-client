@@ -60,27 +60,32 @@ module Parse
     # ParseProtocolError if the response has an error status code,
     # and will return the parsed JSON body on success, if there is one.
     def request(uri, method = :get, body = nil, query = nil, content_type = nil)
-      @session.headers[Protocol::HEADER_MASTER_KEY]    = @master_key
-      @session.headers[Protocol::HEADER_API_KEY]  = @api_key
-      @session.headers[Protocol::HEADER_APP_ID]   = @application_id
-      @session.headers[Protocol::HEADER_SESSION_TOKEN]   = @session_token
-
-      if content_type
-        @session.headers["Content-Type"] = content_type
-      end
-
       options = {}
       headers = {}
+
+      headers[Protocol::HEADER_MASTER_KEY]    = @master_key
+      headers[Protocol::HEADER_API_KEY]       = @api_key
+      headers[Protocol::HEADER_APP_ID]        = @application_id
+      headers[Protocol::HEADER_SESSION_TOKEN] = @session_token
+
       if body
         options[:data] = body
       end
       if query
-        options[:query] = query
+        options[:query] = Patron::Util.build_query_pairs_from_hash(query).join('&')
+
+        # Avoid 502 or 414 when sending a large querystring. See https://parse.com/questions/502-error-when-query-with-huge-contains
+        if options[:query].size > 2000 && method == :get && !body && !content_type
+          options[:data] = options[:query]
+          options[:query] = nil
+          method = :post
+          headers['X-HTTP-Method-Override'] = 'GET'
+          content_type = 'application/x-www-form-urlencoded'
+        end
       end
 
-      if method == :xget
-        headers['X-HTTP-Method-Override'] = 'GET'
-        method = :post
+      if content_type
+        headers["Content-Type"] = content_type
       end
 
       num_tries = 0
