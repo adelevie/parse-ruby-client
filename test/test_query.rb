@@ -128,6 +128,18 @@ class TestQuery < ParseTestCase
     assert_equal({"inner"=>{"$inQuery"=>{"className"=>"Inner", "where"=>{"foo"=>"bar"}}}}, outer_query.where)
   end
 
+  def test_xget
+    VCR.use_cassette('test_xget', :record => :new_episodes) do
+      post = Parse::Object.new("Post")
+      post.save
+
+      other_post = Parse::Object.new("Post")
+      other_post.save
+
+      assert_equal [post], Parse::Query.new("Post").value_in("objectId", [post.id, "bar"]).get(true)
+    end
+  end
+
   def test_bad_response
     VCR.use_cassette('test_bad_response', :record => :new_episodes) do
       Parse::Client.any_instance.expects(:request).returns("crap")

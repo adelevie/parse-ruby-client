@@ -70,11 +70,17 @@ module Parse
       end
 
       options = {}
+      headers = {}
       if body
         options[:data] = body
       end
       if query
         options[:query] = query
+      end
+
+      if method == :xget
+        headers['X-HTTP-Method-Override'] = 'GET'
+        method = :post
       end
 
       num_tries = 0
@@ -89,14 +95,14 @@ module Parse
           #  else
               # add to queue before request
               @queue.post("1")
-              response = @session.request(method, uri, {}, options)
+              response = @session.request(method, uri, headers, options)
               # delete from queue after request
               msg = @queue.get()
               msg.delete
           #  end
           #end
         else
-          response = @session.request(method, uri, {}, options)
+          response = @session.request(method, uri, headers, options)
         end
 
         parsed = JSON.parse(response.body)
