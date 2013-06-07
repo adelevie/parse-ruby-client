@@ -348,7 +348,7 @@ bytes = Parse::Bytes.new(data)
 The `Pointer` type is used when mobile code sets a `PFObject` (iOS SDK) or `ParseObject` (Android SDK) as the value of another object. It contains the `className` and `objectId` of the referred-to value.
 
 ```ruby
-pointer = Parse::Pointer.new({"className => gameScore", "objectId" => "GeqPWJdNqp"})
+pointer = Parse::Pointer.new({"className" => "gameScore", "objectId" => "GeqPWJdNqp"})
 ```
 
 Pointers to `user` objects have a `className` of `_User`. Prefixing with an underscore is forbidden for developer-defined classes and signifies the class is a special built-in.
