@@ -3,8 +3,10 @@ require 'json'
 module Parse
   class Batch
     attr_reader :requests
+    attr_reader :client
 
-    def initialize
+    def initialize(client = Parse.client)
+      @client = client
       @requests ||= []
     end
 
@@ -44,9 +46,8 @@ module Parse
     def run!
       uri = Parse::Protocol.batch_request_uri
       body = {:requests => @requests}.to_json
-      Parse.client.request(uri, :post, body)
+      @client.request(uri, :post, body)
     end
-
 
   end
 
