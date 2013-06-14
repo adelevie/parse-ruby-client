@@ -110,7 +110,7 @@ module Parse
     def to_h(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_DATE,
-          "iso"              => value.iso8601(3)
+          "iso"              => value.to_time.utc.iso8601(3)
       }
     end
     alias :as_json :to_h

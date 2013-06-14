@@ -18,14 +18,13 @@ class TestDatatypes < Test::Unit::TestCase
   end
 
   def test_date
-    date_time = DateTime.now
-    data = date_time
-    parse_date = Parse::Date.new data
+    date_time = Time.at(0).to_datetime
+    parse_date = Parse::Date.new(date_time)
 
-    assert_equal parse_date.value, date_time
-    assert_equal JSON.parse(parse_date.to_json)["iso"], date_time.iso8601(3)
+    assert_equal date_time, parse_date.value
+    assert_equal "1970-01-01T00:00:00.000Z", JSON.parse(parse_date.to_json)["iso"]
     assert_equal 0, parse_date <=> parse_date
-    assert_equal 0, Parse::Date.new(data) <=> Parse::Date.new(data)
+    assert_equal 0, Parse::Date.new(date_time) <=> Parse::Date.new(date_time)
 
     post = Parse::Object.new("Post")
     post["time"] = parse_date
