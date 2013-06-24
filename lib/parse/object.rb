@@ -35,7 +35,7 @@ module Parse
     end
 
     def pointer
-      Parse::Pointer.new(self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)) unless new?
+      Parse::Pointer.new(rest_api_hash) unless new?
     end
 
     # make it easier to deal with the ambiguity of whether you're passed a pointer or object
@@ -75,36 +75,33 @@ module Parse
       self
     end
 
+    # representation of object to send on saves
     def safe_hash
-      without_reserved = self.dup
-      Protocol::RESERVED_KEYS.each { |k| without_reserved.delete(k) }
-
-      without_relations = without_reserved
-      without_relations.each do |k,v|
-          if v.is_a? Hash
-            if v[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
-              without_relations.delete(k)
-            end
-          end
-      end
-
-      without_relations.each do |k, v|
-        without_relations[k] = if v.nil?
-          Protocol::DELETE_OP
+      Hash[self.map do |key, value|
+        if Protocol::RESERVED_KEYS.include?(key)
+          nil
+        elsif value.is_a?(Hash) && value[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
+          nil
+        elsif value.nil?
+          [key, Protocol::DELETE_OP]
         else
-          Parse.pointerize_value(v)
+          [key, Parse.pointerize_value(value)]
         end
-      end
+      end.compact]
+    end
 
-      without_relations
+    # full REST api representation of object
+    def rest_api_hash
+      self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)
     end
 
     def to_h(*a)
-      Hash[self.map do |key, value|
+      Hash[rest_api_hash.map do |key, value|
         [key, value.respond_to?(:to_h) ? value.to_h : value]
       end]
     end
     alias :as_json :to_h
+    alias :to_hash :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
