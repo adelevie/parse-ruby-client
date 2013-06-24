@@ -101,6 +101,7 @@ module Parse
       end]
     end
     alias :as_json :to_h
+    alias :to_hash :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
