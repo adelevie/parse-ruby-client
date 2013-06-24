@@ -35,7 +35,7 @@ module Parse
     end
 
     def pointer
-      Parse::Pointer.new(self.to_h) unless new?
+      Parse::Pointer.new(rest_api_hash) unless new?
     end
 
     # make it easier to deal with the ambiguity of whether you're passed a pointer or object
@@ -91,8 +91,12 @@ module Parse
     end
 
     # full REST api representation of object
+    def rest_api_hash
+      self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)
+    end
+
     def to_h(*a)
-      Hash[self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name).map do |key, value|
+      Hash[rest_api_hash.map do |key, value|
         [key, value.respond_to?(:to_h) ? value.to_h : value]
       end]
     end
