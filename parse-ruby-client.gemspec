@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2013-05-22"
+  s.date = "2013-07-01"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -34,8 +34,8 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_batch_create_object.yml",
     "fixtures/vcr_cassettes/test_batch_delete_object.yml",
     "fixtures/vcr_cassettes/test_batch_run.yml",
+    "fixtures/vcr_cassettes/test_batch_update_nils_delete_keys.yml",
     "fixtures/vcr_cassettes/test_batch_update_object.yml",
-    "fixtures/vcr_cassettes/test_circular_save.yml",
     "fixtures/vcr_cassettes/test_created_at.yml",
     "fixtures/vcr_cassettes/test_decrement.yml",
     "fixtures/vcr_cassettes/test_deep_parse.yml",
@@ -52,12 +52,14 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_pointer.yml",
     "fixtures/vcr_cassettes/test_save_with_sub_objects.yml",
     "fixtures/vcr_cassettes/test_saving_boolean_values.yml",
+    "fixtures/vcr_cassettes/test_saving_nested_objects.yml",
     "fixtures/vcr_cassettes/test_server_update.yml",
     "fixtures/vcr_cassettes/test_simple_save.yml",
     "fixtures/vcr_cassettes/test_text_file_save.yml",
     "fixtures/vcr_cassettes/test_update.yml",
     "fixtures/vcr_cassettes/test_updated_at.yml",
     "fixtures/vcr_cassettes/test_user_save.yml",
+    "fixtures/vcr_cassettes/test_xget.yml",
     "lib/parse-ruby-client.rb",
     "lib/parse/batch.rb",
     "lib/parse/client.rb",
@@ -93,11 +95,11 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/adelevie/parse-ruby-client"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "2.0.3"
   s.summary = "A simple Ruby client for the parse.com REST API"
 
   if s.respond_to? :specification_version then
-    s.specification_version = 3
+    s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<patron>, [">= 0"])
@@ -106,7 +108,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<test-unit>, ["= 2.5.0"])
       s.add_development_dependency(%q<mocha>, ["= 0.12.0"])
-      s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.8.5"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
       s.add_development_dependency(%q<webmock>, [">= 0"])
       s.add_development_dependency(%q<vcr>, [">= 0"])
@@ -117,7 +119,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<test-unit>, ["= 2.5.0"])
       s.add_dependency(%q<mocha>, ["= 0.12.0"])
-      s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.8.5"])
       s.add_dependency(%q<simplecov>, [">= 0"])
       s.add_dependency(%q<webmock>, [">= 0"])
       s.add_dependency(%q<vcr>, [">= 0"])
@@ -129,7 +131,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<test-unit>, ["= 2.5.0"])
     s.add_dependency(%q<mocha>, ["= 0.12.0"])
-    s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.8.5"])
     s.add_dependency(%q<simplecov>, [">= 0"])
     s.add_dependency(%q<webmock>, [">= 0"])
     s.add_dependency(%q<vcr>, [">= 0"])
