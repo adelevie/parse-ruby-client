@@ -274,7 +274,7 @@ Because manually constructing `"path"` values is repetitive, you can use `Parse:
 
 ```ruby
 batch = Parse::Batch.new
-# making a few GameScore objects
+# making a few GameScore objects and adding them to the batch operation.
 [1, 2, 3, 4, 5].each do |i|
   gs = Parse::Object.new("GameScore")
   gs["score"] = "#{i}"
