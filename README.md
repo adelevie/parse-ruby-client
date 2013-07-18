@@ -273,15 +273,11 @@ batch.run!
 Because manually constructing `"path"` values is repetitive, you can use `Parse::Batch#create_object`, `Parse::Batch#update_object`, and `Parse::Batch#delete_object`. Each of these methods takes an instance of `Parse::Object` as the only argument. Then you just call `Parse::Batch#run!`. For example:
 
 ```ruby
+batch = Parse::Batch.new
 # making a few GameScore objects
 game_scores = [1, 2, 3, 4, 5].map do |i|
   gs = Parse::Object.new("GameScore")
   gs["score"] = "#{i}"
-  gs
-end
-
-batch = Parse::Batch.new
-game_scores.each do |gs|
   batch.create_object(gs)
 end
 batch.run!
