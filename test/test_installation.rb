@@ -14,6 +14,7 @@ class TestInstallation < ParseTestCase
     end
   end
 
+  # this test fails as the device_token isn't understood by Apple
   def test_save
     VCR.use_cassette('test_new_installation', :record => :new_episodes) do
       tmo = TestModelObject.new
