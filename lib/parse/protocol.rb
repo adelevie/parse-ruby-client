@@ -169,5 +169,13 @@ module Parse
     def Protocol.batch_request_uri
       "/#{VERSION}/#{BATCH_REQUEST_URI}"
     end
+
+    def Protocol.installations_request_uri(installation_id = nil)
+      if installation_id
+        "/#{VERSION}/installations/#{installation_id}"
+      else  
+        "/#{VERSION}/installations"
+      end
+    end    
   end
 end
