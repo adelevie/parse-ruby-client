@@ -58,6 +58,7 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_update.yml",
     "fixtures/vcr_cassettes/test_updated_at.yml",
     "fixtures/vcr_cassettes/test_user_save.yml",
+    "fixtures/vcr_cassettes/test_new_installation.yml",
     "lib/parse-ruby-client.rb",
     "lib/parse/batch.rb",
     "lib/parse/client.rb",
