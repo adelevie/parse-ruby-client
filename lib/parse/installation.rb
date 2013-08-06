@@ -7,9 +7,11 @@ module Parse
   class Installation < Parse::Object
 
     attr_accessor :device_type
+    attr_accessor :installation_id
     attr_accessor :device_token
+    attr_accessor :badge
+    attr_accessor :time_zone
     attr_accessor :channels
-    attr_accessor :parse_object_id
 
     def self.get(installation_id)
       installation = Installation.new(installation_id)
