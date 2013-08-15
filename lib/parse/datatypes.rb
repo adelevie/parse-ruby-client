@@ -41,16 +41,17 @@ module Parse
       false
     end
 
-    def as_json(*a)
+    def to_h(*a)
       {
           Protocol::KEY_TYPE        => Protocol::TYPE_POINTER,
           Protocol::KEY_CLASS_NAME  => @class_name,
           Protocol::KEY_OBJECT_ID   => @parse_object_id
       }
     end
+    alias :as_json :to_h
 
     def to_json(*a)
-        as_json.to_json(*a)
+      to_h.to_json(*a)
     end
 
     # Retrieve the Parse object referenced by this pointer.
@@ -106,15 +107,16 @@ module Parse
       super || value.respond_to?(method, include_private)
     end
 
-    def as_json(*a)
+    def to_h(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_DATE,
-          "iso"              => value.iso8601(3)
+          "iso"              => value.to_time.utc.iso8601(3)
       }
     end
+    alias :as_json :to_h
 
     def to_json(*a)
-        as_json.to_json(*a)
+      to_h.to_json(*a)
     end
   end
 
@@ -156,15 +158,16 @@ module Parse
       super || value.respond_to?(method, include_private)
     end
 
-    def as_json(*a)
+    def to_h(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_BYTES,
           "base64" => Base64.encode64(@value)
       }
     end
+    alias :as_json :to_h
 
     def to_json(*a)
-        as_json.to_json(*a)
+      to_h.to_json(*a)
     end
   end
 
@@ -190,15 +193,16 @@ module Parse
       amount.hash
     end
 
-    def as_json(*a)
+    def to_h(*a)
       {
           Protocol::KEY_OP => Protocol::KEY_INCREMENT,
           Protocol::KEY_AMOUNT => @amount
       }
     end
+    alias :as_json :to_h
 
     def to_json(*a)
-        as_json.to_json(*a)
+      to_h.to_json(*a)
     end
   end
 
@@ -224,15 +228,16 @@ module Parse
       operation.hash ^ objects.hash
     end
 
-    def as_json(*a)
+    def to_h(*a)
       {
           Protocol::KEY_OP => operation,
           Protocol::KEY_OBJECTS => @objects
       }
     end
+    alias :as_json :to_h
 
     def to_json(*a)
-        as_json.to_json(*a)
+      to_h.to_json(*a)
     end
   end
 
@@ -265,16 +270,17 @@ module Parse
       longitude.hash ^ latitude.hash
     end
 
-    def as_json(*a)
+    def to_h(*a)
       {
           Protocol::KEY_TYPE => Protocol::TYPE_GEOPOINT,
           "latitude" => @latitude,
           "longitude" => @longitude
       }
     end
+    alias :as_json :to_h
 
     def to_json(*a)
-        as_json.to_json(*a)
+      to_h.to_json(*a)
     end
 
     def to_s
@@ -323,16 +329,17 @@ module Parse
       resp
     end
 
-    def as_json(*a)
+    def to_h(*a)
       {
         Protocol::KEY_TYPE => Protocol::TYPE_FILE,
         "name" => @parse_filename,
         "url" => @url
       }
     end
+    alias :as_json :to_h
 
     def to_json(*a)
-      as_json.to_json(*a)
+    to_h.to_json(*a)
     end
   end
 
