@@ -5,6 +5,11 @@ class TestBatch < ParseTestCase
   def test_initialize
     batch = Parse::Batch.new
     assert_equal batch.class, Parse::Batch
+    assert_equal Parse.client, batch.client
+
+    batch = Parse::Batch.new(Parse::Client.new)
+    assert_equal batch.class, Parse::Batch
+    assert_not_equal Parse.client, batch.client
   end
 
   def test_add_request
@@ -88,6 +93,21 @@ class TestBatch < ParseTestCase
       resp = batch.run!
       assert_equal Array, resp.class
       assert_equal resp.first["success"]["updatedAt"].class, String
+    end
+  end
+
+  def test_update_nils_delete_keys
+    VCR.use_cassette('test_batch_update_nils_delete_keys', :record => :new_episodes) do
+      post = Parse::Object.new("BatchTestObject")
+      post["foo"] = "1"
+      post.save
+
+      post["foo"] = nil
+      batch = Parse::Batch.new
+      batch.update_object(post)
+      batch.run!
+
+      assert_false post.refresh.keys.include?("foo")
     end
   end
 

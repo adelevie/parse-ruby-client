@@ -1,7 +1,7 @@
 module Parse
 
   # Parse a JSON representation into a fully instantiated
-  # class. obj can be either a string or a Hash as parsed
+  # class. obj can be either a primitive or a Hash of primitives as parsed
   # by JSON.parse
   # @param class_name [Object]
   # @param obj [Object]
@@ -19,8 +19,6 @@ module Parse
       # If it's a datatype hash
       if obj.has_key?(Protocol::KEY_TYPE)
         parse_datatype obj
-      elsif obj.size == 1 && obj.has_key?(Protocol::KEY_RESULTS) && obj[Protocol::KEY_RESULTS].is_a?(Array)
-        obj[Protocol::KEY_RESULTS].collect { |o| parse_json(class_name, o) }
       elsif class_name # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
         Parse::Object.new class_name, Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
       else # plain old hash
@@ -54,7 +52,9 @@ module Parse
 
   def Parse.pointerize_value(obj)
     if obj.kind_of?(Parse::Object)
-      obj.pointer
+      p = obj.pointer
+      raise ArgumentError.new("new object used in context requiring pointer #{obj}") unless p
+      p
     elsif obj.is_a?(Array)
       obj.map do |v|
         Parse.pointerize_value(v)

@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Post
+    body:
+      encoding: UTF-8
+      string: '{"comment":{"__op":"Delete"}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2013 22:24:06 GMT
+      Location:
+      - https://api.parse.com/1/classes/Post/lt1txKrs3x
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 201 Created
+      X-Runtime:
+      - '0.035016'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"createdAt":"2013-05-22T22:24:06.104Z","objectId":"lt1txKrs3x"}'
+    http_version: 
+  recorded_at: Wed, 22 May 2013 22:24:06 GMT
+recorded_with: VCR 2.4.0

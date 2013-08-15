@@ -1,0 +1,239 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/BatchTestObject
+    body:
+      encoding: UTF-8
+      string: '{"foo":"1"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2013 16:29:53 GMT
+      Location:
+      - https://api.parse.com/1/classes/BatchTestObject/2ymFSQYHfE
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 201 Created
+      X-Runtime:
+      - '0.036319'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '64'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"createdAt":"2013-05-22T16:29:53.618Z","objectId":"2ymFSQYHfE"}'
+    http_version: 
+  recorded_at: Wed, 22 May 2013 16:29:53 GMT
+- request:
+    method: post
+    uri: https://api.parse.com/1/batch
+    body:
+      encoding: UTF-8
+      string: '{"requests":[{"method":"PUT","path":"/1/classes/BatchTestObject/2ymFSQYHfE","body":{"foo":{"__op":"Delete"}}}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2013 16:29:53 GMT
+      Etag:
+      - '"46d925ca6ec13b0f74a396e85f13e0d2"'
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '0.036707'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '54'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"success":{"updatedAt":"2013-05-22T16:29:53.704Z"}}]'
+    http_version: 
+  recorded_at: Wed, 22 May 2013 16:29:53 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/BatchTestObject/2ymFSQYHfE
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2013 16:29:53 GMT
+      Etag:
+      - '"97322f30380a98755c73de04b24d660c"'
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '0.046347'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '103'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"createdAt":"2013-05-22T16:29:53.618Z","updatedAt":"2013-05-22T16:29:53.704Z","objectId":"2ymFSQYHfE"}'
+    http_version: 
+  recorded_at: Wed, 22 May 2013 16:29:53 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/BatchTestObject/2ymFSQYHfE
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      User-Agent:
+      - Parse for Ruby, 0.0
+      X-Parse-Master-Key:
+      - ''
+      X-Parse-Rest-Api-Key:
+      - <X-Parse-REST-API-Key>
+      X-Parse-Application-Id:
+      - <X-Parse-Application-Id>
+      X-Parse-Session-Token:
+      - ''
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Method:
+      - '*'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2013 16:31:59 GMT
+      Etag:
+      - '"97322f30380a98755c73de04b24d660c"'
+      Server:
+      - nginx/1.2.2
+      Set-Cookie:
+      - <COOKIE-KEY>
+      Status:
+      - 200 OK
+      X-Runtime:
+      - '0.027746'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '103'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"createdAt":"2013-05-22T16:29:53.618Z","updatedAt":"2013-05-22T16:29:53.704Z","objectId":"2ymFSQYHfE"}'
+    http_version: 
+  recorded_at: Wed, 22 May 2013 16:31:59 GMT
+recorded_with: VCR 2.4.0

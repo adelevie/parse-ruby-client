@@ -2,6 +2,8 @@ require 'helper'
 
 class TestQuery < ParseTestCase
 
+  EMPTY_QUERY_RESPONSE = {Parse::Protocol::KEY_RESULTS => []}
+
   def test_get
     VCR.use_cassette('test_get', :record => :new_episodes) do
       post = Parse::Object.new "Post"
@@ -64,7 +66,7 @@ class TestQuery < ParseTestCase
       q.limit = 2
       q.skip = 3
       query_matcher = has_entries(:limit =>  2, :skip => 3)
-      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns({}.to_json)
+      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns(EMPTY_QUERY_RESPONSE)
       q.get
     end
   end
@@ -74,8 +76,9 @@ class TestQuery < ParseTestCase
       q = Parse::Query.new "TestQuery"
       q.count = true
       query_matcher = has_entries(:count => true)
-      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns({}.to_json)
-      q.get
+      Parse::Client.any_instance.expects(:request).with(anything, :get, nil, query_matcher).returns(EMPTY_QUERY_RESPONSE.merge("count" => 1000))
+      results = q.get
+      assert_equal 1000, results['count']
     end
   end
 
@@ -123,5 +126,26 @@ class TestQuery < ParseTestCase
     inner_query.eq("foo", "bar")
     outer_query.in_query("inner", inner_query)
     assert_equal({"inner"=>{"$inQuery"=>{"className"=>"Inner", "where"=>{"foo"=>"bar"}}}}, outer_query.where)
+  end
+
+  def test_large_value_in_xget
+    VCR.use_cassette('test_xget', :record => :new_episodes) do
+      post = Parse::Object.new("Post")
+      post.save
+
+      other_post = Parse::Object.new("Post")
+      other_post.save
+
+      assert_equal [post], Parse::Query.new("Post").value_in("objectId", [post.id] + 5000.times.map { "x" }).get
+    end
+  end
+
+  def test_bad_response
+    VCR.use_cassette('test_bad_response', :record => :new_episodes) do
+      Parse::Client.any_instance.expects(:request).returns("crap")
+      assert_raises do
+        Parse::Query.new("Post").get
+      end
+    end
   end
 end
