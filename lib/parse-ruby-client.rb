@@ -9,9 +9,14 @@ require "rubygems"
 require "bundler/setup"
 
 require 'json'
-require 'patron'
 require 'date'
 require 'cgi'
+if defined?(JRUBY_VERSION)
+  require 'net/http'
+  require 'net/https'
+else
+  require 'patron' 
+end
 
 cwd = Pathname(__FILE__).dirname
 $:.unshift(cwd.to_s) unless $:.include?(cwd.to_s) || $:.include?(cwd.expand_path.to_s)
