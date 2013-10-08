@@ -26,6 +26,8 @@ Parse.init :application_id => "<your_app_id>",
 
 [![Build Status](https://travis-ci.org/adelevie/parse-ruby-client.png?branch=master)](https://travis-ci.org/adelevie/parse-ruby-client)
 
+[![Code Climate](https://codeclimate.com/github/adelevie/parse-ruby-client.png)](https://codeclimate.com/github/adelevie/parse-ruby-client)
+
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
 - [Summary](#summary)
