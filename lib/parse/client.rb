@@ -1,6 +1,7 @@
 require 'parse/protocol'
 require 'parse/error'
 require 'parse/util'
+require 'parse/http_client'
 
 require 'logger'
 
@@ -9,8 +10,7 @@ require 'iron_mq'
 module Parse
 
   # A class which encapsulates the HTTPS communication with the Parse
-  # API server. Currently uses the Patron library for low-level HTTP
-  # communication.
+  # API server.
   class Client
     attr_accessor :host
     attr_accessor :application_id
@@ -29,10 +29,7 @@ module Parse
       @session_token  = data[:session_token]
       @max_retries    = data[:max_retries] || 3
       @logger         = data[:logger] || Logger.new(STDERR).tap{|l| l.level = Logger::INFO}
-
-      @session        = Patron::Session.new
-      @session.timeout = 30
-      @session.connect_timeout = 30
+      @session        = data[:http_client] || Parse::DEFAULT_HTTP_CLIENT.new
 
       if data[:ironio_project_id] && data[:ironio_token]
 
@@ -63,16 +60,16 @@ module Parse
       options = {}
       headers = {}
 
-      headers[Protocol::HEADER_MASTER_KEY]    = @master_key
+      headers[Protocol::HEADER_MASTER_KEY]    = @master_key if @master_key
       headers[Protocol::HEADER_API_KEY]       = @api_key
       headers[Protocol::HEADER_APP_ID]        = @application_id
-      headers[Protocol::HEADER_SESSION_TOKEN] = @session_token
+      headers[Protocol::HEADER_SESSION_TOKEN] = @session_token if @session_token
 
       if body
         options[:data] = body
       end
       if query
-        options[:query] = Patron::Util.build_query_pairs_from_hash(query).join('&')
+        options[:query] = @session.build_query(query)
 
         # Avoid 502 or 414 when sending a large querystring. See https://parse.com/questions/502-error-when-query-with-huge-contains
         if options[:query].size > 2000 && method == :get && !body && !content_type
@@ -128,7 +125,7 @@ module Parse
           retry
         end
         raise
-      rescue Patron::TimeoutError => e
+      rescue HttpClient::TimeoutError => e
         if num_tries <= max_retries
           log_retry(e, uri, query, body, response)
           retry
