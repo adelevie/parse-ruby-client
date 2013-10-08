@@ -11,5 +11,8 @@ group :development do
   gem 'vcr'
 end
 
-gem 'patron'
+platforms :ruby do
+  gem 'patron' # skip patron for jruby
+end
+
 gem 'iron_mq'
