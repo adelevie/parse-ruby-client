@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "parse-ruby-client"
-  s.version = "0.1.15"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2013-07-01"
+  s.date = "2013-10-08"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -66,6 +66,7 @@ Gem::Specification.new do |s|
     "lib/parse/cloud.rb",
     "lib/parse/datatypes.rb",
     "lib/parse/error.rb",
+    "lib/parse/http_client.rb",
     "lib/parse/model.rb",
     "lib/parse/object.rb",
     "lib/parse/protocol.rb",
@@ -95,11 +96,11 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/adelevie/parse-ruby-client"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.3"
+  s.rubygems_version = "1.8.24"
   s.summary = "A simple Ruby client for the parse.com REST API"
 
   if s.respond_to? :specification_version then
-    s.specification_version = 4
+    s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<patron>, [">= 0"])
