@@ -22,4 +22,19 @@ class TestCloud < ParseTestCase
 			assert_equal resp, params
 		end
 	end
+
+	def test_cloud_job_initialize
+		assert_not_equal nil, Parse::Cloud::Job.new("trivialJob")
+	end
+
+	def test_cloud_job
+		omit("this should automate the parse deploy command by committing that binary to the repo")
+
+		VCR.use_cassette('test_cloud_job', :record => :new_episodes) do
+			job = Parse::Cloud::Job.new("trivial")
+			params = {"foo" => "bar"}
+			resp = job.call(params)
+			assert_equal resp, params
+		end
+	end
 end
