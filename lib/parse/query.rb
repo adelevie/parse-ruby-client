@@ -119,6 +119,8 @@ module Parse
       uri   = Protocol.class_uri @class_name
       if @class_name == Parse::Protocol::CLASS_USER
         uri = Protocol.user_uri
+      elsif @class_name == Parse::Protocol::CLASS_INSTALLATION
+        uri = Protocol.installation_uri
       end
       query = { "where" => CGI.escape(where_as_json.to_json) }
       set_order(query)
