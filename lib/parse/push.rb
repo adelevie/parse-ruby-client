@@ -9,6 +9,7 @@ module Parse
     attr_accessor :type
     attr_accessor :expiration_time_interval
     attr_accessor :expiration_time
+    attr_accessor :push_time
     attr_accessor :data
 
     def initialize(data, channel = "")
@@ -33,6 +34,7 @@ module Parse
 
       body.merge!({ :expiration_interval => @expiration_time_interval }) if @expiration_time_interval
       body.merge!({ :expiration_time => @expiration_time }) if @expiration_time
+      body.merge!({ :push_time => @push_time }) if @push_time
       body.merge!({ :type => @type }) if @type
 
       response = Parse.client.request uri, :post, body.to_json, nil
