@@ -141,6 +141,15 @@ module Parse
       end
     end
 
+    # Construct a uri referencing a given Parse installation
+    # class or instance (of object_id is non-nil).
+    def Protocol.installation_uri(object_id = nil)
+      if object_id
+        "/#{VERSION}/installations/#{object_id}"
+      else
+        "/#{VERSION}/installations"
+      end
+    end
 
     # Construct a uri referencing a given Parse user
     # instance or the users category.

@@ -15,7 +15,7 @@ if defined?(JRUBY_VERSION)
   require 'net/http'
   require 'net/https'
 else
-  require 'patron' 
+  require 'patron'
 end
 
 cwd = Pathname(__FILE__).dirname
@@ -27,6 +27,7 @@ require 'parse/datatypes'
 require 'parse/util'
 require 'parse/protocol'
 require 'parse/user'
+require "parse/installation"
 require 'parse/push'
 require 'parse/cloud'
 require 'parse/model'
