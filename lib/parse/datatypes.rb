@@ -1,3 +1,5 @@
+require 'time'
+require 'date'
 require 'base64'
 
 module Parse
@@ -71,12 +73,14 @@ module Parse
     attr_accessor :value
 
     def initialize(data)
-      if data.is_a? DateTime
+      if data.respond_to?(:iso8601)
         @value = data
       elsif data.is_a? Hash
         @value = DateTime.parse data["iso"]
       elsif data.is_a? String
         @value = DateTime.parse data
+      else
+        raise "data doesn't act like time #{data.inspect}"
       end
     end
 
