@@ -36,6 +36,20 @@ class TestDatatypes < Test::Unit::TestCase
     assert_equal parse_date.to_time.utc.to_datetime.iso8601(3), q["time"].to_time.utc.to_datetime.iso8601(3)
   end
 
+  def test_date_with_bad_data
+    assert_raise do
+      Parse::Date.new(2014)
+    end
+    assert_raise do
+      Parse::Date.new(nil)
+    end
+  end
+
+  def test_date_with_time
+    time = Time.parse("01/01/2012 23:59:59")
+    assert_equal time, Parse::Date.new(time).to_time
+  end
+
   def test_bytes
     data = {
       "base64" => Base64.encode64("testing bytes!")
