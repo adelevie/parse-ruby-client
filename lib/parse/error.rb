@@ -13,8 +13,10 @@ module Parse
     attr_accessor :code
     attr_accessor :error
     attr_accessor :response
+    attr_accessor :request
 
-    def initialize(response)
+    def initialize(response, request=nil)
+      @request = request
       @response = response
       if response
         @code = response["code"]
@@ -32,5 +34,4 @@ module Parse
       @message = msg
     end
   end
-
 end
