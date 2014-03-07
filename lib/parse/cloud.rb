@@ -19,5 +19,23 @@ module Parse
       end
     end
 
+    class Job
+      attr_accessor :job_name
+
+      def initialize(job_name)
+        @job_name = job_name
+      end
+
+      def uri
+        Protocol.cloud_job_uri(@job_name)
+      end
+
+      def call(params={})
+        response = Parse.client.post(self.uri, params.to_json)
+        result = response["result"]
+        result
+      end
+    end
+
   end
 end

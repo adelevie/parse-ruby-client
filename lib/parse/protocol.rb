@@ -120,6 +120,7 @@ module Parse
     PASSWORD_RESET_URI = "/#{VERSION}/requestPasswordReset"
 
     CLOUD_FUNCTIONS_PATH = "functions"
+    CLOUD_JOBS_PATH = "jobs"
 
     BATCH_REQUEST_URI = "batch"
 
@@ -173,6 +174,10 @@ module Parse
 
     def Protocol.cloud_function_uri(function_name)
       "/#{VERSION}/#{CLOUD_FUNCTIONS_PATH}/#{function_name}"
+    end
+
+    def Protocol.cloud_job_uri(job_name)
+      "/#{VERSION}/#{CLOUD_JOBS_PATH}/#{job_name}"
     end
 
     def Protocol.batch_request_uri

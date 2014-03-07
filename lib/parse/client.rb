@@ -111,7 +111,20 @@ module Parse
 
         if response.status >= 400
           parsed ||= {}
-          raise ParseProtocolError.new({"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed))
+
+          [ Protocol::HEADER_API_KEY, Protocol::HEADER_MASTER_KEY, Protocol::HEADER_SESSION_TOKEN ].each do |k|
+            if headers[k] && headers[k] != ''
+              headers[k] = "#{headers[k][0,2]}.."
+            end
+          end
+
+          raise ParseProtocolError.new(
+            {"error" => "HTTP Status #{response.status} Body #{response.body}"}.merge(parsed),
+            method: method,
+            uri: uri,
+            headers: headers,
+            body: options[:data],
+            query: options[:query])
         end
 
         if content_type
