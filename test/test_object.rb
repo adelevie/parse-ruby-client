@@ -132,6 +132,15 @@ class TestObject < ParseTestCase
     end
   end
 
+  def test_deep_as_json_with_array
+    VCR.use_cassette('test_deep_as_json', :record => :new_episodes) do
+      other = Parse::Object.new "Post"
+      other['date'] = Parse::Date.new(DateTime.now)
+      other['array'] = [1, 2]
+      assert other.as_json['date']['iso']
+    end
+  end
+
   def test_nils_delete_keys
     VCR.use_cassette('test_nils_delete_keys', :record => :new_episodes) do
       post = Parse::Object.new "Post"
