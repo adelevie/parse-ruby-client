@@ -95,9 +95,14 @@ module Parse
       self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)
     end
 
+    # Handle the addition of Array#to_h in Ruby 2.1
+    def should_call_to_h?(value)
+      value.respond_to?(:to_h) && !value.kind_of?(Array)
+    end
+
     def to_h(*a)
       Hash[rest_api_hash.map do |key, value|
-        [key, value.respond_to?(:to_h) ? value.to_h : value]
+        [key, should_call_to_h?(value) ? value.to_h : value]
       end]
     end
     alias :as_json :to_h
