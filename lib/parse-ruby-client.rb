@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 ## ----------------------------------------------------------------------
 ##
 ## Ruby client for parse.com
@@ -5,18 +6,17 @@
 ## See https://parse.com/docs/rest for full documentation on the API.
 ##
 ## ----------------------------------------------------------------------
-require "rubygems"
-require "bundler/setup"
+require 'rubygems'
+require 'bundler/setup'
 
-require 'json'
+require 'yajl/json_gem'
+require 'faraday'
+require 'faraday_middleware'
+require 'faraday/better_retry'
+require 'faraday/extended_parse_json'
+require 'faraday/get_method_override'
 require 'date'
 require 'cgi'
-if defined?(JRUBY_VERSION)
-  require 'net/http'
-  require 'net/https'
-else
-  require 'patron'
-end
 
 cwd = Pathname(__FILE__).dirname
 $:.unshift(cwd.to_s) unless $:.include?(cwd.to_s) || $:.include?(cwd.expand_path.to_s)

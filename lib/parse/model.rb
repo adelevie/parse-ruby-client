@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Parse
   class Model < Parse::Object
     def initialize

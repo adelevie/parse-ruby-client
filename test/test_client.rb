@@ -2,63 +2,113 @@ require 'helper'
 
 class TestClient < ParseTestCase
 
+  def stubbed_client(&block)
+    stubs = Faraday::Adapter::Test::Stubs.new do |stub|
+      yield(stub)
+    end
+
+    client = Parse.init(
+      :logger => Logger.new(STDERR).tap {
+        |l| l.level = Logger::ERROR
+      }
+    ) do |b|
+      b.adapter :test, stubs
+    end
+
+    [stubs, client]
+  end
+
   def test_retries
     VCR.use_cassette('test_retries', :record => :new_episodes) do
-      response = mock()
-      response.stubs(:body).returns({'code' => Parse::Protocol::ERROR_TIMEOUT}.to_json)
-      response.stubs(:status).returns(500)
-      @client.session.expects(:request).times(@client.max_retries + 1).returns(response)
-      assert_raise do
-       @client.request(nil)
+
+      stubs, client = stubbed_client do |stub|
+        (@client.max_retries + 1).times do
+          stub.get('/') {[ 500, {}, {
+            'code' => Parse::Protocol::ERROR_TIMEOUT}.to_json
+          ]}
+        end
       end
+
+      assert_raise do
+        client.request('/')
+      end
+
+      stubs.verify_stubbed_calls
     end
   end
 
   def test_retries_json_error
     VCR.use_cassette('test_retries_json_error', :record => :new_episodes) do
-      bad_response = mock()
-      bad_response.stubs(:body).returns("<HTML>this is not json</HTML>")
-      bad_response.stubs(:status).returns(500)
+      stubs, client = stubbed_client do |stub|
+        stub.get('/') {[ 500, {}, '<HTML>this is not json</HTML>' ]}
+        stub.get('/') {[ 200, {}, '{"foo":100}' ]}
+      end
 
-      good_response = mock()
-      good_response.stubs(:body).returns('{"foo":100}')
-      good_response.stubs(:status).returns(200)
-      @client.session.expects(:request).twice.returns(bad_response, good_response)
+      assert_equal({ "foo" => 100 }, client.request('/'))
 
-      assert_equal({ "foo" => 100 }, @client.request(nil))
+      stubs.verify_stubbed_calls
     end
   end
 
   def test_retries_server_error
     VCR.use_cassette('test_retries_server_error', :record => :new_episodes) do
-      bad_response = mock()
-      bad_response.stubs(:body).returns("{}")
-      bad_response.stubs(:status).returns(500)
 
-      good_response = mock()
-      good_response.stubs(:body).returns('{"foo":100}')
-      good_response.stubs(:status).returns(200)
-      @client.session.expects(:request).twice.returns(bad_response, good_response)
+      stubs, client = stubbed_client do |stub|
+        stub.get('/') {[ 500, {}, '{}' ]}
+        stub.get('/') {[ 200, {}, '{"foo":100}' ]}
+      end
 
-      assert_equal({ "foo" => 100 }, @client.request(nil))
+      assert_equal({ "foo" => 100 }, client.request('/'))
+
+      stubs.verify_stubbed_calls
+    end
+  end
+
+  def test_not_retries_404
+    VCR.use_cassette('test_retries_404', :record => :new_episodes) do
+
+      stubs, client = stubbed_client do |stub|
+        stub.get('/') {[ 404, {}, 'Not found' ]}
+        stub.get('/') {[ 200, {}, '{"foo":100}' ]}
+      end
+
+      assert_raise do
+        client.request('/')
+      end
+    end
+  end
+
+  def test_not_retries_404_with_correct_json
+    VCR.use_cassette('test_retries_404_correct', :record => :new_episodes) do
+
+      stubs, client = stubbed_client do |stub|
+        stub.get('/') {[ 404, {}, '{"foo":100}' ]}
+        stub.get('/') {[ 200, {}, '{"foo":100}' ]}
+      end
+
+      assert_raise do
+        client.request('/')
+      end
     end
   end
 
   def test_empty_response
     VCR.use_cassette('test_empty_response', :record => :new_episodes) do
-      bad_response = mock()
-      bad_response.stubs(:body).returns('')
-      JSON.stubs(:parse).returns(nil) # some json parsers return nil instead of raising
-      bad_response.stubs(:status).returns(403)
+      stubs, client = stubbed_client do |stub|
+        stub.get('/') {[ 403, {}, 'nonparseable' ]}
+      end
 
-      @client.session.stubs(:request).returns(bad_response)
+      # some json parsers return nil instead of raising
+      JSON.stubs(:parse).returns(nil) 
 
       begin
-        @client.request(nil)
+        client.request('/')
         raise "client error response should have raised"
       rescue Parse::ParseProtocolError => e
-        assert_equal "HTTP Status 403 Body ", e.error
+        assert_equal "HTTP Status 403 Body nonparseable", e.error
       end
+
+      stubs.verify_stubbed_calls
     end
   end
 
