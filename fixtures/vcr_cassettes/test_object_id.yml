@@ -1,0 +1,56 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: https://api.parse.com/1/classes/Post
+    body: 
+      encoding: UTF-8
+      string: "{\"title\":\"hello world\"}"
+    headers: 
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      Content-Type: 
+      - application/json
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 201
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Sun, 28 Apr 2013 13:34:36 GMT
+      Location: 
+      - https://api.parse.com/1/classes/Post/8q7HUf9da6
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.027185"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "64"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: US-ASCII
+      string: "{\"createdAt\":\"2013-04-28T13:34:36.083Z\",\"objectId\":\"8q7HUf9da6\"}"
+    http_version: 
+  recorded_at: Sun, 28 Apr 2013 13:34:36 GMT
+recorded_with: VCR 2.4.0
