@@ -17,12 +17,11 @@ module Faraday
     end
 
     def call(env)
-
       if env[:method] == :get && env[:url].to_s.size > 2000
         env[:request_headers][HEADER] = 'GET'
         env[:request_headers]['Content-Type'] =
           'application/x-www-form-urlencoded'
-        env[:data] = env[:url].query
+        env[:body] = env[:url].query
         env[:url].query = nil
         env[:method] = :post
       end
