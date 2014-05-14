@@ -124,6 +124,13 @@ class TestObject < ParseTestCase
     end
   end
 
+  def test_to_json_uses_rest_api_hash
+    post = Parse::Object.new "Post"
+    hash = { 'post' => [post] }
+    parsed = JSON.parse(hash.to_json)
+    assert_equal "Post", parsed['post'][0][Parse::Protocol::KEY_CLASS_NAME]
+  end
+
   def test_deep_as_json
     VCR.use_cassette('test_deep_as_json', :record => :new_episodes) do
       other = Parse::Object.new "Post"
