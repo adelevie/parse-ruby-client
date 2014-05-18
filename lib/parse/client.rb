@@ -31,7 +31,6 @@ module Parse
 
       @session = Faraday.new("https://#{host}", options) do |c|
         c.request :json
-        c.response :logger, @logger
 
         c.use Faraday::GetMethodOverride
 
@@ -42,6 +41,7 @@ module Parse
           exceptions: ['Faraday::Error::TimeoutError', 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry']
         c.use Faraday::ExtendedParseJson
 
+        c.response :logger, @logger
         c.adapter Faraday.default_adapter
 
         yield(c) if block_given?

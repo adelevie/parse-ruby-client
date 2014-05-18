@@ -9,7 +9,6 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'yajl/json_gem'
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday/better_retry'

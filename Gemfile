@@ -12,6 +12,5 @@ group :development do
   gem 'pry'
 end
 
-gem 'yajl-ruby', :require => 'yail'
 gem 'faraday'
 gem 'faraday_middleware'
