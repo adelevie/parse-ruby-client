@@ -568,6 +568,12 @@ For keys with an array type, you can find objects where the key's array value co
 randos = Parse::Query.new("RandomObject").eq("arrayKey", 2).get
 ```
 
+You can also query that the array contains multiple objects by using contains all, for example you can return objects that have the array values 2 AND 3 by:
+
+```ruby
+randos = Parse::Query.new("RandomObject").eq("arrayKey", [2, 3]).get
+```
+
 ### Relational Queries
 
 There are several ways to issue queries for relational data. For example, if each `Comment` has a `Post` object in its `post` field, you can fetch comments for a particular `Post`:
