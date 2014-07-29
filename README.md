@@ -454,6 +454,10 @@ Other constraint methods include:
     <td>A value is set for the key</td>
   </tr>
   <tr>
+    <td>`Parse::Query#contains_all(field, values)`</td>
+    <td>Contains all values in the array</td>
+  </tr>
+  <tr>
     <td>`Parse::Query#select`</td>
     <td>TODO: `$select` not yet implemented. This matches a value for a key in the result of a different query</td>
   </tr>

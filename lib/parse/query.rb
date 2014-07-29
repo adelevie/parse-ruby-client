@@ -86,6 +86,11 @@ module Parse
       self
     end
 
+    def contains_all(field, values)
+      add_constraint field, { "$all" => values.map { |v| Parse.pointerize_value(v) } }
+      self
+    end
+
     def related_to(field,value)
       h = {"object" => Parse.pointerize_value(value), "key" => field}
       add_constraint("$relatedTo", h )
