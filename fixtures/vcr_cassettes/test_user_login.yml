@@ -1,0 +1,276 @@
+--- 
+http_interactions: 
+- request: 
+    method: post
+    uri: https://api.parse.com/1/users
+    body: 
+      encoding: UTF-8
+      string: "{\"username\":\"alan2167152157930\",\"password\":\"secret\"}"
+    headers: 
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      Content-Type: 
+      - application/json
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 201
+      message: Created
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Sun, 28 Apr 2013 13:39:35 GMT
+      Location: 
+      - https://api.parse.com/1/users/vCg0KX9L6S
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 201 Created
+      X-Runtime: 
+      - "0.152370"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "107"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: US-ASCII
+      string: "{\"createdAt\":\"2013-04-28T13:39:35.248Z\",\"objectId\":\"vCg0KX9L6S\",\"sessionToken\":\"4q4lkm055bigm8zb8dkr2pg4i\"}"
+    http_version: 
+  recorded_at: Sun, 28 Apr 2013 13:39:35 GMT
+- request: 
+    method: get
+    uri: https://api.parse.com/1/login?password=secret&username=alan2167152157930
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Sun, 28 Apr 2013 13:39:36 GMT
+      Etag: 
+      - "\"79bfaac0fa81b16043b5f46ca090cedf\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.133860"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "177"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: US-ASCII
+      string: "{\"username\":\"alan2167152157930\",\"createdAt\":\"2013-04-28T13:39:35.248Z\",\"updatedAt\":\"2013-04-28T13:39:35.248Z\",\"objectId\":\"vCg0KX9L6S\",\"sessionToken\":\"4q4lkm055bigm8zb8dkr2pg4i\"}"
+    http_version: 
+  recorded_at: Sun, 28 Apr 2013 13:39:37 GMT
+- request: 
+    method: get
+    uri: https://api.parse.com/1/classes/_User/vCg0KX9L6S
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      Content-Type: 
+      - application/json
+      X-Parse-Session-Token: 
+      - <X-Parse-Session-Token>
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Sun, 28 Apr 2013 13:39:37 GMT
+      Etag: 
+      - "\"79bfaac0fa81b16043b5f46ca090cedf\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.077970"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "177"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: US-ASCII
+      string: "{\"username\":\"alan2167152157930\",\"createdAt\":\"2013-04-28T13:39:35.248Z\",\"updatedAt\":\"2013-04-28T13:39:35.248Z\",\"objectId\":\"vCg0KX9L6S\",\"sessionToken\":\"4q4lkm055bigm8zb8dkr2pg4i\"}"
+    http_version: 
+  recorded_at: Sun, 28 Apr 2013 13:39:38 GMT
+- request: 
+    method: put
+    uri: https://api.parse.com/1/classes/_User/vCg0KX9L6S
+    body: 
+      encoding: UTF-8
+      string: "{\"username\":\"alan2167152157930\"}"
+    headers: 
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      Content-Type: 
+      - application/json
+      X-Parse-Session-Token: 
+      - <X-Parse-Session-Token>
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Sun, 28 Apr 2013 13:39:39 GMT
+      Etag: 
+      - "\"f894faab4871a72f39615f0f837f001d\""
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 200 OK
+      X-Runtime: 
+      - "0.244965"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "40"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: US-ASCII
+      string: "{\"updatedAt\":\"2013-04-28T13:39:38.990Z\"}"
+    http_version: 
+  recorded_at: Sun, 28 Apr 2013 13:39:39 GMT
+- request: 
+    method: get
+    uri: https://api.parse.com/1/login?password=secret&username=alan5976098792485
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - Parse for Ruby, 0.0
+      X-Parse-Application-Id: 
+      - <X-Parse-Application-Id>
+      X-Parse-Rest-Api-Key: 
+      - <X-Parse-REST-API-Key>
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 404
+      message: Not Found
+    headers: 
+      Access-Control-Allow-Origin: 
+      - "*"
+      Access-Control-Request-Method: 
+      - "*"
+      Cache-Control: 
+      - no-cache
+      Content-Type: 
+      - application/json; charset=utf-8
+      Date: 
+      - Sun, 28 Apr 2013 13:39:44 GMT
+      Server: 
+      - nginx/1.2.2
+      Set-Cookie: 
+      - <COOKIE-KEY>
+      Status: 
+      - 404 Not Found
+      X-Runtime: 
+      - "0.036423"
+      X-Ua-Compatible: 
+      - IE=Edge,chrome=1
+      Content-Length: 
+      - "47"
+      Connection: 
+      - keep-alive
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":101,\"error\":\"invalid login parameters\"}"
+    http_version: 
+  recorded_at: Sun, 28 Apr 2013 13:39:44 GMT
+recorded_with: VCR 2.4.0

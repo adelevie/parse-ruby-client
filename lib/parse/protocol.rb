@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Parse
   # A module which encapsulates the specifics of Parse's REST API.
   module Protocol

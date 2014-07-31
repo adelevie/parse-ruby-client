@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Parse
 
   # Base exception class for errors thrown by the Parse
@@ -17,8 +18,8 @@ module Parse
     def initialize(response)
       @response = response
       if response
-        @code = response["code"]
-        @error = response["error"]
+        @code   = response["code"]
+        @error  = response["error"]
       end
 
       super("#{@code}: #{@error}")
@@ -31,6 +32,9 @@ module Parse
     def message=(msg)
       @message = msg
     end
+  end
+
+  class ParseProtocolRetry < ParseProtocolError
   end
 
 end
