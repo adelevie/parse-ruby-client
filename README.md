@@ -84,6 +84,8 @@ Parse.init :application_id => "<your_app_id>",
     - [Associating with Objects](#associating-with-objects)
     - [Deleting Files](#deleting-files)
   - [Push Notifications](#push-notifications)
+    - [Using Channels](#using-channels)
+    - [Using Advanced Targeting](#using-advanced targeting)
   - [Installations](#installations)
   - [GeoPoints](#geopoints)
     - [GeoPoint](#geopoint)
@@ -1063,18 +1065,34 @@ TODO: Implement this!
 
 Parse allows you send Push Notifications to iOS and Android devices.
 
-To send a notification to the "user_1" channel
+Notifications by default are set for iOS and Android. You can set certain notifications to only be sent to iOS or Android by setting the `type` to `ios` or `android`.
+
+For config/installation: https://parse.com/docs/rest#push and https://parse.com/docs/push_guide#top/REST
+
+### Using Channels
+
+To send a notification to the "Giants" channel, as given at: https://parse.com/docs/push_guide#sending-channels/REST.
 
 ```ruby
 data = { :alert => "This is a notification from Parse" }
-push = Parse::Push.new(data, "user_1")
+push = Parse::Push.new(data, "Giants")
 push.type = "ios"
 push.save
 ```
 
-Notifications by default are set for iOS and Android. You can set certain notifications to only be sent to iOS or Android by setting the `type` to `ios` or `android`.
+### Using Advanced Targeting
 
-For config/installation: https://parse.com/docs/rest#push and https://parse.com/docs/push_guide#top/REST
+To send a notification to installations where `injuryReports` is `true`, as given at: https://parse.com/docs/push_guide#sending-queries/REST
+
+
+```ruby
+data = { :alert => "This is a notification from Parse" }
+push = Parse::Push.new(data)
+push.type = "ios"
+query = Parse::Query.new(Parse::Protocol::CLASS_INSTALLATION).eq('injuryReports', true)
+push.where = query.where
+push.save
+```
 
 ## Installations
 
