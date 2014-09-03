@@ -14,12 +14,14 @@ module Parse
     attr_accessor :code
     attr_accessor :error
     attr_accessor :response
+    attr_accessor :http_status_code
 
     def initialize(response)
       @response = response
       if response
         @code   = response["code"]
         @error  = response["error"]
+        @http_status_code = response["http_status_code"]
       end
 
       super("#{@code}: #{@error}")
