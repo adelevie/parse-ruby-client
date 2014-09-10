@@ -60,7 +60,7 @@ Parse.init :application_id => "<your_app_id>",
     - [Relational Queries](#relational-queries)
     - [Counting Objects](#counting-objects)
     - [Compound Queries](#compound-queries)
-  - [Parse App Config Parameters](#parse-app-config-parameters)
+- [Parse App Config Parameters](#parse-app-config-parameters)
   - [Users](#users)
     - [Signing Up](#signing-up)
     - [Logging In](#logging-in)
