@@ -34,6 +34,7 @@ Parse.init :application_id => "<your_app_id>",
   - [Quick Reference](#quick-reference)
     - [Installation](#installation)
     - [Configuration](#configuration)
+- [Parse App Config Parameters](#parse-app-config-parameters)
 - [Objects](#objects)
   - [Creating Objects](#creating-objects)
   - [Retrieving Objects](#retrieving-objects)
@@ -90,6 +91,14 @@ Parse.init :application_id => "<your_app_id>",
     - [GeoQueries](#geoqueries)
 - [should look something like this:](#should-look-something-like-this:)
     - [Caveats](#caveats)
+
+## Parse App Config Parameters
+
+[Application config parameters](https://parse.com/docs/rest#config) are read-only and must be set via the Parse web application. However, you can access the values with:
+
+```ruby
+Parse::Application.config # => {"welcomeMessage" => "Welcome to The Internet!", "winningNumber" => 42}
+```
 
 ## Objects
 
@@ -360,6 +369,8 @@ game_score.pointer
 #### Relation
 
 The `Relation` type is used for many-to-many relations when the mobile uses `PFRelation` (iOS SDK) or `ParseRelation` (Android SDK) as a value. It has a `className` that is the class name of the target objects.
+
+*Note:* The REST API embeds the configuration parameters in a key called 'params' which is omitted for you by the client.
 
 ```ruby
 # TODO: There is no Ruby object representation of this type, yet.

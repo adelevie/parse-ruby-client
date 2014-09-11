@@ -132,6 +132,10 @@ module Parse
     # URI Helpers
     # ----------------------------------------
 
+    def Protocol.config_uri
+      "/#{VERSION}/config"
+    end
+
     # Construct a uri referencing a given Parse object
     # class or instance (of object_id is non-nil).
     def Protocol.class_uri(class_name, object_id = nil)
