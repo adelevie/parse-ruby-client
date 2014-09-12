@@ -48,6 +48,11 @@ module Parse
       self["objectId"].nil?
     end
 
+    def update_attributes(data={})
+      data.each_pair { |k,v| self[k] = v }
+      save
+    end
+
     # Write the current state of the local object to the API.
     # If the object has never been saved before, this will create
     # a new object, otherwise it will update the existing stored object.
