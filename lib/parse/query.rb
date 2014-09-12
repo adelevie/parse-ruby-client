@@ -116,6 +116,11 @@ module Parse
       end
     end
 
+    def first
+      self.limit = 1
+      get.first
+    end
+
     def get
       uri   = Protocol.class_uri @class_name
       if @class_name == Parse::Protocol::CLASS_USER
