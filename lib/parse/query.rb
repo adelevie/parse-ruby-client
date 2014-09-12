@@ -42,7 +42,13 @@ module Parse
       self
     end
 
-    def eq(field, value)
+    def eq(hash_or_field,value=nil)
+      return eq_pair(hash_or_field,value) unless hash_or_field.is_a?(Hash)
+      hash_or_field.each_pair { |k,v| eq_pair k, v }
+      self
+    end
+
+    def eq_pair(field, value)
       add_constraint field, Parse.pointerize_value(value)
       self
     end
