@@ -23,4 +23,27 @@ class TestInstallation < ParseTestCase
       assert_equal installation_data, installation
     end
   end
+
+  def test_changing_channels
+    installation = Parse::Installation.new "987"
+    installation.channels = ["", "my-channel"]
+    assert_equal ["", "my-channel"], installation["channels"]
+  end
+
+  def test_changing_badges
+    installation = Parse::Installation.new "987"
+    installation.badge = 5
+    assert_equal 5, installation["badge"]
+  end
+
+  def test_updating_installation_data
+    installation = Parse::Installation.new "987"
+    installation.channels = ["", "my-channel"]
+    installation.badge = 5
+
+    VCR.use_cassette('test_save_installation') do
+      result = installation.save
+      assert_not_empty result["updatedAt"]
+    end
+  end
 end
