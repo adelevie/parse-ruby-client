@@ -1089,7 +1089,14 @@ For config/installation: https://parse.com/docs/rest#push and https://parse.com/
 
 ## Installations
 
-TODO: Implement this!
+#### Retrieving Installations
+
+```ruby
+installation = Parse::Installation.get "objectId"
+# Same as
+installation = Parse::Installation.new "objectId"
+installation.get
+```
 
 ## GeoPoints
 
