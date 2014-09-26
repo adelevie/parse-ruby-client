@@ -153,6 +153,10 @@ module Parse
       array_op(field, Protocol::KEY_ADD_RELATION, value)
     end
 
+    def array_remove_relation(field, value)
+      array_op(field, Protocol::KEY_REMOVE_RELATION, value)
+    end
+
     def array_add_unique(field, value)
       array_op(field, Protocol::KEY_ADD_UNIQUE, value)
     end
@@ -227,16 +231,13 @@ module Parse
 
       # parse doesn't return column values on initial POST creation so we must maintain them ourselves
       case operation
-      when Protocol::KEY_ADD
-        self[field] ||= []
-        self[field] << value
-      when Protocol::KEY_ADD_RELATION
+      when Protocol::KEY_ADD, Protocol::KEY_ADD_RELATION
         self[field] ||= []
         self[field] << value
       when Protocol::KEY_ADD_UNIQUE
         self[field] ||= []
         self[field] << value unless self[field].include?(value)
-      when Protocol::KEY_REMOVE
+      when Protocol::KEY_REMOVE, Protocol::KEY_REMOVE_RELATION
         self[field].delete(value) if self[field]
       end
     end
