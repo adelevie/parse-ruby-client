@@ -126,7 +126,7 @@ module Parse
       query = { "where" => where_as_json.to_json }
       set_order(query)
       [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
-      Parse.client.logger.info{"Parse query for #{uri} #{query.inspect}"}
+      Parse.client.logger.info{"Parse query for #{uri} #{query.inspect}"} unless Parse.client.quiet
       response = Parse.client.request uri, :get, nil, query
 
       if response.is_a?(Hash) && response.has_key?(Protocol::KEY_RESULTS) && response[Protocol::KEY_RESULTS].is_a?(Array)
