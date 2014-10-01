@@ -38,7 +38,7 @@ module Parse
 
         c.use Faraday::BetterRetry,
           max: @max_retries,
-          logger: @logger
+          logger: @logger,
           interval: 0.5,
           exceptions: ['Faraday::Error::TimeoutError', 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry']
         c.use Faraday::ExtendedParseJson
