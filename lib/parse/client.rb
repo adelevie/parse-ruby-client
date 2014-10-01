@@ -17,6 +17,7 @@ module Parse
     attr_accessor :session
     attr_accessor :max_retries
     attr_accessor :logger
+    attr_accessor :quiet
 
     def initialize(data = {}, &blk)
       @host           = data[:host] || Protocol::HOST
@@ -26,6 +27,7 @@ module Parse
       @session_token  = data[:session_token]
       @max_retries    = data[:max_retries] || 3
       @logger         = data[:logger] || Logger.new(STDERR).tap{|l| l.level = Logger::INFO}
+      @quiet          = data[:quiet] || false
 
       options = {:request => {:timeout => 30, :open_timeout => 30}}
 
@@ -41,7 +43,7 @@ module Parse
           exceptions: ['Faraday::Error::TimeoutError', 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry']
         c.use Faraday::ExtendedParseJson
 
-        c.response :logger, @logger
+        c.response :logger, @logger unless @quiet
         c.adapter Faraday.default_adapter
 
         yield(c) if block_given?
