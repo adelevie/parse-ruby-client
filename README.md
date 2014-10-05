@@ -19,7 +19,8 @@ parse-ruby-client lets you interact with Parse using Ruby. There are many uses. 
 require 'parse-ruby-client'
 
 Parse.init :application_id => "<your_app_id>",
-           :api_key        => "<your_api_key>"
+           :api_key        => "<your_api_key>",
+           :quiet			=> true | false                      
 ```
 
 [![Gem Version](https://badge.fury.io/rb/parse-ruby-client.png)](http://badge.fury.io/rb/parse-ruby-client)
