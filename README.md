@@ -1090,7 +1090,23 @@ For config/installation: https://parse.com/docs/rest#push and https://parse.com/
 
 ## Installations
 
-TODO: Implement this!
+#### Retrieving Installations
+
+```ruby
+installation = Parse::Installation.get "objectId"
+# Same as
+installation = Parse::Installation.new "objectId"
+installation.get
+```
+
+#### Updating installations
+
+```ruby
+installation = Parse::Installation.new "objectId"
+installation.channels = ["", "my-channel-name"]
+installation.badge = 5
+installation.save
+```
 
 ## GeoPoints
 
