@@ -336,7 +336,7 @@ Dates are useful in combination with the built-in createdAt and updatedAt fields
 
 ```ruby
 game_score = Parse::Query.new("GameScore").tap do |q|
-  g.greater_than("createdAt", Parse::Date.new(DateTime.now)) # query options explained in more detail later in this document
+  q.greater_than("createdAt", Parse::Date.new(DateTime.now)) # query options explained in more detail later in this document
 end.get.first
 ```
 
