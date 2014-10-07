@@ -468,6 +468,10 @@ Other constraint methods include:
     <td>A value is set for the key</td>
   </tr>
   <tr>
+    <td>`Parse::Query#contains_all(field, values)`</td>
+    <td>Contains all values in the array</td>
+  </tr>
+  <tr>
     <td>`Parse::Query#select`</td>
     <td>TODO: `$select` not yet implemented. This matches a value for a key in the result of a different query</td>
   </tr>
@@ -576,6 +580,12 @@ For keys with an array type, you can find objects where the key's array value co
 
 ```ruby
 randos = Parse::Query.new("RandomObject").eq("arrayKey", 2).get
+```
+
+You can also query that the array contains multiple objects by using contains all, for example you can return objects that have the array values 2 AND 3 by:
+
+```ruby
+randos = Parse::Query.new("RandomObject").eq("arrayKey", [2, 3]).get
 ```
 
 ### Relational Queries

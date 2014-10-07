@@ -148,4 +148,39 @@ class TestQuery < ParseTestCase
       end
     end
   end
+
+  def test_contains_all
+    VCR.use_cassette('test_contains_all', :record => :new_episodes) do
+
+      #ensure cacti from the previous test to not hang around
+      q = Parse::Query.new "Cactus"
+      cacti = q.get
+      cacti.each do |cactus|
+        cactus.parse_delete
+      end
+      #end ensure
+
+      cactus = Parse::Object.new "Cactus"
+      cactus['array'] = [1, 2, 5, 6, 7]
+      cactus.save
+
+      second_cactus = Parse::Object.new "Cactus"
+      second_cactus['array'] = [3, 4, 5, 6]
+      second_cactus.save
+
+      contains_query = Parse::Query.new("Cactus").contains_all('array', [5, 6])
+      assert_equal 2, contains_query.get.size
+
+      with_one_query = Parse::Query.new("Cactus").contains_all('array', [1,5,6])
+      assert_equal 1, with_one_query.get.size
+      assert_equal [cactus], with_one_query.get
+
+      with_four_query = Parse::Query.new("Cactus").contains_all('array', [4,5,6])
+      assert_equal 1, with_four_query.get.size
+      assert_equal [second_cactus], with_four_query.get
+
+      with_nine_query = Parse::Query.new("Cactus").contains_all('array', [9])
+      assert_equal 0, with_nine_query.get.size
+    end
+  end
 end
