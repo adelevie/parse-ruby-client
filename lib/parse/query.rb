@@ -12,6 +12,7 @@ module Parse
     attr_accessor :skip
     attr_accessor :count
     attr_accessor :include
+    attr_accessor :keys
 
     def initialize(cls_name)
       @class_name = cls_name
@@ -141,7 +142,7 @@ module Parse
       end
       query = { "where" => where_as_json.to_json }
       set_order(query)
-      [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
+      [:count, :limit, :skip, :include, :keys].each {|a| merge_attribute(a, query)}
       Parse.client.logger.info{"Parse query for #{uri} #{query.inspect}"} unless Parse.client.quiet
       response = Parse.client.request uri, :get, nil, query
 

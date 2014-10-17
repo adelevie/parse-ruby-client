@@ -101,6 +101,10 @@ class TestQuery < ParseTestCase
     end
   end
 
+  # def test_keys
+    
+  # end
+
   def test_or
     #VCR.use_cassette('test_or', :record => :new_episodes) do
       foo = Parse::Object.new "Post"
