@@ -105,12 +105,12 @@ class TestQuery < ParseTestCase
     VCR.use_cassette('test_keys', :record => :new_episodes) do
       post = Parse::Object.new "Post"
       post['title'] = 'foo'
-      post['name'] = "This is cool"
+      post['name'] = 'This is cool'
       post.save
 
       q = Parse::Query.new "Post"
       q.eq('objectId', post_2.parse_object_id)
-      q.keys = "title"
+      q.keys = 'title'
 
       refute q.get.first.include? 'name'
     end
