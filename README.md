@@ -678,7 +678,7 @@ You can issue a query with multiple fields included by passing a comma-separated
 
 ```ruby
 comments = Parse::Query.new("Comment").tap do |q|
-  q.include("post,author")
+  q.include = "post,author"
 end.get
 ```
 
