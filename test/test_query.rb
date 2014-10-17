@@ -109,10 +109,10 @@ class TestQuery < ParseTestCase
       post.save
 
       q = Parse::Query.new "Post"
-      q.eq('objectId', post_2.parse_object_id)
+      q.eq('objectId', post.parse_object_id)
       q.keys = 'title'
 
-      refute q.get.first.include? 'name'
+      assert_equal false, q.get.first.include?('name')
     end
   end
 
