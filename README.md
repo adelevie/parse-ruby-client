@@ -572,6 +572,15 @@ scores = Parse::Query.new("GameScore").tap do |q|
 end.get
 ```
 
+You can use `keys` to only get specified fields back. `objectId`, `createdAt`, and `updatedAt` are always returned, and other fields are supplied as a comma separated string.
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.keys = "score,name"
+end.get
+```
+
+
 All of these parameters can be used in combination with each other.
 
 ### Queries on Array Values
