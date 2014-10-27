@@ -334,6 +334,11 @@ module Parse
       resp
     end
 
+    def delete
+      uri = Parse::Protocol.file_uri(@parse_filename)
+      resp = Parse.client.delete(uri)
+    end
+
     def to_h(*a)
       {
         Protocol::KEY_TYPE => Protocol::TYPE_FILE,
