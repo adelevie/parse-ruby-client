@@ -13,9 +13,15 @@ module Parse
     attr_accessor :push_time
     attr_accessor :data
 
-    def initialize(data, channel = "")
+    def initialize(data, channel = nil)
       @data = data
-      @channel = channel
+      
+      if !channel
+        # If no channel is specified, by setting "where" to an empty clause, a push is sent to all clients.
+        @where = {} if !channel
+      else 
+        @channel = channel
+      end
     end
 
     def save
@@ -30,13 +36,15 @@ module Parse
 
       if @where
         body.merge!({ :where => @where })
-        body.delete :channel
+      end
+
+      if @type
+        @where = {:deviceType => @type}
       end
 
       body.merge!({ :expiration_interval => @expiration_time_interval }) if @expiration_time_interval
       body.merge!({ :expiration_time => @expiration_time }) if @expiration_time
       body.merge!({ :push_time => @push_time }) if @push_time
-      body.merge!({ :type => @type }) if @type
 
       response = Parse.client.request uri, :post, body.to_json, nil
     end
