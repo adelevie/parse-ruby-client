@@ -39,7 +39,12 @@ module Parse
       end
 
       if @type
-        @where = {:deviceType => @type}
+        deviceType = { :deviceType => @type }
+        if @where
+            @where.merge!(deviceType)
+        else
+            body.merge!({ :where => deviceType })
+        end
       end
 
       body.merge!({ :expiration_interval => @expiration_time_interval }) if @expiration_time_interval
