@@ -15,8 +15,8 @@ module Parse
 
     def initialize(data, channel = "")
       @data = data
-      
-      if channel.empty?
+
+      if !channel || channel.empty?
         # If no channel is specified, by setting "where" to an empty clause, a push is sent to all clients.
         @where = {}
       else 
