@@ -13,12 +13,12 @@ module Parse
     attr_accessor :push_time
     attr_accessor :data
 
-    def initialize(data, channel = nil)
+    def initialize(data, channel = "")
       @data = data
       
-      if !channel
+      if channel.empty?
         # If no channel is specified, by setting "where" to an empty clause, a push is sent to all clients.
-        @where = {} if !channel
+        @where = {}
       else 
         @channel = channel
       end
@@ -41,9 +41,9 @@ module Parse
       if @type
         deviceType = { :deviceType => @type }
         if @where
-            @where.merge!(deviceType)
+           @where.merge!(deviceType)
         else
-            body.merge!({ :where => deviceType })
+          body.merge!({ :where => deviceType })
         end
       end
 
