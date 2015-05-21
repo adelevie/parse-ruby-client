@@ -53,7 +53,7 @@ end
 
 class ParseTestCase < Test::Unit::TestCase
   def setup
-    @client = Parse.init(:logger => Logger.new(STDERR).tap{|l| l.level = Logger::ERROR})
+    @client = Parse.create(:logger => Logger.new(STDERR).tap{|l| l.level = Logger::ERROR})
   end
 end
 

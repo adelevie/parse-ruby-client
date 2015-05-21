@@ -3,17 +3,14 @@ require 'helper'
 class TestBatch < ParseTestCase
 
   def test_initialize
-    batch = Parse::Batch.new
+    client = Parse::Client.new
+    batch = Parse::Batch.new(client)
     assert_equal batch.class, Parse::Batch
-    assert_equal Parse.client, batch.client
-
-    batch = Parse::Batch.new(Parse::Client.new)
-    assert_equal batch.class, Parse::Batch
-    assert_not_equal Parse.client, batch.client
+    assert_equal client, batch.client
   end
 
   def test_add_request
-    batch = Parse::Batch.new
+    batch = Parse::Batch.new(@client)
     batch.add_request({
       :method => "POST",
       :path => "/1/classes/GameScore",
@@ -42,7 +39,7 @@ class TestBatch < ParseTestCase
 
   def test_run
     VCR.use_cassette('test_batch_run', :record => :new_episodes) do
-      batch = Parse::Batch.new
+      batch = Parse::Batch.new(@client)
       batch.add_request({
         "method" => "POST",
         "path" => "/1/classes/GameScore",
@@ -61,11 +58,11 @@ class TestBatch < ParseTestCase
   def test_create_object
     VCR.use_cassette('test_batch_create_object', :record => :new_episodes) do
       objects = [1, 2, 3, 4, 5].map do |i|
-        p = Parse::Object.new("BatchTestObject")
+        p = Parse::Object.new("BatchTestObject", data = nil, client = @client)
         p["foo"] = "#{i}"
         p
       end
-      batch = Parse::Batch.new
+      batch = Parse::Batch.new(@client)
       objects.each do |obj|
         batch.create_object(obj)
       end
@@ -78,7 +75,7 @@ class TestBatch < ParseTestCase
   def test_update_object
     VCR.use_cassette('test_batch_update_object', :record => :new_episodes) do
       objects = [1, 2, 3, 4, 5].map do |i|
-        p = Parse::Object.new("BatchTestObject")
+        p = Parse::Object.new("BatchTestObject", data = nil, client = @client)
         p["foo"] = "#{i}"
         p.save
         p
@@ -86,7 +83,7 @@ class TestBatch < ParseTestCase
       objects.map do |obj|
         obj["foo"] = "updated"
       end
-      batch = Parse::Batch.new
+      batch = Parse::Batch.new(@client)
       objects.each do |obj|
         batch.update_object(obj)
       end
@@ -98,12 +95,12 @@ class TestBatch < ParseTestCase
 
   def test_update_nils_delete_keys
     VCR.use_cassette('test_batch_update_nils_delete_keys', :record => :new_episodes) do
-      post = Parse::Object.new("BatchTestObject")
+      post = Parse::Object.new("BatchTestObject", data = nil, client = @client)
       post["foo"] = "1"
       post.save
 
       post["foo"] = nil
-      batch = Parse::Batch.new
+      batch = Parse::Batch.new(@client)
       batch.update_object(post)
       batch.run!
 
@@ -114,12 +111,12 @@ class TestBatch < ParseTestCase
   def test_delete_object
     VCR.use_cassette('test_batch_delete_object', :record => :new_episodes) do
       objects = [1, 2, 3, 4, 5].map do |i|
-        p = Parse::Object.new("BatchTestObject")
+        p = Parse::Object.new("BatchTestObject", data = nil, client = @client)
         p["foo"] = "#{i}"
         p.save
         p
       end
-      batch = Parse::Batch.new
+      batch = Parse::Batch.new(@client)
       objects.each do |obj|
         batch.delete_object(obj)
       end

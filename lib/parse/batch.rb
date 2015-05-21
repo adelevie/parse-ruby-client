@@ -4,8 +4,8 @@ module Parse
     attr_reader :requests
     attr_reader :client
 
-    def initialize(client = Parse.client)
-      @client = client
+    def initialize(client = nil)
+      @client = client || Parse.client
       @requests ||= []
     end
 

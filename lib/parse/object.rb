@@ -11,14 +11,16 @@ module Parse
     attr_reader :class_name
     attr_reader :created_at
     attr_reader :updated_at
+    attr_accessor :client
     alias :id :parse_object_id
 
-    def initialize(class_name, data = nil)
+    def initialize(class_name, data = nil, client = nil)
       @class_name = class_name
       @op_fields = {}
       if data
         parse data
       end
+      @client = client || Parse.client
     end
 
     def eql?(other)
@@ -65,11 +67,13 @@ module Parse
       end
 
       body = safe_hash.to_json
-      data = Parse.client.request(self.uri, method, body)
+      data = @client.request(self.uri, method, body)
 
       if data
         # array operations can return mutated view of array which needs to be parsed
-        parse Parse.parse_json(class_name, data)
+        object = Parse.parse_json(class_name, data)
+        object = Parse.copy_client(@client, object)
+        parse object
       end
 
       if @class_name == Parse::Protocol::CLASS_USER
@@ -130,7 +134,7 @@ module Parse
     # values from the API.
     def refresh
       if @parse_object_id
-        data = Parse.get @class_name, @parse_object_id
+        data = Parse.get(@class_name, @parse_object_id, client = @client)
         clear
         if data
           parse data
@@ -143,7 +147,7 @@ module Parse
     # Delete the remote Parse API object.
     def parse_delete
       if @parse_object_id
-        response = Parse.client.delete self.uri
+        response = @client.delete self.uri
       end
 
       self.clear
@@ -180,7 +184,7 @@ module Parse
       #end
 
       body = {field => Parse::Increment.new(amount)}.to_json
-      data = Parse.client.request(self.uri, :put, body)
+      data = @client.request(self.uri, :put, body)
       parse data
       self
     end

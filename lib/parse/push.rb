@@ -13,9 +13,10 @@ module Parse
     attr_accessor :push_time
     attr_accessor :data
 
-    def initialize(data, channel = "")
+    def initialize(data, channel = "", client = nil)
       @data = data
       @channel = channel
+      @client = client || Parse.client
     end
 
     def save
@@ -38,7 +39,7 @@ module Parse
       body.merge!({ :push_time => @push_time }) if @push_time
       body.merge!({ :type => @type }) if @type
 
-      response = Parse.client.request uri, :post, body.to_json, nil
+      response = @client.request uri, :post, body.to_json, nil
     end
 
   end

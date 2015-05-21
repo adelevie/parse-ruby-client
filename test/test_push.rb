@@ -5,10 +5,10 @@ class TestPush < ParseTestCase
   def test_save_without_where
     data = {:foo => 'bar',
             :alert => 'message'}
-    pf_push = Parse::Push.new(data, "some_chan")
+    pf_push = Parse::Push.new(data, "some_chan", client = @client)
     pf_push.type = 'ios'
 
-    query = Parse::Query.new(Parse::Protocol::CLASS_INSTALLATION).eq('deviceToken', 'baz')
+    query = Parse::Query.new(Parse::Protocol::CLASS_INSTALLATION, client = @client).eq('deviceToken', 'baz')
 
     Parse::Client.any_instance.expects(:request).with do |uri, method, body, query|
       hash = JSON.parse(body)
@@ -26,10 +26,10 @@ class TestPush < ParseTestCase
   def test_save_with_where_removes_channel
     data = {:foo => 'bar',
             :alert => 'message'}
-    pf_push = Parse::Push.new(data, "some_chan")
+    pf_push = Parse::Push.new(data, "some_chan", client = @client)
     pf_push.type = 'ios'
 
-    query = Parse::Query.new(Parse::Protocol::CLASS_INSTALLATION).eq('deviceToken', 'baz')
+    query = Parse::Query.new(Parse::Protocol::CLASS_INSTALLATION, client = @client).eq('deviceToken', 'baz')
     pf_push.where = query.where
 
     Parse::Client.any_instance.expects(:request).with do |uri, method, body, query|

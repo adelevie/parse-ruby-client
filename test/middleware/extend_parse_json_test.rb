@@ -2,7 +2,7 @@
 require 'helper'
 
 module Middleware
-  class ExtedParseJsonTest < Faraday::TestCase
+  class ExtendedParseJson < Faraday::TestCase
 
     def conn(retry_options = {})
       Faraday.new do |b|
