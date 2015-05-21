@@ -36,7 +36,7 @@ class TestUser < ParseTestCase
       assert_equal login["username"], user["username"]
       assert_equal login["sessionToken"].class, String
 
-      user = user.pointer.get
+      user = user.pointer.get(@client)
       user.save
     #end
   end
