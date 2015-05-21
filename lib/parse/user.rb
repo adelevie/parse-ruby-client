@@ -17,7 +17,7 @@ module Parse
       response = client.request(Parse::Protocol::USER_LOGIN_URI, :get, nil, body)
       client.session_token = response[Parse::Protocol::KEY_USER_SESSION_TOKEN]
 
-      new(response)
+      new(response, client = client)
     end
 
     def self.reset_password(email, client = nil)

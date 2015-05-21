@@ -109,7 +109,7 @@ class TestQuery < ParseTestCase
       foo_query = Parse::Query.new("Post", client = @client).eq("random", foo["random"])
       assert_equal 1, foo_query.get.size
 
-      bar = Parse::Object.new("Post", client = @client)
+      bar = Parse::Object.new("Post", data = nil, client = @client)
       bar["random"] = rand
       bar.save
       bar_query = Parse::Query.new("Post", client = @client).eq("random", bar["random"])
