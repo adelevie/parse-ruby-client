@@ -23,11 +23,11 @@ Parse.init :application_id => "<your_app_id>", # required
            :quiet		   => true | false  # optional, defaults to false                 
 ```
 
-[![Gem Version](https://badge.fury.io/rb/parse-ruby-client.png)](http://badge.fury.io/rb/parse-ruby-client)
+[![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
 
-[![Build Status](https://travis-ci.org/adelevie/parse-ruby-client.png?branch=master)](https://travis-ci.org/adelevie/parse-ruby-client)
+[![Travis](https://img.shields.io/travis/adelevie/parse-ruby-client.svg)](https://travis-ci.org/adelevie/parse-ruby-client)
 
-[![Code Climate](https://codeclimate.com/github/adelevie/parse-ruby-client.png)](https://codeclimate.com/github/adelevie/parse-ruby-client)
+[![Code Climate](https://img.shields.io/codeclimate/github/adelevie/parse-ruby-client.svg)](https://codeclimate.com/github/adelevie/parse-ruby-client)
 
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
