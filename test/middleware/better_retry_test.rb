@@ -2,7 +2,7 @@
 require 'helper'
 
 module Middleware
-  class BeterRetryTest < Faraday::TestCase
+  class BetterRetryTest < Faraday::TestCase
     def setup
       @times_called = 0
     end

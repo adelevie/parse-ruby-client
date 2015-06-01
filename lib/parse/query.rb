@@ -13,11 +13,12 @@ module Parse
     attr_accessor :count
     attr_accessor :include
 
-    def initialize(cls_name)
+    def initialize(cls_name, client = nil)
       @class_name = cls_name
       @where = {}
       @order = :ascending
       @ors = []
+      @client = client || Parse.client
     end
 
     def add_constraint(field, constraint)
@@ -142,11 +143,15 @@ module Parse
       query = { "where" => where_as_json.to_json }
       set_order(query)
       [:count, :limit, :skip, :include].each {|a| merge_attribute(a, query)}
-      Parse.client.logger.info{"Parse query for #{uri} #{query.inspect}"} unless Parse.client.quiet
-      response = Parse.client.request uri, :get, nil, query
+      @client.logger.info{"Parse query for #{uri} #{query.inspect}"} unless @client.quiet
+      response = @client.request uri, :get, nil, query
 
       if response.is_a?(Hash) && response.has_key?(Protocol::KEY_RESULTS) && response[Protocol::KEY_RESULTS].is_a?(Array)
-        parsed_results = response[Protocol::KEY_RESULTS].map{|o| Parse.parse_json(class_name, o)}
+        parsed_results = response[Protocol::KEY_RESULTS].map do |result|
+          result = Parse.parse_json(class_name, result)
+          result = Parse.copy_client(@client, result)
+        end
+
         if response.keys.size == 1
           parsed_results
         else
@@ -172,5 +177,4 @@ module Parse
       query.merge!((query_field || attribute) => value)
     end
   end
-
 end

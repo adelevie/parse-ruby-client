@@ -58,8 +58,8 @@ module Parse
     end
 
     # Retrieve the Parse object referenced by this pointer.
-    def get
-      Parse.get @class_name, @parse_object_id if @parse_object_id
+    def get(client = nil)
+      Parse.get(@class_name, @parse_object_id, client = client) if @parse_object_id
     end
 
     def to_s
@@ -305,7 +305,7 @@ module Parse
     attr_accessor :body
     attr_accessor :url
 
-    def initialize(data)
+    def initialize(data, client = nil)
       data = Hash[data.map{ |k, v| [k.to_s, v] }] # convert hash keys to strings
       @local_filename = data["local_filename"] if data["local_filename"]
       @parse_filename = data["name"]           if data["name"]
@@ -313,6 +313,7 @@ module Parse
       @content_type   = data["content_type"]   if data["content_type"]
       @url            = data["url"]            if data["url"]
       @body           = data["body"]           if data["body"]
+      @client         = client || Parse.client
     end
 
     def eql?(other)
@@ -328,7 +329,7 @@ module Parse
 
     def save
       uri = Parse::Protocol.file_uri(@local_filename)
-      resp = Parse.client.request(uri, :post, @body, nil, @content_type)
+      resp = @client.request(uri, :post, @body, nil, @content_type)
       @parse_filename = resp["name"]
       @url = resp["url"]
       resp
@@ -344,7 +345,7 @@ module Parse
     alias :as_json :to_h
 
     def to_json(*a)
-    to_h.to_json(*a)
+      to_h.to_json(*a)
     end
   end
 

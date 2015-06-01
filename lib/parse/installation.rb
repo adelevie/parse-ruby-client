@@ -17,16 +17,18 @@ module Parse
       app_identifier: 'appIdentifier'
     }
 
-    def initialize(parse_object_id)
+    def initialize(parse_object_id, client = nil)
       @parse_object_id = parse_object_id
+      @client = client || Parse.client
     end
 
-    def self.get(parse_object_id)
-      new(parse_object_id).get
+    def self.get(parse_object_id, client = nil)
+      client ||= Parse.client
+      new(parse_object_id, client = client).get
     end
 
     def get
-      if response = Parse.client.request(uri, :get, nil, nil)
+      if response = @client.request(uri, :get, nil, nil)
         parse Parse.parse_json(nil, response)
       end
     end
@@ -42,7 +44,7 @@ module Parse
     end
 
     def save
-      Parse.client.request uri, method, self.to_json, nil
+      @client.request uri, method, self.to_json, nil
     end
 
     def rest_api_hash

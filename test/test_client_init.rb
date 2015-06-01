@@ -1,6 +1,9 @@
 require 'helper'
 
-class TestClient < ParseTestCase
+class TestClientInit < ParseTestCase
+  def setup
+    @client = Parse.init(:logger => Logger.new(STDERR).tap{|l| l.level = Logger::ERROR})
+  end
 
   def stubbed_client(&block)
     stubs = Faraday::Adapter::Test::Stubs.new do |stub|
@@ -99,7 +102,7 @@ class TestClient < ParseTestCase
       end
 
       # some json parsers return nil instead of raising
-      JSON.stubs(:parse).returns(nil) 
+      JSON.stubs(:parse).returns(nil)
 
       begin
         client.request('/')

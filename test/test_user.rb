@@ -9,7 +9,7 @@ class TestUser < ParseTestCase
         :username => username,
         :password => "topsecret"
       }
-      user = Parse::User.new data
+      user = Parse::User.new(data, client = @client)
       user.save
       assert_equal user[Parse::Protocol::KEY_OBJECT_ID].class, String
       assert_equal user[Parse::Protocol::KEY_CREATED_AT].class, String
@@ -24,19 +24,19 @@ class TestUser < ParseTestCase
         :password => "secret"
       }
 
-      user = Parse::User.new(data)
+      user = Parse::User.new(data, client = @client)
 
       user.save
 
       assert_equal user["username"], u
       assert_equal user[Parse::Protocol::KEY_USER_SESSION_TOKEN].class, String
 
-      login = Parse::User.authenticate(u, "secret")
+      login = Parse::User.authenticate(u, "secret", client = @client)
 
       assert_equal login["username"], user["username"]
       assert_equal login["sessionToken"].class, String
 
-      user = user.pointer.get
+      user = user.pointer.get(@client)
       user.save
     #end
   end
@@ -48,11 +48,11 @@ class TestUser < ParseTestCase
       :password => "secret"
     }
 
-    user = Parse::User.new(data)
+    user = Parse::User.new(data, client = @client)
 
     user.save
 
-    reset_password = Parse::User.reset_password(u)
+    reset_password = Parse::User.reset_password(u, client = @client)
 
     assert_equal Hash.new, reset_password
   end

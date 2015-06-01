@@ -8,7 +8,7 @@ class TestFile < ParseTestCase
         :body => "Hello World!",
         :local_filename => "hello.txt",
         :content_type => "text/plain"
-      })
+      }, client = @client)
       tf.save
 
       assert tf.local_filename
@@ -26,7 +26,7 @@ class TestFile < ParseTestCase
         :body => IO.read("test/parsers.jpg"),
         :local_filename => "parsers.jpg",
         :content_type => "image/jpeg"
-      })
+      }, client = @client)
       tf.save
 
       assert tf.local_filename
@@ -43,7 +43,7 @@ class TestFile < ParseTestCase
         :body => IO.read("test/parsers.jpg"),
         :local_filename => "parsers.jpg",
         :content_type => "image/jpeg"
-      })
+      }, client = @client)
       tf.save
 
       assert tf.local_filename
