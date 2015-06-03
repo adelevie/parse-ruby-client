@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestDatatypes < Test::Unit::TestCase
+class TestDatatypes < ParseTestCase
   def test_pointer
     data = {
       Parse::Protocol::KEY_CLASS_NAME => "DatatypeTestClass",
@@ -26,7 +26,7 @@ class TestDatatypes < Test::Unit::TestCase
     assert_equal 0, parse_date <=> parse_date
     assert_equal 0, Parse::Date.new(date_time) <=> Parse::Date.new(date_time)
 
-    post = Parse::Object.new("Post")
+    post = Parse::Object.new("Post", data = nil, client = @client)
     post["time"] = parse_date
     post.save
     q = Parse.get("Post", post.id)
@@ -80,7 +80,7 @@ class TestDatatypes < Test::Unit::TestCase
     assert_equal JSON.parse(gp.to_json)["latitude"], data["latitude"]
     assert_equal JSON.parse(gp.to_json)[Parse::Protocol::KEY_TYPE], Parse::Protocol::TYPE_GEOPOINT
 
-    post = Parse::Object.new("Post")
+    post = Parse::Object.new("Post", data = nil, client = @client)
     post["location"] = gp
     post.save
     q = Parse.get("Post", post.id)

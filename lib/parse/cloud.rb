@@ -5,8 +5,9 @@ module Parse
     class Function
       attr_accessor :function_name
 
-      def initialize(function_name)
+      def initialize(function_name, client = nil)
         @function_name = function_name
+        @client = client || Parse.client
       end
 
       def uri
@@ -14,7 +15,7 @@ module Parse
       end
 
       def call(params={})
-        response = Parse.client.post(self.uri, params.to_json)
+        response = @client.post(self.uri, params.to_json)
         result = response["result"]
         result
       end
