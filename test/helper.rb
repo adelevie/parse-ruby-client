@@ -27,7 +27,9 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'parse-ruby-client'
 
-YAML::ENGINE.yamler='syck' # get ascii strings as strings in fixtures
+unless RUBY_VERSION[0..2] == '2.2'
+  YAML::ENGINE.yamler = 'syck' # get ascii strings as strings in fixtures
+end
 
 VCR.configure do |c|
   c.cassette_library_dir = 'fixtures/vcr_cassettes'
@@ -51,7 +53,7 @@ end
 
 class ParseTestCase < Test::Unit::TestCase
   def setup
-    @client = Parse.init(:logger => Logger.new(STDERR).tap{|l| l.level = Logger::ERROR})
+    @client = Parse.create(:logger => Logger.new(STDERR).tap{|l| l.level = Logger::ERROR})
   end
 end
 

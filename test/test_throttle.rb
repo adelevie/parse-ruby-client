@@ -1,5 +1,5 @@
 require 'helper'
 
-class TestQuery < ParseTestCase
+class TestThrottle < ParseTestCase
 
 end

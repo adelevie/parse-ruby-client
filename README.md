@@ -87,7 +87,7 @@ Parse.init :application_id => "<your_app_id>",
     - [Deleting Files](#deleting-files)
   - [Push Notifications](#push-notifications)
     - [Using Channels](#using-channels)
-    - [Using Advanced Targeting](#using-advanced targeting)
+    - [Using Advanced Targeting](#using-advanced-targeting)
   - [Installations](#installations)
   - [GeoPoints](#geopoints)
     - [GeoPoint](#geopoint)

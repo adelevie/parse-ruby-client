@@ -22,7 +22,8 @@ module Parse
       if obj.has_key?(Protocol::KEY_TYPE)
         parse_datatype obj
       elsif class_name # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
-        Parse::Object.new class_name, Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
+        # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
+        Parse::Object.new(class_name, data = Hash[obj.map{|k,v| [k, parse_json(nil, v)]}], client = '')
       else # plain old hash
         obj
       end
@@ -48,7 +49,8 @@ module Parse
       when Protocol::TYPE_FILE
         Parse::File.new obj
       when Protocol::TYPE_OBJECT # used for relation queries, e.g. "?include=post"
-        Parse::Object.new obj[Protocol::KEY_CLASS_NAME], Hash[obj.map{|k,v| [k, parse_json(nil, v)]}]
+        # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
+        Parse::Object.new(obj[Protocol::KEY_CLASS_NAME], data = Hash[obj.map{|k,v| [k, parse_json(nil, v)]}], client = '')
     end
   end
 
@@ -85,5 +87,27 @@ module Parse
     else
       v.class_name.hash ^ v.id.hash
     end
+  end
+
+
+  # NOTE: this mess is used to pass along the @client to internal objects
+  def Parse.copy_client(client, parsed_data)
+    do_copy = lambda do |object|
+      if object.is_a?(Parse::Object)
+        object.client = client
+        object.each do |key, value|
+          value.client = client if value.is_a?(Parse::Object)
+        end
+      end
+      object
+    end
+
+    if parsed_data.is_a?(Array)
+      parsed_data.collect(&:do_copy)
+    else
+      parsed_data = do_copy.call(parsed_data)
+    end
+
+    parsed_data
   end
 end
