@@ -304,6 +304,7 @@ module Parse
     attr_accessor :content_type
     attr_accessor :body
     attr_accessor :url
+    attr_accessor :client
 
     def initialize(data, client = nil)
       data = Hash[data.map{ |k, v| [k.to_s, v] }] # convert hash keys to strings

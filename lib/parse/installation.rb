@@ -5,6 +5,8 @@ require 'parse/object'
 
 module Parse
   class Installation < Parse::Object
+    attr_accessor :client
+
     UPDATABLE_FIELDS = {
       badge: 'badge',
       channels: 'channels',

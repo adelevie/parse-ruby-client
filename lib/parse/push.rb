@@ -12,6 +12,7 @@ module Parse
     attr_accessor :expiration_time
     attr_accessor :push_time
     attr_accessor :data
+    attr_accessor :client
 
     def initialize(data, channel = "", client = nil)
       @data = data
