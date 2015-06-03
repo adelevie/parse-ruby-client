@@ -13,7 +13,7 @@ module Parse
     attr_accessor :push_time
     attr_accessor :data
 
-    def initialize(data, channel = "")
+    def initialize(data, channel = "", client=nil)
       @data = data
 
       if !channel || channel.empty?
@@ -22,6 +22,8 @@ module Parse
       else 
         @channel = channel
       end
+
+      @client = client || Parse.client
     end
 
     def save
@@ -52,7 +54,7 @@ module Parse
       body.merge!({ :expiration_time => @expiration_time }) if @expiration_time
       body.merge!({ :push_time => @push_time }) if @push_time
 
-      response = Parse.client.request uri, :post, body.to_json, nil
+      response = @client.request uri, :post, body.to_json, nil
     end
 
   end
