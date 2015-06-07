@@ -2,7 +2,7 @@
 module Parse
   class Batch
     attr_reader :requests
-    attr_reader :client
+    attr_accessor :client
 
     def initialize(client = nil)
       @client = client || Parse.client

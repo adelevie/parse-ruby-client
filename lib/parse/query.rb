@@ -12,6 +12,7 @@ module Parse
     attr_accessor :skip
     attr_accessor :count
     attr_accessor :include
+    attr_accessor :client
 
     def initialize(cls_name, client = nil)
       @class_name = cls_name

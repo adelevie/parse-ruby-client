@@ -4,6 +4,7 @@ module Parse
 
     class Function
       attr_accessor :function_name
+      attr_accessor :client
 
       def initialize(function_name, client = nil)
         @function_name = function_name
