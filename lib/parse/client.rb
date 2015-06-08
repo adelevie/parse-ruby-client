@@ -87,6 +87,10 @@ module Parse
       request(uri, :delete)
     end
 
+    def application_config
+      Parse::Application.config(self)
+    end
+
     def batch
       Parse::Batch.new(self)
     end
@@ -109,6 +113,10 @@ module Parse
 
     def query(class_name)
       Parse::Query.new(class_name, self)
+    end
+
+    def user(data)
+      Parse::User.new(data, self)
     end
   end
 

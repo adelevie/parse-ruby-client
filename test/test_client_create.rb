@@ -39,6 +39,12 @@ class TestClientShortcuts < ParseTestCase
     assert query.is_a? Parse::Query
     assert_equal @client, query.client
   end
+
+  def test_user
+    user = @client.user({:username => 'foobar', :password => 'whatever'})
+    assert user.is_a? Parse::User
+    assert_equal @client, user.client
+  end
 end
 
 class TestClientCreate < ParseTestCase
