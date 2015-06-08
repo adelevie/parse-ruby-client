@@ -4,8 +4,8 @@ require 'parse/error'
 require 'parse/util'
 
 require 'logger'
-module Parse
 
+module Parse
   # A class which encapsulates the HTTPS communication with the Parse
   # API server.
   class Client
@@ -87,6 +87,37 @@ module Parse
       request(uri, :delete)
     end
 
+    def application_config
+      Parse::Application.config(self)
+    end
+
+    def batch
+      Parse::Batch.new(self)
+    end
+
+    def cloud_function(function_name)
+      Parse::Cloud::Function.new(function_name, self)
+    end
+
+    def file(data)
+      Parse::File.new(data, self)
+    end
+
+    def object(class_name, data = nil)
+      Parse::Object.new(class_name, data, self)
+    end
+
+    def push(data, channel = '')
+      Parse::Push.new(data, channel, self)
+    end
+
+    def query(class_name)
+      Parse::Query.new(class_name, self)
+    end
+
+    def user(data)
+      Parse::User.new(data, self)
+    end
   end
 
 
