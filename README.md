@@ -1,3 +1,15 @@
+# !! NOTE !!
+The master branch has a lot of changes that the current release doesn't. The version on RubyGems (0.3.0) corresponds to the repo at [this](https://github.com/adelevie/parse-ruby-client/tree/b686900f8a26c3674dabe72ae66b38daa8b84021) point, so use those docs instead. 
+
+Alternatively, you can set up your `Gemfile` as such:
+
+ruby
+```
+gem 'parse-ruby-client', git: 'https://github.com/adelevie/parse-ruby-client.git'
+```
+
+and it'll use the current master branch in your app.
+
 ## Summary
 
 parse-ruby-client lets you interact with Parse using Ruby. There are many uses. For example:
