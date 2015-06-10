@@ -1,5 +1,7 @@
 # !! NOTE !!
-The master branch has a lot of changes that the current release doesn't. The version on RubyGems (0.3.0) corresponds to the repo at [this](https://github.com/adelevie/parse-ruby-client/tree/b686900f8a26c3674dabe72ae66b38daa8b84021) point, so use those docs instead. 
+The master branch has a lot of changes that the current release doesn't have.
+
+The version on RubyGems (0.3.0) has its [corresponding tag](https://github.com/adelevie/parse-ruby-client/tree/v0.3.0), so use those docs instead. 
 
 Alternatively, you can set up your `Gemfile` as such:
 
