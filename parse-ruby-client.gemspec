@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2014-07-31"
+  s.date = "2015-06-18"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_batch_run.yml",
     "fixtures/vcr_cassettes/test_batch_update_nils_delete_keys.yml",
     "fixtures/vcr_cassettes/test_batch_update_object.yml",
+    "fixtures/vcr_cassettes/test_contains_all.yml",
     "fixtures/vcr_cassettes/test_created_at.yml",
     "fixtures/vcr_cassettes/test_decrement.yml",
     "fixtures/vcr_cassettes/test_deep_parse.yml",
@@ -46,6 +47,7 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_eq_pointerize.yml",
     "fixtures/vcr_cassettes/test_equality.yml",
     "fixtures/vcr_cassettes/test_get.yml",
+    "fixtures/vcr_cassettes/test_get_installation.yml",
     "fixtures/vcr_cassettes/test_get_missing.yml",
     "fixtures/vcr_cassettes/test_image_file_associate_with_object.yml",
     "fixtures/vcr_cassettes/test_image_file_save.yml",
@@ -62,6 +64,7 @@ Gem::Specification.new do |s|
     "fixtures/vcr_cassettes/test_retries_404_correct.yml",
     "fixtures/vcr_cassettes/test_retries_json_error.yml",
     "fixtures/vcr_cassettes/test_retries_server_error.yml",
+    "fixtures/vcr_cassettes/test_save_installation.yml",
     "fixtures/vcr_cassettes/test_save_with_sub_objects.yml",
     "fixtures/vcr_cassettes/test_saving_boolean_values.yml",
     "fixtures/vcr_cassettes/test_saving_nested_objects.yml",
@@ -77,6 +80,7 @@ Gem::Specification.new do |s|
     "lib/faraday/extended_parse_json.rb",
     "lib/faraday/get_method_override.rb",
     "lib/parse-ruby-client.rb",
+    "lib/parse/application.rb",
     "lib/parse/batch.rb",
     "lib/parse/client.rb",
     "lib/parse/cloud.rb",
@@ -98,12 +102,14 @@ Gem::Specification.new do |s|
     "test/middleware/extend_parse_json_test.rb",
     "test/parsers.jpg",
     "test/test_batch.rb",
-    "test/test_client.rb",
+    "test/test_client_create.rb",
+    "test/test_client_init.rb",
     "test/test_cloud.rb",
     "test/test_datatypes.rb",
     "test/test_file.rb",
     "test/test_init.rb",
     "test/test_init_from_cloud_code.rb",
+    "test/test_installation.rb",
     "test/test_model.rb",
     "test/test_object.rb",
     "test/test_push.rb",
@@ -113,7 +119,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/adelevie/parse-ruby-client"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.2.2"
+  s.rubygems_version = "2.4.6"
   s.summary = "A simple Ruby client for the parse.com REST API"
 
   if s.respond_to? :specification_version then

@@ -1,13 +1,12 @@
 # -*- encoding : utf-8 -*-
 
 module Parse
-
   # Parse a JSON representation into a fully instantiated
   # class. obj can be either a primitive or a Hash of primitives as parsed
   # by JSON.parse
   # @param class_name [Object]
   # @param obj [Object]
-  def Parse.parse_json(class_name, obj)
+  def self.parse_json(class_name, obj)
     if obj.nil?
       nil
 
@@ -19,11 +18,11 @@ module Parse
     elsif obj.is_a? Hash
 
       # If it's a datatype hash
-      if obj.has_key?(Protocol::KEY_TYPE)
+      if obj.key?(Protocol::KEY_TYPE)
         parse_datatype obj
       elsif class_name # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
         # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
-        Parse::Object.new(class_name, data = Hash[obj.map{|k,v| [k, parse_json(nil, v)]}], client = '')
+        Parse::Object.new(class_name, Hash[obj.map { |k, v| [k, parse_json(nil, v)] }], '')
       else # plain old hash
         obj
       end
@@ -34,30 +33,30 @@ module Parse
     end
   end
 
-  def Parse.parse_datatype(obj)
+  def self.parse_datatype(obj)
     type = obj[Protocol::KEY_TYPE]
 
     case type
-      when Protocol::TYPE_POINTER
-        Parse::Pointer.new obj
-      when Protocol::TYPE_BYTES
-        Parse::Bytes.new obj
-      when Protocol::TYPE_DATE
-        Parse::Date.new obj
-      when Protocol::TYPE_GEOPOINT
-        Parse::GeoPoint.new obj
-      when Protocol::TYPE_FILE
-        Parse::File.new obj
-      when Protocol::TYPE_OBJECT # used for relation queries, e.g. "?include=post"
-        # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
-        Parse::Object.new(obj[Protocol::KEY_CLASS_NAME], data = Hash[obj.map{|k,v| [k, parse_json(nil, v)]}], client = '')
+    when Protocol::TYPE_POINTER
+      Parse::Pointer.new obj
+    when Protocol::TYPE_BYTES
+      Parse::Bytes.new obj
+    when Protocol::TYPE_DATE
+      Parse::Date.new obj
+    when Protocol::TYPE_GEOPOINT
+      Parse::GeoPoint.new obj
+    when Protocol::TYPE_FILE
+      Parse::File.new obj
+    when Protocol::TYPE_OBJECT # used for relation queries, e.g. "?include=post"
+      # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
+      Parse::Object.new(obj[Protocol::KEY_CLASS_NAME], Hash[obj.map { |k, v| [k, parse_json(nil, v)] }], '')
     end
   end
 
-  def Parse.pointerize_value(obj)
-    if obj.kind_of?(Parse::Object)
+  def self.pointerize_value(obj)
+    if obj.is_a?(Parse::Object)
       p = obj.pointer
-      raise ArgumentError.new("new object used in context requiring pointer #{obj}") unless p
+      fail ArgumentError, "new object used in context requiring pointer #{obj}" unless p
       p
     elsif obj.is_a?(Array)
       obj.map do |v|
@@ -72,16 +71,16 @@ module Parse
     end
   end
 
-  def Parse.object_pointer_equality?(a, b)
+  def self.object_pointer_equality?(a, b)
     classes = [Parse::Object, Parse::Pointer]
-    return false unless classes.any? { |c| a.kind_of?(c) } && classes.any? { |c| b.kind_of?(c) }
+    return false unless classes.any? { |c| a.is_a?(c) } && classes.any? { |c| b.is_a?(c) }
     return true if a.equal?(b)
     return false if a.new? || b.new?
 
     a.class_name == b.class_name && a.id == b.id
   end
 
-  def Parse.object_pointer_hash(v)
+  def self.object_pointer_hash(v)
     if v.new?
       v.object_id
     else
@@ -89,13 +88,12 @@ module Parse
     end
   end
 
-
   # NOTE: this mess is used to pass along the @client to internal objects
-  def Parse.copy_client(client, parsed_data)
+  def self.copy_client(client, parsed_data)
     do_copy = lambda do |object|
       if object.is_a?(Parse::Object)
         object.client = client
-        object.each do |key, value|
+        object.each do |_key, value|
           value.client = client if value.is_a?(Parse::Object)
         end
       end

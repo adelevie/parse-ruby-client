@@ -26,13 +26,12 @@ module Parse
 
     def self.get(parse_object_id, client = nil)
       client ||= Parse.client
-      new(parse_object_id, client = client).get
+      new(parse_object_id, client).get
     end
 
     def get
-      if response = @client.request(uri, :get, nil, nil)
-        parse Parse.parse_json(nil, response)
-      end
+      response = @client.request(uri, :get, nil, nil)
+      parse Parse.parse_json(nil, response) if response
     end
 
     UPDATABLE_FIELDS.each do |method_name, key|
@@ -46,7 +45,7 @@ module Parse
     end
 
     def save
-      @client.request uri, method, self.to_json, nil
+      @client.request uri, method, to_json, nil
     end
 
     def rest_api_hash
@@ -56,6 +55,5 @@ module Parse
     def method
       @parse_object_id ? :put : :post
     end
-
   end
 end

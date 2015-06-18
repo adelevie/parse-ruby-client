@@ -16,7 +16,6 @@ module Faraday
   #   end
   class BetterRetry < Faraday::Middleware
     class Options < OpenStruct
-
       def max
         (self[:max] ||= 2).to_i
       end
@@ -37,7 +36,6 @@ module Faraday
       def []=(name, value)
         modifiable[new_ostruct_member(name)] = value
       end
-
     end
 
     # Public: Initialize middleware
@@ -62,7 +60,7 @@ module Faraday
       rescue @errmatch => e
         if retries > 0
           if @logger
-            @logger.warn("Retrying Parse Error #{e.inspect} on request #{env[:url].to_s} #{env[:body].inspect} response #{env[:response].inspect}")
+            @logger.warn("Retrying Parse Error #{e.inspect} on request #{env[:url]} #{env[:body].inspect} response #{env[:response].inspect}")
           end
           retries -= 1
           env[:retries] = retries

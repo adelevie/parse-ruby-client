@@ -19,17 +19,17 @@ module Parse
     attr_accessor :logger
     attr_accessor :quiet
 
-    def initialize(data = {}, &blk)
+    def initialize(data = {}, &_blk)
       @host           = data[:host] || Protocol::HOST
       @application_id = data[:application_id]
       @api_key        = data[:api_key]
       @master_key     = data[:master_key]
       @session_token  = data[:session_token]
       @max_retries    = data[:max_retries] || 3
-      @logger         = data[:logger] || Logger.new(STDERR).tap{|l| l.level = Logger::INFO}
+      @logger         = data[:logger] || Logger.new(STDERR).tap { |l| l.level = Logger::INFO }
       @quiet          = data[:quiet] || false
 
-      options = {:request => {:timeout => 30, :open_timeout => 30}}
+      options = { request: { timeout: 30, open_timeout: 30 } }
 
       @session = Faraday.new("https://#{host}", options) do |c|
         c.request :json
@@ -37,10 +37,10 @@ module Parse
         c.use Faraday::GetMethodOverride
 
         c.use Faraday::BetterRetry,
-          max: @max_retries,
-          logger: @logger,
-          interval: 0.5,
-          exceptions: ['Faraday::Error::TimeoutError', 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry']
+              max: @max_retries,
+              logger: @logger,
+              interval: 0.5,
+              exceptions: ['Faraday::Error::TimeoutError', 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry']
         c.use Faraday::ExtendedParseJson
 
         c.response :logger, @logger unless @quiet
@@ -58,12 +58,12 @@ module Parse
       headers = {}
 
       {
-        "Content-Type"                  => content_type || 'application/json',
-        "User-Agent"                    => 'Parse for Ruby, 0.0',
+        'Content-Type'                  => content_type || 'application/json',
+        'User-Agent'                    => 'Parse for Ruby, 0.0',
         Protocol::HEADER_MASTER_KEY     => @master_key,
         Protocol::HEADER_APP_ID         => @application_id,
         Protocol::HEADER_API_KEY        => @api_key,
-        Protocol::HEADER_SESSION_TOKEN  => @session_token,
+        Protocol::HEADER_SESSION_TOKEN  => @session_token
       }.each do |key, value|
         headers[key] = value if value
       end
@@ -120,7 +120,6 @@ module Parse
     end
   end
 
-
   # Module methods
   # ------------------------------------------------------------
   class << self
@@ -132,11 +131,11 @@ module Parse
     # This should be preferred over Parse.init which uses a singleton
     # client object for all API calls.
     def create(data = {}, &blk)
-      defaults = {:application_id => ENV["PARSE_APPLICATION_ID"], :api_key => ENV["PARSE_REST_API_KEY"]}
+      defaults = { application_id: ENV['PARSE_APPLICATION_ID'], api_key: ENV['PARSE_REST_API_KEY'] }
       defaults.merge!(data)
 
       # use less permissive key if both are specified
-      defaults[:master_key] = ENV["PARSE_MASTER_API_KEY"] unless data[:master_key] || defaults[:api_key]
+      defaults[:master_key] = ENV['PARSE_MASTER_API_KEY'] unless data[:master_key] || defaults[:api_key]
       Client.new(defaults, &blk)
     end
 
@@ -145,17 +144,17 @@ module Parse
     # by all API methods. Parse.init must be called before saving
     # or retrieving any objects.
     def init(data = {}, &blk)
-      warn "[DEPRECATION] `init` is deprecated.  Please use `create` instead."
+      warn '[DEPRECATION] `init` is deprecated.  Please use `create` instead.'
       @@client = create(data, &blk)
     end
 
     # A convenience method for using global.json
-    def init_from_cloud_code(path = "../config/global.json")
+    def init_from_cloud_code(path = '../config/global.json')
       global = JSON.parse(::File.open(path).read)
-      application_name  = global["applications"]["_default"]["link"]
-      application_id    = global["applications"][application_name]["applicationId"]
-      master_key        = global["applications"][application_name]["masterKey"]
-      create(:application_id => application_id, :master_key => master_key)
+      application_name  = global['applications']['_default']['link']
+      application_id    = global['applications'][application_name]['applicationId']
+      master_key        = global['applications'][application_name]['masterKey']
+      create(application_id: application_id, master_key: master_key)
     end
 
     # Used mostly for testing. Lets you delete the api key global vars.
@@ -165,7 +164,7 @@ module Parse
     end
 
     def client
-      raise ParseError, "API not initialized" if !@@client
+      fail ParseError, 'API not initialized' unless @@client
       @@client
     end
 
@@ -176,7 +175,7 @@ module Parse
     # Accepts an explicit client object to avoid using the legacy singleton.
     def get(class_name, object_id = nil, client = nil)
       c = client || self.client
-      data = c.get( Protocol.class_uri(class_name, object_id) )
+      data = c.get(Protocol.class_uri(class_name, object_id))
       object = Parse.parse_json(class_name, data)
       object = Parse.copy_client(c, object)
       object
@@ -187,6 +186,4 @@ module Parse
       raise
     end
   end
-
 end
-

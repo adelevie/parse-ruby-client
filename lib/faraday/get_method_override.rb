@@ -6,13 +6,12 @@ module Faraday
   # Public: Writes the original HTTP method to "X-Http-Method-Override" header
   # and sends the request as POST for GET requests that are too long.
   class GetMethodOverride < Faraday::Middleware
-
-    HEADER = "X-Http-Method-Override".freeze
+    HEADER = 'X-Http-Method-Override'.freeze
 
     # Public: Initialize the middleware.
     #
     # app     - the Faraday app to wrap
-    def initialize(app, options = nil)
+    def initialize(app, _options = nil)
       super(app)
     end
 

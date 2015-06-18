@@ -4,6 +4,7 @@ pkg
 lib/.DS_Store
 lib/parse/.DS_Store
 
+.env
 .bundle
 
 test/cloud_functions/MyCloudCode/config/global.json

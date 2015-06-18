@@ -4,10 +4,9 @@ class TestModelObject < Parse::Model
 end
 
 class TestModel < ParseTestCase
-
   def test_new
-    VCR.use_cassette('test_new_model', :record => :new_episodes) do
-      tmo = TestModelObject.new(data = nil, client = @client)
+    VCR.use_cassette('test_new_model', record: :new_episodes) do
+      tmo = TestModelObject.new(nil, @client)
       assert_equal tmo.new?, true
       tmo.save
       assert_equal tmo.new?, false

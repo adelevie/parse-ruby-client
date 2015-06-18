@@ -6,7 +6,7 @@ begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
+  $stderr.puts 'Run `bundle install` to install missing gems'
   exit e.status_code
 end
 require 'rake'
@@ -14,13 +14,13 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "parse-ruby-client"
-  gem.homepage = "http://github.com/adelevie/parse-ruby-client"
-  gem.license = "MIT"
-  gem.summary = %Q{A simple Ruby client for the parse.com REST API}
-  gem.description = %Q{A simple Ruby client for the parse.com REST API}
-  gem.email = "adelevie@gmail.com"
-  gem.authors = ["Alan deLevie", "Adam Alpern"]
+  gem.name = 'parse-ruby-client'
+  gem.homepage = 'http://github.com/adelevie/parse-ruby-client'
+  gem.license = 'MIT'
+  gem.summary = %(A simple Ruby client for the parse.com REST API)
+  gem.description = %(A simple Ruby client for the parse.com REST API)
+  gem.email = 'adelevie@gmail.com'
+  gem.authors = ['Alan deLevie', 'Adam Alpern']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -32,11 +32,11 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-task :default => :test
+task default: :test
 
 require 'rdoc/task'
 RDoc::Task.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "parse-ruby-client #{version}"

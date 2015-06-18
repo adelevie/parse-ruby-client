@@ -1,15 +1,14 @@
 require 'helper'
 
 class TestUser < ParseTestCase
-
   def test_user_save
-    VCR.use_cassette('test_user_save', :record => :new_episodes) do
+    VCR.use_cassette('test_user_save', record: :new_episodes) do
       username = rand.to_s
       data = {
-        :username => username,
-        :password => "topsecret"
+        username: username,
+        password: 'topsecret'
       }
-      user = Parse::User.new(data, client = @client)
+      user = Parse::User.new(data, @client)
       user.save
       assert_equal user[Parse::Protocol::KEY_OBJECT_ID].class, String
       assert_equal user[Parse::Protocol::KEY_CREATED_AT].class, String
@@ -17,44 +16,42 @@ class TestUser < ParseTestCase
   end
 
   def test_user_login
-    #VCR.use_cassette('test_user_login', :record => :new_episodes) do
-      u = "alan" + rand(10000000000000).to_s
-      data = {
-        :username => u,
-        :password => "secret"
-      }
-
-      user = Parse::User.new(data, client = @client)
-
-      user.save
-
-      assert_equal user["username"], u
-      assert_equal user[Parse::Protocol::KEY_USER_SESSION_TOKEN].class, String
-
-      login = Parse::User.authenticate(u, "secret", client = @client)
-
-      assert_equal login["username"], user["username"]
-      assert_equal login["sessionToken"].class, String
-
-      user = user.pointer.get(@client)
-      user.save
-    #end
-  end
-
-  def test_reset_password
-    u =  "alan" + rand(10000000000000).to_s + "@gmail.com"
+    # VCR.use_cassette('test_user_login', :record => :new_episodes) do
+    u = 'alan' + rand(10_000_000_000_000).to_s
     data = {
-      :username => u,
-      :password => "secret"
+      username: u,
+      password: 'secret'
     }
 
-    user = Parse::User.new(data, client = @client)
+    user = Parse::User.new(data, @client)
 
     user.save
 
-    reset_password = Parse::User.reset_password(u, client = @client)
+    assert_equal user['username'], u
+    assert_equal user[Parse::Protocol::KEY_USER_SESSION_TOKEN].class, String
 
-    assert_equal Hash.new, reset_password
+    login = Parse::User.authenticate(u, 'secret', @client)
+
+    assert_equal login['username'], user['username']
+    assert_equal login['sessionToken'].class, String
+
+    user = user.pointer.get(@client)
+    user.save
+    # end
   end
 
+  def test_reset_password
+    u =  'alan' + rand(10_000_000_000_000).to_s + '@gmail.com'
+    data = {
+      username: u,
+      password: 'secret'
+    }
+
+    user = Parse::User.new(data, @client)
+    user.save
+
+    reset_password = Parse::User.reset_password(u,  @client)
+
+    assert_equal({}, reset_password)
+  end
 end

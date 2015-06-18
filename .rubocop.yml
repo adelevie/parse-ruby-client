@@ -1,0 +1,11 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'Gemfile'
+    - 'parse-ruby-client.gemspec'
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent

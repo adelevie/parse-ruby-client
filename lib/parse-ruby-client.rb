@@ -18,7 +18,7 @@ require 'date'
 require 'cgi'
 
 cwd = Pathname(__FILE__).dirname
-$:.unshift(cwd.to_s) unless $:.include?(cwd.to_s) || $:.include?(cwd.expand_path.to_s)
+$LOAD_PATH.unshift(cwd.to_s) unless $LOAD_PATH.include?(cwd.to_s) || $LOAD_PATH.include?(cwd.expand_path.to_s)
 
 require 'parse/object'
 require 'parse/query'
@@ -26,7 +26,7 @@ require 'parse/datatypes'
 require 'parse/util'
 require 'parse/protocol'
 require 'parse/user'
-require "parse/installation"
+require 'parse/installation'
 require 'parse/push'
 require 'parse/cloud'
 require 'parse/model'
