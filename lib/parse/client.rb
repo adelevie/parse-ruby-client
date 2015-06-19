@@ -111,6 +111,10 @@ module Parse
       Parse::Push.new(data, channel, self)
     end
 
+    def installation(object_id = nil)
+      Parse::Installation.new(object_id, self)
+    end
+
     def query(class_name)
       Parse::Query.new(class_name, self)
     end
