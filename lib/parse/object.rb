@@ -132,6 +132,7 @@ module Parse
     def refresh
       if @parse_object_id
         data = Parse.get(@class_name, @parse_object_id, @client)
+        @op_fields = {}
         clear
         parse data if data
       end

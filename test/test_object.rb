@@ -205,7 +205,7 @@ class TestObject < ParseTestCase
 
   def test_array_add
     VCR.use_cassette('test_object_array_add') do
-      post = Parse::Object.new('Post', nil, @client)
+      post = @client.object('Post')
       post.array_add('chapters', 'hello')
       assert_equal ['hello'], post['chapters']
       post.save
@@ -215,6 +215,21 @@ class TestObject < ParseTestCase
       assert_equal %w(hello goodbye), post['chapters']
       post.save
       assert_equal %w(hello goodbye), post['chapters']
+    end
+  end
+
+  def test_array_remove
+    VCR.use_cassette('test_object_array_remove') do
+      post = @client.object('Post')
+      post.array_add('chapters', 'hello')
+      assert_equal ['hello'], post['chapters']
+      post.save
+      assert_equal ['hello'], post['chapters']
+
+      post.array_remove('chapters', 'hello')
+      assert_empty post['chapters']
+      post.save
+      assert_empty post['chapters']
     end
   end
 
@@ -269,22 +284,48 @@ class TestObject < ParseTestCase
   end
 
   def test_array_add_relation
-    skip("broken test, saving Post results in ParseProtocolError: 111: can't add a relation to an non-relation field")
-
     VCR.use_cassette('test_object_array_add_relation') do
-      post = Parse::Object.new('Post', nil, @client)
+      post = @client.object('Post')
       post.save
 
-      comment = Parse::Object.new('Comment', nil, @client)
+      comment = @client.object('Comment')
       comment.save
 
-      post.array_add_relation('comments', comment.pointer)
+      post.array_add_relation('cs', comment.pointer)
       post.save
 
-      q = Parse::Query.new('Comment', @client)
-      q.related_to('comments', post.pointer)
-      comments = q.get
+      comments = @client.query('Comment').tap do |q|
+        q.related_to('cs', post.pointer)
+      end.get
+
       assert_equal comments.first['objectId'], comment['objectId']
+    end
+  end
+
+  def test_array_remove_relation
+    VCR.use_cassette('test_object_array_remove_relation') do
+      post = @client.object('Post')
+      post.save
+
+      comment = @client.object('Comment')
+      comment.save
+
+      post.array_add_relation('cs', comment.pointer)
+      post.save
+
+      comments = @client.query('Comment').tap do |q|
+        q.related_to('cs', post.pointer)
+      end.get
+      assert_equal comments.first['objectId'], comment['objectId']
+
+      post = post.refresh
+      post.array_remove_relation('cs', comment.pointer)
+      post.save
+
+      comments = @client.query('Comment').tap do |q|
+        q.related_to('cs', post.pointer)
+      end.get
+      assert_empty comments
     end
   end
 
