@@ -2,16 +2,16 @@ require 'helper'
 
 class TestFile < ParseTestCase
   def test_file_equality
-    file_1 = @client.file({'url': 'http://foobar'})
-    file_2 = @client.file({'url': 'http://foobar'})
-    file_3 = @client.file({'url': 'http://foobar2'})
+    file_1 = @client.file({'url' => 'http://foobar'})
+    file_2 = @client.file({'url' => 'http://foobar'})
+    file_3 = @client.file({'url' => 'http://foobar2'})
 
     assert_equal file_1, file_2
     refute_equal file_1, file_3
   end
 
   def test_file_hash
-    file_1 = @client.file({'url': 'http://foobar'})
+    file_1 = @client.file({'url' => 'http://foobar'})
     assert_equal file_1.url.hash, file_1.hash
   end
 
