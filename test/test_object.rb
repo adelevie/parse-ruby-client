@@ -91,7 +91,7 @@ class TestObject < ParseTestCase
 
       post.parse_delete
 
-      assert_raise Parse::ParseProtocolError do
+      assert_raises(Parse::ParseProtocolError) do
         q = Parse.get('Post', post.id, @client)
       end
     end
@@ -154,15 +154,16 @@ class TestObject < ParseTestCase
       post.save
       post['title'] = nil
       post.save
-      assert_false post.refresh.keys.include?('title')
+      refute post.refresh.keys.include?('title')
     end
   end
 
   def test_saving_nested_objects
     VCR.use_cassette('test_saving_nested_objects', record: :new_episodes) do
       post = Parse::Object.new('Post', nil, @client)
-      post['comment'] = Parse::Object.new('Comment', { 'text' => 'testing' }, @client)
-      assert_raise { post.save }
+      post['comment'] = Parse::Object.new(
+        'Comment', { 'text' => 'testing' }, @client)
+      assert_raises(ArgumentError) { post.save }
     end
   end
 
@@ -248,7 +249,7 @@ class TestObject < ParseTestCase
   end
 
   def test_array_add_relation
-    omit("broken test, saving Post results in ParseProtocolError: 111: can't add a relation to an non-relation field")
+    skip("broken test, saving Post results in ParseProtocolError: 111: can't add a relation to an non-relation field")
 
     VCR.use_cassette('test_array_add_relation', record: :new_episodes) do
       post = Parse::Object.new('Post', nil, @client)

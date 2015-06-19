@@ -29,7 +29,7 @@ class TestDatatypes < ParseTestCase
     post = Parse::Object.new('Post', nil, @client)
     post['time'] = parse_date
     post.save
-    q = Parse.get('Post', post.id)
+    q = Parse.get('Post', post.id, @client)
 
     # time zone from parse is utc so string formats don't compare equal,
     # also floating points vary a bit so only equality after rounding to millis is guaranteed
@@ -37,10 +37,11 @@ class TestDatatypes < ParseTestCase
   end
 
   def test_date_with_bad_data
-    assert_raise do
+    assert_raises(RuntimeError) do
       Parse::Date.new(2014)
     end
-    assert_raise do
+
+    assert_raises(RuntimeError) do
       Parse::Date.new(nil)
     end
   end
@@ -83,7 +84,7 @@ class TestDatatypes < ParseTestCase
     post = Parse::Object.new('Post', nil, @client)
     post['location'] = gp
     post.save
-    q = Parse.get('Post', post.id)
+    q = Parse.get('Post', post.id, @client)
     assert_equal gp, q['location']
   end
 end

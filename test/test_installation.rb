@@ -43,7 +43,7 @@ class TestInstallation < ParseTestCase
 
     VCR.use_cassette('test_save_installation') do
       result = installation.save
-      assert_not_empty result['updatedAt']
+      refute_empty result['updatedAt']
     end
   end
 end

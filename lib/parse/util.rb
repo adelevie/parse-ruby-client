@@ -46,7 +46,8 @@ module Parse
     when Protocol::TYPE_GEOPOINT
       Parse::GeoPoint.new obj
     when Protocol::TYPE_FILE
-      Parse::File.new obj
+      # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
+      Parse::File.new(obj, '')
     when Protocol::TYPE_OBJECT # used for relation queries, e.g. "?include=post"
       # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
       Parse::Object.new(obj[Protocol::KEY_CLASS_NAME], Hash[obj.map { |k, v| [k, parse_json(nil, v)] }], '')

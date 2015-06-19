@@ -2,7 +2,8 @@ require 'helper'
 
 class TestClientInit < ParseTestCase
   def setup
-    @client = Parse.init(logger: Logger.new(STDERR).tap { |l| l.level = Logger::ERROR })
+    logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
+    @client = Parse.init(logger: logger)
   end
 
   def stubbed_client(&_block)
@@ -33,7 +34,7 @@ class TestClientInit < ParseTestCase
         end
       end
 
-      assert_raise do
+      assert_raises(Parse::ParseProtocolError) do
         client.request('/')
       end
 
@@ -74,7 +75,7 @@ class TestClientInit < ParseTestCase
         stub.get('/') { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raise do
+      assert_raises(Parse::ParseProtocolError) do
         client.request('/')
       end
     end
@@ -87,7 +88,7 @@ class TestClientInit < ParseTestCase
         stub.get('/') { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raise do
+      assert_raises(Parse::ParseProtocolError) do
         client.request('/')
       end
     end
@@ -177,7 +178,7 @@ class TestClientInit < ParseTestCase
 
   def test_get_missing
     VCR.use_cassette('test_get_missing', record: :new_episodes) do
-      e = assert_raise(Parse::ParseProtocolError) { Parse.get('SomeClass', 'someIdThatDoesNotExist') }
+      e = assert_raises(Parse::ParseProtocolError) { Parse.get('SomeClass', 'someIdThatDoesNotExist') }
       assert_equal '101: object not found for get: SomeClass:someIdThatDoesNotExist', e.message
     end
   end

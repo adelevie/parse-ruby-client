@@ -18,7 +18,7 @@ module Middleware
     end
 
     def test_invalid_json
-      assert_raise(Faraday::Error::ParsingError) { conn.get('/invalid_json') }
+      assert_raises(Faraday::Error::ParsingError) { conn.get('/invalid_json') }
     end
 
     def test_valid_json
@@ -28,24 +28,24 @@ module Middleware
     end
 
     def test_empty_response
-      ex = assert_raise(Parse::ParseProtocolError) { conn.get('/empty_response') }
+      ex = assert_raises(Parse::ParseProtocolError) { conn.get('/empty_response') }
       assert_match(/403/, ex.to_s)
       assert_equal 'HTTP Status 403 Body ', ex.error
     end
 
     def test_parse_error_code
-      ex = assert_raise(Parse::ParseProtocolError) { conn.get('/parse_error_code') }
+      ex = assert_raises(Parse::ParseProtocolError) { conn.get('/parse_error_code') }
       assert_match(/403/, ex.to_s)
       assert_equal Parse::Protocol::ERROR_INTERNAL, ex.code
     end
 
     def test_404
-      ex = assert_raise(Parse::ParseProtocolError) { conn.get('/404') }
+      ex = assert_raises(Parse::ParseProtocolError) { conn.get('/404') }
       assert_match(/404/, ex.to_s)
     end
 
     def test_500
-      ex = assert_raise(Parse::ParseProtocolError) { conn.get('/500') }
+      ex = assert_raises(Parse::ParseProtocolError) { conn.get('/500') }
       assert_match(/500/, ex.to_s)
       assert_match(/Internal Server Error/, ex.to_s)
     end

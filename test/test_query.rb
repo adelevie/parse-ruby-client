@@ -34,7 +34,7 @@ class TestQuery < ParseTestCase
     pointer = Parse::Pointer.new(class_name: 'Post', parse_object_id: '1234')
     q.related_to('comments', pointer)
 
-    assert_not_nil q.where['$relatedTo']
+    refute_nil q.where['$relatedTo']
     assert_equal pointer, q.where['$relatedTo']['object']
     assert_equal q.where['$relatedTo']['key'], 'comments'
   end
@@ -142,7 +142,7 @@ class TestQuery < ParseTestCase
   def test_bad_response
     VCR.use_cassette('test_bad_response', record: :new_episodes) do
       Parse::Client.any_instance.expects(:request).returns('crap')
-      assert_raises do
+      assert_raises(Parse::ParseError) do
         Parse::Query.new('Post', @client).get
       end
     end

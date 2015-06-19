@@ -14,14 +14,16 @@ SimpleCov.start do
   add_filter '/test/'
 end if ENV['COVERAGE']
 
-require 'test/unit'
-require 'shoulda'
-require 'mocha'
-require 'vcr'
-require 'webmock/test_unit'
+# minitest
+require 'minitest/autorun'
+require 'minitest/pride'
+require 'minitest/focus'
 
-require 'simplecov'
-SimpleCov.start if ENV['COVERAGE']
+# mocha + minitest
+require 'minitest/unit'
+require 'mocha/mini_test'
+
+require 'vcr'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
@@ -33,6 +35,7 @@ end
 
 VCR.configure do |c|
   c.cassette_library_dir = 'fixtures/vcr_cassettes'
+  c.default_cassette_options = { record: :once }
   c.hook_into :webmock # or :fakeweb
   c.allow_http_connections_when_no_cassette = true
   c.filter_sensitive_data('<COOKIE-KEY>') { |i| [i.response.headers['Set-Cookie']].flatten.compact.first }
@@ -50,7 +53,7 @@ VCR.configure do |c|
   filter_sensitive_header(c, Parse::Protocol::HEADER_SESSION_TOKEN)
 end
 
-class ParseTestCase < Test::Unit::TestCase
+class ParseTestCase < Minitest::Test
   def setup
     logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
     @client = Parse.create(logger: logger)
@@ -77,7 +80,8 @@ module Faraday
       live_server? && @@live_server
     end
   end
-  class TestCase < Test::Unit::TestCase
+
+  class TestCase < Minitest::Test
     extend LiveServerConfig
     self.live_server = ENV['LIVE']
 

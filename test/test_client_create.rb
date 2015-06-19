@@ -75,7 +75,7 @@ class TestClientCreate < ParseTestCase
         end
       end
 
-      assert_raise do
+      assert_raises(Parse::ParseProtocolError) do
         client.request('/')
       end
 
@@ -116,7 +116,7 @@ class TestClientCreate < ParseTestCase
         stub.get('/') { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raise do
+      assert_raises(Parse::ParseProtocolError) do
         client.request('/')
       end
     end
@@ -129,7 +129,7 @@ class TestClientCreate < ParseTestCase
         stub.get('/') { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raise do
+      assert_raises(Parse::ParseProtocolError) do
         client.request('/')
       end
     end
@@ -219,7 +219,7 @@ class TestClientCreate < ParseTestCase
 
   def test_get_missing
     VCR.use_cassette('test_get_missing', record: :new_episodes) do
-      e = assert_raise(Parse::ParseProtocolError) do
+      e = assert_raises(Parse::ParseProtocolError) do
         Parse.get('SomeClass', 'someIdThatDoesNotExist', @client)
       end
       assert_equal '101: object not found for get: SomeClass:someIdThatDoesNotExist', e.message

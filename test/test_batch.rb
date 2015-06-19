@@ -100,7 +100,7 @@ class TestBatch < ParseTestCase
       batch.update_object(post)
       batch.run!
 
-      assert_false post.refresh.keys.include?('foo')
+      refute post.refresh.keys.include?('foo')
     end
   end
 

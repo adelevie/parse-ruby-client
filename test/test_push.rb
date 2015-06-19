@@ -33,7 +33,7 @@ class TestPush < ParseTestCase
 
     Parse::Client.any_instance.expects(:request).with do |_uri, _method, body, _query|
       hash = JSON.parse(body)
-      assert_false has_entries('channel' => 'some_chan').matches?([hash])
+      refute has_entries('channel' => 'some_chan').matches?([hash])
       assert has_entries('deviceToken' => 'baz', 'deviceType' => 'ios').matches?([hash['where']])
       true
     end.returns({}.to_json)

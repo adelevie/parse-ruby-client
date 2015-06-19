@@ -173,8 +173,8 @@ module Parse
     # retrieved. If object_id is not supplied, then all objects of the
     # given class will be retrieved and returned in an Array.
     # Accepts an explicit client object to avoid using the legacy singleton.
-    def get(class_name, object_id = nil, client = nil)
-      c = client || self.client
+    def get(class_name, object_id = nil, parse_client = nil)
+      c = parse_client || client
       data = c.get(Protocol.class_uri(class_name, object_id))
       object = Parse.parse_json(class_name, data)
       object = Parse.copy_client(c, object)

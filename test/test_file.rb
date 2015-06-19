@@ -51,7 +51,7 @@ class TestFile < ParseTestCase
     assert tf.body
     assert tf.to_json
 
-    object = Parse::Object.new('ShouldHaveFile')
+    object = Parse::Object.new('ShouldHaveFile', nil, @client)
     object['photo'] = tf
     object.save
 
@@ -59,6 +59,5 @@ class TestFile < ParseTestCase
     assert object['objectId']
 
     object.refresh.save
-    # end
   end
 end
