@@ -32,6 +32,19 @@ class TestObject < ParseTestCase
     end
   end
 
+  def test_get
+    VCR.use_cassette('test_object_get') do
+      post = Parse::Object.new('Post', nil, @client)
+      post['title'] = 'foo'
+      post.save
+
+      obj = Parse.get('Post', post.id, @client)
+
+      assert_equal obj.id, post.id
+      assert_equal obj['title'], post['title']
+    end
+  end
+
   def test_equality
     VCR.use_cassette('test_object_equality') do
       foo_1 = Parse::Object.new('Foo', nil, @client)

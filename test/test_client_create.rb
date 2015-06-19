@@ -44,6 +44,12 @@ class TestClientShortcuts < ParseTestCase
     assert user.is_a? Parse::User
     assert_equal @client, user.client
   end
+
+  def test_application_config
+    VCR.use_cassette('test_application_config') do
+      assert @client.application_config
+    end
+  end
 end
 
 class TestClientCreate < ParseTestCase

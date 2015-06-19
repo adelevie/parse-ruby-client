@@ -19,4 +19,13 @@ class TestModel < ParseTestCase
     assert model.is_a?(Parse::Model)
     assert model.is_a?(Parse::Object)
   end
+
+  def test_find
+    VCR.use_cassette('test_model_find') do
+      model = TestModelObject.new(nil, @client)
+      model.save
+
+      assert TestModelObject.find(model['objectId'], @client)
+    end
+  end
 end

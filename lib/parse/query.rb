@@ -1,6 +1,3 @@
-# -*- encoding : utf-8 -*-
-require 'cgi'
-
 module Parse
   class Query
     attr_accessor :where
@@ -30,12 +27,6 @@ module Parse
         where[field] = constraint
       end
     end
-    # private :add_constraint
-
-    def includes(class_name)
-      @includes = class_name
-      self
-    end
 
     def or(query)
       fail ArgumentError, "you must pass an entire #{self.class} to \#or" unless query.is_a?(self.class)
@@ -45,12 +36,8 @@ module Parse
 
     def eq(hash_or_field, value = nil)
       return eq_pair(hash_or_field, value) unless hash_or_field.is_a?(Hash)
-      hash_or_field.each_pair { |k, v| eq_pair k, v }
-      self
-    end
 
-    def eq_pair(field, value)
-      add_constraint field, Parse.pointerize_value(value)
+      hash_or_field.each_pair { |k, v| eq_pair k, v }
       self
     end
 
@@ -134,14 +121,18 @@ module Parse
     end
 
     def get
-      uri   = Protocol.class_uri @class_name
+
       if @class_name == Parse::Protocol::CLASS_USER
         uri = Protocol.user_uri
       elsif @class_name == Parse::Protocol::CLASS_INSTALLATION
         uri = Protocol.installation_uri
+      else
+        uri = Protocol.class_uri @class_name
       end
+
       query = { 'where' => where_as_json.to_json }
       order(query)
+
       [:count, :limit, :skip, :include].each { |a| merge_attribute(a, query) }
       @client.logger.info { "Parse query for #{uri} #{query.inspect}" } unless @client.quiet
       response = @client.request uri, :get, nil, query
@@ -163,6 +154,11 @@ module Parse
     end
 
     private
+
+    def eq_pair(field, value)
+      add_constraint field, Parse.pointerize_value(value)
+      self
+    end
 
     def order(query)
       return unless @order_by
