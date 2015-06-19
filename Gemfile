@@ -4,7 +4,6 @@ gem 'faraday'
 gem 'faraday_middleware'
 
 group :development do
-  gem 'byebug' if RUBY_VERSION[0] > 1
   gem 'bundler'
   gem 'jeweler',   '~> 1.8.5'
   gem 'pry'
