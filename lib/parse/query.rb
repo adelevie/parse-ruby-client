@@ -121,7 +121,6 @@ module Parse
     end
 
     def get
-
       if @class_name == Parse::Protocol::CLASS_USER
         uri = Protocol.user_uri
       elsif @class_name == Parse::Protocol::CLASS_INSTALLATION

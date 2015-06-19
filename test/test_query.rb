@@ -15,9 +15,9 @@ class TestQuery < ParseTestCase
     @q.add_constraint('player', '$regex' => 'regex voodoo')
     assert_equal @q.where['player'], '$regex' => 'regex voodoo'
 
-    @q.add_constraint('multiple', {'first' => 1})
-    @q.add_constraint('multiple', {'second' => 2})
-    expected_result = {'first' => 1, 'second' => 2}
+    @q.add_constraint('multiple', 'first' => 1)
+    @q.add_constraint('multiple', 'second' => 2)
+    expected_result = { 'first' => 1, 'second' => 2 }
     assert_equal expected_result, @q.where['multiple']
   end
 
@@ -39,11 +39,11 @@ class TestQuery < ParseTestCase
   end
 
   def test_eq_hash
-    @q.eq({'points' => 5})
-    expected_result = {'points' => 5}
+    @q.eq('points' => 5)
+    expected_result = { 'points' => 5 }
     assert_equal expected_result, @q.where
 
-    @q.eq({'player' => 'michael@jordan.com'})
+    @q.eq('player' => 'michael@jordan.com')
     expected_result = { 'points' =>  5, 'player' => 'michael@jordan.com' }
     assert_equal expected_result, @q.where
   end
@@ -52,7 +52,7 @@ class TestQuery < ParseTestCase
     VCR.use_cassette('test_query_eq_pointerize') do
       foo = @client.object('Foo', nil)
       foo.save
-      bar = @client.object('Bar', { 'foo' => foo.pointer, 'bar' => 'bar' })
+      bar = @client.object('Bar', 'foo' => foo.pointer, 'bar' => 'bar')
       bar.save
 
       assert_equal 'bar', @client.query('Bar').eq('foo', foo.pointer).get.first['bar']
@@ -62,101 +62,101 @@ class TestQuery < ParseTestCase
 
   def test_not_eq
     @q.not_eq('points', 5)
-    expected_result = {"points"=> {"$ne"=>5}}
+    expected_result = { 'points' => { '$ne' => 5 } }
     assert_equal expected_result, @q.where
 
     @q.not_eq('player', 'michael@jordan.com')
-    expected_result = {'points' => {'$ne' => 5}, 'player' => {'$ne' => 'michael@jordan.com'}}
+    expected_result = { 'points' => { '$ne' => 5 }, 'player' => { '$ne' => 'michael@jordan.com' } }
     assert_equal expected_result, @q.where
   end
 
   def test_regex
     @q.regex('points', 5)
-    expected_result = {"points"=> {"$regex"=>5}}
+    expected_result = { 'points' => { '$regex' => 5 } }
     assert_equal expected_result, @q.where
 
     @q.regex('player', 'michael@jordan.com')
-    expected_result = {'points' => {'$regex' => 5}, 'player' => {'$regex' => 'michael@jordan.com'}}
+    expected_result = { 'points' => { '$regex' => 5 }, 'player' => { '$regex' => 'michael@jordan.com' } }
     assert_equal expected_result, @q.where
   end
 
   def test_less_than
     @q.less_than('points', 5)
-    expected_result = {"points"=> {"$lt"=>5}}
+    expected_result = { 'points' => { '$lt' => 5 } }
     assert_equal expected_result, @q.where
 
     @q.less_than('player', 'michael@jordan.com')
-    expected_result = {'points' => {'$lt' => 5}, 'player' => {'$lt' => 'michael@jordan.com'}}
+    expected_result = { 'points' => { '$lt' => 5 }, 'player' => { '$lt' => 'michael@jordan.com' } }
     assert_equal expected_result, @q.where
   end
 
   def test_less_eq
     @q.less_eq('points', 5)
-    expected_result = {"points"=> {"$lte"=>5}}
+    expected_result = { 'points' => { '$lte' => 5 } }
     assert_equal expected_result, @q.where
 
     @q.less_eq('player', 'michael@jordan.com')
-    expected_result = {'points' => {'$lte' => 5}, 'player' => {'$lte' => 'michael@jordan.com'}}
+    expected_result = { 'points' => { '$lte' => 5 }, 'player' => { '$lte' => 'michael@jordan.com' } }
     assert_equal expected_result, @q.where
   end
 
   def test_greather_than
     @q.greater_than('points', 5)
-    expected_result = {"points"=> {"$gt"=>5}}
+    expected_result = { 'points' => { '$gt' => 5 } }
     assert_equal expected_result, @q.where
 
     @q.greater_than('player', 'michael@jordan.com')
-    expected_result = {'points' => {'$gt' => 5}, 'player' => {'$gt' => 'michael@jordan.com'}}
+    expected_result = { 'points' => { '$gt' => 5 }, 'player' => { '$gt' => 'michael@jordan.com' } }
     assert_equal expected_result, @q.where
   end
 
   def test_greather_eq
     @q.greater_eq('points', 5)
-    expected_result = {"points"=> {"$gte"=>5}}
+    expected_result = { 'points' => { '$gte' => 5 } }
     assert_equal expected_result, @q.where
 
     @q.greater_eq('player', 'michael@jordan.com')
-    expected_result = {'points' => {'$gte' => 5}, 'player' => {'$gte' => 'michael@jordan.com'}}
+    expected_result = { 'points' => { '$gte' => 5 }, 'player' => { '$gte' => 'michael@jordan.com' } }
     assert_equal expected_result, @q.where
   end
 
   def test_value_in
     @q.value_in('points', [5])
-    expected_result = {"points"=> {"$in"=>[5]}}
+    expected_result = { 'points' => { '$in' => [5] } }
     assert_equal expected_result, @q.where
 
     @q.value_in('player', ['michael@jordan.com'])
-    expected_result = {'points' => {'$in' => [5]}, 'player' => {'$in' => ['michael@jordan.com']}}
+    expected_result = { 'points' => { '$in' => [5] }, 'player' => { '$in' => ['michael@jordan.com'] } }
     assert_equal expected_result, @q.where
   end
 
   def test_value_not_in
     @q.value_not_in('points', [5])
-    expected_result = {"points"=> {"$nin"=>[5]}}
+    expected_result = { 'points' => { '$nin' => [5] } }
     assert_equal expected_result, @q.where
 
     @q.value_not_in('player', ['michael@jordan.com'])
-    expected_result = {'points' => {'$nin' => [5]}, 'player' => {'$nin' => ['michael@jordan.com']}}
+    expected_result = { 'points' => { '$nin' => [5] }, 'player' => { '$nin' => ['michael@jordan.com'] } }
     assert_equal expected_result, @q.where
   end
 
   def test_exists
     @q.exists('points', true)
-    expected_result = {"points"=> {"$exists"=>true}}
+    expected_result = { 'points' => { '$exists' => true } }
     assert_equal expected_result, @q.where
 
     @q.exists('player', true)
-    expected_result = {'points' => {'$exists' => true}, 'player' => {'$exists' => true}}
+    expected_result = { 'points' => { '$exists' => true }, 'player' => { '$exists' => true } }
     assert_equal expected_result, @q.where
   end
 
   def test_does_not_exist
     @q.exists('points', false)
-    expected_result = {"points"=> {"$exists"=>false}}
+    expected_result = { 'points' => { '$exists' => false } }
     assert_equal expected_result, @q.where
 
     @q.exists('player', false)
-    expected_result = {'points' => {'$exists' => false}, 'player' => {'$exists' => false}}
+    expected_result = { 'points' => { '$exists' => false }, 'player' => { '$exists' => false } }
     assert_equal expected_result, @q.where
   end
 
@@ -311,7 +311,7 @@ class TestQuery < ParseTestCase
       end.get
 
       # check if they are ordered in ascending order
-      assert users.map(&:to_h).map {|o| o['username']}.each_cons(2).all? { |a, b| (a <=> b) <= 0 }
+      assert users.map(&:to_h).map { |o| o['username'] }.each_cons(2).all? { |a, b| (a <=> b) <= 0 }
     end
   end
 
@@ -324,7 +324,7 @@ class TestQuery < ParseTestCase
       end.get
 
       # check if they are ordered in descending order
-      assert users.map(&:to_h).map {|o| o['username']}.each_cons(2).all? { |a, b| (b <=> a) <= 0 }
+      assert users.map(&:to_h).map { |o| o['username'] }.each_cons(2).all? { |a, b| (b <=> a) <= 0 }
     end
   end
 end

@@ -157,11 +157,11 @@ class TestDatatypes < ParseTestCase
   end
 
   def test_geopoint_init_symbols
-    assert Parse::GeoPoint.new({longitude: 40.0, latitude: -30.0})
+    assert Parse::GeoPoint.new(longitude: 40.0, latitude: -30.0)
   end
 
   def test_geopoint_hash
-    geopoint = Parse::GeoPoint.new({longitude: 40.0, latitude: -30.0})
+    geopoint = Parse::GeoPoint.new(longitude: 40.0, latitude: -30.0)
     expected_result = geopoint.longitude.hash ^ geopoint.latitude.hash
     assert_equal expected_result, geopoint.hash
   end
