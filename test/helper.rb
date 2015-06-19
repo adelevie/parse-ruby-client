@@ -34,11 +34,12 @@ unless RUBY_VERSION[0..2] == '2.2'
 end
 
 VCR.configure do |c|
-  c.cassette_library_dir = 'fixtures/vcr_cassettes'
+  c.cassette_library_dir = 'test/fixtures/vcr_cassettes'
   c.default_cassette_options = { record: :once }
   c.hook_into :webmock # or :fakeweb
-  c.allow_http_connections_when_no_cassette = true
-  c.filter_sensitive_data('<COOKIE-KEY>') { |i| [i.response.headers['Set-Cookie']].flatten.compact.first }
+  c.filter_sensitive_data('<COOKIE-KEY>') do |i|
+    [i.response.headers['Set-Cookie']].flatten.compact.first
+  end
 
   def filter_sensitive_header(c, header)
     c.filter_sensitive_data("<#{header}>") do |interaction|

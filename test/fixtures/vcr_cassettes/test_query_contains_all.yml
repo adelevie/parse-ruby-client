@@ -1,0 +1,535 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Cactus?where=%7B%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:00 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.019364'
+      Content-Length:
+      - '260'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"array":[1,2,5,6,7],"createdAt":"2015-06-19T14:14:52.293Z","objectId":"Q7F8J5KrCb","updatedAt":"2015-06-19T14:14:52.293Z"},{"array":[3,4,5,6],"createdAt":"2015-06-19T14:14:52.760Z","objectId":"JqEzinGtov","updatedAt":"2015-06-19T14:14:52.760Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:00 GMT
+- request:
+    method: delete
+    uri: https://api.parse.com/1/classes/Cactus/Q7F8J5KrCb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:01 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.317481'
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:01 GMT
+- request:
+    method: delete
+    uri: https://api.parse.com/1/classes/Cactus/JqEzinGtov
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:02 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.091231'
+      Content-Length:
+      - '3'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:02 GMT
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Cactus
+    body:
+      encoding: UTF-8
+      string: '{"array":[1,2,5,6,7]}'
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:02 GMT
+      Location:
+      - https://api.parse.com/1/classes/Cactus/gajvllZJQp
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.025907'
+      Content-Length:
+      - '65'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"createdAt":"2015-06-19T14:48:02.535Z","objectId":"gajvllZJQp"}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:02 GMT
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Cactus
+    body:
+      encoding: UTF-8
+      string: '{"array":[3,4,5,6]}'
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:03 GMT
+      Location:
+      - https://api.parse.com/1/classes/Cactus/MiNLSnLvGe
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.050410'
+      Content-Length:
+      - '65'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"createdAt":"2015-06-19T14:48:03.043Z","objectId":"MiNLSnLvGe"}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:03 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Cactus?where=%7B%22array%22:%7B%22$all%22:%5B5,6%5D%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:04 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.056447'
+      Content-Length:
+      - '260'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"array":[3,4,5,6],"createdAt":"2015-06-19T14:48:03.043Z","objectId":"MiNLSnLvGe","updatedAt":"2015-06-19T14:48:03.043Z"},{"array":[1,2,5,6,7],"createdAt":"2015-06-19T14:48:02.535Z","objectId":"gajvllZJQp","updatedAt":"2015-06-19T14:48:02.535Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:04 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Cactus?where=%7B%22array%22:%7B%22$all%22:%5B1,5,6%5D%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:05 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.018078'
+      Content-Length:
+      - '138'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"array":[1,2,5,6,7],"createdAt":"2015-06-19T14:48:02.535Z","objectId":"gajvllZJQp","updatedAt":"2015-06-19T14:48:02.535Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:05 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Cactus?where=%7B%22array%22:%7B%22$all%22:%5B1,5,6%5D%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:06 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.645182'
+      Content-Length:
+      - '138'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"array":[1,2,5,6,7],"createdAt":"2015-06-19T14:48:02.535Z","objectId":"gajvllZJQp","updatedAt":"2015-06-19T14:48:02.535Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:06 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Cactus?where=%7B%22array%22:%7B%22$all%22:%5B4,5,6%5D%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:06 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.011991'
+      Content-Length:
+      - '136'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"array":[3,4,5,6],"createdAt":"2015-06-19T14:48:03.043Z","objectId":"MiNLSnLvGe","updatedAt":"2015-06-19T14:48:03.043Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:06 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Cactus?where=%7B%22array%22:%7B%22$all%22:%5B4,5,6%5D%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:07 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.026734'
+      Content-Length:
+      - '136'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"array":[3,4,5,6],"createdAt":"2015-06-19T14:48:03.043Z","objectId":"MiNLSnLvGe","updatedAt":"2015-06-19T14:48:03.043Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:07 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Cactus?where=%7B%22array%22:%7B%22$all%22:%5B9%5D%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:48:07 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.022210'
+      Content-Length:
+      - '15'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:48:07 GMT
+recorded_with: VCR 2.9.3

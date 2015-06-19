@@ -35,7 +35,7 @@ class TestBatch < ParseTestCase
   end
 
   def test_run
-    VCR.use_cassette('test_batch_run', record: :new_episodes) do
+    VCR.use_cassette('test_batch_run') do
       batch = Parse::Batch.new(@client)
       batch.add_request(
         'method' => 'POST',
@@ -52,7 +52,7 @@ class TestBatch < ParseTestCase
   end
 
   def test_create_object
-    VCR.use_cassette('test_batch_create_object', record: :new_episodes) do
+    VCR.use_cassette('test_batch_create_object') do
       objects = [1, 2, 3, 4, 5].map do |i|
         p = Parse::Object.new('BatchTestObject', nil, @client)
         p['foo'] = "#{i}"
@@ -69,7 +69,7 @@ class TestBatch < ParseTestCase
   end
 
   def test_update_object
-    VCR.use_cassette('test_batch_update_object', record: :new_episodes) do
+    VCR.use_cassette('test_batch_update_object') do
       objects = [1, 2, 3, 4, 5].map do |i|
         p = Parse::Object.new('BatchTestObject', nil, @client)
         p['foo'] = "#{i}"
@@ -90,7 +90,7 @@ class TestBatch < ParseTestCase
   end
 
   def test_update_nils_delete_keys
-    VCR.use_cassette('test_batch_update_nils_delete_keys', record: :new_episodes) do
+    VCR.use_cassette('test_batch_update_nils_delete_keys') do
       post = Parse::Object.new('BatchTestObject', nil, @client)
       post['foo'] = '1'
       post.save
@@ -105,7 +105,7 @@ class TestBatch < ParseTestCase
   end
 
   def test_delete_object
-    VCR.use_cassette('test_batch_delete_object', record: :new_episodes) do
+    VCR.use_cassette('test_batch_delete_object') do
       objects = [1, 2, 3, 4, 5].map do |i|
         p = Parse::Object.new('BatchTestObject', nil, @client)
         p['foo'] = "#{i}"
@@ -117,8 +117,10 @@ class TestBatch < ParseTestCase
         batch.delete_object(obj)
       end
       resp = batch.run!
-      assert_equal Array, resp.class
-      assert_equal resp.first['success'], true
+
+      assert resp.is_a?(Array)
+
+      assert_equal true, resp.all? { |item| item.key? 'success' }
     end
   end
 end

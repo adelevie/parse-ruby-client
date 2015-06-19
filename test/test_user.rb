@@ -2,7 +2,7 @@ require 'helper'
 
 class TestUser < ParseTestCase
   def test_user_save
-    VCR.use_cassette('test_user_save', record: :new_episodes) do
+    VCR.use_cassette('test_user_save') do
       username = rand.to_s
       data = {
         username: username,
@@ -16,42 +16,33 @@ class TestUser < ParseTestCase
   end
 
   def test_user_login
-    # VCR.use_cassette('test_user_login', :record => :new_episodes) do
-    u = 'alan' + rand(10_000_000_000_000).to_s
-    data = {
-      username: u,
-      password: 'secret'
-    }
+    VCR.use_cassette('test_user_login') do
+      data = { username: 'alan299652018572', password: 'secret' }
+      user = Parse::User.authenticate(data[:username], data[:password], @client)
 
-    user = Parse::User.new(data, @client)
+      assert_equal data[:username], user['username']
+      assert user['sessionToken'].is_a?(String)
 
-    user.save
-
-    assert_equal user['username'], u
-    assert_equal user[Parse::Protocol::KEY_USER_SESSION_TOKEN].class, String
-
-    login = Parse::User.authenticate(u, 'secret', @client)
-
-    assert_equal login['username'], user['username']
-    assert_equal login['sessionToken'].class, String
-
-    user = user.pointer.get(@client)
-    user.save
-    # end
+      # test pointer
+      user = user.pointer.get(@client)
+      assert user.save
+    end
   end
 
   def test_reset_password
-    u =  'alan' + rand(10_000_000_000_000).to_s + '@gmail.com'
-    data = {
-      username: u,
-      password: 'secret'
-    }
+    VCR.use_cassette('test_user_reset_password') do
+      u =  'alan' + rand(10_000_000_000_000).to_s + '@gmail.com'
+      data = {
+        username: u,
+        password: 'secret'
+      }
 
-    user = Parse::User.new(data, @client)
-    user.save
+      user = Parse::User.new(data, @client)
+      assert user.save
 
-    reset_password = Parse::User.reset_password(u,  @client)
+      reset_password = Parse::User.reset_password(u,  @client)
 
-    assert_equal({}, reset_password)
+      assert_equal({}, reset_password)
+    end
   end
 end

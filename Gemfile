@@ -4,6 +4,7 @@ gem 'faraday'
 gem 'faraday_middleware'
 
 group :development do
+  gem 'byebug'
   gem 'bundler'
   gem 'jeweler',   '~> 1.8.5'
   gem 'pry'

@@ -4,7 +4,7 @@ class TestQuery < ParseTestCase
   EMPTY_QUERY_RESPONSE = { Parse::Protocol::KEY_RESULTS => [] }
 
   def test_get
-    VCR.use_cassette('test_get', record: :new_episodes) do
+    VCR.use_cassette('test_query_get') do
       post = Parse::Object.new('Post', nil, @client)
       post['title'] = 'foo'
       post.save
@@ -48,7 +48,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_eq_pointerize
-    VCR.use_cassette('test_eq_pointerize', record: :new_episodes) do
+    VCR.use_cassette('test_query_eq_pointerize') do
       foo = Parse::Object.new('Foo', nil, @client)
       foo.save
       bar = Parse::Object.new('Bar', { 'foo' => foo.pointer, 'bar' => 'bar' }, @client)
@@ -60,7 +60,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_limit_skip
-    VCR.use_cassette('test_limit_skip', record: :new_episodes) do
+    VCR.use_cassette('test_query_limit_skip') do
       q = Parse::Query.new('TestQuery', @client)
       q.limit = 2
       q.skip = 3
@@ -71,7 +71,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_count
-    VCR.use_cassette('test_count', record: :new_episodes) do
+    VCR.use_cassette('test_query_count') do
       q = Parse::Query.new('TestQuery', @client)
       q.count = true
       query_matcher = has_entries(count: true)
@@ -82,7 +82,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_include
-    VCR.use_cassette('test_include', record: :new_episodes) do
+    VCR.use_cassette('test_query_include') do
       post_1 = Parse::Object.new('Post', nil, @client)
       post_1['title'] = 'foo'
       post_1.save
@@ -101,22 +101,23 @@ class TestQuery < ParseTestCase
   end
 
   def test_or
-    # VCR.use_cassette('test_or', :record => :new_episodes) do
-    foo = Parse::Object.new('Post', nil, @client)
-    foo['random'] = rand
-    foo.save
-    foo_query = Parse::Query.new('Post', @client).eq('random', foo['random'])
-    assert_equal 1, foo_query.get.size
+    VCR.use_cassette('test_query_or') do
+      foo = Parse::Object.new('Post', nil, @client)
+      # can't be really random since we're using VCR to pre-record
+      foo['random'] = 7
+      foo.save
+      foo_query = Parse::Query.new('Post', @client).eq('random', foo['random'])
+      assert_equal 1, foo_query.get.size
 
-    bar = Parse::Object.new('Post', nil, @client)
-    bar['random'] = rand
-    bar.save
-    bar_query = Parse::Query.new('Post', @client).eq('random', bar['random'])
-    assert_equal 1, foo_query.get.size
+      bar = Parse::Object.new('Post', nil, @client)
+      bar['random'] = 5
+      bar.save
+      bar_query = Parse::Query.new('Post', @client).eq('random', bar['random'])
+      assert_equal 1, foo_query.get.size
 
-    query = foo_query.or(bar_query)
-    assert_equal 2, query.get.size
-    # end
+      query = foo_query.or(bar_query)
+      assert_equal 2, query.get.size
+    end
   end
 
   def test_in_query
@@ -128,7 +129,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_large_value_in_xget
-    VCR.use_cassette('test_xget', record: :new_episodes) do
+    VCR.use_cassette('test_query_xget') do
       post = Parse::Object.new('Post', nil, @client)
       post.save
 
@@ -140,7 +141,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_bad_response
-    VCR.use_cassette('test_bad_response', record: :new_episodes) do
+    VCR.use_cassette('test_query_bad_response') do
       Parse::Client.any_instance.expects(:request).returns('crap')
       assert_raises(Parse::ParseError) do
         Parse::Query.new('Post', @client).get
@@ -149,7 +150,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_contains_all
-    VCR.use_cassette('test_contains_all', record: :new_episodes) do
+    VCR.use_cassette('test_query_contains_all') do
       # ensure cacti from the previous test to not hang around
       q = Parse::Query.new('Cactus', @client)
       cacti = q.get

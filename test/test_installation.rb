@@ -2,25 +2,14 @@ require 'helper'
 
 class TestInstallation < ParseTestCase
   def test_retrieving_installation_data
-    installation_data = {
-      'appIdentifier' => 'net.project_name',
-      'appName' => 'Parse Project',
-      'appVersion' => '35',
-      'badge' => 9,
-      'channels' => ['', 'channel1'],
-      'deviceToken' => '123',
-      'deviceType' => 'ios',
-      'installationId' => '345',
-      'parseVersion' => '1.3.0',
-      'timeZone' => 'Europe/Chisinau',
-      'createdAt' => '2014-09-18T15:04:18.602Z',
-      'updatedAt' => '2014-09-19T12:17:48.509Z',
-      'objectId' => '987'
-    }
+    VCR.use_cassette('test_installation_get') do
+      installation = Parse::Installation.new(nil, @client).tap do |inst|
+        inst['deviceType'] = 'ios'
+        inst['deviceToken'] = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+      end.save
 
-    VCR.use_cassette('test_get_installation') do
-      installation = Parse::Installation.get('987', @client)
-      assert_equal installation_data, installation
+      installation_data = Parse::Installation.get(installation['objectId'], @client)
+      assert_equal installation_data['objectId'], installation['objectId']
     end
   end
 
@@ -37,13 +26,20 @@ class TestInstallation < ParseTestCase
   end
 
   def test_updating_installation_data
-    installation = Parse::Installation.new('987', @client)
-    installation.channels = ['', 'my-channel']
-    installation.badge = 5
+    VCR.use_cassette('test_installation_update') do
+      installation = Parse::Installation.new(nil, @client).tap do |inst|
+        inst['deviceType'] = 'ios'
+        inst['deviceToken'] = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+      end
+      old_installation_data = installation.save
 
-    VCR.use_cassette('test_save_installation') do
-      result = installation.save
-      refute_empty result['updatedAt']
+      installation.channels = ['', 'my-channel']
+      installation.badge = 5
+      installation_data = installation.save
+
+      assert installation_data['updatedAt'] > old_installation_data['updatedAt']
+      assert_equal 5, installation_data['badge']
+      assert_equal ['', 'my-channel'], installation_data['channels']
     end
   end
 end

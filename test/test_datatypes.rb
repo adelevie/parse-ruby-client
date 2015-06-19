@@ -18,22 +18,24 @@ class TestDatatypes < ParseTestCase
   end
 
   def test_date
-    date_time = Time.at(0).to_datetime
-    parse_date = Parse::Date.new(date_time)
+    VCR.use_cassette('test_datatypes_date') do
+      date_time = Time.at(0).to_datetime
+      parse_date = Parse::Date.new(date_time)
 
-    assert_equal date_time, parse_date.value
-    assert_equal '1970-01-01T00:00:00.000Z', JSON.parse(parse_date.to_json)['iso']
-    assert_equal 0, parse_date <=> parse_date.dup
-    assert_equal 0, Parse::Date.new(date_time) <=> Parse::Date.new(date_time).dup
+      assert_equal date_time, parse_date.value
+      assert_equal '1970-01-01T00:00:00.000Z', JSON.parse(parse_date.to_json)['iso']
+      assert_equal 0, parse_date <=> parse_date.dup
+      assert_equal 0, Parse::Date.new(date_time) <=> Parse::Date.new(date_time).dup
 
-    post = Parse::Object.new('Post', nil, @client)
-    post['time'] = parse_date
-    post.save
-    q = Parse.get('Post', post.id, @client)
+      post = Parse::Object.new('Post', nil, @client)
+      post['time'] = parse_date
+      post.save
+      q = Parse.get('Post', post.id, @client)
 
-    # time zone from parse is utc so string formats don't compare equal,
-    # also floating points vary a bit so only equality after rounding to millis is guaranteed
-    assert_equal parse_date.to_time.utc.to_datetime.iso8601(3), q['time'].to_time.utc.to_datetime.iso8601(3)
+      # time zone from parse is utc so string formats don't compare equal,
+      # also floating points vary a bit so only equality after rounding to millis is guaranteed
+      assert_equal parse_date.to_time.utc.to_datetime.iso8601(3), q['time'].to_time.utc.to_datetime.iso8601(3)
+    end
   end
 
   def test_date_with_bad_data
@@ -70,21 +72,25 @@ class TestDatatypes < ParseTestCase
   end
 
   def test_geopoint
-    # '{"location": {"__type":"GeoPoint", "latitude":40.0, "longitude":-30.0}}'
-    data = {
-      'longitude' => 40.0,
-      'latitude' => -30.0
-    }
-    gp = Parse::GeoPoint.new data
+    VCR.use_cassette('test_datatypes_geopoint') do
+      data = {
+        'longitude' => 40.0,
+        'latitude' => -30.0
+      }
 
-    assert_equal JSON.parse(gp.to_json)['longitude'], data['longitude']
-    assert_equal JSON.parse(gp.to_json)['latitude'], data['latitude']
-    assert_equal JSON.parse(gp.to_json)[Parse::Protocol::KEY_TYPE], Parse::Protocol::TYPE_GEOPOINT
+      geopoint = Parse::GeoPoint.new data
 
-    post = Parse::Object.new('Post', nil, @client)
-    post['location'] = gp
-    post.save
-    q = Parse.get('Post', post.id, @client)
-    assert_equal gp, q['location']
+      pgp = JSON.parse(geopoint.to_json)
+      assert_equal pgp['longitude'], data['longitude']
+      assert_equal pgp['latitude'], data['latitude']
+      assert_equal pgp[Parse::Protocol::KEY_TYPE], Parse::Protocol::TYPE_GEOPOINT
+
+      post = Parse::Object.new('Post', nil, @client)
+      post['location'] = geopoint
+      post.save
+
+      q = Parse.get('Post', post.id, @client)
+      assert_equal geopoint, q['location']
+    end
   end
 end

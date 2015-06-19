@@ -3,7 +3,10 @@ GEM
   specs:
     addressable (2.3.8)
     builder (3.2.2)
+    byebug (5.0.0)
+      columnize (= 0.9.0)
     coderay (1.1.0)
+    columnize (0.9.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     docile (1.1.5)
@@ -73,6 +76,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
+  byebug
   faraday
   faraday_middleware
   jeweler (~> 1.8.5)

@@ -64,7 +64,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_retries
-    VCR.use_cassette('test_retries', record: :new_episodes) do
+    VCR.use_cassette('test_client_retries') do
       stubs, client = stubbed_client do |stub|
         (@client.max_retries + 1).times do
           stub.get('/') do
@@ -84,7 +84,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_retries_json_error
-    VCR.use_cassette('test_retries_json_error', record: :new_episodes) do
+    VCR.use_cassette('test_client_retries_json_error') do
       stubs, client = stubbed_client do |stub|
         stub.get('/') { [500, {}, '<HTML>this is not json</HTML>'] }
         stub.get('/') { [200, {}, '{"foo":100}'] }
@@ -97,7 +97,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_retries_server_error
-    VCR.use_cassette('test_retries_server_error', record: :new_episodes) do
+    VCR.use_cassette('test_client_retries_server_error') do
       stubs, client = stubbed_client do |stub|
         stub.get('/') { [500, {}, '{}'] }
         stub.get('/') { [200, {}, '{"foo":100}'] }
@@ -110,7 +110,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_not_retries_404
-    VCR.use_cassette('test_retries_404', record: :new_episodes) do
+    VCR.use_cassette('test_client_retries_404') do
       _stubs, client = stubbed_client do |stub|
         stub.get('/') { [404, {}, 'Not found'] }
         stub.get('/') { [200, {}, '{"foo":100}'] }
@@ -123,7 +123,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_not_retries_404_with_correct_json
-    VCR.use_cassette('test_retries_404_correct', record: :new_episodes) do
+    VCR.use_cassette('test_client_retries_404_correct') do
       _stubs, client = stubbed_client do |stub|
         stub.get('/') { [404, {}, '{"foo":100}'] }
         stub.get('/') { [200, {}, '{"foo":100}'] }
@@ -136,7 +136,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_empty_response
-    VCR.use_cassette('test_empty_response', record: :new_episodes) do
+    VCR.use_cassette('test_client_empty_response') do
       stubs, client = stubbed_client do |stub|
         stub.get('/') { [403, {}, 'nonparseable'] }
       end
@@ -156,7 +156,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_simple_save
-    VCR.use_cassette('test_simple_save', record: :new_episodes) do
+    VCR.use_cassette('test_client_simple_save') do
       test_save = Parse::Object.new('TestSave', nil, @client)
       test_save['foo'] = 'bar'
       test_save.save
@@ -168,7 +168,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_update
-    VCR.use_cassette('test_update', record: :new_episodes) do
+    VCR.use_cassette('test_client_update') do
       foo = Parse::Object.new('TestSave', nil, @client)
       foo['age'] = 20
       foo.save
@@ -191,7 +191,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_server_update
-    VCR.use_cassette('test_server_update', record: :new_episodes) do
+    VCR.use_cassette('test_client_server_update') do
       foo = Parse::Object.new('TestSave', nil, @client).save
       foo['name'] = 'john'
       foo.save
@@ -207,7 +207,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_destroy
-    VCR.use_cassette('test_destroy', record: :new_episodes) do
+    VCR.use_cassette('test_client_destroy') do
       d = Parse::Object.new('toBeDeleted', nil, @client)
       d['foo'] = 'bar'
       d.save
@@ -218,7 +218,7 @@ class TestClientCreate < ParseTestCase
   end
 
   def test_get_missing
-    VCR.use_cassette('test_get_missing', record: :new_episodes) do
+    VCR.use_cassette('test_client_get_missing') do
       e = assert_raises(Parse::ParseProtocolError) do
         Parse.get('SomeClass', 'someIdThatDoesNotExist', @client)
       end
