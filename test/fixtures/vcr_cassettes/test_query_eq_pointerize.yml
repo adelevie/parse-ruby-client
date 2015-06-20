@@ -1,0 +1,199 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Foo
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:47:57 GMT
+      Location:
+      - https://api.parse.com/1/classes/Foo/Hn5tn8fhmw
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.010658'
+      Content-Length:
+      - '65'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"createdAt":"2015-06-19T14:47:57.636Z","objectId":"Hn5tn8fhmw"}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:47:57 GMT
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Bar
+    body:
+      encoding: UTF-8
+      string: '{"foo":{"__type":"Pointer","className":"Foo","objectId":"Hn5tn8fhmw"},"bar":"bar"}'
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:47:58 GMT
+      Location:
+      - https://api.parse.com/1/classes/Bar/D74ARsyyGH
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.096790'
+      Content-Length:
+      - '65'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"createdAt":"2015-06-19T14:47:58.109Z","objectId":"D74ARsyyGH"}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:47:58 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Bar?where=%7B%22foo%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Foo%22,%22objectId%22:%22Hn5tn8fhmw%22%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:47:58 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.036219'
+      Content-Length:
+      - '199'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"bar":"bar","createdAt":"2015-06-19T14:47:58.109Z","foo":{"__type":"Pointer","className":"Foo","objectId":"Hn5tn8fhmw"},"objectId":"D74ARsyyGH","updatedAt":"2015-06-19T14:47:58.109Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:47:58 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Bar?where=%7B%22foo%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Foo%22,%22objectId%22:%22Hn5tn8fhmw%22%7D%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 14:47:59 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.013145'
+      Content-Length:
+      - '199'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"results":[{"bar":"bar","createdAt":"2015-06-19T14:47:58.109Z","foo":{"__type":"Pointer","className":"Foo","objectId":"Hn5tn8fhmw"},"objectId":"D74ARsyyGH","updatedAt":"2015-06-19T14:47:58.109Z"}]}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 14:47:59 GMT
+recorded_with: VCR 2.9.3

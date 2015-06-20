@@ -5,23 +5,25 @@ begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
+  $stderr.puts 'Run `bundle install` to install missing gems'
   exit e.status_code
 end
 
 require 'simplecov'
 SimpleCov.start do
-  add_filter "/test/"
-end if ENV["COVERAGE"]
+  add_filter '/test/'
+end if ENV['COVERAGE']
 
-require 'test/unit'
-require 'shoulda'
-require 'mocha'
+# minitest
+require 'minitest/autorun'
+require 'minitest/pride'
+require 'minitest/focus'
+
+# mocha + minitest
+require 'minitest/unit'
+require 'mocha/mini_test'
+
 require 'vcr'
-require 'webmock/test_unit'
-
-require 'simplecov'
-SimpleCov.start if ENV['COVERAGE']
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
@@ -32,16 +34,17 @@ unless RUBY_VERSION[0..2] == '2.2'
 end
 
 VCR.configure do |c|
-  c.cassette_library_dir = 'fixtures/vcr_cassettes'
+  c.cassette_library_dir = 'test/fixtures/vcr_cassettes'
+  c.default_cassette_options = { record: :once }
   c.hook_into :webmock # or :fakeweb
-  c.allow_http_connections_when_no_cassette = true
-  c.filter_sensitive_data("<COOKIE-KEY>") { |i| [i.response.headers['Set-Cookie']].flatten.compact.first }
+  c.filter_sensitive_data('<COOKIE-KEY>') do |i|
+    [i.response.headers['Set-Cookie']].flatten.compact.first
+  end
 
   def filter_sensitive_header(c, header)
     c.filter_sensitive_data("<#{header}>") do |interaction|
-      if v = interaction.request.headers.detect{|k,_| k.casecmp(header) == 0}
-        v.last.first
-      end
+      v = interaction.request.headers.detect { |k, _| k.casecmp(header) == 0 }
+      v.last.first if v
     end
   end
 
@@ -51,9 +54,10 @@ VCR.configure do |c|
   filter_sensitive_header(c, Parse::Protocol::HEADER_SESSION_TOKEN)
 end
 
-class ParseTestCase < Test::Unit::TestCase
+class ParseTestCase < Minitest::Test
   def setup
-    @client = Parse.create(:logger => Logger.new(STDERR).tap{|l| l.level = Logger::ERROR})
+    logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
+    @client = Parse.create(logger: logger)
   end
 end
 
@@ -61,10 +65,10 @@ module Faraday
   module LiveServerConfig
     def live_server=(value)
       @@live_server = case value
-      when /^http/
-        URI(value)
-      when /./
-        URI('http://127.0.0.1:4567')
+                      when /^http/
+                        URI(value)
+                      when /./
+                        URI('http://127.0.0.1:4567')
       end
     end
 
@@ -74,10 +78,11 @@ module Faraday
 
     # Returns an object that responds to `host` and `port`.
     def live_server
-      live_server? and @@live_server
+      live_server? && @@live_server
     end
   end
-  class TestCase < Test::Unit::TestCase
+
+  class TestCase < Minitest::Test
     extend LiveServerConfig
     self.live_server = ENV['LIVE']
 
@@ -96,11 +101,11 @@ module Faraday
     end
 
     def self.jruby?
-      defined? RUBY_ENGINE and 'jruby' == RUBY_ENGINE
+      defined? RUBY_ENGINE && 'jruby' == RUBY_ENGINE
     end
 
     def self.rbx?
-      defined? RUBY_ENGINE and 'rbx' == RUBY_ENGINE
+      defined? RUBY_ENGINE && 'rbx' == RUBY_ENGINE
     end
 
     def self.ssl_mode?
@@ -108,4 +113,3 @@ module Faraday
     end
   end
 end
-

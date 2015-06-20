@@ -4,7 +4,6 @@ require 'parse/client'
 require 'parse/error'
 
 module Parse
-
   # Represents an individual Parse API object.
   class Object < Hash
     attr_reader :parse_object_id
@@ -12,14 +11,12 @@ module Parse
     attr_reader :created_at
     attr_reader :updated_at
     attr_accessor :client
-    alias :id :parse_object_id
+    alias_method :id, :parse_object_id
 
     def initialize(class_name, data = nil, client = nil)
       @class_name = class_name
       @op_fields = {}
-      if data
-        parse data
-      end
+      parse data if data
       @client = client || Parse.client
     end
 
@@ -27,7 +24,7 @@ module Parse
       Parse.object_pointer_equality?(self, other)
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       Parse.object_pointer_hash(self)
@@ -47,11 +44,11 @@ module Parse
     end
 
     def new?
-      self["objectId"].nil?
+      self['objectId'].nil?
     end
 
-    def update_attributes(data={})
-      data.each_pair { |k,v| self[k] = v }
+    def update_attributes(data = {})
+      data.each_pair { |k, v| self[k] = v }
       save
     end
 
@@ -67,7 +64,7 @@ module Parse
       end
 
       body = safe_hash.to_json
-      data = @client.request(self.uri, method, body)
+      data = @client.request(uri, method, body)
 
       if data
         # array operations can return mutated view of array which needs to be parsed
@@ -77,9 +74,9 @@ module Parse
       end
 
       if @class_name == Parse::Protocol::CLASS_USER
-        self.delete("password")
-        self.delete(:username)
-        self.delete(:password)
+        delete('password')
+        delete(:username)
+        delete(:password)
       end
 
       self
@@ -87,7 +84,7 @@ module Parse
 
     # representation of object to send on saves
     def safe_hash
-      Hash[self.map do |key, value|
+      Hash[map do |key, value|
         if Protocol::RESERVED_KEYS.include?(key)
           nil
         elsif value.is_a?(Hash) && value[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
@@ -102,21 +99,21 @@ module Parse
 
     # full REST api representation of object
     def rest_api_hash
-      self.merge(Parse::Protocol::KEY_CLASS_NAME => class_name)
+      merge(Parse::Protocol::KEY_CLASS_NAME => class_name)
     end
 
     # Handle the addition of Array#to_h in Ruby 2.1
     def should_call_to_h?(value)
-      value.respond_to?(:to_h) && !value.kind_of?(Array)
+      value.respond_to?(:to_h) && !value.is_a?(Array)
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       Hash[rest_api_hash.map do |key, value|
         [key, should_call_to_h?(value) ? value.to_h : value]
       end]
     end
-    alias :as_json :to_h
-    alias :to_hash :to_h
+    alias_method :as_json, :to_h
+    alias_method :to_hash, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -134,11 +131,10 @@ module Parse
     # values from the API.
     def refresh
       if @parse_object_id
-        data = Parse.get(@class_name, @parse_object_id, client = @client)
+        data = Parse.get(@class_name, @parse_object_id, @client)
+        @op_fields = {}
         clear
-        if data
-          parse data
-        end
+        parse data if data
       end
 
       self
@@ -146,11 +142,9 @@ module Parse
 
     # Delete the remote Parse API object.
     def parse_delete
-      if @parse_object_id
-        response = @client.delete self.uri
-      end
+      @client.delete uri if @parse_object_id
 
-      self.clear
+      clear
       self
     end
 
@@ -176,15 +170,15 @@ module Parse
 
     # Increment the given field by an amount, which defaults to 1. Saves immediately to reflect incremented
     def increment(field, amount = 1)
-      #value = (self[field] || 0) + amount
-      #self[field] = value
-      #if !@parse_object_id
+      # value = (self[field] || 0) + amount
+      # self[field] = value
+      # if !@parse_object_id
       #  # TODO - warn that the object must be stored first
       #  return nil
-      #end
+      # end
 
-      body = {field => Parse::Increment.new(amount)}.to_json
-      data = @client.request(self.uri, :put, body)
+      body = { field => Parse::Increment.new(amount) }.to_json
+      data = @client.request(uri, :put, body)
       parse data
       self
     end
@@ -202,39 +196,33 @@ module Parse
     # merge the hash keys, and then ensure that the reserved
     # fields do not occur in the underlying hash storage.
     def parse(data)
-      if !data
-        return
-      end
+      return unless data
 
       @parse_object_id ||= data[Protocol::KEY_OBJECT_ID]
 
-      if data.has_key? Protocol::KEY_CREATED_AT
+      if data.key? Protocol::KEY_CREATED_AT
         @created_at = DateTime.parse data[Protocol::KEY_CREATED_AT]
       end
 
-      if data.has_key? Protocol::KEY_UPDATED_AT
+      if data.key? Protocol::KEY_UPDATED_AT
         @updated_at = DateTime.parse data[Protocol::KEY_UPDATED_AT]
       end
 
-      data.each do |k,v|
-        if k.is_a? Symbol
-          k = k.to_s
-        end
+      data.each do |k, v|
+        k = k.to_s if k.is_a? Symbol
 
-        if k != Parse::Protocol::KEY_TYPE
-          self[k] = v
-        end
+        self[k] = v if k != Parse::Protocol::KEY_TYPE
       end
 
       self
     end
 
     def array_op(field, operation, value)
-      raise "field #{field} not an array" if self[field] && !self[field].is_a?(Array)
+      fail "field #{field} not an array" if self[field] && !self[field].is_a?(Array)
 
       if @parse_object_id
         @op_fields[field] ||= ArrayOp.new(operation, [])
-        raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
+        fail "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
         @op_fields[field].objects << Parse.pointerize_value(value)
       end
 

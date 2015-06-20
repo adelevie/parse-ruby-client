@@ -4,19 +4,28 @@ class TestModelObject < Parse::Model
 end
 
 class TestModel < ParseTestCase
-
   def test_new
-    VCR.use_cassette('test_new_model', :record => :new_episodes) do
-      tmo = TestModelObject.new(data = nil, client = @client)
-      assert_equal tmo.new?, true
-      tmo.save
-      assert_equal tmo.new?, false
+    VCR.use_cassette('test_model_new') do
+      model = TestModelObject.new(nil, @client)
+      assert_equal model.new?, true
+
+      model.save
+      assert_equal model.new?, false
     end
   end
 
   def test_superclass
-    tmo = TestModelObject
-    assert_equal tmo.superclass, Parse::Model
-    assert_equal tmo.superclass.superclass, Parse::Object
+    model = TestModelObject.new(nil, @client)
+    assert model.is_a?(Parse::Model)
+    assert model.is_a?(Parse::Object)
+  end
+
+  def test_find
+    VCR.use_cassette('test_model_find') do
+      model = TestModelObject.new(nil, @client)
+      model.save
+
+      assert TestModelObject.find(model['objectId'], @client)
+    end
   end
 end

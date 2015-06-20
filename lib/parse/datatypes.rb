@@ -4,14 +4,13 @@ require 'date'
 require 'base64'
 
 module Parse
-
   # Pointer
   # ------------------------------------------------------------
 
   class Pointer
     attr_accessor :parse_object_id
     attr_accessor :class_name
-    alias :id :parse_object_id
+    alias_method :id, :parse_object_id
 
     def self.make(class_name, object_id)
       Pointer.new(
@@ -34,7 +33,7 @@ module Parse
       Parse.object_pointer_equality?(self, other)
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       Parse.object_pointer_hash(self)
@@ -44,14 +43,14 @@ module Parse
       false
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       {
-          Protocol::KEY_TYPE        => Protocol::TYPE_POINTER,
-          Protocol::KEY_CLASS_NAME  => @class_name,
-          Protocol::KEY_OBJECT_ID   => @parse_object_id
+        Protocol::KEY_TYPE        => Protocol::TYPE_POINTER,
+        Protocol::KEY_CLASS_NAME  => @class_name,
+        Protocol::KEY_OBJECT_ID   => @parse_object_id
       }
     end
-    alias :as_json :to_h
+    alias_method :as_json, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -59,7 +58,7 @@ module Parse
 
     # Retrieve the Parse object referenced by this pointer.
     def get(client = nil)
-      Parse.get(@class_name, @parse_object_id, client = client) if @parse_object_id
+      Parse.get(@class_name, @parse_object_id, client) if @parse_object_id
     end
 
     def to_s
@@ -77,11 +76,11 @@ module Parse
       if data.respond_to?(:iso8601)
         @value = data
       elsif data.is_a? Hash
-        @value = DateTime.parse data["iso"]
+        @value = DateTime.parse data['iso']
       elsif data.is_a? String
         @value = DateTime.parse data
       else
-        raise "data doesn't act like time #{data.inspect}"
+        fail "data doesn't act like time #{data.inspect}"
       end
     end
 
@@ -90,7 +89,7 @@ module Parse
         value == other.value
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       value.hash
@@ -112,13 +111,13 @@ module Parse
       super || value.respond_to?(method, include_private)
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       {
-          Protocol::KEY_TYPE => Protocol::TYPE_DATE,
-          "iso"              => value.to_time.utc.iso8601(3)
+        Protocol::KEY_TYPE => Protocol::TYPE_DATE,
+        'iso'              => value.to_time.utc.iso8601(3)
       }
     end
-    alias :as_json :to_h
+    alias_method :as_json, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -132,7 +131,7 @@ module Parse
     attr_accessor :value
 
     def initialize(data)
-      bytes = data["base64"]
+      bytes = data['base64']
       @value = Base64.decode64(bytes)
     end
 
@@ -141,7 +140,7 @@ module Parse
         value == other.value
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       value.hash
@@ -163,13 +162,13 @@ module Parse
       super || value.respond_to?(method, include_private)
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       {
-          Protocol::KEY_TYPE => Protocol::TYPE_BYTES,
-          "base64" => Base64.encode64(@value)
+        Protocol::KEY_TYPE => Protocol::TYPE_BYTES,
+        'base64' => Base64.encode64(@value)
       }
     end
-    alias :as_json :to_h
+    alias_method :as_json, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -192,19 +191,19 @@ module Parse
         amount == other.amount
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       amount.hash
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       {
-          Protocol::KEY_OP => Protocol::KEY_INCREMENT,
-          Protocol::KEY_AMOUNT => @amount
+        Protocol::KEY_OP => Protocol::KEY_INCREMENT,
+        Protocol::KEY_AMOUNT => @amount
       }
     end
-    alias :as_json :to_h
+    alias_method :as_json, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -227,19 +226,19 @@ module Parse
         objects == other.objects
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       operation.hash ^ objects.hash
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       {
-          Protocol::KEY_OP => operation,
-          Protocol::KEY_OBJECTS => @objects
+        Protocol::KEY_OP => operation,
+        Protocol::KEY_OBJECTS => @objects
       }
     end
-    alias :as_json :to_h
+    alias_method :as_json, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -254,8 +253,8 @@ module Parse
     attr_accessor :longitude, :latitude
 
     def initialize(data)
-      @longitude = data["longitude"]
-      @latitude  = data["latitude"]
+      @longitude = data['longitude']
+      @latitude  = data['latitude']
 
       if !@longitude && !@latitude
         @longitude = data[:longitude]
@@ -269,20 +268,20 @@ module Parse
         latitude == other.latitude
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       longitude.hash ^ latitude.hash
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       {
-          Protocol::KEY_TYPE => Protocol::TYPE_GEOPOINT,
-          "latitude" => @latitude,
-          "longitude" => @longitude
+        Protocol::KEY_TYPE => Protocol::TYPE_GEOPOINT,
+        'latitude' => @latitude,
+        'longitude' => @longitude
       }
     end
-    alias :as_json :to_h
+    alias_method :as_json, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -307,13 +306,13 @@ module Parse
     attr_accessor :client
 
     def initialize(data, client = nil)
-      data = Hash[data.map{ |k, v| [k.to_s, v] }] # convert hash keys to strings
-      @local_filename = data["local_filename"] if data["local_filename"]
-      @parse_filename = data["name"]           if data["name"]
-      @parse_filename = data["parse_filename"] if data["parse_filename"]
-      @content_type   = data["content_type"]   if data["content_type"]
-      @url            = data["url"]            if data["url"]
-      @body           = data["body"]           if data["body"]
+      data = Hash[data.map { |k, v| [k.to_s, v] }] # convert hash keys to strings
+      @local_filename = data['local_filename'] if data['local_filename']
+      @parse_filename = data['name']           if data['name']
+      @parse_filename = data['parse_filename'] if data['parse_filename']
+      @content_type   = data['content_type']   if data['content_type']
+      @url            = data['url']            if data['url']
+      @body           = data['body']           if data['body']
       @client         = client || Parse.client
     end
 
@@ -322,7 +321,7 @@ module Parse
         url == other.url
     end
 
-    alias == eql?
+    alias_method :==, :eql?
 
     def hash
       url.hash
@@ -331,23 +330,22 @@ module Parse
     def save
       uri = Parse::Protocol.file_uri(@local_filename)
       resp = @client.request(uri, :post, @body, nil, @content_type)
-      @parse_filename = resp["name"]
-      @url = resp["url"]
+      @parse_filename = resp['name']
+      @url = resp['url']
       resp
     end
 
-    def to_h(*a)
+    def to_h(*_a)
       {
         Protocol::KEY_TYPE => Protocol::TYPE_FILE,
-        "name" => @parse_filename,
-        "url" => @url
+        'name' => @parse_filename,
+        'url' => @url
       }
     end
-    alias :as_json :to_h
+    alias_method :as_json, :to_h
 
     def to_json(*a)
       to_h.to_json(*a)
     end
   end
-
 end

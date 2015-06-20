@@ -1,28 +1,29 @@
 # -*- encoding : utf-8 -*-
 module Faraday
-
   class ExtendedParseJson < FaradayMiddleware::ParseJson
-
     def process_response(env)
       env[:raw_body] = env[:body] if preserve_raw?(env)
 
-
       if env[:status] >= 400
-        data = parse(env[:body]) || {} rescue {}
+        begin
+          data = parse(env[:body]) || {}
+        rescue StandardError
+          data = {}
+        end
 
         array_codes = [
           Parse::Protocol::ERROR_INTERNAL,
           Parse::Protocol::ERROR_TIMEOUT,
           Parse::Protocol::ERROR_EXCEEDED_BURST_LIMIT
         ]
-        error_hash = { "error" => "HTTP Status #{env[:status]} Body #{env[:body]}", "http_status_code" => env[:status] }.merge(data)
+        error_hash = { 'error' => "HTTP Status #{env[:status]} Body #{env[:body]}", 'http_status_code' => env[:status] }.merge(data)
         if data['code'] && array_codes.include?(data['code'])
           sleep 60 if data['code'] == Parse::Protocol::ERROR_EXCEEDED_BURST_LIMIT
-          raise exception(env).new(error_hash.merge(data))
+          fail exception(env), error_hash.merge(data)
         elsif env[:status] >= 500
-          raise exception(env).new(error_hash.merge(data))
+          fail exception(env), error_hash.merge(data)
         end
-        raise Parse::ParseProtocolError.new(error_hash)
+        fail Parse::ParseProtocolError, error_hash
       else
         data = parse(env[:body]) || {}
 
@@ -30,10 +31,9 @@ module Faraday
       end
     end
 
-    def exception env
+    def exception(env)
       # decide to retry or not
       (env[:retries].to_i.zero? ? Parse::ParseProtocolError : Parse::ParseProtocolRetry)
     end
-
   end
 end

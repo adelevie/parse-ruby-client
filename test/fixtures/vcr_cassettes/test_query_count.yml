@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Post
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 16:03:46 GMT
+      Location:
+      - https://api.parse.com/1/classes/Post/muFySZ3MK0
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.019442'
+      Content-Length:
+      - '65'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |
+        {"createdAt":"2015-06-19T16:03:46.232Z","objectId":"muFySZ3MK0"}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 16:03:46 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Post?count=true&where=%7B%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 19 Jun 2015 16:03:46 GMT
+      Server:
+      - nginx/1.6.0
+      X-Parse-Platform:
+      - G1
+      X-Runtime:
+      - '0.116326'
+      Content-Length:
+      - '2931'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {"results":[{"createdAt":"2015-06-19T15:42:19.696Z","objectId":"pzBLMTmxIH","title":"foo","updatedAt":"2015-06-19T15:42:19.696Z"},{"createdAt":"2015-06-19T14:52:06.568Z","objectId":"pWn1tykhst","random":5,"updatedAt":"2015-06-19T14:52:06.568Z"},{"createdAt":"2015-06-19T14:52:05.609Z","objectId":"gybLZBSy1o","random":7,"updatedAt":"2015-06-19T14:52:05.609Z"},{"createdAt":"2015-06-19T14:47:11.878Z","objectId":"wpgp42xwMu","other":{"__type":"Pointer","className":"Post","objectId":"3P1DwV9X7R"},"updatedAt":"2015-06-19T14:47:11.878Z"},{"createdAt":"2015-06-19T14:48:08.285Z","objectId":"pHu53gCHPK","title":"foo","updatedAt":"2015-06-19T14:48:08.285Z"},{"createdAt":"2015-06-19T14:47:59.631Z","objectId":"4kTZXJRi9E","title":"foo","updatedAt":"2015-06-19T14:47:59.631Z"},{"createdAt":"2015-06-19T14:47:56.677Z","objectId":"ls4sIrydCH","random":3,"updatedAt":"2015-06-19T14:47:56.677Z"},{"createdAt":"2015-06-19T14:47:53.842Z","objectId":"TPOJzIeP7c","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T14:47:53.842Z"},{"count":0,"createdAt":"2015-06-19T14:47:04.563Z","objectId":"ecSJRSkJSt","updatedAt":"2015-06-19T14:47:05.059Z"},{"createdAt":"2015-06-19T14:47:07.543Z","objectId":"a4kT7Fu9DQ","published":true,"read":false,"updatedAt":"2015-06-19T14:47:07.543Z"},{"createdAt":"2015-06-19T14:46:51.455Z","objectId":"Onw0L0dY6r","updatedAt":"2015-06-19T14:46:51.914Z"},{"createdAt":"2015-06-19T14:46:53.865Z","objectId":"hQBE7tb1RY","title":"hello world","updatedAt":"2015-06-19T14:46:53.865Z"},{"createdAt":"2015-06-19T14:31:30.581Z","objectId":"R4XMJhJtJu","random":2,"updatedAt":"2015-06-19T14:31:30.581Z"},{"createdAt":"2015-06-19T14:25:11.809Z","objectId":"5rGDcbDnTH","random":0.04405561490818777,"updatedAt":"2015-06-19T14:25:11.809Z"},{"createdAt":"2015-06-19T14:25:10.860Z","objectId":"a5Mle6Y7Oa","random":0.8208380112713658,"updatedAt":"2015-06-19T14:25:10.860Z"},{"createdAt":"2015-06-19T14:15:26.816Z","objectId":"UaJyK070eQ","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T14:15:26.816Z"},{"createdAt":"2015-06-19T14:15:05.237Z","objectId":"ZIUp5jICmi","random":0.34928346019021794,"updatedAt":"2015-06-19T14:15:05.237Z"},{"createdAt":"2015-06-19T14:15:04.244Z","objectId":"lsGbJy6rkk","random":0.22121860415066819,"updatedAt":"2015-06-19T14:15:04.244Z"},{"createdAt":"2015-06-19T14:14:59.971Z","objectId":"cZQ6EToZJI","title":"foo","updatedAt":"2015-06-19T14:14:59.971Z"},{"createdAt":"2015-06-19T14:46:49.475Z","objectId":"uTVQ5wv7y3","title":"hello 2","updatedAt":"2015-06-19T14:46:49.958Z"},{"createdAt":"2015-06-19T14:31:29.632Z","objectId":"mMErmqRaMw","random":3,"updatedAt":"2015-06-19T14:31:29.632Z"},{"createdAt":"2015-06-19T14:14:47.835Z","objectId":"ShV4jPb5MB","updatedAt":"2015-06-19T14:14:49.360Z"},{"createdAt":"2015-06-19T14:14:41.473Z","objectId":"BL0CSWl1lw","title":"hello 2","updatedAt":"2015-06-19T14:14:41.946Z"},{"createdAt":"2015-06-19T14:14:57.140Z","objectId":"iECO7MJuDA","title":"foo","updatedAt":"2015-06-19T14:14:57.140Z"},{"createdAt":"2015-06-19T14:14:46.841Z","objectId":"qqCgWiP5Sv","other":{"__type":"Pointer","className":"Post","objectId":"rjUT3ReEN0"},"updatedAt":"2015-06-19T14:14:46.841Z"},{"createdAt":"2015-06-19T14:14:40.541Z","objectId":"fzklePNH24","published":true,"read":false,"updatedAt":"2015-06-19T14:14:40.541Z"},{"createdAt":"2015-06-19T14:14:34.871Z","objectId":"VhHuASb736","title":"hello world","updatedAt":"2015-06-19T14:14:34.871Z"},{"count":0,"createdAt":"2015-06-19T14:14:28.882Z","objectId":"EmCyCqQtHh","updatedAt":"2015-06-19T14:14:29.344Z"},{"createdAt":"2015-06-19T14:12:50.657Z","objectId":"O3HsrqEHe5","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T14:12:50.657Z"},{"createdAt":"2015-06-19T14:12:45.472Z","objectId":"2wWoj0b4h0","title":"foo","updatedAt":"2015-06-19T14:12:45.472Z"},{"createdAt":"2015-06-19T14:12:35.192Z","objectId":"1bB9chDM9I","title":"foo","updatedAt":"2015-06-19T14:12:35.192Z"},{"createdAt":"2015-06-19T14:12:33.752Z","objectId":"t1uCbebhLL","random":0.3587329372260777,"updatedAt":"2015-06-19T14:12:33.752Z"},{"createdAt":"2015-06-19T14:12:32.822Z","objectId":"PtWiaoZ030","random":0.0681385842141976,"updatedAt":"2015-06-19T14:12:32.822Z"},{"createdAt":"2015-06-19T14:11:46.924Z","objectId":"aahFXS4kCn","title":"hello 2","updatedAt":"2015-06-19T14:11:47.408Z"},{"count":0,"createdAt":"2015-06-19T14:11:45.979Z","objectId":"U2iQgNVG7U","updatedAt":"2015-06-19T14:11:46.449Z"},{"createdAt":"2015-06-19T14:00:32.397Z","objectId":"cp7kj4pR4D","updatedAt":"2015-06-19T14:00:32.871Z"},{"count":0,"createdAt":"2015-06-19T14:00:31.380Z","objectId":"BS03pOHQGC","updatedAt":"2015-06-19T14:00:31.881Z"},{"createdAt":"2015-06-19T14:00:26.616Z","objectId":"GvZWbWbAqM","other":{"__type":"Pointer","className":"Post","objectId":"3xmxREAApN"},"updatedAt":"2015-06-19T14:00:26.616Z"},{"createdAt":"2015-06-19T14:00:18.603Z","objectId":"NvAcCFUW2F","title":"hello 2","updatedAt":"2015-06-19T14:00:19.073Z"},{"createdAt":"2015-06-19T14:00:17.170Z","objectId":"oTlhFXCbGy","published":true,"read":false,"updatedAt":"2015-06-19T14:00:17.170Z"},{"createdAt":"2015-06-19T14:00:25.637Z","objectId":"xdC6Zfwejw","title":"hello world","updatedAt":"2015-06-19T14:00:25.637Z"},{"createdAt":"2015-06-19T13:59:39.392Z","objectId":"2MQQwSHiFi","random":0.32361376898834937,"updatedAt":"2015-06-19T13:59:39.392Z"},{"createdAt":"2015-06-19T16:03:46.232Z","objectId":"muFySZ3MK0","updatedAt":"2015-06-19T16:03:46.232Z"},{"createdAt":"2015-06-19T16:00:41.894Z","objectId":"LcZ6fJl3Be","updatedAt":"2015-06-19T16:00:41.894Z"},{"createdAt":"2015-06-19T13:59:12.064Z","location":{"__type":"GeoPoint","latitude":-30,"longitude":40},"objectId":"qdQfDDXLNe","updatedAt":"2015-06-19T13:59:12.064Z"},{"createdAt":"2015-06-19T13:59:38.447Z","objectId":"iUdECzPH0I","random":0.3047596721825725,"updatedAt":"2015-06-19T13:59:38.447Z"},{"createdAt":"2015-06-19T16:00:41.436Z","objectId":"LtJtSaEKRk","updatedAt":"2015-06-19T16:00:41.436Z"},{"createdAt":"2015-06-19T13:59:37.515Z","objectId":"Q4JE28Qi33","title":"foo","updatedAt":"2015-06-19T13:59:37.515Z"},{"createdAt":"2015-06-19T15:59:47.957Z","objectId":"lcWc5mp7K4","updatedAt":"2015-06-19T15:59:47.957Z"},{"createdAt":"2015-06-19T15:59:47.449Z","objectId":"loFLogw4Lx","updatedAt":"2015-06-19T15:59:47.449Z"},{"createdAt":"2015-06-19T13:59:25.020Z","objectId":"twcr8SEzWT","title":"foo","updatedAt":"2015-06-19T13:59:25.020Z"},{"createdAt":"2015-06-19T14:47:55.259Z","objectId":"fFqkWbIsRz","updatedAt":"2015-06-19T14:47:55.259Z"},{"createdAt":"2015-06-19T13:59:11.142Z","objectId":"FYhi0tirZd","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T13:59:11.142Z"},{"createdAt":"2015-06-19T13:49:06.237Z","objectId":"LffFMDnwWK","title":"foo","updatedAt":"2015-06-19T13:49:06.237Z"},{"createdAt":"2015-06-19T13:49:04.753Z","objectId":"xs3ekjm4Ef","random":0.8815471429108187,"updatedAt":"2015-06-19T13:49:04.753Z"},{"createdAt":"2015-06-19T13:49:03.788Z","objectId":"Vn2Zms6Eul","random":0.8509941926067056,"updatedAt":"2015-06-19T13:49:03.788Z"},{"createdAt":"2015-06-19T13:48:58.940Z","objectId":"PDGZC1mVZ5","title":"foo","updatedAt":"2015-06-19T13:48:58.940Z"},{"createdAt":"2015-06-19T13:48:46.423Z","objectId":"6cDbc9TZb2","published":true,"read":false,"updatedAt":"2015-06-19T13:48:46.423Z"},{"createdAt":"2015-06-19T13:48:43.474Z","objectId":"yFlZWkwrR5","updatedAt":"2015-06-19T13:48:43.993Z"},{"createdAt":"2015-06-19T13:48:42.539Z","objectId":"K87vz5UohC","title":"hello 2","updatedAt":"2015-06-19T13:48:43.002Z"},{"createdAt":"2015-06-19T13:48:25.374Z","objectId":"UeFDK4BDRY","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T13:48:25.374Z"},{"createdAt":"2015-06-19T13:48:24.422Z","location":{"__type":"GeoPoint","latitude":-30,"longitude":40},"objectId":"rASyeo0qjp","updatedAt":"2015-06-19T13:48:24.422Z"},{"createdAt":"2015-06-19T14:47:54.791Z","objectId":"glS2t54MsQ","updatedAt":"2015-06-19T14:47:54.791Z"},{"createdAt":"2015-06-19T14:47:11.390Z","objectId":"3P1DwV9X7R","updatedAt":"2015-06-19T14:47:11.390Z"},{"createdAt":"2015-06-19T13:45:19.145Z","objectId":"4I9UOstUHf","title":"foo","updatedAt":"2015-06-19T13:45:19.145Z"},{"createdAt":"2015-06-19T13:45:17.697Z","objectId":"LXCbhzIchQ","random":0.661889191851716,"updatedAt":"2015-06-19T13:45:17.697Z"},{"createdAt":"2015-06-19T14:47:02.039Z","objectId":"ZZ4lPDIFJD","updatedAt":"2015-06-19T14:47:02.039Z"},{"createdAt":"2015-06-19T14:46:50.942Z","objectId":"KhrIsovkCN","updatedAt":"2015-06-19T14:46:50.942Z"},{"createdAt":"2015-06-19T14:46:50.457Z","objectId":"lEYMMHJNCB","updatedAt":"2015-06-19T14:46:50.457Z"},{"createdAt":"2015-06-19T13:45:16.722Z","objectId":"lNfmbPokyw","random":0.21316905401276798,"updatedAt":"2015-06-19T13:45:16.722Z"},{"createdAt":"2015-06-19T13:45:06.900Z","objectId":"7pnoP2n50v","title":"foo","updatedAt":"2015-06-19T13:45:06.900Z"},{"createdAt":"2015-06-19T13:44:47.704Z","objectId":"RgX4HnuP5f","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T13:44:47.704Z"},{"count":0,"createdAt":"2015-06-19T13:44:38.204Z","objectId":"AYsnXEOaNA","updatedAt":"2015-06-19T13:44:38.815Z"},{"createdAt":"2015-06-19T13:44:12.990Z","objectId":"MgKHx255k9","updatedAt":"2015-06-19T13:44:13.794Z"},{"createdAt":"2015-06-19T13:44:05.848Z","objectId":"cYBZk4X1gg","published":true,"read":false,"updatedAt":"2015-06-19T13:44:05.848Z"},{"createdAt":"2015-06-19T13:44:03.286Z","objectId":"Wvx5MqlD7x","title":"hello 2","updatedAt":"2015-06-19T13:44:03.890Z"},{"createdAt":"2015-06-19T14:14:58.560Z","objectId":"NdF2mHNWck","updatedAt":"2015-06-19T14:14:58.560Z"},{"createdAt":"2015-06-19T14:14:58.082Z","objectId":"MVcUXbTrrk","updatedAt":"2015-06-19T14:14:58.082Z"},{"count":0,"createdAt":"2015-06-19T13:27:40.604Z","objectId":"UGSiJcWDzo","updatedAt":"2015-06-19T13:27:41.086Z"},{"createdAt":"2015-06-19T13:27:39.665Z","objectId":"tJ9GfiU2Ol","title":"hello 2","updatedAt":"2015-06-19T13:27:40.142Z"},{"createdAt":"2015-06-19T14:14:50.388Z","objectId":"7NhitHAu4w","updatedAt":"2015-06-19T14:14:50.388Z"},{"createdAt":"2015-06-19T14:14:46.341Z","objectId":"rjUT3ReEN0","updatedAt":"2015-06-19T14:14:46.341Z"},{"createdAt":"2015-06-19T14:14:40.077Z","objectId":"JKhwOXtP6b","updatedAt":"2015-06-19T14:14:40.077Z"},{"createdAt":"2015-06-19T13:27:38.239Z","objectId":"4E37m1nKVJ","updatedAt":"2015-06-19T13:27:38.727Z"},{"createdAt":"2015-06-19T13:27:33.588Z","objectId":"B1jwiQX0d9","published":true,"read":false,"updatedAt":"2015-06-19T13:27:33.588Z"},{"createdAt":"2015-06-19T13:26:55.421Z","objectId":"tLyklvDC8M","title":"foo","updatedAt":"2015-06-19T13:26:55.421Z"},{"createdAt":"2015-06-19T13:26:52.079Z","objectId":"jgQbF1GKtG","random":0.49934627483984995,"updatedAt":"2015-06-19T13:26:52.079Z"},{"createdAt":"2015-06-19T13:26:51.130Z","objectId":"NAMMrGQaro","random":0.7663821527029655,"updatedAt":"2015-06-19T13:26:51.130Z"},{"createdAt":"2015-06-19T13:26:44.108Z","objectId":"1gjIpsLSp7","title":"foo","updatedAt":"2015-06-19T13:26:44.108Z"},{"createdAt":"2015-06-19T13:27:33.128Z","objectId":"zLkPjn4UtQ","title":"hello world","updatedAt":"2015-06-19T13:27:33.128Z"},{"createdAt":"2015-06-19T14:14:37.749Z","objectId":"qQhudZ6vyA","updatedAt":"2015-06-19T14:14:37.749Z"},{"createdAt":"2015-06-19T14:12:31.384Z","objectId":"iGAvH7yYzi","updatedAt":"2015-06-19T14:12:31.384Z"},{"createdAt":"2015-06-19T13:26:40.371Z","location":{"__type":"GeoPoint","latitude":-30,"longitude":40},"objectId":"ENwpR0e9gn","updatedAt":"2015-06-19T13:26:40.371Z"},{"createdAt":"2015-06-19T13:26:41.304Z","objectId":"i5UU7i1d9F","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T13:26:41.304Z"},{"createdAt":"2015-06-19T14:12:30.910Z","objectId":"bwzjkxwNCD","updatedAt":"2015-06-19T14:12:30.910Z"},{"createdAt":"2015-06-19T14:11:52.808Z","objectId":"IvUGoIYtEG","updatedAt":"2015-06-19T14:11:52.808Z"},{"createdAt":"2015-06-19T14:11:38.391Z","objectId":"xPdVAOmNPo","updatedAt":"2015-06-19T14:11:38.391Z"},{"createdAt":"2015-06-19T13:20:49.611Z","objectId":"ipmO5mlmo3","title":"foo","updatedAt":"2015-06-19T13:20:49.611Z"},{"createdAt":"2015-06-19T13:20:30.488Z","objectId":"m31MrG8TiZ","time":{"__type":"Date","iso":"1970-01-01T00:00:00.000Z"},"updatedAt":"2015-06-19T13:20:30.488Z"},{"count":0,"createdAt":"2015-06-19T13:20:17.869Z","objectId":"NN1DFPKBhO","updatedAt":"2015-06-19T13:20:18.385Z"}],"count":4578}
+    http_version: 
+  recorded_at: Fri, 19 Jun 2015 16:03:46 GMT
+recorded_with: VCR 2.9.3

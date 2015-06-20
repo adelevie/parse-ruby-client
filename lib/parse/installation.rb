@@ -27,13 +27,13 @@ module Parse
       @client = client || Parse.client
     end
 
-    def self.get(parse_object_id, client = nil)
-      new(parse_object_id, client).get
+    def self.get(parse_object_id, parse_client = nil)
+      parse_client ||= Parse.client
+      new(parse_object_id, parse_client).get
     end
 
     def get
       response = client.request(uri, :get, nil, nil)
-
       parse Parse.parse_json(nil, response) if response
     end
 
