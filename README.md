@@ -1,7 +1,7 @@
 # !! NOTE !!
 The master branch has a lot of changes that the current release doesn't have.
 
-The version on RubyGems (0.3.0) has its [corresponding tag](https://github.com/adelevie/parse-ruby-client/tree/v0.3.0), so use those docs instead. 
+The version on RubyGems (0.3.0) has its [corresponding tag](https://github.com/adelevie/parse-ruby-client/tree/v0.3.0), so use those docs instead.
 
 Alternatively, you can set up your `Gemfile` as such:
 
@@ -1134,20 +1134,31 @@ push.save
 
 ## Installations
 
+#### Creating Installations
+
+```ruby
+installation = client.installation.tap do |i|
+  i.device_token = 'mobile_app_device_token'
+  i.device_type = 'ios'
+  i.channels = ['my-channel-name']
+end
+installation.save
+```
+
 #### Retrieving Installations
 
 ```ruby
-installation = Parse::Installation.get("objectId", client)
+installation = client.installation('objectId').get
 # Same as
-installation = Parse::Installation.new("objectId", client)
+installation = Parse::Installation.new('objectId', client)
 installation.get
 ```
 
 #### Updating installations
 
 ```ruby
-installation = Parse::Installation.new("objectId", client)
-installation.channels = ["", "my-channel-name"]
+installation = client.installation('objectId')
+installation.channels = ['', 'my-channel-name']
 installation.badge = 5
 installation.save
 ```

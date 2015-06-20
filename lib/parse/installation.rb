@@ -11,6 +11,9 @@ module Parse
       badge: 'badge',
       channels: 'channels',
       time_zone: 'timeZone',
+      device_type: 'deviceType',
+      push_type: 'pushType',
+      gcm_sender_id: 'GCMSenderId',
       device_token: 'deviceToken',
       channel_uris: 'channelUris',
       app_name: 'appName',
@@ -24,13 +27,13 @@ module Parse
       @client = client || Parse.client
     end
 
-    def self.get(parse_object_id, client = nil)
-      client ||= Parse.client
-      new(parse_object_id, client).get
+    def self.get(parse_object_id, parse_client = nil)
+      parse_client ||= Parse.client
+      new(parse_object_id, parse_client).get
     end
 
     def get
-      response = @client.request(uri, :get, nil, nil)
+      response = client.request(uri, :get, nil, nil)
       parse Parse.parse_json(nil, response) if response
     end
 
@@ -45,7 +48,7 @@ module Parse
     end
 
     def save
-      @client.request uri, method, to_json, nil
+      client.request uri, method, to_json, nil
     end
 
     def rest_api_hash
