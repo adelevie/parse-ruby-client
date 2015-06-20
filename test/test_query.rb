@@ -327,4 +327,9 @@ class TestQuery < ParseTestCase
       assert users.map(&:to_h).map { |o| o['username'] }.each_cons(2).all? { |a, b| (b <=> a) <= 0 }
     end
   end
+
+  def test_order_attribute_should_be_accessible
+    @q.order = :ascending
+    assert_equal :ascending, @q.order
+  end
 end

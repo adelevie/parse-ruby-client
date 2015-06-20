@@ -130,7 +130,7 @@ module Parse
       end
 
       query = { 'where' => where_as_json.to_json }
-      order(query)
+      ordering(query)
 
       [:count, :limit, :skip, :include].each { |a| merge_attribute(a, query) }
       @client.logger.info { "Parse query for #{uri} #{query.inspect}" } unless @client.quiet
@@ -159,7 +159,7 @@ module Parse
       self
     end
 
-    def order(query)
+    def ordering(query)
       return unless @order_by
       order_string = @order_by
       order_string = "-#{order_string}" if @order == :descending
