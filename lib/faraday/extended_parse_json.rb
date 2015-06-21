@@ -32,8 +32,10 @@ module Faraday
     end
 
     def exception(env)
-      # decide to retry or not
-      (env[:retries].to_i.zero? ? Parse::ParseProtocolError : Parse::ParseProtocolRetry)
+      # NOTE: decide to retry or not, the header is deleted
+      #  so it won't be sent to the server
+      retries = env.request_headers.delete('X-ParseRubyClient-Retries')
+      (retries.to_i.zero? ? Parse::ParseProtocolError : Parse::ParseProtocolRetry)
     end
   end
 end
