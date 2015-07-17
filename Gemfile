@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'faraday'
-gem 'faraday_middleware'
+gem 'faraday', '0.9.1'
+gem 'faraday_middleware', '0.9.1'
 
 group :development do
   gem 'bundler'
-  gem 'jeweler',   '~> 1.8.5'
+  gem 'jeweler'
   gem 'pry'
 end
 

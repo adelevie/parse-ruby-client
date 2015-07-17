@@ -35,15 +35,19 @@ module Parse
         c.request :json
 
         c.use Faraday::GetMethodOverride
-
         c.use Faraday::BetterRetry,
               max: @max_retries,
               logger: @logger,
               interval: 0.5,
-              exceptions: ['Faraday::Error::TimeoutError', 'Faraday::Error::ParsingError', 'Parse::ParseProtocolRetry']
+              exceptions: [
+                'Faraday::Error::TimeoutError',
+                'Faraday::Error::ParsingError',
+                'Parse::ParseProtocolRetry'
+              ]
         c.use Faraday::ExtendedParseJson
 
         c.response :logger, @logger unless @quiet
+
         c.adapter Faraday.default_adapter
 
         yield(c) if block_given?

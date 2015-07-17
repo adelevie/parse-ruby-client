@@ -6,43 +6,48 @@ GEM
     coderay (1.1.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     docile (1.1.5)
-    faraday (0.8.9)
-      multipart-post (~> 1.2.0)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
     git (1.2.9.1)
-    github_api (0.10.1)
-      addressable
-      faraday (~> 0.8.1)
-      hashie (>= 1.2)
-      multi_json (~> 1.4)
-      nokogiri (~> 1.5.2)
+    github_api (0.12.3)
+      addressable (~> 2.3)
+      descendants_tracker (~> 0.0.4)
+      faraday (~> 0.8, < 0.10)
+      hashie (>= 3.3)
+      multi_json (>= 1.7.5, < 2.0)
+      nokogiri (~> 1.6.3)
       oauth2
-    hashie (3.4.1)
+    hashie (3.4.2)
     highline (1.7.2)
-    jeweler (1.8.8)
+    jeweler (2.0.1)
       builder
-      bundler (~> 1.0)
+      bundler (>= 1.0)
       git (>= 1.2.5)
-      github_api (= 0.10.1)
+      github_api
       highline (>= 1.6.15)
-      nokogiri (= 1.5.10)
+      nokogiri (>= 1.5.10)
       rake
       rdoc
-    json (1.8.2)
+    json (1.8.3)
     jwt (1.5.0)
     metaclass (0.0.4)
     method_source (0.8.2)
-    minitest (5.6.1)
+    mini_portile (0.6.2)
+    minitest (5.7.0)
     minitest-focus (1.1.1)
       minitest (>= 4, < 6)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
-    multi_json (1.11.0)
+    multi_json (1.11.1)
     multi_xml (0.5.5)
-    multipart-post (1.2.0)
-    nokogiri (1.5.10)
+    multipart-post (2.0.0)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -53,7 +58,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    rack (1.6.1)
+    rack (1.6.4)
     rake (10.4.2)
     rdoc (4.2.0)
     safe_yaml (1.0.4)
@@ -63,9 +68,10 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
+    thread_safe (0.3.5)
     vcr (2.9.3)
-    webmock (1.9.3)
-      addressable (>= 2.2.7)
+    webmock (1.21.0)
+      addressable (>= 2.3.6)
       crack (>= 0.3.2)
 
 PLATFORMS
@@ -73,9 +79,9 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
-  faraday
-  faraday_middleware
-  jeweler (~> 1.8.5)
+  faraday (= 0.9.1)
+  faraday_middleware (= 0.9.1)
+  jeweler
   minitest
   minitest-focus
   mocha
