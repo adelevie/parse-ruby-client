@@ -5,7 +5,6 @@ require 'parse/error'
 module Parse
   class Push
     attr_accessor :channels
-    attr_accessor :channel
     attr_accessor :where
     attr_accessor :type
     attr_accessor :expiration_time_interval
@@ -17,32 +16,35 @@ module Parse
     def initialize(data, channel = '', client = nil)
       @data = data
 
+      # NOTE: if no channel is specified, by setting "where" to an empty clause
+      #   a push is sent to all clients.
       if !channel || channel.empty?
-        # If no channel is specified, by setting "where" to an empty clause, a push is sent to all clients.
         @where = {}
       else
-        @channel = channel
+        @channels = [channel]
       end
 
       @client = client || Parse.client
     end
 
     def save
-      uri   = Protocol.push_uri
-
-      body = { data: @data, channel: @channel }
-
-      if @channels
-        body.merge!(channels: @channels)
-        body.delete :channel
-      end
+      body = { data: @data }
 
       if @type
-        device_type = { deviceType: @type }
         if @where
-          @where.merge!(device_type)
+          @where.merge!(deviceType: @type)
         else
-          @where = ({ where: device_type })
+          body.merge!(deviceType: @type)
+        end
+      end
+
+      # NOTE: Parse does not support channels and where at the same time
+      # so we make channels part of the query conditions
+      if @channels
+        if @where
+          @where.merge!(channels: @channels)
+        else
+          body.merge!(channels: @channels)
         end
       end
 
@@ -52,7 +54,7 @@ module Parse
       body.merge!(expiration_time: @expiration_time) if @expiration_time
       body.merge!(push_time: @push_time) if @push_time
 
-      @client.request uri, :post, body.to_json, nil
+      @client.request Protocol.push_uri, :post, body.to_json
     end
   end
 end
