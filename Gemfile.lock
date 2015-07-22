@@ -11,7 +11,7 @@ GEM
     docile (1.1.5)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.1)
+    faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
     git (1.2.9.1)
     github_api (0.12.3)
@@ -34,7 +34,7 @@ GEM
       rake
       rdoc
     json (1.8.3)
-    jwt (1.5.0)
+    jwt (1.5.1)
     metaclass (0.0.4)
     method_source (0.8.2)
     mini_portile (0.6.2)
@@ -43,7 +43,7 @@ GEM
       minitest (>= 4, < 6)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
-    multi_json (1.11.1)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nokogiri (1.6.6.2)
@@ -80,7 +80,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   faraday (= 0.9.1)
-  faraday_middleware (= 0.9.1)
+  faraday_middleware (~> 0.10.0)
   jeweler
   minitest
   minitest-focus
