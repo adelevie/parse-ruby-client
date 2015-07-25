@@ -6,6 +6,9 @@ module Parse
   class ParseError < StandardError
   end
 
+  class ConnectionError < ParseError
+  end
+
   # An exception class raised when the REST API returns an error.
   # The error code and message will be parsed out of the HTTP response,
   # which is also included in the response attribute.

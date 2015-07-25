@@ -115,6 +115,18 @@ class TestClientCreate < ParseTestCase
     end
   end
 
+  def test_wraps_connection_errors
+    VCR.use_cassette('test_client_wraps_connection_errors') do
+      stubs, client = stubbed_client do |stub|
+        stub.get('/') { raise Faraday::Error::ConnectionFailed, :fake_wrapped_exception }
+      end
+
+      assert_raises(Parse::ConnectionError) do
+        client.request('/')
+      end
+    end
+  end
+
   def test_not_retries_404
     VCR.use_cassette('test_client_retries_404') do
       _stubs, client = stubbed_client do |stub|
