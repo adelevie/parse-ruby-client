@@ -74,10 +74,10 @@ module Parse
 
       @session.send(method, uri, query || body || {}, headers).body
 
-    # Don't leak our internal libraries to our clients.
+    # NOTE: Don't leak our internal libraries to our clients.
     # Extend this list of exceptions as needed.
-    rescue Faraday::Error::ConnectionFailed, Faraday::Error::TimeoutError
-      raise Parse::ConnectionError
+    rescue Faraday::Error::ConnectionFailed, Faraday::Error::TimeoutError => e
+      raise Parse::ConnectionError, e.message
     end
 
     def get(uri)
