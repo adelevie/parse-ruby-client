@@ -129,12 +129,11 @@ module Parse
       else
         uri = Protocol.class_uri @class_name
       end
-<<<<<<< HEAD
 
       query = { 'where' => where_as_json.to_json }
       ordering(query)
 
-      [:count, :limit, :skip, :include].each { |a| merge_attribute(a, query) }
+      [:count, :limit, :skip, :include, :keys].each { |a| merge_attribute(a, query) }
       @client.logger.info { "Parse query for #{uri} #{query.inspect}" } unless @client.quiet
       response = @client.request uri, :get, nil, query
 
@@ -144,16 +143,6 @@ module Parse
           Parse.copy_client(@client, result)
         end
 
-=======
-      query = { "where" => where_as_json.to_json }
-      set_order(query)
-      [:count, :limit, :skip, :include, :keys].each {|a| merge_attribute(a, query)}
-      Parse.client.logger.info{"Parse query for #{uri} #{query.inspect}"} unless Parse.client.quiet
-      response = Parse.client.request uri, :get, nil, query
-
-      if response.is_a?(Hash) && response.has_key?(Protocol::KEY_RESULTS) && response[Protocol::KEY_RESULTS].is_a?(Array)
-        parsed_results = response[Protocol::KEY_RESULTS].map{|o| Parse.parse_json(class_name, o)}
->>>>>>> 1698619b22e00ea985136778f89945e20ad957f2
         if response.keys.size == 1
           parsed_results
         else

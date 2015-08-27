@@ -210,16 +210,16 @@ class TestQuery < ParseTestCase
 
   def test_keys
     VCR.use_cassette('test_keys', :record => :new_episodes) do
-      post = Parse::Object.new "Post"
+      post = Parse::Object.new('Post', nil, @client)
       post['title'] = 'foo'
       post['name'] = 'This is cool'
       post.save
 
-      q = Parse::Query.new "Post"
+      q = Parse::Query.new('Post', @client)
       q.eq('objectId', post.parse_object_id)
       q.keys = 'title'
 
-      assert_equal false, q.get.first.include?('name')
+      assert_equal(false, q.get.first.include?('name'))
     end
   end
 
