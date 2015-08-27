@@ -18,6 +18,9 @@ module Parse
     attr_accessor :max_retries
     attr_accessor :logger
     attr_accessor :quiet
+    attr_accessor :timeout
+    attr_accessor :interval
+    attr_accessor :backoff_factor
 
     def initialize(data = {}, &_blk)
       @host           = data[:host] || Protocol::HOST
@@ -28,8 +31,13 @@ module Parse
       @max_retries    = data[:max_retries] || 3
       @logger         = data[:logger] || Logger.new(STDERR).tap { |l| l.level = Logger::INFO }
       @quiet          = data[:quiet] || false
+      @timeout        = data[:timeout] || 30
 
-      options = { request: { timeout: 30, open_timeout: 30 } }
+      # Additional parameters for Faraday Request::Retry
+      @interval       = data[:interval] || 0.5
+      @backoff_factor = data[:backoff_factor] || 2
+
+      options = { request: { timeout: @timeout, open_timeout: @timeout } }
 
       @session = Faraday.new("https://#{host}", options) do |c|
         c.request :json
@@ -38,10 +46,13 @@ module Parse
         c.use Faraday::BetterRetry,
               max: @max_retries,
               logger: @logger,
-              interval: 0.5,
+              interval: @interval,
+              backoff_factor: @backoff_factor,
               exceptions: [
                 'Faraday::Error::TimeoutError',
                 'Faraday::Error::ParsingError',
+                'Faraday::Error::ConnectionFailed',
+                'Faraday::Error::SSLError',
                 'Parse::ParseProtocolRetry'
               ]
         c.use Faraday::ExtendedParseJson
