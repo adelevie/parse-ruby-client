@@ -34,7 +34,7 @@ require 'parse-ruby-client'
 
 Parse.init :application_id => "<your_app_id>", # required
            :api_key        => "<your_api_key>", # required
-           :quiet		   => true | false  # optional, defaults to false
+           :quiet      => true | false  # optional, defaults to false
 ```              
 
 [![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
@@ -700,13 +700,10 @@ end.get
 You can issue a query with multiple fields included by passing a comma-separated list of keys as the include parameter:
 
 ```ruby
-<<<<<<< HEAD
 comments = client.query("Comment").tap do |q|
   q.include("post,author")
-=======
 comments = Parse::Query.new("Comment").tap do |q|
   q.include = "post,author"
->>>>>>> 1698619b22e00ea985136778f89945e20ad957f2
 end.get
 ```
 
