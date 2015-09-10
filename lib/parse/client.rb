@@ -9,6 +9,13 @@ module Parse
   # A class which encapsulates the HTTPS communication with the Parse
   # API server.
   class Client
+    RETRIED_EXCEPTIONS = [
+      'Faraday::Error::TimeoutError',
+      'Faraday::Error::ParsingError',
+      'Faraday::Error::ConnectionFailed',
+      'Parse::ParseProtocolRetry'
+    ].freeze
+
     attr_accessor :host
     attr_accessor :application_id
     attr_accessor :api_key
@@ -21,6 +28,7 @@ module Parse
     attr_accessor :timeout
     attr_accessor :interval
     attr_accessor :backoff_factor
+    attr_accessor :retried_exceptions
 
     def initialize(data = {}, &_blk)
       @host           = data[:host] || Protocol::HOST
@@ -37,6 +45,9 @@ module Parse
       @interval       = data[:interval] || 0.5
       @backoff_factor = data[:backoff_factor] || 2
 
+      @retried_exceptions = RETRIED_EXCEPTIONS
+      @retried_exceptions += data[:retried_exceptions] if data[:retried_exceptions]
+
       options = { request: { timeout: @timeout, open_timeout: @timeout } }
 
       @session = Faraday.new("https://#{host}", options) do |c|
@@ -48,13 +59,7 @@ module Parse
               logger: @logger,
               interval: @interval,
               backoff_factor: @backoff_factor,
-              exceptions: [
-                'Faraday::Error::TimeoutError',
-                'Faraday::Error::ParsingError',
-                'Faraday::Error::ConnectionFailed',
-                'Faraday::Error::SSLError',
-                'Parse::ParseProtocolRetry'
-              ]
+              exceptions: @retried_exceptions
         c.use Faraday::ExtendedParseJson
 
         c.response :logger, @logger unless @quiet
