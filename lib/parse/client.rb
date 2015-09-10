@@ -9,6 +9,13 @@ module Parse
   # A class which encapsulates the HTTPS communication with the Parse
   # API server.
   class Client
+    RETRIED_EXCEPTIONS = [
+      'Faraday::Error::TimeoutError',
+      'Faraday::Error::ParsingError',
+      'Faraday::Error::ConnectionFailed',
+      'Parse::ParseProtocolRetry'
+    ]
+
     attr_accessor :host
     attr_accessor :application_id
     attr_accessor :api_key
@@ -18,6 +25,10 @@ module Parse
     attr_accessor :max_retries
     attr_accessor :logger
     attr_accessor :quiet
+    attr_accessor :timeout
+    attr_accessor :interval
+    attr_accessor :backoff_factor
+    attr_accessor :retried_exceptions
 
     def initialize(data = {}, &_blk)
       @host           = data[:host] || Protocol::HOST
@@ -28,8 +39,16 @@ module Parse
       @max_retries    = data[:max_retries] || 3
       @logger         = data[:logger] || Logger.new(STDERR).tap { |l| l.level = Logger::INFO }
       @quiet          = data[:quiet] || false
+      @timeout        = data[:timeout] || 30
 
-      options = { request: { timeout: 30, open_timeout: 30 } }
+      # Additional parameters for Faraday Request::Retry
+      @interval       = data[:interval] || 0.5
+      @backoff_factor = data[:backoff_factor] || 2
+
+      @retried_exceptions = RETRIED_EXCEPTIONS
+      @retried_exceptions += data[:retried_exceptions] if data[:retried_exceptions]
+
+      options = { request: { timeout: @timeout, open_timeout: @timeout } }
 
       @session = Faraday.new("https://#{host}", options) do |c|
         c.request :json
@@ -38,12 +57,9 @@ module Parse
         c.use Faraday::BetterRetry,
               max: @max_retries,
               logger: @logger,
-              interval: 0.5,
-              exceptions: [
-                'Faraday::Error::TimeoutError',
-                'Faraday::Error::ParsingError',
-                'Parse::ParseProtocolRetry'
-              ]
+              interval: @interval,
+              backoff_factor: @backoff_factor,
+              exceptions: @retried_exceptions
         c.use Faraday::ExtendedParseJson
 
         c.response :logger, @logger unless @quiet
