@@ -14,7 +14,7 @@ module Parse
       'Faraday::Error::ParsingError',
       'Faraday::Error::ConnectionFailed',
       'Parse::ParseProtocolRetry'
-    ].freeze
+    ]
 
     attr_accessor :host
     attr_accessor :application_id
