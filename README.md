@@ -32,7 +32,7 @@ parse-ruby-client lets you interact with Parse using Ruby. There are many uses. 
 ```ruby
 require 'parse-ruby-client'
 
-Parse.init :application_id => "<your_app_id>", # required
+Parse.create :application_id => "<your_app_id>", # required
            :api_key        => "<your_api_key>", # required
            :quiet      => true | false  # optional, defaults to false
 ```              
