@@ -1,0 +1,115 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.parse.com/1/classes/Post
+    body:
+      encoding: UTF-8
+      string: '{"title":"foo","name":"This is cool"}'
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 17 Oct 2014 07:11:41 GMT
+      Location:
+      - https://api.parse.com/1/classes/Post/VJMChhWzgt
+      Server:
+      - nginx/1.6.0
+      Set-Cookie:
+      - "<COOKIE-KEY>"
+      Status:
+      - 201 Created
+      X-Content-Type-Options:
+      - nosniff
+      X-Runtime:
+      - '0.024972'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '64'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"createdAt":"2014-10-17T07:11:41.210Z","objectId":"VJMChhWzgt"}'
+    http_version: 
+  recorded_at: Fri, 17 Oct 2014 07:11:41 GMT
+- request:
+    method: get
+    uri: https://api.parse.com/1/classes/Post?keys=title&where=%7B%22objectId%22:%22VJMChhWzgt%22%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Parse for Ruby, 0.0
+      Content-Type:
+      - application/json
+      X-Parse-Application-Id:
+      - "<X-Parse-Application-Id>"
+      X-Parse-Rest-Api-Key:
+      - "<X-Parse-REST-API-Key>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Methods:
+      - "*"
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 17 Oct 2014 07:12:41 GMT
+      Server:
+      - nginx/1.6.0
+      Set-Cookie:
+      - "<COOKIE-KEY>"
+      Status:
+      - 200 OK
+      X-Content-Type-Options:
+      - nosniff
+      X-Runtime:
+      - '0.026852'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Content-Length:
+      - '114'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"results":[{"title":"foo","createdAt":"2014-10-17T07:11:41.210Z","updatedAt":"2014-10-17T07:11:41.210Z","objectId":"VJMChhWzgt"}]}'
+    http_version: 
+  recorded_at: Fri, 17 Oct 2014 07:12:41 GMT
+recorded_with: VCR 2.4.0

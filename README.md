@@ -32,16 +32,16 @@ parse-ruby-client lets you interact with Parse using Ruby. There are many uses. 
 ```ruby
 require 'parse-ruby-client'
 
-client = Parse.create :application_id => '<your_app_id>',
-                      :api_key        => '<your_api_key>',
-                      :quiet          => true | false
-```
+Parse.create :application_id => "<your_app_id>", # required
+           :api_key        => "<your_api_key>", # required
+           :quiet      => true | false  # optional, defaults to false
+```              
 
-[![Gem Version](https://badge.fury.io/rb/parse-ruby-client.png)](http://badge.fury.io/rb/parse-ruby-client)
+[![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
 
-[![Build Status](https://travis-ci.org/adelevie/parse-ruby-client.png?branch=master)](https://travis-ci.org/adelevie/parse-ruby-client)
+[![Travis](https://img.shields.io/travis/adelevie/parse-ruby-client.svg)](https://travis-ci.org/adelevie/parse-ruby-client)
 
-[![Code Climate](https://codeclimate.com/github/adelevie/parse-ruby-client.png)](https://codeclimate.com/github/adelevie/parse-ruby-client)
+[![Code Climate](https://img.shields.io/codeclimate/github/adelevie/parse-ruby-client.svg)](https://codeclimate.com/github/adelevie/parse-ruby-client)
 
 **Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
@@ -586,6 +586,15 @@ scores = client.query("GameScore").tap do |q|
 end.get
 ```
 
+You can use `keys` to only get specified fields back. `objectId`, `createdAt`, and `updatedAt` are always returned, and other fields are supplied as a comma separated string.
+
+```ruby
+scores = Parse::Query.new("GameScore").tap do |q|
+  q.keys = "score,name"
+end.get
+```
+
+
 All of these parameters can be used in combination with each other.
 
 ### Queries on Array Values
@@ -693,6 +702,8 @@ You can issue a query with multiple fields included by passing a comma-separated
 ```ruby
 comments = client.query("Comment").tap do |q|
   q.include("post,author")
+comments = Parse::Query.new("Comment").tap do |q|
+  q.include = "post,author"
 end.get
 ```
 
