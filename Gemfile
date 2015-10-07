@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'faraday', '>= 0.9.1'
+gem 'faraday', '~> 0.9.2'
 gem 'faraday_middleware', '~> 0.10.0'
 
 group :development do

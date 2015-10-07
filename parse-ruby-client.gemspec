@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Alan deLevie", "Adam Alpern"]
-  s.date = "2015-10-06"
+  s.date = "2015-10-07"
   s.description = "A simple Ruby client for the parse.com REST API"
   s.email = "adelevie@gmail.com"
   s.extra_rdoc_files = [
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "example.rb",
     "features.md",
+    "fixtures/vcr_cassettes/test_keys.yml",
     "lib/faraday/better_retry.rb",
     "lib/faraday/extended_parse_json.rb",
     "lib/faraday/get_method_override.rb",
@@ -79,6 +80,7 @@ Gem::Specification.new do |s|
     "test/fixtures/vcr_cassettes/test_file_text_save.yml",
     "test/fixtures/vcr_cassettes/test_installation_get.yml",
     "test/fixtures/vcr_cassettes/test_installation_update.yml",
+    "test/fixtures/vcr_cassettes/test_keys.yml",
     "test/fixtures/vcr_cassettes/test_model_find.yml",
     "test/fixtures/vcr_cassettes/test_model_new.yml",
     "test/fixtures/vcr_cassettes/test_object_acls_arent_objects.yml",
@@ -145,20 +147,20 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<faraday>, [">= 0.9.1"])
+      s.add_runtime_dependency(%q<faraday>, ["~> 0.9.2"])
       s.add_runtime_dependency(%q<faraday_middleware>, ["~> 0.10.0"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<pry>, [">= 0"])
     else
-      s.add_dependency(%q<faraday>, [">= 0.9.1"])
+      s.add_dependency(%q<faraday>, ["~> 0.9.2"])
       s.add_dependency(%q<faraday_middleware>, ["~> 0.10.0"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<pry>, [">= 0"])
     end
   else
-    s.add_dependency(%q<faraday>, [">= 0.9.1"])
+    s.add_dependency(%q<faraday>, ["~> 0.9.2"])
     s.add_dependency(%q<faraday_middleware>, ["~> 0.10.0"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
