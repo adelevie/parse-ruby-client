@@ -5,8 +5,8 @@ The version on RubyGems (0.3.0) has its [corresponding tag](https://github.com/a
 
 Alternatively, you can set up your `Gemfile` as such:
 
-ruby
-```
+
+```ruby
 gem 'parse-ruby-client', git: 'https://github.com/adelevie/parse-ruby-client.git'
 ```
 
@@ -33,8 +33,8 @@ parse-ruby-client lets you interact with Parse using Ruby. There are many uses. 
 require 'parse-ruby-client'
 
 Parse.create :application_id => "<your_app_id>", # required
-           :api_key        => "<your_api_key>", # required
-           :quiet      => true | false  # optional, defaults to false
+             :api_key        => "<your_api_key>", # required
+             :quiet          => true | false  # optional, defaults to false
 ```              
 
 [![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
