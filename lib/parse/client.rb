@@ -178,9 +178,9 @@ module Parse
     end
 
     # A convenience method for using global.json
-    def init_from_cloud_code(path = '../config/global.json')
+    def init_from_cloud_code(path = '../config/global.json', application_name = nil)
       global = JSON.parse(::File.open(path).read)
-      application_name  = global['applications']['_default']['link']
+      application_name  = global['applications']['_default']['link'] if application_name.nil?
       application_id    = global['applications'][application_name]['applicationId']
       master_key        = global['applications'][application_name]['masterKey']
       create(application_id: application_id, master_key: master_key)
