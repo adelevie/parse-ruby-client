@@ -4,7 +4,7 @@ rvm:
   - 2.1
   - 2.0
   - 1.9.3
-  - jruby
+  - jruby-9000
   - jruby-19mode
 env:
  - PARSE_APPLICATION_ID=Slw1ACyMSVguo79pWvfIq15pkUjfwTLNPpL4984b PARSE_REST_API_KEY=qJKM8CGOAn70WOyR16f16YbyKWM0nBJCEbbtAMOm
