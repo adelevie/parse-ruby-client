@@ -35,11 +35,13 @@ require 'parse-ruby-client'
 Parse.create :application_id => "<your_app_id>", # required
              :api_key        => "<your_api_key>", # required
              :quiet          => true | false  # optional, defaults to false
-```              
+```
 
 [![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
 
 [![Travis](https://img.shields.io/travis/adelevie/parse-ruby-client.svg)](https://travis-ci.org/adelevie/parse-ruby-client)
+
+[![Coverage Status](https://coveralls.io/repos/adelevie/parse-ruby-client/badge.svg?branch=master&service=github)](https://coveralls.io/github/adelevie/parse-ruby-client?branch=master)
 
 [![Code Climate](https://img.shields.io/codeclimate/github/adelevie/parse-ruby-client.svg)](https://codeclimate.com/github/adelevie/parse-ruby-client)
 

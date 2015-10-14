@@ -1,4 +1,7 @@
 # -*- encoding : utf-8 -*-
+require 'coveralls'
+Coveralls.wear!
+
 require 'rubygems'
 require 'bundler'
 begin
@@ -12,7 +15,7 @@ end
 require 'simplecov'
 SimpleCov.start do
   add_filter '/test/'
-end if ENV['COVERAGE']
+end
 
 # minitest
 require 'minitest/autorun'
