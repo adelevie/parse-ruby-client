@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
-require 'coveralls'
-Coveralls.wear!
+unless RUBY_PLATFORM == 'java'
+  require 'coveralls'
+  Coveralls.wear!
+end
 
 require 'rubygems'
 require 'bundler'

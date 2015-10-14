@@ -10,7 +10,7 @@ group :development do
 end
 
 group :test do
-  gem 'coveralls', :require => false
+  gem 'coveralls', :require => false, :platforms => :mri
   gem 'minitest'
   gem 'minitest-focus'
   gem 'mocha', :require => false
