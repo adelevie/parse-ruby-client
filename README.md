@@ -711,7 +711,7 @@ end.get
 
 ### Counting Objects
 
-If you are limiting your query, or if there is a very large number of results, and you want to know how many total results there are without returning them all, you can use the `count` parameter. For example, if you only care about the number of games played by a particular player:
+If you are limiting your query, or if there are a very large number of results, and you want to know how many total results there are without returning them all, you can use the `count` parameter. For example, if you only care about the number of games played by a particular player:
 
 ```ruby
 count = client.query("GameScore").tap do |q|
