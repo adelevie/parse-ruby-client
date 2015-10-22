@@ -739,7 +739,7 @@ end.get
 
 ## Users
 
-Many apps have an unified login that works across the mobile app and other systems. Accessing user accounts through parse-ruby-client lets you build this functionality on top of Parse.
+Many apps have a unified login that works across the mobile app and other systems. Accessing user accounts through parse-ruby-client lets you build this functionality on top of Parse.
 
 In general, users have the same features as other objects, such as the flexible schema. The differences are that user objects must have a username and password, the password is automatically encrypted and stored securely, and Parse enforces the uniqueness of the `username` and `email` fields.
 
@@ -1197,7 +1197,7 @@ end.save
 
 TODO: Implement this!
 
-Now that you have a bunch of objects with spatial coordinates, it would be nice to find out which objects are closest to a point. This can be done by using a GeoPoint data type with query on the field using $nearSphere. Getting a list of ten places that are closest to an user may look something like:
+Now that you have a bunch of objects with spatial coordinates, it would be nice to find out which objects are closest to a point. This can be done by using a GeoPoint data type with query on the field using $nearSphere. Getting a list of ten places that are closest to a user may look something like:
 
 ```ruby
 # should look something like this:
