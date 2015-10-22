@@ -313,7 +313,7 @@ end
 batch.run!
 ```
 
-The response from batch will be an `Array` with the same number of elements as the input list. Each item in the `Array` with be a `Hash` with either the `"success"` or `"error"` field set. The value of success will be the normal response to the equivalent REST command:
+The response from batch will be an `Array` with the same number of elements as the input list. Each item in the `Array` will be a `Hash` with either the `"success"` or `"error"` field set. The value of success will be the normal response to the equivalent REST command:
 
 ```ruby
 {
@@ -725,7 +725,7 @@ With a nonzero limit, that request would return results as well as the count.
 
 ### Compound Queries
 
-If you want to find objects that match one of several queries, you can use `Parse::Quer#or` method, with an `Array` as its value. For instance, if you want to find players with either have a lot of wins or a few wins, you can do:
+If you want to find objects that match one of several queries, you can use `Parse::Query#or` method, with an `Array` as its value. For instance, if you want to find players with either have a lot of wins or a few wins, you can do:
 
 ```ruby
 
@@ -1029,7 +1029,7 @@ user.unlink_from_facebook!
 
 TODO: Implement this!
 
-When you access Parse via the REST API key, access can be restricted by ACL just like in the iOS and Android SDKs. You can still read and modify acls via the REST API, just be accessing the "ACL" key of an object.
+When you access Parse via the REST API key, access can be restricted by ACL just like in the iOS and Android SDKs. You can still read and modify acls via the REST API, just by accessing the "ACL" key of an object.
 
 The ACL is formatted as a JSON object where the keys are either object ids or the special key "*" to indicate public access permissions. The values of the ACL are "permission objects", JSON objects whose keys are the permission name and the value is always true.
 
@@ -1112,7 +1112,7 @@ TODO: Implement this!
 
 ## Push Notifications
 
-Parse allows you send Push Notifications to iOS and Android devices.
+Parse allows you to send push notifications to iOS and Android devices.
 
 Notifications by default are set for iOS and Android. You can set certain notifications to only be sent to iOS or Android by setting the `type` to `ios` or `android`.
 
@@ -1129,7 +1129,7 @@ push.type = "ios"
 push.save
 ```
 
-Without a specific channels, by default it sends to all installations.
+Without a specific channel, by default it sends to all installations.
 
 ### Using Advanced Targeting
 
@@ -1178,7 +1178,7 @@ installation.save
 
 ## GeoPoints
 
-Parse allows you to associate real-world latitude and longitude coordinates with an object. Adding a GeoPoint data type to a class allows queries to take into account the proximity of an object to a reference point. This allows you to easily do things like find out what user is closest to another user or which places are closest to a user.
+Parse allows you to associate real-world latitude and longitude coordinates with an object. Adding a GeoPoint data type to a class allows queries to take into account the proximity of an object to a reference point. This allows you to easily do things like find out which user is closest to another user or which places are closest to a user.
 
 ### GeoPoint
 
@@ -1209,7 +1209,7 @@ places = client.query("PlaceObject").tap do |q|
 end.get
 ```
 
-See https://parse.com/docs/rest#geo-query for the rest of the geo query types to implement.
+See https://parse.com/docs/rest#geo-query for the rest of the geo query types to be implemented.
 
 ### Caveats
 
