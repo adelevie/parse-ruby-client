@@ -34,7 +34,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'parse-ruby-client'
 
-unless RUBY_VERSION[0..2] == '2.2'
+if RUBY_VERSION[0..2] < '2.2'
   YAML::ENGINE.yamler = 'syck' # get ascii strings as strings in fixtures
 end
 

@@ -1,4 +1,7 @@
 language: ruby
+cache: bundler
+sudo: false
+
 rvm:
   - 2.3.0
   - 2.2.4
@@ -7,6 +10,6 @@ rvm:
   - 1.9.3
   - jruby-9.0.4.0
   - jruby-1.7
+
 env:
  - PARSE_APPLICATION_ID=Slw1ACyMSVguo79pWvfIq15pkUjfwTLNPpL4984b PARSE_REST_API_KEY=qJKM8CGOAn70WOyR16f16YbyKWM0nBJCEbbtAMOm
-sudo: false
