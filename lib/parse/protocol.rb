@@ -6,7 +6,7 @@ module Parse
     # ----------------------------------------
 
     # The default hostname for communication with the Parse API.
-    HOST            = 'api.parse.com'
+    HOST            = 'https://api.parse.com'
 
     # The version of the REST API implemented by this module.
     VERSION         = 1
