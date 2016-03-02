@@ -36,6 +36,19 @@ Parse.create :application_id => "<your_app_id>", # required
              :api_key        => "<your_api_key>", # required
              :quiet          => true | false  # optional, defaults to false
 ```
+You can also specify your host if you are hosting your own parse-server:
+
+```ruby
+require 'parse-ruby-client'
+
+Parse.create :application_id => "<your_app_id>", # required
+             :api_key        => "<your_api_key>", # required
+             :quiet          => true | false  # optional, defaults to false
+             :host           => "http://custom-parse-server-without-backslash"
+
+```
+Please specify the url you mounted the api server without backslash as the ``host`` when
+instantiating the ``client``
 
 [![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
 
