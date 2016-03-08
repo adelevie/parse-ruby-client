@@ -20,6 +20,7 @@ require 'cgi'
 cwd = Pathname(__FILE__).dirname
 $LOAD_PATH.unshift(cwd.to_s) unless $LOAD_PATH.include?(cwd.to_s) || $LOAD_PATH.include?(cwd.expand_path.to_s)
 
+require 'parse/version'
 require 'parse/object'
 require 'parse/query'
 require 'parse/datatypes'
