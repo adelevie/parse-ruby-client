@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 unless RUBY_PLATFORM == 'java'
   require 'coveralls'
   Coveralls.wear!
@@ -32,7 +32,8 @@ require 'vcr'
 
 begin
   require 'byebug'
-rescue LoadError
+rescue LoadError => e
+  $stderr.puts e.message
 end
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
@@ -53,7 +54,7 @@ VCR.configure do |c|
 
   def filter_sensitive_header(c, header)
     c.filter_sensitive_data("<#{header}>") do |interaction|
-      v = interaction.request.headers.detect { |k, _| k.casecmp(header) == 0 }
+      v = interaction.request.headers.find { |k, _| k.casecmp(header) == 0 }
       v.last.first if v
     end
   end
@@ -68,7 +69,6 @@ class ParseTestCase < Minitest::Test
   def setup
     logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
     @client = Parse.create(logger: logger)
-    # @client = Parse.create(logger: logger, host: 'http://localhost:1337')
   end
 end
 
@@ -80,7 +80,7 @@ module Faraday
                         URI(value)
                       when /./
                         URI('http://127.0.0.1:4567')
-      end
+                      end
     end
 
     def live_server?
@@ -102,7 +102,8 @@ module Faraday
     end unless defined? ::MiniTest
 
     def capture_warnings
-      old, $stderr = $stderr, StringIO.new
+      old = $stderr
+      $stderr = StringIO.new
       begin
         yield
         $stderr.string

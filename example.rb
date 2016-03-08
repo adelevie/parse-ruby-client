@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 client = Parse.create(
   application_id: 'your_application_id',
   api_key: 'your_REST_API_Key')

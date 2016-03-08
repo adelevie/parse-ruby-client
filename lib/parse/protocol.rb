@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 module Parse
   # A module which encapsulates the specifics of Parse's REST API.
   module Protocol
@@ -22,7 +22,7 @@ module Parse
 
     # The HTTP header used for passing your API Master key to the
     # Parse API.
-    HEADER_MASTER_KEY  = 'X-Parse-Master-Key'
+    HEADER_MASTER_KEY = 'X-Parse-Master-Key'
 
     # The HTTP header used for passing your authenticated session
     HEADER_SESSION_TOKEN = 'X-Parse-Session-Token'
@@ -115,7 +115,7 @@ module Parse
 
     CLASS_INSTALLATION = '_Installation'
 
-    USER_LOGIN_URI  = '/login'
+    USER_LOGIN_URI = '/login'
     PASSWORD_RESET_URI = '/requestPasswordReset'
 
     CLOUD_FUNCTIONS_PATH = 'functions'
@@ -150,7 +150,7 @@ module Parse
       if object_id
         "/installations/#{object_id}"
       else
-        "/installations"
+        '/installations'
       end
     end
 
@@ -160,7 +160,7 @@ module Parse
       if user_id
         "/users/#{user_id}"
       else
-        "/users"
+        '/users'
       end
     end
 
@@ -171,7 +171,7 @@ module Parse
 
     # Construct a uri to send a push notification via the API.
     def self.push_uri
-      "/push"
+      '/push'
     end
 
     def self.cloud_function_uri(function_name)

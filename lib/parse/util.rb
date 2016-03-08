@@ -1,5 +1,6 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 
+# This module contains all the code
 module Parse
   # Parse a JSON representation into a fully instantiated
   # class. obj can be either a primitive or a Hash of primitives as parsed
@@ -12,7 +13,7 @@ module Parse
 
     # Array
     elsif obj.is_a? Array
-      obj.collect { |o| parse_json(class_name, o) }
+      obj.map { |o| parse_json(class_name, o) }
 
     # Hash
     elsif obj.is_a? Hash
@@ -57,7 +58,7 @@ module Parse
   def self.pointerize_value(obj)
     if obj.is_a?(Parse::Object)
       p = obj.pointer
-      fail ArgumentError, "new object used in context requiring pointer #{obj}" unless p
+      raise ArgumentError, "new object used in context requiring pointer #{obj}" unless p
       p
     elsif obj.is_a?(Array)
       obj.map do |v|
@@ -102,7 +103,7 @@ module Parse
     end
 
     if parsed_data.is_a?(Array)
-      parsed_data.collect(&:do_copy)
+      parsed_data.map(&:do_copy)
     else
       parsed_data = do_copy.call(parsed_data)
     end

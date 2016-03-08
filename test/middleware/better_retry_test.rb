@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 require 'stringio'
 
@@ -32,7 +33,7 @@ module Middleware
     end
 
     def test_logging_retries
-      @explode = ->(_n) { fail Parse::ParseProtocolRetry, 'boom!' }
+      @explode = ->(_n) { raise Parse::ParseProtocolRetry, 'boom!' }
       assert_raises(Parse::ParseProtocolRetry) { conn.post('/unstable') }
       refute_empty @logger_buffer.string
     end
@@ -44,13 +45,13 @@ module Middleware
     end
 
     def test_unhandled_exception
-      @explode = ->(_n) { fail 'boom!' }
+      @explode = ->(_n) { raise 'boom!' }
       assert_raises(RuntimeError) { conn.post('/unstable') }
       assert_equal 1, @times_called
     end
 
     def test_default_exception
-      @explode = ->(_n) { fail Errno::ETIMEDOUT }
+      @explode = ->(_n) { raise Errno::ETIMEDOUT }
       assert_raises(Errno::ETIMEDOUT) { conn.post('/unstable') }
       assert_equal 3, @times_called
     end

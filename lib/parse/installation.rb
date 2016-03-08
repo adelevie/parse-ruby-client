@@ -1,9 +1,12 @@
+# encoding: utf-8
 require 'parse/protocol'
 require 'parse/client'
 require 'parse/error'
 require 'parse/object'
 
 module Parse
+  # Installation object
+  # https://parse.com/docs/rest/guide/#push-notifications-installations
   class Installation < Parse::Object
     attr_accessor :client
 

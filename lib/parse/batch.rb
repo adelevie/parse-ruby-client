@@ -1,5 +1,7 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 module Parse
+  # Issue batch operations
+  # https://parse.com/docs/rest/guide/#objects-batch-operations
   class Batch
     attr_reader :requests
     attr_accessor :client

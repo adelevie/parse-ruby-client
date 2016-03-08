@@ -1,4 +1,7 @@
+# encoding: utf-8
 module Parse
+  # Query objects
+  # https://parse.com/docs/rest/guide/#queries
   class Query
     attr_accessor :where
     attr_accessor :class_name
@@ -20,7 +23,7 @@ module Parse
     end
 
     def add_constraint(field, constraint)
-      fail ArgumentError, 'cannot add constraint to an $or query' if @ors.size > 0
+      raise ArgumentError, 'cannot add constraint to an $or query' unless @ors.empty?
       current = where[field]
       if current && current.is_a?(Hash) && constraint.is_a?(Hash)
         current.merge! constraint
@@ -30,7 +33,7 @@ module Parse
     end
 
     def or(query)
-      fail ArgumentError, "you must pass an entire #{self.class} to \#or" unless query.is_a?(self.class)
+      raise ArgumentError, "you must pass an entire #{self.class} to \#or" unless query.is_a?(self.class)
       @ors << query
       self
     end
@@ -109,10 +112,10 @@ module Parse
     end
 
     def where_as_json
-      if @ors.size > 0
-        { '$or' => [where] + @ors.map(&:where_as_json) }
-      else
+      if @ors.empty?
         @where
+      else
+        { '$or' => [where] + @ors.map(&:where_as_json) }
       end
     end
 
@@ -122,13 +125,13 @@ module Parse
     end
 
     def get
-      if @class_name == Parse::Protocol::CLASS_USER
-        uri = Protocol.user_uri
-      elsif @class_name == Parse::Protocol::CLASS_INSTALLATION
-        uri = Protocol.installation_uri
-      else
-        uri = Protocol.class_uri @class_name
-      end
+      uri = if @class_name == Parse::Protocol::CLASS_USER
+              Protocol.user_uri
+            elsif @class_name == Parse::Protocol::CLASS_INSTALLATION
+              Protocol.installation_uri
+            else
+              Protocol.class_uri @class_name
+            end
 
       query = { 'where' => where_as_json.to_json }
       ordering(query)
@@ -149,7 +152,7 @@ module Parse
           response.dup.merge(Protocol::KEY_RESULTS => parsed_results)
         end
       else
-        fail ParseError, "query response not a Hash with #{Protocol::KEY_RESULTS} key: #{response.class} #{response.inspect}"
+        raise ParseError, "query response not a Hash with #{Protocol::KEY_RESULTS} key: #{response.class} #{response.inspect}"
       end
     end
 

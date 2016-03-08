@@ -1,5 +1,6 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 module Faraday
+  # A middleware to display error messages in the JSON response
   class ExtendedParseJson < FaradayMiddleware::ParseJson
     def process_response(env)
       env[:raw_body] = env[:body] if preserve_raw?(env)
@@ -16,17 +17,19 @@ module Faraday
           Parse::Protocol::ERROR_TIMEOUT,
           Parse::Protocol::ERROR_EXCEEDED_BURST_LIMIT
         ]
-        error_hash = { 'error' => "HTTP Status #{env[:status]} Body #{env[:body]}", 'http_status_code' => env[:status] }.merge(data)
+        error_hash = {
+          'error' => "HTTP Status #{env[:status]} Body #{env[:body]}",
+          'http_status_code' => env[:status]
+        }.merge(data)
         if data['code'] && array_codes.include?(data['code'])
           sleep 60 if data['code'] == Parse::Protocol::ERROR_EXCEEDED_BURST_LIMIT
-          fail exception(env), error_hash.merge(data)
+          raise exception(env), error_hash.merge(data)
         elsif env[:status] >= 500
-          fail exception(env), error_hash.merge(data)
+          raise exception(env), error_hash.merge(data)
         end
-        fail Parse::ParseProtocolError, error_hash
+        raise Parse::ParseProtocolError, error_hash
       else
         data = parse(env[:body]) || {}
-
         env[:body] = data
       end
     end

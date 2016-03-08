@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestUser < ParseTestCase
@@ -40,7 +41,7 @@ class TestUser < ParseTestCase
       user = Parse::User.new(data, @client)
       assert user.save
 
-      reset_password = Parse::User.reset_password(u,  @client)
+      reset_password = Parse::User.reset_password(u, @client)
 
       assert_equal({}, reset_password)
     end

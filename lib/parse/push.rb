@@ -1,8 +1,10 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'cgi'
 require 'parse/error'
 
 module Parse
+  # Push notification
+  # https://parse.com/docs/rest/guide/#push-notifications
   class Push
     attr_accessor :channels
     attr_accessor :where

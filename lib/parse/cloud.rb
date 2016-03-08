@@ -1,6 +1,8 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 module Parse
   module Cloud
+    # Call cloud functions
+    # https://parse.com/docs/rest/guide/#cloud-code-cloud-functions
     class Function
       attr_accessor :function_name
       attr_accessor :client

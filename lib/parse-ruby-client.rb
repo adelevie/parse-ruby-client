@@ -1,9 +1,9 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 ## ----------------------------------------------------------------------
 ##
 ## Ruby client for parse.com
 ## A quick library for playing with parse.com's REST API for object storage.
-## See https://parse.com/docs/rest for full documentation on the API.
+## See https://parse.com/docs/rest/guide/ for full documentation on the API.
 ##
 ## ----------------------------------------------------------------------
 require 'rubygems'

@@ -1,16 +1,15 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'time'
 require 'date'
 require 'base64'
 
 module Parse
-  # Pointer
-  # ------------------------------------------------------------
-
+  # A pointer to a Parse object
+  # https://parse.com/docs/rest/guide/#objects-data-types
   class Pointer
     attr_accessor :parse_object_id
     attr_accessor :class_name
-    alias_method :id, :parse_object_id
+    alias id parse_object_id
 
     def self.make(class_name, object_id)
       Pointer.new(
@@ -24,7 +23,8 @@ module Parse
       @parse_object_id  = data[Protocol::KEY_OBJECT_ID]
     end
 
-    # make it easier to deal with the ambiguity of whether you're passed a pointer or object
+    # make it easier to deal with the ambiguity of whether
+    # you're passed a pointer or object
     def pointer
       self
     end
@@ -32,8 +32,7 @@ module Parse
     def eql?(other)
       Parse.object_pointer_equality?(self, other)
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       Parse.object_pointer_hash(self)
@@ -50,7 +49,7 @@ module Parse
         Protocol::KEY_OBJECT_ID   => @parse_object_id
       }
     end
-    alias_method :as_json, :to_h
+    alias as_json to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -66,9 +65,8 @@ module Parse
     end
   end
 
-  # Date
-  # ------------------------------------------------------------
-
+  # A Parse Date
+  # https://parse.com/docs/rest/guide/#objects-data-types
   class Date
     attr_accessor :value
 
@@ -80,7 +78,7 @@ module Parse
       elsif data.is_a? String
         @value = DateTime.parse data
       else
-        fail "data doesn't act like time #{data.inspect}"
+        raise "data doesn't act like time #{data.inspect}"
       end
     end
 
@@ -88,8 +86,7 @@ module Parse
       self.class.equal?(other.class) &&
         value == other.value
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       value.hash
@@ -117,7 +114,7 @@ module Parse
         'iso'              => value.to_time.utc.iso8601(3)
       }
     end
-    alias_method :as_json, :to_h
+    alias as_json to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -125,8 +122,6 @@ module Parse
   end
 
   # Bytes
-  # ------------------------------------------------------------
-
   class Bytes
     attr_accessor :value
 
@@ -139,8 +134,7 @@ module Parse
       self.class.equal?(other.class) &&
         value == other.value
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       value.hash
@@ -168,18 +162,16 @@ module Parse
         'base64' => Base64.encode64(@value)
       }
     end
-    alias_method :as_json, :to_h
+    alias as_json to_h
 
     def to_json(*a)
       to_h.to_json(*a)
     end
   end
 
-  # Increment and Decrement
-  # ------------------------------------------------------------
-
+  # Increment (or decrement) counter
+  # https://parse.com/docs/rest/guide/#objects-counters
   class Increment
-    # '{"score": {"__op": "Increment", "amount": 1 } }'
     attr_accessor :amount
 
     def initialize(amount)
@@ -190,8 +182,7 @@ module Parse
       self.class.equal?(other.class) &&
         amount == other.amount
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       amount.hash
@@ -203,15 +194,16 @@ module Parse
         Protocol::KEY_AMOUNT => @amount
       }
     end
-    alias_method :as_json, :to_h
+    alias as_json to_h
 
     def to_json(*a)
       to_h.to_json(*a)
     end
   end
 
+  # Array operation
+  # https://parse.com/docs/rest/guide/#objects-arrays
   class ArrayOp
-    # '{"myArray": {"__op": "Add", "objects": ["something", "something else"] } }'
     attr_accessor :operation
     attr_accessor :objects
 
@@ -225,8 +217,7 @@ module Parse
         operation == other.operation &&
         objects == other.objects
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       operation.hash ^ objects.hash
@@ -238,7 +229,7 @@ module Parse
         Protocol::KEY_OBJECTS => @objects
       }
     end
-    alias_method :as_json, :to_h
+    alias as_json to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -246,20 +237,13 @@ module Parse
   end
 
   # GeoPoint
-  # ------------------------------------------------------------
-
+  # https://parse.com/docs/rest/guide/#geopoints
   class GeoPoint
-    # '{"location": {"__type":"GeoPoint", "latitude":40.0, "longitude":-30.0}}'
     attr_accessor :longitude, :latitude
 
     def initialize(data)
-      @longitude = data['longitude']
-      @latitude  = data['latitude']
-
-      if !@longitude && !@latitude
-        @longitude = data[:longitude]
-        @latitude  = data[:latitude]
-      end
+      @longitude = data['longitude'] || data[:longitude]
+      @latitude  = data['latitude'] || data[:latitude]
     end
 
     def eql?(other)
@@ -267,8 +251,7 @@ module Parse
         longitude == other.longitude &&
         latitude == other.latitude
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       longitude.hash ^ latitude.hash
@@ -281,7 +264,7 @@ module Parse
         'longitude' => @longitude
       }
     end
-    alias_method :as_json, :to_h
+    alias as_json to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -293,20 +276,19 @@ module Parse
   end
 
   # File
-  # ------------------------------------------------------------
-  # tf = Parse::File.new(:body => "Hello World!", :local_filename => "hello.txt")
-  # tf.save
+  # https://parse.com/docs/rest/guide/#files
   class File
-    # '{"avatar": {"__type":"File", "name":"profile.png", "url"=>"http://files.parse.com/blah/profile.png"}}'
-    attr_accessor :local_filename # eg "hello.txt"
-    attr_accessor :parse_filename # eg "12-4-532d-d-g3-3-hello.text"
+    attr_accessor :local_filename
+    attr_accessor :parse_filename
     attr_accessor :content_type
     attr_accessor :body
     attr_accessor :url
     attr_accessor :client
 
     def initialize(data, client = nil)
-      data = Hash[data.map { |k, v| [k.to_s, v] }] # convert hash keys to strings
+      # convert hash keys to strings
+      data = Hash[data.map { |k, v| [k.to_s, v] }]
+
       @local_filename = data['local_filename'] if data['local_filename']
       @parse_filename = data['name']           if data['name']
       @parse_filename = data['parse_filename'] if data['parse_filename']
@@ -320,8 +302,7 @@ module Parse
       self.class.equal?(other.class) &&
         url == other.url
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       url.hash
@@ -342,7 +323,7 @@ module Parse
         'url' => @url
       }
     end
-    alias_method :as_json, :to_h
+    alias as_json to_h
 
     def to_json(*a)
       to_h.to_json(*a)

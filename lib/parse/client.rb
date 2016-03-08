@@ -1,13 +1,13 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'parse/protocol'
 require 'parse/error'
 require 'parse/util'
 
 require 'logger'
 
+# This module contains all the code
 module Parse
-  # A class which encapsulates the HTTPS communication with the Parse
-  # API server.
+  # The client that communicates with the Parse server via REST
   class Client
     RETRIED_EXCEPTIONS = [
       'Faraday::Error::TimeoutError',
@@ -196,7 +196,7 @@ module Parse
     end
 
     def client
-      fail ParseError, 'API not initialized' unless @@client
+      raise ParseError, 'API not initialized' unless @@client
       @@client
     end
 

@@ -1,10 +1,12 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'parse/protocol'
 require 'parse/client'
 require 'parse/error'
 require 'parse/object'
 
 module Parse
+  # A Parse User
+  # https://parse.com/docs/rest/guide/#users
   class User < Parse::Object
     def self.authenticate(username, password, client = nil)
       body = {

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestObject < ParseTestCase
@@ -51,7 +52,7 @@ class TestObject < ParseTestCase
       foo_2 = Parse::Object.new('Foo', nil, @client)
 
       assert foo_1 != foo_2
-      assert foo_1 == foo_1
+      assert foo_1 == foo_1 # rubocop:disable Lint/UselessComparison
 
       foo_1.save
       assert foo_1 != foo_2
@@ -197,7 +198,7 @@ class TestObject < ParseTestCase
       post['published'] = true
       post.save
       retrieved_post = Parse::Query.new('Post', @client)
-                       .eq('objectId', post['objectId']).get.first
+        .eq('objectId', post['objectId']).get.first
       assert_equal false, retrieved_post['read']
       assert_equal true, retrieved_post['published']
     end

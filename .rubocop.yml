@@ -6,6 +6,30 @@ AllCops:
     - 'parse-ruby-client.gemspec'
   DisplayCopNames: true
   DisplayStyleGuide: true
+  ExtraDetails: true
+  TargetRubyVersion: 1.9
 
 Style/BracesAroundHashParameters:
   EnforcedStyle: context_dependent
+
+Style/Alias:
+  EnforcedStyle: prefer_alias
+
+Style/FileName:
+  Exclude:
+    - 'lib/parse-ruby-client.rb'
+
+Style/AutoResourceCleanup:
+  Enabled: true
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/Encoding:
+  Enabled: true
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented

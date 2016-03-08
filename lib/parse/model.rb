@@ -1,5 +1,6 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 module Parse
+  # A meta object to find objects by object id
   class Model < Parse::Object
     def initialize(data = nil, parse_client = nil)
       super(self.class.to_s, data, parse_client || Parse.client)

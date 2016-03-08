@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 module Parse
   # Base exception class for errors thrown by the Parse
   # client library. ParseError will be raised by any

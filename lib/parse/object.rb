@@ -1,17 +1,18 @@
-# -*- encoding : utf-8 -*-
+# encoding: utf-8
 require 'parse/protocol'
 require 'parse/client'
 require 'parse/error'
 
 module Parse
-  # Represents an individual Parse API object.
+  # A Parse object
+  # https://parse.com/docs/rest/guide/#objects
   class Object < Hash
     attr_reader :parse_object_id
     attr_reader :class_name
     attr_reader :created_at
     attr_reader :updated_at
     attr_accessor :client
-    alias_method :id, :parse_object_id
+    alias id parse_object_id
 
     def initialize(class_name, data = nil, client = nil)
       @class_name = class_name
@@ -23,8 +24,7 @@ module Parse
     def eql?(other)
       Parse.object_pointer_equality?(self, other)
     end
-
-    alias_method :==, :eql?
+    alias == eql?
 
     def hash
       Parse.object_pointer_hash(self)
@@ -58,7 +58,7 @@ module Parse
     def save
       if @parse_object_id
         method = :put
-        self.merge!(@op_fields) # use operations instead of our own view of the columns
+        merge!(@op_fields) # use operations instead of our own view of the columns
       else
         method = :post
       end
@@ -112,8 +112,8 @@ module Parse
         [key, should_call_to_h?(value) ? value.to_h : value]
       end]
     end
-    alias_method :as_json, :to_h
-    alias_method :to_hash, :to_h
+    alias as_json to_h
+    alias to_hash to_h
 
     def to_json(*a)
       to_h.to_json(*a)
@@ -218,11 +218,11 @@ module Parse
     end
 
     def array_op(field, operation, value)
-      fail "field #{field} not an array" if self[field] && !self[field].is_a?(Array)
+      raise "field #{field} not an array" if self[field] && !self[field].is_a?(Array)
 
       if @parse_object_id
         @op_fields[field] ||= ArrayOp.new(operation, [])
-        fail "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
+        raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
         @op_fields[field].objects << Parse.pointerize_value(value)
       end
 

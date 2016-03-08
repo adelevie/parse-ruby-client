@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestBatch < ParseTestCase
@@ -55,7 +56,7 @@ class TestBatch < ParseTestCase
     VCR.use_cassette('test_batch_create_object') do
       objects = [1, 2, 3, 4, 5].map do |i|
         p = Parse::Object.new('BatchTestObject', nil, @client)
-        p['foo'] = "#{i}"
+        p['foo'] = i.to_s
         p
       end
       batch = Parse::Batch.new(@client)
@@ -72,7 +73,7 @@ class TestBatch < ParseTestCase
     VCR.use_cassette('test_batch_update_object') do
       objects = [1, 2, 3, 4, 5].map do |i|
         p = Parse::Object.new('BatchTestObject', nil, @client)
-        p['foo'] = "#{i}"
+        p['foo'] = i.to_s
         p.save
         p
       end
@@ -108,7 +109,7 @@ class TestBatch < ParseTestCase
     VCR.use_cassette('test_batch_delete_object') do
       objects = [1, 2, 3, 4, 5].map do |i|
         p = Parse::Object.new('BatchTestObject', nil, @client)
-        p['foo'] = "#{i}"
+        p['foo'] = i.to_s
         p.save
         p
       end

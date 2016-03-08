@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestClientInit < ParseTestCase
@@ -105,7 +106,7 @@ class TestClientInit < ParseTestCase
 
       begin
         client.request('/')
-        fail 'client error response should have raised'
+        raise 'client error response should have raised'
       rescue Parse::ParseProtocolError => e
         assert_equal 'HTTP Status 403 Body nonparseable', e.error
       end

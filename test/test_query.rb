@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestQuery < ParseTestCase
@@ -35,7 +36,7 @@ class TestQuery < ParseTestCase
     assert_equal @q.where, 'points' => 5
 
     @q.eq('player', 'michael@jordan.com')
-    assert_equal @q.where, 'points' =>  5, 'player' => 'michael@jordan.com'
+    assert_equal @q.where, 'points' => 5, 'player' => 'michael@jordan.com'
   end
 
   def test_eq_hash
@@ -44,7 +45,7 @@ class TestQuery < ParseTestCase
     assert_equal expected_result, @q.where
 
     @q.eq('player' => 'michael@jordan.com')
-    expected_result = { 'points' =>  5, 'player' => 'michael@jordan.com' }
+    expected_result = { 'points' => 5, 'player' => 'michael@jordan.com' }
     assert_equal expected_result, @q.where
   end
 
@@ -209,7 +210,7 @@ class TestQuery < ParseTestCase
   end
 
   def test_keys
-    VCR.use_cassette('test_keys', :record => :new_episodes) do
+    VCR.use_cassette('test_keys', record: :new_episodes) do
       post = Parse::Object.new('Post', nil, @client)
       post['title'] = 'foo'
       post['name'] = 'This is cool'
@@ -259,7 +260,10 @@ class TestQuery < ParseTestCase
       other_post = Parse::Object.new('Post', nil, @client)
       other_post.save
 
-      assert_equal [post], Parse::Query.new('Post', @client).value_in('objectId', [post.id] + 5000.times.map { 'x' }).get
+      query = Parse::Query.new('Post', @client)
+        .value_in('objectId', [post.id] + Array.new(5000) { 'x' })
+        .get
+      assert_equal [post], query
     end
   end
 

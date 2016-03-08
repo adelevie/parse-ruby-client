@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Faraday
   # Custom version of Request::Retry with two additions:
   #    1 - logs (on warn level) each retry attempt
@@ -13,11 +14,9 @@ module Faraday
       @options.methods << :post
 
       # NOTE: the default exceptions are lost when custom ones are given
-      @options.exceptions.concat([
-        Errno::ETIMEDOUT,
-        'Timeout::Error',
-        Error::TimeoutError
-      ])
+      default_exceptions = [
+        Errno::ETIMEDOUT, 'Timeout::Error', Error::TimeoutError]
+      @options.exceptions.concat(default_exceptions)
     end
 
     def call(env)
