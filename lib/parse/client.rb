@@ -17,6 +17,7 @@ module Parse
     ]
 
     attr_accessor :host
+    attr_accessor :path
     attr_accessor :application_id
     attr_accessor :api_key
     attr_accessor :master_key
@@ -32,6 +33,7 @@ module Parse
 
     def initialize(data = {}, &_blk)
       @host           = data[:host] || Protocol::HOST
+      @path           = data[:path] || Protocol::PATH
       @application_id = data[:application_id]
       @api_key        = data[:api_key]
       @master_key     = data[:master_key]
@@ -50,7 +52,7 @@ module Parse
 
       options = { request: { timeout: @timeout, open_timeout: @timeout } }
 
-      @session = Faraday.new("https://#{host}", options) do |c|
+      @session = Faraday.new(host, options) do |c|
         c.request :json
 
         c.use Faraday::GetMethodOverride
@@ -88,6 +90,7 @@ module Parse
         headers[key] = value if value
       end
 
+      uri = ::File.join(path, uri)
       @session.send(method, uri, query || body || {}, headers).body
 
     # NOTE: Don't leak our internal libraries to our clients.

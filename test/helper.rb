@@ -28,6 +28,7 @@ require 'minitest/focus'
 require 'minitest/unit'
 require 'mocha/mini_test'
 
+require 'byebug'
 require 'vcr'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
@@ -63,6 +64,7 @@ class ParseTestCase < Minitest::Test
   def setup
     logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
     @client = Parse.create(logger: logger)
+    # @client = Parse.create(logger: logger, host: 'http://localhost:1337')
   end
 end
 
