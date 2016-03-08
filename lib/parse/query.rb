@@ -164,13 +164,14 @@ module Parse
       return unless @order_by
       order_string = @order_by
       order_string = "-#{order_string}" if @order == :descending
-      query.merge!(order: order_string)
+      query[:order] = order_string
     end
 
     def merge_attribute(attribute, query, query_field = nil)
       value = instance_variable_get("@#{attribute}")
       return if value.nil?
-      query.merge!((query_field || attribute) => value)
+      to_merge = query_field || attribute
+      query[to_merge] = value
     end
   end
 end

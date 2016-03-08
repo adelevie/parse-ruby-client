@@ -32,9 +32,9 @@ module Parse
 
       if @type
         if @where
-          @where.merge!(deviceType: @type)
+          @where[:deviceType] = @type
         else
-          body.merge!(deviceType: @type)
+          body[:deviceType] = @type
         end
       end
 
@@ -42,17 +42,17 @@ module Parse
       # so we make channels part of the query conditions
       if @channels
         if @where
-          @where.merge!(channels: @channels)
+          @where[:channels] = @channels
         else
-          body.merge!(channels: @channels)
+          body[:channels] = @channels
         end
       end
 
-      body.merge!(where: @where) if @where
+      body[:where] = @where if @where
 
-      body.merge!(expiration_interval: @expiration_time_interval) if @expiration_time_interval
-      body.merge!(expiration_time: @expiration_time) if @expiration_time
-      body.merge!(push_time: @push_time) if @push_time
+      body[:expiration_interval] = @expiration_time_interval if @expiration_time_interval
+      body[:expiration_time] = @expiration_time if @expiration_time
+      body[:push_time] = @push_time if @push_time
 
       @client.request Protocol.push_uri, :post, body.to_json
     end
