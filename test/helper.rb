@@ -28,7 +28,6 @@ require 'minitest/focus'
 require 'minitest/unit'
 require 'mocha/mini_test'
 
-require 'byebug'
 require 'vcr'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
