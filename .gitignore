@@ -1,9 +1,12 @@
-/coverage
-pkg
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
 
 .DS_Store
-
 .env
-.bundle
-
-test/cloud_functions/MyCloudCode/config/global.json
