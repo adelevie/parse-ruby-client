@@ -34,7 +34,9 @@ require 'parse-ruby-client'
 
 Parse.create :application_id => "<your_app_id>", # required
              :api_key        => "<your_api_key>", # required
-             :quiet          => true | false  # optional, defaults to false
+             :quiet          => true | false,  # optional, defaults to false
+             :host           => 'http://localhost:1337', # optional, defaults to 'https://api.parse.com'
+             :path           => '/parse', # optional, defaults to '/1'
 ```
 
 [![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
