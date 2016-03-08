@@ -81,7 +81,7 @@ module Parse
 
       {
         'Content-Type'                  => content_type || 'application/json',
-        'User-Agent'                    => 'Parse for Ruby, 0.0',
+        'User-Agent'                    => "Parse for Ruby, #{VERSION}",
         Protocol::HEADER_MASTER_KEY     => @master_key,
         Protocol::HEADER_APP_ID         => @application_id,
         Protocol::HEADER_API_KEY        => @api_key,
