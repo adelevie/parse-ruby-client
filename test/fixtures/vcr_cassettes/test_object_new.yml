@@ -8,13 +8,15 @@ http_interactions:
       string: "{}"
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,23 +33,24 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:02 GMT
+      - Wed, 09 Mar 2016 17:12:11 GMT
       Location:
-      - https://api.parse.com/1/classes/Post/ZZ4lPDIFJD
+      - https://api.parse.com/1/classes/Post/dVe5zLU2V2
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.014997'
+      - '0.349471'
       Content-Length:
       - '65'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T14:47:02.039Z","objectId":"ZZ4lPDIFJD"}
+      string: '{"createdAt":"2016-03-09T17:12:11.802Z","objectId":"dVe5zLU2V2"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:02 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:12:11 GMT
+recorded_with: VCR 3.0.1

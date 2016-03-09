@@ -8,13 +8,15 @@ http_interactions:
       string: Hello World!
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - text/plain
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,23 +33,24 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:17 GMT
+      - Wed, 09 Mar 2016 17:11:50 GMT
       Location:
-      - http://files.parsetfss.com/8bc57bf6-31d6-4e0c-9229-9bbda4325815/tfss-0c1d5095-0264-4e5f-b6d2-68533067abba-hello.txt
+      - http://files.parsetfss.com/9a6f1cad-4371-490e-b40f-5045ebc7b5b3/tfss-6dedb9e6-02b2-4116-8ed2-05e4a7c96c0b-hello.txt
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.063626'
+      - '0.035219'
       Content-Length:
       - '187'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"name":"tfss-0c1d5095-0264-4e5f-b6d2-68533067abba-hello.txt","url":"http://files.parsetfss.com/8bc57bf6-31d6-4e0c-9229-9bbda4325815/tfss-0c1d5095-0264-4e5f-b6d2-68533067abba-hello.txt"}
+      string: '{"name":"tfss-6dedb9e6-02b2-4116-8ed2-05e4a7c96c0b-hello.txt","url":"http://files.parsetfss.com/9a6f1cad-4371-490e-b40f-5045ebc7b5b3/tfss-6dedb9e6-02b2-4116-8ed2-05e4a7c96c0b-hello.txt"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:17 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:11:50 GMT
+recorded_with: VCR 3.0.1

@@ -8,13 +8,15 @@ http_interactions:
       string: '{"count":1}'
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,40 +33,43 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:04 GMT
+      - Wed, 09 Mar 2016 17:12:04 GMT
       Location:
-      - https://api.parse.com/1/classes/Post/ecSJRSkJSt
+      - https://api.parse.com/1/classes/Post/KNTyxGuCEG
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.016149'
+      - '0.013437'
       Content-Length:
       - '65'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T14:47:04.563Z","objectId":"ecSJRSkJSt"}
+      string: '{"createdAt":"2016-03-09T17:12:04.981Z","objectId":"KNTyxGuCEG"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:04 GMT
+  recorded_at: Wed, 09 Mar 2016 17:12:05 GMT
 - request:
     method: put
-    uri: https://api.parse.com/1/classes/Post/ecSJRSkJSt
+    uri: https://api.parse.com/1/classes/Post/KNTyxGuCEG
     body:
       encoding: UTF-8
       string: '{"count":{"__op":"Increment","amount":-1}}'
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -81,21 +86,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:05 GMT
+      - Wed, 09 Mar 2016 17:12:05 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.017231'
+      - '0.009353'
       Content-Length:
       - '51'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"count":0,"updatedAt":"2015-06-19T14:47:05.059Z"}
+      string: '{"count":0,"updatedAt":"2016-03-09T17:12:05.448Z"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:05 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:12:05 GMT
+recorded_with: VCR 3.0.1

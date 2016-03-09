@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.parse.com/1/files/parsers.jpg
     body:
       encoding: UTF-8
-      string: !binary |-
+      base64_string: |
         /9j/4QJuRXhpZgAASUkqAAgAAAAJAA8BAgAHAAAAegAAABABAgAPAAAAggAA
         ABoBBQABAAAAkgAAABsBBQABAAAAmgAAACgBAwABAAAAAgAAADEBAgAaAAAA
         ogAAADIBAgAaAAAAvAAAADsBAgAJAAAA1gAAAGmHBAABAAAA4AAAAAAAAABD
@@ -1879,13 +1879,15 @@ http_interactions:
         +mXk669eyvZi4vSBL0H/2Q==
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - image/jpeg
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -1902,23 +1904,27 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:16 GMT
+      - Wed, 09 Mar 2016 17:11:51 GMT
       Location:
-      - http://files.parsetfss.com/8bc57bf6-31d6-4e0c-9229-9bbda4325815/tfss-40f933d1-c7cc-4e9d-999a-a44f196406f7-parsers.jpg
+      - http://files.parsetfss.com/9a6f1cad-4371-490e-b40f-5045ebc7b5b3/tfss-ff5971d9-4eaf-435a-a237-7e7a9e14d87c-parsers.jpg
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.451980'
+      - '0.097913'
       Content-Length:
       - '191'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"name":"tfss-40f933d1-c7cc-4e9d-999a-a44f196406f7-parsers.jpg","url":"http://files.parsetfss.com/8bc57bf6-31d6-4e0c-9229-9bbda4325815/tfss-40f933d1-c7cc-4e9d-999a-a44f196406f7-parsers.jpg"}
+      base64_string: |
+        eyJuYW1lIjoidGZzcy1mZjU5NzFkOS00ZWFmLTQzNWEtYTIzNy03ZTdhOWUx
+        NGQ4N2MtcGFyc2Vycy5qcGciLCJ1cmwiOiJodHRwOi8vZmlsZXMucGFyc2V0
+        ZnNzLmNvbS85YTZmMWNhZC00MzcxLTQ5MGUtYjQwZi01MDQ1ZWJjN2I1YjMv
+        dGZzcy1mZjU5NzFkOS00ZWFmLTQzNWEtYTIzNy03ZTdhOWUxNGQ4N2MtcGFy
+        c2Vycy5qcGcifQo=
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:16 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:11:51 GMT
+recorded_with: VCR 3.0.1

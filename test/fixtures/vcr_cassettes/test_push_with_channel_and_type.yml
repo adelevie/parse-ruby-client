@@ -8,13 +8,15 @@ http_interactions:
       string: '{"data":{"alert":"This is a notification from Parse"},"deviceType":"ios","channels":["Giants"]}'
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,23 +33,24 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Sat, 20 Jun 2015 12:35:24 GMT
+      - Wed, 09 Mar 2016 17:12:57 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Parse-Push-Status-Id:
-      - knUsfzyyUF
+      - BP5rMscLNA
       X-Runtime:
-      - '0.010793'
+      - '0.047111'
       Content-Length:
       - '16'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"result":true}
+      string: '{"result":true}
+
+'
     http_version: 
-  recorded_at: Sat, 20 Jun 2015 12:35:24 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:12:58 GMT
+recorded_with: VCR 3.0.1

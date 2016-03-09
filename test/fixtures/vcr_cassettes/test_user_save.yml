@@ -5,16 +5,18 @@ http_interactions:
     uri: https://api.parse.com/1/users
     body:
       encoding: UTF-8
-      string: '{"username":"0.8649057526595906","password":"topsecret"}'
+      string: '{"username":"0.31776623548679894","password":"topsecret"}'
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,23 +33,24 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:52 GMT
+      - Wed, 09 Mar 2016 17:12:30 GMT
       Location:
-      - https://api.parse.com/1/users/lg02nf9SoO
+      - https://api.parse.com/1/users/4GBsTsL9Oa
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.157904'
+      - '0.163386'
       Content-Length:
-      - '108'
+      - '110'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T14:47:52.142Z","objectId":"lg02nf9SoO","sessionToken":"d6buJBQFYbFBlRpAvrXu7hyLS"}
+      string: '{"createdAt":"2016-03-09T17:12:30.289Z","objectId":"4GBsTsL9Oa","sessionToken":"r:jkSHYDJELyJFeadgLMHrDdIPP"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:52 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:12:30 GMT
+recorded_with: VCR 3.0.1

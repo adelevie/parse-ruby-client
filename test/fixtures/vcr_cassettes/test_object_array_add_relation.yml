@@ -8,13 +8,15 @@ http_interactions:
       string: "{}"
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,25 +33,26 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 21:05:36 GMT
+      - Wed, 09 Mar 2016 17:12:18 GMT
       Location:
-      - https://api.parse.com/1/classes/Post/h224Ol3lcL
+      - https://api.parse.com/1/classes/Post/GfogLzIHrF
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.027817'
+      - '0.006685'
       Content-Length:
       - '65'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T21:05:36.727Z","objectId":"h224Ol3lcL"}
-    http_version:
-  recorded_at: Fri, 19 Jun 2015 21:05:36 GMT
+      string: '{"createdAt":"2016-03-09T17:12:18.711Z","objectId":"GfogLzIHrF"}
+
+'
+    http_version: 
+  recorded_at: Wed, 09 Mar 2016 17:12:18 GMT
 - request:
     method: post
     uri: https://api.parse.com/1/classes/Comment
@@ -58,13 +61,15 @@ http_interactions:
       string: "{}"
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -81,40 +86,43 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 21:05:37 GMT
+      - Wed, 09 Mar 2016 17:12:19 GMT
       Location:
-      - https://api.parse.com/1/classes/Comment/Q2zD2g6kpf
+      - https://api.parse.com/1/classes/Comment/eyIzZrCtwB
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.025028'
+      - '0.060742'
       Content-Length:
       - '65'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T21:05:37.216Z","objectId":"Q2zD2g6kpf"}
-    http_version:
-  recorded_at: Fri, 19 Jun 2015 21:05:37 GMT
+      string: '{"createdAt":"2016-03-09T17:12:19.175Z","objectId":"eyIzZrCtwB"}
+
+'
+    http_version: 
+  recorded_at: Wed, 09 Mar 2016 17:12:19 GMT
 - request:
     method: put
-    uri: https://api.parse.com/1/classes/Post/h224Ol3lcL
+    uri: https://api.parse.com/1/classes/Post/GfogLzIHrF
     body:
       encoding: UTF-8
-      string: '{"cs":{"__op":"AddRelation","objects":[{"__type":"Pointer","className":"Comment","objectId":"Q2zD2g6kpf"}]}}'
+      string: '{"cs":{"__op":"AddRelation","objects":[{"__type":"Pointer","className":"Comment","objectId":"eyIzZrCtwB"}]}}'
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -131,38 +139,41 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 21:05:37 GMT
+      - Wed, 09 Mar 2016 17:12:19 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.039029'
+      - '0.014136'
       Content-Length:
       - '41'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"updatedAt":"2015-06-19T21:05:37.715Z"}
-    http_version:
-  recorded_at: Fri, 19 Jun 2015 21:05:37 GMT
+      string: '{"updatedAt":"2016-03-09T17:12:19.693Z"}
+
+'
+    http_version: 
+  recorded_at: Wed, 09 Mar 2016 17:12:19 GMT
 - request:
     method: get
-    uri: https://api.parse.com/1/classes/Comment?where=%7B%22$relatedTo%22:%7B%22object%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Post%22,%22objectId%22:%22h224Ol3lcL%22%7D,%22key%22:%22cs%22%7D%7D
+    uri: https://api.parse.com/1/classes/Comment?where=%7B%22$relatedTo%22:%7B%22object%22:%7B%22__type%22:%22Pointer%22,%22className%22:%22Post%22,%22objectId%22:%22GfogLzIHrF%22%7D,%22key%22:%22cs%22%7D%7D
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -179,21 +190,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 21:05:38 GMT
+      - Wed, 09 Mar 2016 17:12:20 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.019320'
+      - '0.014664'
       Content-Length:
       - '118'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"results":[{"createdAt":"2015-06-19T21:05:37.216Z","objectId":"Q2zD2g6kpf","updatedAt":"2015-06-19T21:05:37.216Z"}]}
-    http_version:
-  recorded_at: Fri, 19 Jun 2015 21:05:38 GMT
-recorded_with: VCR 2.9.3
+      string: '{"results":[{"createdAt":"2016-03-09T17:12:19.175Z","objectId":"eyIzZrCtwB","updatedAt":"2016-03-09T17:12:19.175Z"}]}
+
+'
+    http_version: 
+  recorded_at: Wed, 09 Mar 2016 17:12:20 GMT
+recorded_with: VCR 3.0.1

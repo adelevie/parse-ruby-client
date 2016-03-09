@@ -8,13 +8,15 @@ http_interactions:
       string: '{"requests":[{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"1"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"2"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"3"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"4"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"5"}}]}'
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,21 +33,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:42 GMT
+      - Wed, 09 Mar 2016 17:28:19 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.034093'
+      - '0.027251'
       Content-Length:
       - '387'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        [{"success":{"createdAt":"2015-06-19T14:47:42.599Z","objectId":"VgrSQ2MdfP"}},{"success":{"createdAt":"2015-06-19T14:47:42.599Z","objectId":"GW7mRLu5EU"}},{"success":{"createdAt":"2015-06-19T14:47:42.599Z","objectId":"c40GzrAQkP"}},{"success":{"createdAt":"2015-06-19T14:47:42.599Z","objectId":"frwpGeQ6Tc"}},{"success":{"createdAt":"2015-06-19T14:47:42.599Z","objectId":"CVTcPMHB3J"}}]
+      string: '[{"success":{"createdAt":"2016-03-09T17:28:19.574Z","objectId":"uEOMVpeMdt"}},{"success":{"createdAt":"2016-03-09T17:28:19.573Z","objectId":"R0ceWz2Yi1"}},{"success":{"createdAt":"2016-03-09T17:28:19.573Z","objectId":"siRRlkhe5B"}},{"success":{"createdAt":"2016-03-09T17:28:19.573Z","objectId":"yI8PRJstsh"}},{"success":{"createdAt":"2016-03-09T17:28:19.572Z","objectId":"Dnwo674CdU"}}]
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:42 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:28:19 GMT
+recorded_with: VCR 3.0.1

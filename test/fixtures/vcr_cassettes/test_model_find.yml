@@ -8,13 +8,15 @@ http_interactions:
       string: "{}"
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,40 +33,43 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 17:08:37 GMT
+      - Wed, 09 Mar 2016 17:12:48 GMT
       Location:
-      - https://api.parse.com/1/classes/TestModelObject/tuNgAspaKf
+      - https://api.parse.com/1/classes/TestModelObject/BpCbHF5D5B
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.014245'
+      - '0.043275'
       Content-Length:
       - '65'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T17:08:37.470Z","objectId":"tuNgAspaKf"}
+      string: '{"createdAt":"2016-03-09T17:12:48.480Z","objectId":"BpCbHF5D5B"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 17:08:37 GMT
+  recorded_at: Wed, 09 Mar 2016 17:12:48 GMT
 - request:
     method: get
-    uri: https://api.parse.com/1/classes/TestModelObject?limit=1&where=%7B%22objectId%22:%22tuNgAspaKf%22%7D
+    uri: https://api.parse.com/1/classes/TestModelObject?limit=1&where=%7B%22objectId%22:%22BpCbHF5D5B%22%7D
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -81,21 +86,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 17:08:37 GMT
+      - Wed, 09 Mar 2016 17:12:48 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.016465'
+      - '0.012554'
       Content-Length:
       - '118'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"results":[{"createdAt":"2015-06-19T17:08:37.470Z","objectId":"tuNgAspaKf","updatedAt":"2015-06-19T17:08:37.470Z"}]}
+      string: '{"results":[{"createdAt":"2016-03-09T17:12:48.480Z","objectId":"BpCbHF5D5B","updatedAt":"2016-03-09T17:12:48.480Z"}]}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 17:08:38 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:12:49 GMT
+recorded_with: VCR 3.0.1

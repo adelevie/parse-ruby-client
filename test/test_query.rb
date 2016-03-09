@@ -186,6 +186,7 @@ class TestQuery < ParseTestCase
 
   def test_first
     VCR.use_cassette('test_query_first') do
+      @client.object('Post', nil).save
       assert @client.query('Post').first
     end
   end

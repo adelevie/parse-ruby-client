@@ -8,13 +8,15 @@ http_interactions:
       string: "{}"
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,40 +33,43 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:02 GMT
+      - Wed, 09 Mar 2016 17:12:24 GMT
       Location:
-      - https://api.parse.com/1/classes/Post/Ch21OqrrOr
+      - https://api.parse.com/1/classes/Post/zAqCf0iAaM
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.125970'
+      - '0.006810'
       Content-Length:
       - '65'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T14:47:02.621Z","objectId":"Ch21OqrrOr"}
+      string: '{"createdAt":"2016-03-09T17:12:24.574Z","objectId":"zAqCf0iAaM"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:02 GMT
+  recorded_at: Wed, 09 Mar 2016 17:12:24 GMT
 - request:
     method: get
-    uri: https://api.parse.com/1/classes/Post/Ch21OqrrOr
+    uri: https://api.parse.com/1/classes/Post/zAqCf0iAaM
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -81,38 +86,41 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:03 GMT
+      - Wed, 09 Mar 2016 17:12:25 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.032878'
+      - '0.008174'
       Content-Length:
-      - '104'
+      - '153'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T14:47:02.621Z","objectId":"Ch21OqrrOr","updatedAt":"2015-06-19T14:47:02.621Z"}
+      string: '{"createdAt":"2016-03-09T17:12:24.574Z","cs":{"__type":"Relation","className":"Comment"},"objectId":"zAqCf0iAaM","updatedAt":"2016-03-09T17:12:24.574Z"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:03 GMT
+  recorded_at: Wed, 09 Mar 2016 17:12:25 GMT
 - request:
     method: delete
-    uri: https://api.parse.com/1/classes/Post/Ch21OqrrOr
+    uri: https://api.parse.com/1/classes/Post/zAqCf0iAaM
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -129,38 +137,39 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:03 GMT
+      - Wed, 09 Mar 2016 17:12:25 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.032688'
+      - '0.010320'
       Content-Length:
       - '3'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {}
+      string: "{}\n"
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:03 GMT
+  recorded_at: Wed, 09 Mar 2016 17:12:25 GMT
 - request:
     method: get
-    uri: https://api.parse.com/1/classes/Post/Ch21OqrrOr
+    uri: https://api.parse.com/1/classes/Post/zAqCf0iAaM
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -177,21 +186,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:04 GMT
+      - Wed, 09 Mar 2016 17:12:26 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.036537'
+      - '0.009096'
       Content-Length:
       - '48'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"code":101,"error":"object not found for get"}
+      string: '{"code":101,"error":"object not found for get"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:04 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:12:26 GMT
+recorded_with: VCR 3.0.1

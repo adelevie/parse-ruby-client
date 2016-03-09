@@ -2,19 +2,21 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.parse.com/1/login?password=secret&username=alan299652018572
+    uri: https://api.parse.com/1/login?password=secret&username=alan4300606921361@gmail.com
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
       X-Parse-Rest-Api-Key:
       - "<X-Parse-REST-API-Key>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,32 +33,33 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:49 GMT
+      - Wed, 09 Mar 2016 17:20:27 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.122832'
+      - '0.139620'
       Content-Length:
-      - '177'
+      - '190'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T14:25:21.714Z","objectId":"6CMIGu0qe4","sessionToken":"LXLMEG8ZGek3kSUYv7pWCmEsd","updatedAt":"2015-06-19T14:37:25.494Z","username":"alan299652018572"}
+      string: '{"createdAt":"2016-03-09T17:12:28.512Z","objectId":"kMIdopcyK7","sessionToken":"r:i4PucfXrFKZTRRXfrAJIMOAVe","updatedAt":"2016-03-09T17:19:36.717Z","username":"alan4300606921361@gmail.com"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:49 GMT
+  recorded_at: Wed, 09 Mar 2016 17:20:27 GMT
 - request:
     method: get
-    uri: https://api.parse.com/1/classes/_User/6CMIGu0qe4
+    uri: https://api.parse.com/1/classes/_User/kMIdopcyK7
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
@@ -65,6 +68,8 @@ http_interactions:
       - "<X-Parse-REST-API-Key>"
       X-Parse-Session-Token:
       - "<X-Parse-Session-Token>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -81,32 +86,33 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:50 GMT
+      - Wed, 09 Mar 2016 17:20:28 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.026961'
+      - '0.036913'
       Content-Length:
-      - '177'
+      - '190'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"createdAt":"2015-06-19T14:25:21.714Z","objectId":"6CMIGu0qe4","sessionToken":"LXLMEG8ZGek3kSUYv7pWCmEsd","updatedAt":"2015-06-19T14:37:25.494Z","username":"alan299652018572"}
+      string: '{"createdAt":"2016-03-09T17:12:28.512Z","objectId":"kMIdopcyK7","sessionToken":"r:i4PucfXrFKZTRRXfrAJIMOAVe","updatedAt":"2016-03-09T17:19:36.717Z","username":"alan4300606921361@gmail.com"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:50 GMT
+  recorded_at: Wed, 09 Mar 2016 17:20:28 GMT
 - request:
     method: put
-    uri: https://api.parse.com/1/classes/_User/6CMIGu0qe4
+    uri: https://api.parse.com/1/classes/_User/kMIdopcyK7
     body:
       encoding: UTF-8
-      string: '{"username":"alan299652018572"}'
+      string: '{"username":"alan4300606921361@gmail.com"}'
     headers:
       User-Agent:
-      - Parse for Ruby, 0.0
+      - Parse for Ruby, 1.0.0
       Content-Type:
       - application/json
       X-Parse-Application-Id:
@@ -115,6 +121,8 @@ http_interactions:
       - "<X-Parse-REST-API-Key>"
       X-Parse-Session-Token:
       - "<X-Parse-Session-Token>"
+      X-Parserubyclient-Retries:
+      - '3'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -131,21 +139,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 19 Jun 2015 14:47:50 GMT
+      - Wed, 09 Mar 2016 17:20:28 GMT
       Server:
       - nginx/1.6.0
       X-Parse-Platform:
       - G1
       X-Runtime:
-      - '0.055547'
+      - '0.044815'
       Content-Length:
       - '41'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |
-        {"updatedAt":"2015-06-19T14:47:50.771Z"}
+      string: '{"updatedAt":"2016-03-09T17:20:28.886Z"}
+
+'
     http_version: 
-  recorded_at: Fri, 19 Jun 2015 14:47:50 GMT
-recorded_with: VCR 2.9.3
+  recorded_at: Wed, 09 Mar 2016 17:20:28 GMT
+recorded_with: VCR 3.0.1

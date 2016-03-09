@@ -36,7 +36,7 @@ class TestFile < ParseTestCase
   end
 
   def test_image_save
-    VCR.use_cassette('test_file_image_save') do
+    VCR.use_cassette('test_file_image_save', preserve_exact_body_bytes: true) do
       data = {
         body: IO.read('test/parsers.jpg'),
         local_filename: 'parsers.jpg',
@@ -54,7 +54,9 @@ class TestFile < ParseTestCase
   end
 
   def test_associate_with_object
-    VCR.use_cassette('test_file_image_associate_with_object') do
+    VCR.use_cassette(
+      'test_file_image_associate_with_object',
+      preserve_exact_body_bytes: true) do
       data = {
         body: IO.read('test/parsers.jpg'),
         local_filename: 'parsers.jpg',
