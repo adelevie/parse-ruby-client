@@ -17,25 +17,25 @@ module Parse
 
     def create_object(object)
       method = 'POST'
-      path = Parse::Protocol.class_uri(object.class_name)
+      path = class_uri(object.class_name)
       body = object.safe_hash
-      add_request('method' => method,
-                  'path' => path,
-                  'body' => body)
+      add_request('method' => method, 'path' => path, 'body' => body)
     end
 
     def update_object(object)
       method = 'PUT'
-      path = Parse::Protocol.class_uri(object.class_name, object.id)
+      path = class_uri(object.class_name, object.id)
       body = object.safe_hash
-      add_request('method' => method,
-                  'path' => path,
-                  'body' => body)
+      add_request('method' => method, 'path' => path, 'body' => body)
     end
 
     def delete_object(object)
-      add_request('method' => 'DELETE',
-                  'path' => Parse::Protocol.class_uri(object.class_name, object.id))
+      add_request(
+        'method' => 'DELETE', 'path' => class_uri(object.class_name, object.id))
+    end
+
+    def class_uri(*args)
+      ::File.join(client.path, Parse::Protocol.class_uri(*args))
     end
 
     def run!
