@@ -76,17 +76,20 @@ module Parse
     end
 
     def value_in(field, values)
-      add_constraint field, '$in' => values.map { |v| Parse.pointerize_value(v) }
+      add_constraint(
+        field, '$in' => values.map { |v| Parse.pointerize_value(v) })
       self
     end
 
     def value_not_in(field, values)
-      add_constraint field, '$nin' => values.map { |v| Parse.pointerize_value(v) }
+      add_constraint(
+        field, '$nin' => values.map { |v| Parse.pointerize_value(v) })
       self
     end
 
     def contains_all(field, values)
-      add_constraint field, '$all' => values.map { |v| Parse.pointerize_value(v) }
+      add_constraint(
+        field, '$all' => values.map { |v| Parse.pointerize_value(v) })
       self
     end
 
@@ -101,7 +104,9 @@ module Parse
     end
 
     def in_query(field, query = nil)
-      query_hash = { Parse::Protocol::KEY_CLASS_NAME => query.class_name, 'where' => query.where }
+      query_hash = {
+        Parse::Protocol::KEY_CLASS_NAME => query.class_name,
+        'where' => query.where }
       add_constraint(field, '$inQuery' => query_hash)
       self
     end
@@ -136,7 +141,9 @@ module Parse
       query = { 'where' => where_as_json.to_json }
       ordering(query)
 
-      [:count, :limit, :skip, :include, :keys].each { |a| merge_attribute(a, query) }
+      [:count, :limit, :skip, :include, :keys].each do |a|
+        merge_attribute(a, query)
+      end
       @client.logger.info { "Parse query for #{uri} #{query.inspect}" } unless @client.quiet
       response = @client.request uri, :get, nil, query
 

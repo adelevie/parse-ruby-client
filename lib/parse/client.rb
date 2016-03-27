@@ -39,7 +39,8 @@ module Parse
       @master_key     = data[:master_key]
       @session_token  = data[:session_token]
       @max_retries    = data[:max_retries] || 3
-      @logger         = data[:logger] || Logger.new(STDERR).tap { |l| l.level = Logger::INFO }
+      @logger         = data[:logger] || Logger
+        .new(STDERR).tap { |l| l.level = Logger::INFO }
       @quiet          = data[:quiet] || false
       @timeout        = data[:timeout] || 30
 
@@ -48,7 +49,8 @@ module Parse
       @backoff_factor = data[:backoff_factor] || 2
 
       @retried_exceptions = RETRIED_EXCEPTIONS
-      @retried_exceptions += data[:retried_exceptions] if data[:retried_exceptions]
+      @retried_exceptions += data[:retried_exceptions] if data[
+        :retried_exceptions]
 
       options = { request: { timeout: @timeout, open_timeout: @timeout } }
 
@@ -163,11 +165,16 @@ module Parse
     # This should be preferred over Parse.init which uses a singleton
     # client object for all API calls.
     def create(data = {}, &blk)
-      defaults = { application_id: ENV['PARSE_APPLICATION_ID'], api_key: ENV['PARSE_REST_API_KEY'] }
+      defaults = {
+        application_id: ENV['PARSE_APPLICATION_ID'],
+        api_key: ENV['PARSE_REST_API_KEY'] }
       defaults.merge!(data)
 
       # use less permissive key if both are specified
-      defaults[:master_key] = ENV['PARSE_MASTER_API_KEY'] unless data[:master_key] || defaults[:api_key]
+      unless data[:master_key] || defaults[:api_key]
+        defaults[:master_key] = ENV['PARSE_MASTER_API_KEY']
+      end
+
       Client.new(defaults, &blk)
     end
 
@@ -181,11 +188,12 @@ module Parse
     end
 
     # A convenience method for using global.json
-    def init_from_cloud_code(path = '../config/global.json', application_name = nil)
+    def init_from_cloud_code(path = '../config/global.json', app_name = nil)
       global = JSON.parse(::File.open(path).read)
-      application_name  = global['applications']['_default']['link'] if application_name.nil?
-      application_id    = global['applications'][application_name]['applicationId']
-      master_key        = global['applications'][application_name]['masterKey']
+      applications = global['applications']
+      app_name = applications['_default']['link'] if app_name.nil?
+      application_id = applications[app_name]['applicationId']
+      master_key = applications[app_name]['masterKey']
       create(application_id: application_id, master_key: master_key)
     end
 

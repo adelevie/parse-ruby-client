@@ -38,7 +38,8 @@ module Parse
       Parse::Pointer.new(rest_api_hash) unless new?
     end
 
-    # make it easier to deal with the ambiguity of whether you're passed a pointer or object
+    # make it easier to deal with the ambiguity of whether
+    # you're passed a pointer or object
     def get
       self
     end
@@ -58,7 +59,7 @@ module Parse
     def save
       if @parse_object_id
         method = :put
-        merge!(@op_fields) # use operations instead of our own view of the columns
+        merge!(@op_fields) # use ops instead of our own view of the columns
       else
         method = :post
       end
@@ -67,7 +68,7 @@ module Parse
       data = @client.request(uri, method, body)
 
       if data
-        # array operations can return mutated view of array which needs to be parsed
+        # array ops can return mutated view of array which needs to be parsed
         object = Parse.parse_json(class_name, data)
         object = Parse.copy_client(@client, object)
         parse object
@@ -87,7 +88,8 @@ module Parse
       Hash[map do |key, value|
         if Protocol::RESERVED_KEYS.include?(key)
           nil
-        elsif value.is_a?(Hash) && value[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
+        elsif value.is_a?(Hash) &&
+              value[Protocol::KEY_TYPE] == Protocol::TYPE_RELATION
           nil
         elsif value.nil?
           [key, Protocol::DELETE_OP]
@@ -168,7 +170,8 @@ module Parse
       array_op(field, Protocol::KEY_REMOVE, value)
     end
 
-    # Increment the given field by an amount, which defaults to 1. Saves immediately to reflect incremented
+    # Increment the given field by an amount, which defaults to 1.
+    # Saves immediately to reflect incremented
     def increment(field, amount = 1)
       # value = (self[field] || 0) + amount
       # self[field] = value
@@ -183,7 +186,8 @@ module Parse
       self
     end
 
-    # Decrement the given field by an amount, which defaults to 1. Saves immediately to reflect decremented
+    # Decrement the given field by an amount, which defaults to 1.
+    # Saves immediately to reflect decremented
     # A synonym for increment(field, -amount).
     def decrement(field, amount = 1)
       increment(field, -amount)
@@ -218,15 +222,18 @@ module Parse
     end
 
     def array_op(field, operation, value)
-      raise "field #{field} not an array" if self[field] && !self[field].is_a?(Array)
+      error_msg = "field #{field} not an array"
+      raise error_msg if self[field] && !self[field].is_a?(Array)
 
       if @parse_object_id
         @op_fields[field] ||= ArrayOp.new(operation, [])
-        raise "only one operation type allowed per array #{field}" if @op_fields[field].operation != operation
+        error_msg = "only one operation type allowed per array #{field}"
+        raise error_msg if @op_fields[field].operation != operation
         @op_fields[field].objects << Parse.pointerize_value(value)
       end
 
-      # parse doesn't return column values on initial POST creation so we must maintain them ourselves
+      # parse doesn't return column values on initial POST creation so
+      # we must maintain them ourselves
       case operation
       when Protocol::KEY_ADD, Protocol::KEY_ADD_RELATION
         self[field] ||= []

@@ -23,7 +23,9 @@ module Parse
         parse_datatype obj
       elsif class_name # otherwise it must be a regular object, so deep parse it avoiding re-JSON.parsing raw Strings
         # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
-        Parse::Object.new(class_name, Hash[obj.map { |k, v| [k, parse_json(nil, v)] }], '')
+        Parse::Object.new(
+          class_name,
+          Hash[obj.map { |k, v| [k, parse_json(nil, v)] }], '')
       else # plain old hash
         obj
       end
@@ -47,11 +49,15 @@ module Parse
     when Protocol::TYPE_GEOPOINT
       Parse::GeoPoint.new obj
     when Protocol::TYPE_FILE
-      # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
+      # NOTE: passing '' for client to avoid passing nil
+      # to trigger the singleton. It's ugly!
       Parse::File.new(obj, '')
     when Protocol::TYPE_OBJECT # used for relation queries, e.g. "?include=post"
-      # NOTE: passing '' for client to avoid passing nil to trigger the singleton. It's ugly!
-      Parse::Object.new(obj[Protocol::KEY_CLASS_NAME], Hash[obj.map { |k, v| [k, parse_json(nil, v)] }], '')
+      # NOTE: passing '' for client to avoid passing nil
+      # to trigger the singleton. It's ugly!
+      Parse::Object.new(
+        obj[Protocol::KEY_CLASS_NAME],
+        Hash[obj.map { |k, v| [k, parse_json(nil, v)] }], '')
     end
   end
 
