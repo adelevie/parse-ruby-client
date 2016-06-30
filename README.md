@@ -33,7 +33,7 @@ parse-ruby-client lets you interact with Parse using Ruby. There are many uses. 
 require 'parse-ruby-client'
 
 Parse.create :application_id => "<your_app_id>", # required
-             :api_key        => "<your_api_key>", # required
+             :api_key        => "<your_api_key>", # optional, defaults to nil
              :master_key     => "<your_master_key>", # optional, defaults to nil
              :quiet          => true | false,  # optional, defaults to false
              :host           => 'http://localhost:1337', # optional, defaults to 'https://api.parse.com'
