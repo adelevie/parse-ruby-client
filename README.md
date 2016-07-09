@@ -27,6 +27,8 @@ parse-ruby-client lets you interact with Parse using Ruby. There are many uses. 
 
 `gem install parse-ruby-client` or add `gem "parse-ruby-client"` to your `Gemfile.`
 
+We support Ruby 2.1 and newer and JRuby 9000. Older versions are not supported, though the library might still work nonetheless.
+
 #### Client initialization
 
 ```ruby
