@@ -4,11 +4,8 @@ sudo: false
 rvm:
   - 2.3.1
   - 2.2.5
-  - 2.1.8
-  - 2.0.0
-  - 1.9.3
-  - jruby-9.0.5.0
-  - jruby-1.7
+  - 2.1.9
+  - jruby-9.1.2.0
 
 env:
  - PARSE_APPLICATION_ID=Xco7FawNF1YUexCi1cNilLyisoiWUnGds0CCDRFg PARSE_REST_API_KEY=KIFjCTjB8r5pRJLtecA2tJkG2T21RXBahoeIk0Vf PARSE_MASTER_API_KEY=VwAabxOyZNqECz2JfhNwp2WI3tDtlfl9JkXBsTUE
