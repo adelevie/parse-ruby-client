@@ -244,4 +244,14 @@ class TestClientCreate < ParseTestCase
       assert_equal '101: object not found for get: SomeClass:someIdThatDoesNotExist', e.message
     end
   end
+
+  def test_get_method_override
+    client = Parse.create
+    assert client.get_method_override
+    assert client.session.builder.handlers.include? Faraday::GetMethodOverride
+
+    client = Parse.create(get_method_override: false)
+    refute client.get_method_override
+    refute client.session.builder.handlers.include? Faraday::GetMethodOverride
+  end
 end

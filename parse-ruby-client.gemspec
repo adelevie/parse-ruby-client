@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'byebug' if RUBY_ENGINE == 'ruby'
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'fasterer'
+  spec.add_development_dependency 'json', '~> 1.8.3'
   spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'minitest-focus'
   spec.add_development_dependency 'mocha'

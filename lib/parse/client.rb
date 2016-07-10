@@ -30,6 +30,7 @@ module Parse
     attr_accessor :interval
     attr_accessor :backoff_factor
     attr_accessor :retried_exceptions
+    attr_reader :get_method_override
 
     def initialize(data = {}, &_blk)
       @host           = data[:host] || Protocol::HOST
@@ -52,12 +53,15 @@ module Parse
       @retried_exceptions += data[:retried_exceptions] if data[
         :retried_exceptions]
 
+      @get_method_override = data[:get_method_override]
+
       options = { request: { timeout: @timeout, open_timeout: @timeout } }
 
       @session = Faraday.new(host, options) do |c|
         c.request :json
 
-        c.use Faraday::GetMethodOverride
+        c.use Faraday::GetMethodOverride if @get_method_override
+
         c.use Faraday::BetterRetry,
               max: @max_retries,
               logger: @logger,
@@ -167,7 +171,9 @@ module Parse
     def create(data = {}, &blk)
       defaults = {
         application_id: ENV['PARSE_APPLICATION_ID'],
-        api_key: ENV['PARSE_REST_API_KEY'] }
+        api_key: ENV['PARSE_REST_API_KEY'],
+        get_method_override: true
+      }
       defaults.merge!(data)
 
       # use less permissive key if both are specified

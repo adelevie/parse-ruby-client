@@ -34,12 +34,13 @@ We support Ruby 2.1 and newer and JRuby 9000. Older versions are not supported, 
 ```ruby
 require 'parse-ruby-client'
 
-Parse.create :application_id => "<your_app_id>", # required
-             :api_key        => "<your_api_key>", # optional, defaults to nil
-             :master_key     => "<your_master_key>", # optional, defaults to nil
-             :quiet          => true | false,  # optional, defaults to false
-             :host           => 'http://localhost:1337', # optional, defaults to 'https://api.parse.com'
-             :path           => '/parse', # optional, defaults to '/1'
+Parse.create :application_id      => "<your_app_id>", # required
+             :api_key             => "<your_api_key>", # optional, defaults to nil
+             :master_key          => "<your_master_key>", # optional, defaults to nil
+             :quiet               => true | false,  # optional, defaults to false
+             :host                => 'http://localhost:1337', # optional, defaults to 'https://api.parse.com'
+             :path                => '/parse', # optional, defaults to '/1'
+             :get_method_override => true | false, # optional, defaults to true
 ```
 
 [![Gem Version](https://img.shields.io/gem/v/parse-ruby-client.svg)](http://badge.fury.io/rb/parse-ruby-client)
