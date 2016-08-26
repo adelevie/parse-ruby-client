@@ -119,7 +119,7 @@ Parse.create :application_id      => "<your_app_id>", # required
 
 ## Parse App Config Parameters
 
-[Application config parameters](https://parse.com/docs/rest#config) are read-only and must be set via the Parse web application. However, you can access the values with:
+[Application config parameters](https://parseplatform.github.io/docs/rest/guide/#config) are read-only and must be set via the Parse web application. However, you can access the values with:
 
 ```ruby
 client.application_config # => {"welcomeMessage" => "Welcome to The Internet!", "winningNumber" => 42}
@@ -895,7 +895,7 @@ user.parse_delete
 
 ### Linking Users
 
-TODO: Implement this! See https://parse.com/docs/rest#users-linking
+TODO: Implement this! See https://parseplatform.github.io/docs/rest/guide/#linking-users
 
 Parse allows you to link your users with services like Twitter and Facebook, enabling your users to sign up or log into your application using their existing identities. This is accomplished through the sign-up and update REST endpoints by providing authentication data for the service you wish to link to a user in the authData field. Once your user is associated with a service, the authData for the service will be stored with the user and is retrievable by logging in.
 
@@ -1059,7 +1059,7 @@ If you want to access your data ignoring all ACLs, you can use the master key pr
 
 TODO: Implement this!
 
-See https://parse.com/docs/rest#roles
+See https://parseplatform.github.io/docs/rest/guide/#roles
 
 ## Files
 
@@ -1122,11 +1122,11 @@ Parse allows you to send push notifications to iOS and Android devices.
 
 Notifications by default are set for iOS and Android. You can set certain notifications to only be sent to iOS or Android by setting the `type` to `ios` or `android`.
 
-For config/installation: https://parse.com/docs/rest#push and https://parse.com/docs/push_guide#top/REST
+For config/installation: https://parseplatform.github.io/docs/rest/guide/#push-notification
 
 ### Using Channels
 
-To send a notification to the "Giants" channel, as given at: https://parse.com/docs/push_guide#sending-channels/REST.
+To send a notification to the "Giants" channel, as given at: https://parseplatform.github.io/docs/rest/guide/#using-channels
 
 ```ruby
 data = { :alert => "This is a notification from Parse" }
@@ -1139,7 +1139,7 @@ Without a specific channel, by default it sends to all installations.
 
 ### Using Advanced Targeting
 
-To send a notification to installations where `injuryReports` is `true`, as given at: https://parse.com/docs/push_guide#sending-queries/REST
+To send a notification to installations where `injuryReports` is `true`, as given at: https://parseplatform.github.io/docs/rest/guide/#sending-pushes-to-queries
 
 
 ```ruby
@@ -1215,7 +1215,7 @@ places = client.query("PlaceObject").tap do |q|
 end.get
 ```
 
-See https://parse.com/docs/rest#geo-query for the rest of the geo query types to be implemented.
+See https://parseplatform.github.io/docs/rest/guide/#geo-queries for the rest of the geo query types to be implemented.
 
 ### Caveats
 
