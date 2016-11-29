@@ -19,7 +19,7 @@ module Parse
       @data = data
 
       # NOTE: if no channel is specified, by setting "where" to an empty clause
-      #   a push is sent to all clients.
+      # a push is sent to all clients.
       if !channel || channel.empty?
         @where = {}
       else
@@ -44,7 +44,7 @@ module Parse
       # so we make channels part of the query conditions
       if @channels
         if @where
-          @where[:channels] = @channels
+          @where[:channels] = { '$in' => @channels }
         else
           body[:channels] = @channels
         end
