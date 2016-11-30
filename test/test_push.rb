@@ -103,7 +103,12 @@ class TestPush < ParseTestCase
       body = JSON.parse(body)
       expected_result = {
         'data' => { 'alert' => 'foobar' },
-        'where' => { 'channels' => ['foobar'], 'appName' => 'Test' }
+        'where' => {
+          'channels' => {
+            '$in' => %w(foobar)
+          },
+          'appName' => 'Test'
+        }
       }
       assert_equal expected_result, body
 
@@ -125,7 +130,7 @@ class TestPush < ParseTestCase
       body = JSON.parse(body)
       expected_result = {
         'data' => { 'alert' => 'foobar' },
-        'where' => { 'channels' => %w(abcdef bcdefg) }
+        'where' => { 'channels' => { '$in' => %w(abcdef bcdefg) } }
       }
       assert_equal expected_result, body
 
