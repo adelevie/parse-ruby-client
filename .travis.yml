@@ -2,11 +2,11 @@ language: ruby
 sudo: false
 
 rvm:
-  - jruby-9.1.7.0
   - 2.4.0
   - 2.3.3
   - 2.2.6
   - 2.1.10
+  - jruby-9.1.7.0
 
 env:
  - PARSE_APPLICATION_ID=Xco7FawNF1YUexCi1cNilLyisoiWUnGds0CCDRFg PARSE_REST_API_KEY=KIFjCTjB8r5pRJLtecA2tJkG2T21RXBahoeIk0Vf PARSE_MASTER_API_KEY=VwAabxOyZNqECz2JfhNwp2WI3tDtlfl9JkXBsTUE
