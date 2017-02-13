@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'dotenv/load'
 require 'bundler/gem_tasks'
 require 'rake/testtask'
 
