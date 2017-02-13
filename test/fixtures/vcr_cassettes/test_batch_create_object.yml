@@ -2,19 +2,19 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.parse.com/1/batch
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/batch
     body:
       encoding: UTF-8
-      string: '{"requests":[{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"1"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"2"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"3"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"4"}},{"method":"POST","path":"/1/classes/BatchTestObject","body":{"foo":"5"}}]}'
+      string: '{"requests":[{"method":"POST","path":"/parse/classes/BatchTestObject","body":{"foo":"1"}},{"method":"POST","path":"/parse/classes/BatchTestObject","body":{"foo":"2"}},{"method":"POST","path":"/parse/classes/BatchTestObject","body":{"foo":"3"}},{"method":"POST","path":"/parse/classes/BatchTestObject","body":{"foo":"4"}},{"method":"POST","path":"/parse/classes/BatchTestObject","body":{"foo":"5"}}]}'
     headers:
       User-Agent:
-      - Parse for Ruby, 1.0.0
+      - Parse for Ruby, 1.0.0.alpha2
       Content-Type:
       - application/json
+      X-Parse-Master-Key:
+      - "<X-Parse-Master-Key>"
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
-      X-Parse-Rest-Api-Key:
-      - "<X-Parse-REST-API-Key>"
       X-Parserubyclient-Retries:
       - '3'
       Accept-Encoding:
@@ -26,29 +26,31 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Access-Control-Allow-Methods:
-      - "*"
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 09 Mar 2016 17:28:19 GMT
       Server:
-      - nginx/1.6.0
-      X-Parse-Platform:
-      - G1
-      X-Runtime:
-      - '0.027251'
-      Content-Length:
-      - '387'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '386'
+      Date:
+      - Mon, 13 Feb 2017 00:06:53 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '[{"success":{"createdAt":"2016-03-09T17:28:19.574Z","objectId":"uEOMVpeMdt"}},{"success":{"createdAt":"2016-03-09T17:28:19.573Z","objectId":"R0ceWz2Yi1"}},{"success":{"createdAt":"2016-03-09T17:28:19.573Z","objectId":"siRRlkhe5B"}},{"success":{"createdAt":"2016-03-09T17:28:19.573Z","objectId":"yI8PRJstsh"}},{"success":{"createdAt":"2016-03-09T17:28:19.572Z","objectId":"Dnwo674CdU"}}]
-
-'
+      string: '[{"success":{"objectId":"e5ZMDDqf63","createdAt":"2017-02-13T00:06:53.407Z"}},{"success":{"objectId":"rZEVzy3cM1","createdAt":"2017-02-13T00:06:53.407Z"}},{"success":{"objectId":"9qmeiEDmY8","createdAt":"2017-02-13T00:06:53.408Z"}},{"success":{"objectId":"3XFvxf5eVA","createdAt":"2017-02-13T00:06:53.408Z"}},{"success":{"objectId":"cyob3sZqag","createdAt":"2017-02-13T00:06:53.408Z"}}]'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 17:28:19 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 13 Feb 2017 00:06:53 GMT
+recorded_with: VCR 3.0.3

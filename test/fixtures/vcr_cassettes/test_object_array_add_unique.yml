@@ -2,19 +2,19 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.parse.com/1/classes/Post
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/classes/Post
     body:
       encoding: UTF-8
       string: "{}"
     headers:
       User-Agent:
-      - Parse for Ruby, 1.0.0
+      - Parse for Ruby, 1.0.0.alpha2
       Content-Type:
       - application/json
+      X-Parse-Master-Key:
+      - "<X-Parse-Master-Key>"
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
-      X-Parse-Rest-Api-Key:
-      - "<X-Parse-REST-API-Key>"
       X-Parserubyclient-Retries:
       - '3'
       Accept-Encoding:
@@ -26,48 +26,50 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      Access-Control-Allow-Methods:
-      - "*"
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 09 Mar 2016 17:12:03 GMT
-      Location:
-      - https://api.parse.com/1/classes/Post/hx9eKaUuFp
       Server:
-      - nginx/1.6.0
-      X-Parse-Platform:
-      - G1
-      X-Runtime:
-      - '0.009179'
-      Content-Length:
-      - '65'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      Location:
+      - https://parse-ruby-client-server.herokuapp.com/parse/classes/Post/8PoulSUoO6
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '64'
+      Date:
+      - Mon, 13 Feb 2017 00:06:42 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"createdAt":"2016-03-09T17:12:03.472Z","objectId":"hx9eKaUuFp"}
-
-'
+      string: '{"objectId":"8PoulSUoO6","createdAt":"2017-02-13T00:06:42.710Z"}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 17:12:03 GMT
+  recorded_at: Mon, 13 Feb 2017 00:06:42 GMT
 - request:
     method: post
-    uri: https://api.parse.com/1/classes/Comment
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/classes/Comment
     body:
       encoding: UTF-8
       string: '{"text":"great post!"}'
     headers:
       User-Agent:
-      - Parse for Ruby, 1.0.0
+      - Parse for Ruby, 1.0.0.alpha2
       Content-Type:
       - application/json
+      X-Parse-Master-Key:
+      - "<X-Parse-Master-Key>"
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
-      X-Parse-Rest-Api-Key:
-      - "<X-Parse-REST-API-Key>"
       X-Parserubyclient-Retries:
       - '3'
       Accept-Encoding:
@@ -79,48 +81,50 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      Access-Control-Allow-Methods:
-      - "*"
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 09 Mar 2016 17:12:03 GMT
-      Location:
-      - https://api.parse.com/1/classes/Comment/B87Wdf8fWr
       Server:
-      - nginx/1.6.0
-      X-Parse-Platform:
-      - G1
-      X-Runtime:
-      - '0.013374'
-      Content-Length:
-      - '65'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      Location:
+      - https://parse-ruby-client-server.herokuapp.com/parse/classes/Comment/fmxMaKfF12
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '64'
+      Date:
+      - Mon, 13 Feb 2017 00:06:42 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"createdAt":"2016-03-09T17:12:03.935Z","objectId":"B87Wdf8fWr"}
-
-'
+      string: '{"objectId":"fmxMaKfF12","createdAt":"2017-02-13T00:06:42.895Z"}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 17:12:04 GMT
+  recorded_at: Mon, 13 Feb 2017 00:06:42 GMT
 - request:
     method: put
-    uri: https://api.parse.com/1/classes/Post/hx9eKaUuFp
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/classes/Post/8PoulSUoO6
     body:
       encoding: UTF-8
-      string: '{"comments":{"__op":"AddUnique","objects":[{"__type":"Pointer","className":"Comment","objectId":"B87Wdf8fWr"}]}}'
+      string: '{"comments":{"__op":"AddUnique","objects":[{"__type":"Pointer","className":"Comment","objectId":"fmxMaKfF12"}]}}'
     headers:
       User-Agent:
-      - Parse for Ruby, 1.0.0
+      - Parse for Ruby, 1.0.0.alpha2
       Content-Type:
       - application/json
+      X-Parse-Master-Key:
+      - "<X-Parse-Master-Key>"
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
-      X-Parse-Rest-Api-Key:
-      - "<X-Parse-REST-API-Key>"
       X-Parserubyclient-Retries:
       - '3'
       Accept-Encoding:
@@ -132,29 +136,31 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Access-Control-Allow-Methods:
-      - "*"
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 09 Mar 2016 17:12:04 GMT
       Server:
-      - nginx/1.6.0
-      X-Parse-Platform:
-      - G1
-      X-Runtime:
-      - '0.009630'
-      Content-Length:
-      - '121'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '120'
+      Date:
+      - Mon, 13 Feb 2017 00:06:43 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"comments":[{"__type":"Pointer","className":"Comment","objectId":"B87Wdf8fWr"}],"updatedAt":"2016-03-09T17:12:04.459Z"}
-
-'
+      string: '{"comments":[{"__type":"Pointer","className":"Comment","objectId":"fmxMaKfF12"}],"updatedAt":"2017-02-13T00:06:43.083Z"}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 17:12:04 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 13 Feb 2017 00:06:43 GMT
+recorded_with: VCR 3.0.3

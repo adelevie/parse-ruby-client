@@ -4,7 +4,8 @@ require 'helper'
 class TestClientInit < ParseTestCase
   def setup
     logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
-    @client = Parse.init(logger: logger)
+    @client = Parse.init(
+      host: ENV['PARSE_HOST'], path: ENV['PARSE_HOST_PATH'], logger: logger)
   end
 
   def stubbed_client(&_block)
@@ -179,8 +180,11 @@ class TestClientInit < ParseTestCase
 
   def test_get_missing
     VCR.use_cassette('test_client_get_missing') do
-      e = assert_raises(Parse::ParseProtocolError) { Parse.get('SomeClass', 'someIdThatDoesNotExist') }
-      assert_equal '101: object not found for get: SomeClass:someIdThatDoesNotExist', e.message
+      e = assert_raises(Parse::ParseProtocolError) do
+        Parse.get('SomeClass', 'someIdThatDoesNotExist')
+      end
+
+      assert_match /object not found/i, e.message
     end
   end
 end

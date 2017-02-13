@@ -2,19 +2,19 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.parse.com/1/files/hello.txt
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/files/hello.txt
     body:
       encoding: UTF-8
       string: Hello World!
     headers:
       User-Agent:
-      - Parse for Ruby, 1.0.0
+      - Parse for Ruby, 1.0.0.alpha2
       Content-Type:
       - text/plain
+      X-Parse-Master-Key:
+      - "<X-Parse-Master-Key>"
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
-      X-Parse-Rest-Api-Key:
-      - "<X-Parse-REST-API-Key>"
       X-Parserubyclient-Retries:
       - '3'
       Accept-Encoding:
@@ -26,31 +26,33 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      Access-Control-Allow-Methods:
-      - "*"
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 09 Mar 2016 17:11:50 GMT
-      Location:
-      - http://files.parsetfss.com/9a6f1cad-4371-490e-b40f-5045ebc7b5b3/tfss-6dedb9e6-02b2-4116-8ed2-05e4a7c96c0b-hello.txt
       Server:
-      - nginx/1.6.0
-      X-Parse-Platform:
-      - G1
-      X-Runtime:
-      - '0.035219'
-      Content-Length:
-      - '187'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      Location:
+      - https://parse-ruby-client-server.herokuapp.com/parse/files/80b8063a0acd16236ea8/3f6b769dab967cbe2dd3aab0bc9881cd_hello.txt
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '184'
+      Date:
+      - Mon, 13 Feb 2017 00:06:48 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"name":"tfss-6dedb9e6-02b2-4116-8ed2-05e4a7c96c0b-hello.txt","url":"http://files.parsetfss.com/9a6f1cad-4371-490e-b40f-5045ebc7b5b3/tfss-6dedb9e6-02b2-4116-8ed2-05e4a7c96c0b-hello.txt"}
-
-'
+      string: '{"url":"https://parse-ruby-client-server.herokuapp.com/parse/files/80b8063a0acd16236ea8/3f6b769dab967cbe2dd3aab0bc9881cd_hello.txt","name":"3f6b769dab967cbe2dd3aab0bc9881cd_hello.txt"}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 17:11:50 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 13 Feb 2017 00:06:48 GMT
+recorded_with: VCR 3.0.3
