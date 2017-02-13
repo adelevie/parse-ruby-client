@@ -1,12 +1,15 @@
 language: ruby
 sudo: false
-
 rvm:
-  - 2.4.0
-  - 2.3.3
-  - 2.2.6
-  - 2.1.10
-  - jruby-9.1.7.0
-
+- 2.4.0
+- 2.3.3
+- 2.2.6
+- 2.1.10
+- jruby-9.1.7.0
 env:
- - PARSE_HOST=https://parse-ruby-client-server.herokuapp.com PARSE_HOST_PATH=/parse PARSE_APPLICATION_ID=80b8063a0acd16236ea8 PARSE_MASTER_API_KEY=cf9a0738b2687973f7b8
+  matrix:
+  - PARSE_HOST=https://parse-ruby-client-server.herokuapp.com
+  - PARSE_HOST_PATH=/parse
+  global:
+  - secure: Y73am8+24a68YjhF52hl4WafB1RUMsWDjVowMQzfirUdJDpcaje3Ax08J2CzZbEFQ6D30DpgrZNsIKxvX63WHW4EfEljMw6VZZdZmEzUSNkYWGDsk4H2DloVgqfBuucMIk3vGPIJqZbeABR99voOX6PngQC/kmcvI/srC92YhJk=
+  - secure: VXNSetQFaM0Ix9RnxevvnmpHdsIXG0dDn8n39jepwpSeOTn9pGUKDHoZvyg+bKTgYWo5sxwND0XDxhsmTwHyhUVwmXRxayWz0BSOiA6YVtcA9+99o7emCEuggl3jrVzmNWAzbO0cZqbe3dhnT2YQyCPUXGTLlRJ484q4PB3y+6A=
