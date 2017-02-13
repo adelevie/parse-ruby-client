@@ -97,7 +97,8 @@ module Parse
       end
 
       uri = ::File.join(path, uri)
-      @session.send(method, uri, query || body || {}, headers).body
+      response = @session.send(method, uri, query || body || {}, headers)
+      response.body
 
     # NOTE: Don't leak our internal libraries to our clients.
     # Extend this list of exceptions as needed.

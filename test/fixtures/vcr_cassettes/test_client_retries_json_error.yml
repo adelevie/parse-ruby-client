@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.parse.com/1/
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/
     body:
       encoding: US-ASCII
       string: ''
@@ -23,27 +23,43 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 410
-      message: Gone
+      code: 404
+      message: Not Found
     headers:
-      Content-Type:
-      - application/octet-stream
-      Date:
-      - Mon, 13 Feb 2017 00:06:35 GMT
       Server:
-      - nginx/1.6.0
-      Content-Length:
-      - '57'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '19'
+      Date:
+      - Mon, 13 Feb 2017 15:35:24 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: Parse.com has shutdown - https://parseplatform.github.io/
+      string: 'Cannot GET /parse/
+
+'
     http_version: 
-  recorded_at: Mon, 13 Feb 2017 00:06:35 GMT
+  recorded_at: Mon, 13 Feb 2017 15:35:24 GMT
 - request:
     method: get
-    uri: https://api.parse.com/1/
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/
     body:
       encoding: US-ASCII
       string: ''
@@ -64,22 +80,38 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 410
-      message: Gone
+      code: 404
+      message: Not Found
     headers:
-      Content-Type:
-      - application/octet-stream
-      Date:
-      - Mon, 13 Feb 2017 00:06:36 GMT
       Server:
-      - nginx/1.6.0
-      Content-Length:
-      - '57'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '19'
+      Date:
+      - Mon, 13 Feb 2017 15:35:25 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: Parse.com has shutdown - https://parseplatform.github.io/
+      string: 'Cannot GET /parse/
+
+'
     http_version: 
-  recorded_at: Mon, 13 Feb 2017 00:06:36 GMT
+  recorded_at: Mon, 13 Feb 2017 15:35:25 GMT
 recorded_with: VCR 3.0.3

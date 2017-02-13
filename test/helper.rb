@@ -66,11 +66,21 @@ VCR.configure do |c|
 end
 
 class ParseTestCase < Minitest::Test
+  def stub_path
+    '/parse/'
+  end
+
+  def client_options
+    {
+      host: ENV['PARSE_HOST'],
+      path: ENV['PARSE_HOST_PATH'],
+      logger: logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR },
+      get_method_override: false
+    }
+  end
+
   def setup
-    logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
-    @client = Parse.create(
-      host: ENV['PARSE_HOST'], path: ENV['PARSE_HOST_PATH'], logger: logger,
-      get_method_override: false)
+    @client = Parse.create(client_options)
   end
 end
 

@@ -1,69 +1,13 @@
 # encoding: utf-8
 require 'helper'
 
-class TestClientShortcuts < ParseTestCase
-  def test_batch
-    batch = @client.batch
-    assert batch.is_a? Parse::Batch
-    assert_equal @client, batch.client
-  end
-
-  def test_cloud_function
-    cloud_function = @client.cloud_function('whatever')
-    assert cloud_function.is_a? Parse::Cloud::Function
-    assert_equal @client, cloud_function.client
-  end
-
-  def test_file
-    file = @client.file(body: 'Hello World!',
-                        local_filename: 'hello.txt',
-                        content_type: 'text/plain')
-    assert file.is_a? Parse::File
-    assert_equal @client, file.client
-  end
-
-  def test_object
-    object = @client.object('Post')
-    assert object.is_a? Parse::Object
-    assert_equal @client, object.client
-  end
-
-  def test_push
-    push = @client.push(alert: 'message')
-    assert push.is_a? Parse::Push
-    assert_equal @client, push.client
-  end
-
-  def test_query
-    query = @client.query('Post')
-    assert query.is_a? Parse::Query
-    assert_equal @client, query.client
-  end
-
-  def test_user
-    user = @client.user(username: 'foobar', password: 'whatever')
-    assert user.is_a? Parse::User
-    assert_equal @client, user.client
-  end
-
-  def test_application_config
-    VCR.use_cassette('test_application_config') do
-      assert @client.application_config
-    end
-  end
-end
-
 class TestClientCreate < ParseTestCase
   def stubbed_client(&_block)
     stubs = Faraday::Adapter::Test::Stubs.new do |stub|
       yield(stub)
     end
 
-    client = Parse.create(
-      logger: Logger.new(STDERR).tap do |l|
-        l.level = Logger::ERROR
-      end
-    ) do |b|
+    client = Parse.create(client_options) do |b|
       b.adapter :test, stubs
     end
 
@@ -74,31 +18,28 @@ class TestClientCreate < ParseTestCase
     VCR.use_cassette('test_client_retries') do
       stubs, client = stubbed_client do |stub|
         (@client.max_retries + 1).times do
-          stub.get('/1/') do
-            [500, {}, {
-              'code' => Parse::Protocol::ERROR_TIMEOUT }.to_json
-            ]
+          stub.get(stub_path) do
+            [500, {}, {'code' => Parse::Protocol::ERROR_TIMEOUT }.to_json]
           end
         end
       end
 
       assert_raises(Parse::ParseProtocolError) do
         client.request('/')
+        stubs.verify_stubbed_calls
       end
-
-      stubs.verify_stubbed_calls
     end
   end
 
   def test_retries_json_error
     VCR.use_cassette('test_client_retries_json_error') do
       stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [500, {}, '<HTML>this is not json</HTML>'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+        stub.get(stub_path) { [500, {}, '<HTML>this is not json</HTML>'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_equal({ 'foo' => 100 }, client.request('/'))
-
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
       stubs.verify_stubbed_calls
     end
   end
@@ -106,12 +47,12 @@ class TestClientCreate < ParseTestCase
   def test_retries_server_error
     VCR.use_cassette('test_client_retries_server_error') do
       stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [500, {}, '{}'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+        stub.get(stub_path) { [500, {}, '{}'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_equal({ 'foo' => 100 }, client.request('/'))
-
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
       stubs.verify_stubbed_calls
     end
   end
@@ -119,45 +60,46 @@ class TestClientCreate < ParseTestCase
   def test_wraps_connection_errors
     VCR.use_cassette('test_client_wraps_connection_errors') do
       _stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { raise Faraday::Error::ConnectionFailed, 'message' }
+        stub.get(stub_path) do
+          raise Faraday::Error::ConnectionFailed, 'message'
+        end
       end
 
       error = assert_raises(Parse::ConnectionError) { client.request('/') }
-
       assert_equal 'message', error.message
     end
   end
 
-  def test_not_retries_404
+  def test_retries_404
     VCR.use_cassette('test_client_retries_404') do
-      _stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [404, {}, 'Not found'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+      stubs, client = stubbed_client do |stub|
+        stub.get(stub_path) { [404, {}, 'Not found'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raises(Parse::ParseProtocolError) do
-        client.request('/')
-      end
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
+      stubs.verify_stubbed_calls
     end
   end
 
-  def test_not_retries_404_with_correct_json
+  def test_retries_404_with_correct_json
     VCR.use_cassette('test_client_retries_404_correct') do
-      _stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [404, {}, '{"foo":100}'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+      stubs, client = stubbed_client do |stub|
+        stub.get(stub_path) { [404, {}, '{"foo":100}'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raises(Parse::ParseProtocolError) do
-        client.request('/')
-      end
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
+      stubs.verify_stubbed_calls
     end
   end
 
   def test_empty_response
     VCR.use_cassette('test_client_empty_response') do
       stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [403, {}, 'nonparseable'] }
+        stub.get(stub_path) { [403, {}, 'nonparseable'] }
       end
 
       # some json parsers return nil instead of raising
