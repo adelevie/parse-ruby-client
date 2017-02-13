@@ -14,17 +14,6 @@ class TestInstallation < ParseTestCase
     end
   end
 
-  def test_create_installation_with_invalid_data
-    VCR.use_cassette('test_create_invalid_installation') do
-      installation = @client.installation.tap do |i|
-        i.device_token = '123'
-        i.device_type = 'ios'
-      end
-
-      assert_raises(Parse::ParseProtocolError) { installation.save }
-    end
-  end
-
   def test_retrieving_installation_data
     VCR.use_cassette('test_installation_get') do
       installation = Parse::Installation.new(nil, @client).tap do |inst|
