@@ -17,17 +17,19 @@ module Faraday
           Parse::Protocol::ERROR_TIMEOUT,
           Parse::Protocol::ERROR_EXCEEDED_BURST_LIMIT
         ]
+
         error_hash = {
           'error' => "HTTP Status #{env[:status]} Body #{env[:body]}",
           'http_status_code' => env[:status]
         }.merge(data)
-        if data['code'] && array_codes.include?(data['code'])
-          sleep 60 if data['code'] == Parse::Protocol::ERROR_EXCEEDED_BURST_LIMIT
-          raise exception(env), error_hash.merge(data)
-        elsif env[:status] >= 500
-          raise exception(env), error_hash.merge(data)
+
+        if data['code'] && \
+          array_codes.include?(data['code']) && \
+          data['code'] == Parse::Protocol::ERROR_EXCEEDED_BURST_LIMIT
+          sleep 60
         end
-        raise Parse::ParseProtocolError, error_hash
+
+        raise exception(env), error_hash
       else
         data = parse(env[:body]) || {}
         env[:body] = data

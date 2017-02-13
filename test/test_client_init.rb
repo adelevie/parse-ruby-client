@@ -3,9 +3,7 @@ require 'helper'
 
 class TestClientInit < ParseTestCase
   def setup
-    logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
-    @client = Parse.init(
-      host: ENV['PARSE_HOST'], path: ENV['PARSE_HOST_PATH'], logger: logger)
+    @client = Parse.init(client_options)
   end
 
   def stubbed_client(&_block)
@@ -13,11 +11,7 @@ class TestClientInit < ParseTestCase
       yield(stub)
     end
 
-    client = Parse.init(
-      logger: Logger.new(STDERR).tap do |l|
-        l.level = Logger::ERROR
-      end
-    ) do |b|
+    client = Parse.init(client_options) do |b|
       b.adapter :test, stubs
     end
 
@@ -28,10 +22,8 @@ class TestClientInit < ParseTestCase
     VCR.use_cassette('test_client_retries') do
       stubs, client = stubbed_client do |stub|
         (@client.max_retries + 1).times do
-          stub.get('/1/') do
-            [500, {}, {
-              'code' => Parse::Protocol::ERROR_TIMEOUT }.to_json
-            ]
+          stub.get(stub_path) do
+            [500, {}, {'code' => Parse::Protocol::ERROR_TIMEOUT }.to_json]
           end
         end
       end
@@ -47,12 +39,12 @@ class TestClientInit < ParseTestCase
   def test_retries_json_error
     VCR.use_cassette('test_client_retries_json_error') do
       stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [500, {}, '<HTML>this is not json</HTML>'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+        stub.get(stub_path) { [500, {}, '<HTML>this is not json</HTML>'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_equal({ 'foo' => 100 }, client.request('/'))
-
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
       stubs.verify_stubbed_calls
     end
   end
@@ -60,46 +52,46 @@ class TestClientInit < ParseTestCase
   def test_retries_server_error
     VCR.use_cassette('test_client_retries_server_error') do
       stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [500, {}, '{}'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+        stub.get(stub_path) { [500, {}, '{}'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_equal({ 'foo' => 100 }, client.request('/'))
-
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
       stubs.verify_stubbed_calls
     end
   end
 
-  def test_not_retries_404
+  def test_retries_404
     VCR.use_cassette('test_client_retries_404') do
-      _stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [404, {}, 'Not found'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+      stubs, client = stubbed_client do |stub|
+        stub.get(stub_path) { [404, {}, 'Not found'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raises(Parse::ParseProtocolError) do
-        client.request('/')
-      end
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
+      stubs.verify_stubbed_calls
     end
   end
 
-  def test_not_retries_404_with_correct_json
+  def test_retries_404_with_correct_json
     VCR.use_cassette('test_client_retries_404_correct') do
-      _stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [404, {}, '{"foo":100}'] }
-        stub.get('/1/') { [200, {}, '{"foo":100}'] }
+      stubs, client = stubbed_client do |stub|
+        stub.get(stub_path) { [404, {}, '{"foo":100}'] }
+        stub.get(stub_path) { [200, {}, '{"foo":100}'] }
       end
 
-      assert_raises(Parse::ParseProtocolError) do
-        client.request('/')
-      end
+      expected_result = { 'foo' => 100 }
+      assert_equal expected_result, client.request('/')
+      stubs.verify_stubbed_calls
     end
   end
 
   def test_empty_response
     VCR.use_cassette('test_client_empty_response') do
       stubs, client = stubbed_client do |stub|
-        stub.get('/1/') { [403, {}, 'nonparseable'] }
+        stub.get(stub_path) { [403, {}, 'nonparseable'] }
       end
 
       # some json parsers return nil instead of raising

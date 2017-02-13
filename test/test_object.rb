@@ -96,17 +96,13 @@ class TestObject < ParseTestCase
 
   def test_parse_delete
     VCR.use_cassette('test_object_parse_delete') do
-      post = Parse::Object.new('Post', nil, @client)
-      post.save
-      assert_equal post.id.class, String
-
-      q = Parse.get('Post', post.id, @client)
-      assert_equal q.id, post.id
+      post_id = '2BwNSsKcCk'
+      post = Parse.get('Post', post_id, @client)
+      assert_equal post.id, post_id
 
       post.parse_delete
-
       assert_raises(Parse::ParseProtocolError) do
-        q = Parse.get('Post', post.id, @client)
+        Parse.get('Post', post_id, @client)
       end
     end
   end
