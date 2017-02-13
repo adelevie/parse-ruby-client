@@ -13,21 +13,21 @@ class TestBatch < ParseTestCase
     batch = Parse::Batch.new(@client)
     batch.add_request(
       method: 'POST',
-      path: '/1/classes/GameScore',
+      path: '/parse/classes/GameScore',
       body: {
         score: 1337,
         playerName: 'Sean Plott'
       })
     batch.add_request(
       method: 'POST',
-      path: '/1/classes/GameScore',
+      path: '/parse/classes/GameScore',
       body: {
         score: 1338,
         playerName: 'ZeroCool'
       })
     assert_equal batch.requests.class, Array
     assert_equal batch.requests.length, 2
-    assert_equal batch.requests.first[:path], '/1/classes/GameScore'
+    assert_equal batch.requests.first[:path], '/parse/classes/GameScore'
   end
 
   def test_protocol_uri
@@ -35,12 +35,13 @@ class TestBatch < ParseTestCase
     assert_equal '/batch', uri
   end
 
+
   def test_run
     VCR.use_cassette('test_batch_run') do
       batch = Parse::Batch.new(@client)
       batch.add_request(
         'method' => 'POST',
-        'path' => '/1/classes/GameScore',
+        'path' => '/parse/classes/GameScore',
         'body' => {
           'score' => 1337,
           'playerName' => 'Sean Plott'

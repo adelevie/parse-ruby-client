@@ -68,7 +68,9 @@ end
 class ParseTestCase < Minitest::Test
   def setup
     logger = Logger.new(STDERR).tap { |l| l.level = Logger::ERROR }
-    @client = Parse.create(logger: logger)
+    @client = Parse.create(
+      host: ENV['PARSE_HOST'], path: ENV['PARSE_HOST_PATH'], logger: logger,
+      get_method_override: false)
   end
 end
 

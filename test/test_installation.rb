@@ -5,23 +5,12 @@ class TestInstallation < ParseTestCase
   def test_create_installation_with_valid_data
     VCR.use_cassette('test_create_valid_installation') do
       installation = @client.installation.tap do |i|
-        i.device_token = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+        i.device_token = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdex'
         i.device_type = 'ios'
       end.save
 
-      assert_equal installation['createdAt'].class, String
-      assert_equal installation['objectId'].class, String
-    end
-  end
-
-  def test_create_installation_with_invalid_data
-    VCR.use_cassette('test_create_invalid_installation') do
-      installation = @client.installation.tap do |i|
-        i.device_token = '123'
-        i.device_type = 'ios'
-      end
-
-      assert_raises(Parse::ParseProtocolError) { installation.save }
+      assert installation['createdAt']
+      assert installation['objectId']
     end
   end
 
@@ -55,13 +44,15 @@ class TestInstallation < ParseTestCase
         inst['deviceType'] = 'ios'
         inst['deviceToken'] = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
       end
-      old_installation_data = installation.save
+      response = installation.save
 
       installation.channels = ['', 'my-channel']
       installation.badge = 5
-      installation_data = installation.save
+      update_response = installation.save
 
-      assert installation_data['updatedAt'] > old_installation_data['updatedAt']
+      assert update_response['updatedAt'] > response['createdAt']
+
+      installation_data = Parse::Installation.get(response['objectId'], @client)
       assert_equal 5, installation_data['badge']
       assert_equal ['', 'my-channel'], installation_data['channels']
     end

@@ -2,19 +2,19 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.parse.com/1/classes/Post
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/classes/Post
     body:
       encoding: UTF-8
       string: "{}"
     headers:
       User-Agent:
-      - Parse for Ruby, 1.0.0
+      - Parse for Ruby, 1.0.0.alpha2
       Content-Type:
       - application/json
+      X-Parse-Master-Key:
+      - "<X-Parse-Master-Key>"
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
-      X-Parse-Rest-Api-Key:
-      - "<X-Parse-REST-API-Key>"
       X-Parserubyclient-Retries:
       - '3'
       Accept-Encoding:
@@ -26,48 +26,50 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      Access-Control-Allow-Methods:
-      - "*"
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 09 Mar 2016 17:14:52 GMT
-      Location:
-      - https://api.parse.com/1/classes/Post/I84nw56Kz4
       Server:
-      - nginx/1.6.0
-      X-Parse-Platform:
-      - G1
-      X-Runtime:
-      - '0.009763'
-      Content-Length:
-      - '65'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      Location:
+      - https://parse-ruby-client-server.herokuapp.com/parse/classes/Post/zZeKGwjQiw
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '64'
+      Date:
+      - Mon, 13 Feb 2017 00:06:19 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"createdAt":"2016-03-09T17:14:52.694Z","objectId":"I84nw56Kz4"}
-
-'
+      string: '{"objectId":"zZeKGwjQiw","createdAt":"2017-02-13T00:06:19.373Z"}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 17:14:52 GMT
+  recorded_at: Mon, 13 Feb 2017 00:06:19 GMT
 - request:
     method: get
-    uri: https://api.parse.com/1/classes/Post?limit=1&where=%7B%7D
+    uri: https://parse-ruby-client-server.herokuapp.com/parse/classes/Post?limit=1&where=%7B%7D
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Parse for Ruby, 1.0.0
+      - Parse for Ruby, 1.0.0.alpha2
       Content-Type:
       - application/json
+      X-Parse-Master-Key:
+      - "<X-Parse-Master-Key>"
       X-Parse-Application-Id:
       - "<X-Parse-Application-Id>"
-      X-Parse-Rest-Api-Key:
-      - "<X-Parse-REST-API-Key>"
       X-Parserubyclient-Retries:
       - '3'
       Accept-Encoding:
@@ -79,29 +81,33 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Access-Control-Allow-Methods:
-      - "*"
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 09 Mar 2016 17:14:53 GMT
       Server:
-      - nginx/1.6.0
-      X-Parse-Platform:
-      - G1
-      X-Runtime:
-      - '0.012137'
-      Content-Length:
-      - '181'
+      - Cowboy
       Connection:
       - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Headers:
+      - X-Parse-Master-Key, X-Parse-REST-API-Key, X-Parse-Javascript-Key, X-Parse-Application-Id,
+        X-Parse-Client-Version, X-Parse-Session-Token, X-Requested-With, X-Parse-Revocable-Session,
+        Content-Type
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '229'
+      Etag:
+      - W/"e5-vmkLvMMqwpU936fmbUIVWw"
+      Date:
+      - Mon, 13 Feb 2017 00:06:19 GMT
+      Via:
+      - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"results":[{"createdAt":"2016-03-09T17:11:40.402Z","cs":{"__type":"Relation","className":"Comment"},"objectId":"Q6B6rAuKDo","title":"foo","updatedAt":"2016-03-09T17:11:40.402Z"}]}
-
-'
+      string: '{"results":[{"objectId":"CkQiJyROAN","location":{"__type":"GeoPoint","latitude":-30,"longitude":40},"createdAt":"2017-02-12T22:41:34.217Z","updatedAt":"2017-02-12T22:41:34.217Z","cs":{"__type":"Relation","className":"Comment"}}]}'
     http_version: 
-  recorded_at: Wed, 09 Mar 2016 17:14:53 GMT
-recorded_with: VCR 3.0.1
+  recorded_at: Mon, 13 Feb 2017 00:06:19 GMT
+recorded_with: VCR 3.0.3

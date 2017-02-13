@@ -241,7 +241,8 @@ class TestClientCreate < ParseTestCase
       e = assert_raises(Parse::ParseProtocolError) do
         Parse.get('SomeClass', 'someIdThatDoesNotExist', @client)
       end
-      assert_equal '101: object not found for get: SomeClass:someIdThatDoesNotExist', e.message
+
+      assert_match /object not found/i, e.message
     end
   end
 

@@ -189,7 +189,7 @@ class TestPush < ParseTestCase
     VCR.use_cassette('test_push_with_channel_and_type') do
       data = { alert: 'This is a notification from Parse' }
       push = @client.push(data, 'Giants')
-      push.type = 'ios'
+      push.type = 'android'
       result = push.save
       assert result['result']
     end
