@@ -232,16 +232,18 @@ class TestQuery < ParseTestCase
       foo['random'] = 7
       foo.save
       foo_query = Parse::Query.new('Post', @client).eq('random', foo['random'])
-      assert_equal 1, foo_query.get.size
+      foo_count = foo_query.get.size
+      assert foo_count > 0
 
       bar = Parse::Object.new('Post', nil, @client)
       bar['random'] = 5
       bar.save
       bar_query = Parse::Query.new('Post', @client).eq('random', bar['random'])
-      assert_equal 1, foo_query.get.size
+      bar_count = bar_query.get.size
+      assert bar_count > 0
 
       query = foo_query.or(bar_query)
-      assert_equal 2, query.get.size
+      assert_equal foo_count + bar_count, query.get.size
     end
   end
 
@@ -261,10 +263,12 @@ class TestQuery < ParseTestCase
       other_post = Parse::Object.new('Post', nil, @client)
       other_post.save
 
-      query = Parse::Query.new('Post', @client)
-        .value_in('objectId', [post.id] + Array.new(5000) { 'x' })
-        .get
-      assert_equal [post], query
+      query = Parse::Query
+        .new('Post', @client)
+        .value_in('objectId', [post.id] + Array.new(500) { 'x' })
+
+      result = query.get
+      assert_equal [post], result
     end
   end
 
