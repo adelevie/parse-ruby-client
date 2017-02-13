@@ -5,9 +5,8 @@ module Parse
     # Basics
     # ----------------------------------------
 
-    # The default hostname and path for communication with the Parse API.
-    HOST            = 'https://api.parse.com'
-    PATH            = '/1'
+    # The default path for communication with the Parse API.
+    PATH            = '/parse'
 
     # HTTP Headers
     # ----------------------------------------
