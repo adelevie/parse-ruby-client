@@ -35,11 +35,11 @@ We support Ruby 2.1 and newer and JRuby 9000. Older versions are not supported, 
 require 'parse-ruby-client'
 
 Parse.create :application_id      => "<your_app_id>", # required
-             :api_key             => "<your_api_key>", # optional, defaults to nil
-             :master_key          => "<your_master_key>", # optional, defaults to nil
-             :quiet               => true | false,  # optional, defaults to false
-             :host                => 'http://localhost:1337', # optional, defaults to 'https://api.parse.com'
+             :master_key          => "<your_master_key>", # required
+             :host                => 'http://localhost:1337', # required
              :path                => '/parse', # optional, defaults to '/1'
+             :api_key             => "<your_api_key>", # optional, defaults to nil
+             :quiet               => true | false,  # optional, defaults to false
              :get_method_override => true | false, # optional, defaults to true
 ```
 
@@ -1080,7 +1080,7 @@ The response body is a `Hash` object containing the name of the file, which is t
 
 ```ruby
 {"url"=>
-  "http://files.parse.com/372fcbb9-7eae-4b9a-abc8-6da97fcac50d/98f06e15-d6e6-42a9-a9cd-7d28ec98052c-hello.txt",
+  "http://something.com/somewhere/98f06e15-d6e6-42a9-a9cd-7d28ec98052c-hello.txt",
  "name"=>"98f06e15-d6e6-42a9-a9cd-7d28ec98052c-hello.txt"}
 ```
 

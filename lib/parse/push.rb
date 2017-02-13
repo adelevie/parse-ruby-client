@@ -4,7 +4,7 @@ require 'parse/error'
 
 module Parse
   # Push notification
-  # https://parse.com/docs/rest/guide/#push-notifications
+  # https://parseplatform.github.io/docs/rest/guide/#push-notification
   class Push
     attr_accessor :channels
     attr_accessor :where

@@ -6,7 +6,7 @@ require 'parse/object'
 
 module Parse
   # Installation object
-  # https://parse.com/docs/rest/guide/#push-notifications-installations
+  # https://parseplatform.github.io/docs/rest/guide/#installations
   class Installation < Parse::Object
     attr_accessor :client
 

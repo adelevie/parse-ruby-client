@@ -1,7 +1,7 @@
 # encoding: utf-8
 module Parse
   # Parse Application
-  # https://parse.com/docs/rest/guide/#config
+  # https://parseplatform.github.io/docs/rest/guide/#config
   class Application
     def self.config(client = nil)
       client ||= Parse.client

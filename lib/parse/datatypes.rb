@@ -5,7 +5,7 @@ require 'base64'
 
 module Parse
   # A pointer to a Parse object
-  # https://parse.com/docs/rest/guide/#objects-data-types
+  # https://parseplatform.github.io/docs/rest/guide/#data-types
   class Pointer
     attr_accessor :parse_object_id
     attr_accessor :class_name
@@ -66,7 +66,7 @@ module Parse
   end
 
   # A Parse Date
-  # https://parse.com/docs/rest/guide/#objects-data-types
+  # https://parseplatform.github.io/docs/rest/guide/#data-types
   class Date
     attr_accessor :value
 
@@ -170,7 +170,7 @@ module Parse
   end
 
   # Increment (or decrement) counter
-  # https://parse.com/docs/rest/guide/#objects-counters
+  # https://parseplatform.github.io/docs/rest/guide/#counters
   class Increment
     attr_accessor :amount
 
@@ -202,7 +202,7 @@ module Parse
   end
 
   # Array operation
-  # https://parse.com/docs/rest/guide/#objects-arrays
+  # https://parseplatform.github.io/docs/rest/guide/#arrays
   class ArrayOp
     attr_accessor :operation
     attr_accessor :objects
@@ -237,7 +237,7 @@ module Parse
   end
 
   # GeoPoint
-  # https://parse.com/docs/rest/guide/#geopoints
+  # https://parseplatform.github.io/docs/rest/guide/#geopoints
   class GeoPoint
     attr_accessor :longitude, :latitude
 
@@ -276,7 +276,7 @@ module Parse
   end
 
   # File
-  # https://parse.com/docs/rest/guide/#files
+  # https://parseplatform.github.io/docs/rest/guide/#uploading-files
   class File
     attr_accessor :local_filename
     attr_accessor :parse_filename
