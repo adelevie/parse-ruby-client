@@ -1,9 +1,10 @@
 # encoding: utf-8
 module Faraday
-  # Custom version of Request::Retry with two additions:
-  #    1 - logs (on warn level) each retry attempt
-  #    2 - stores in 'X-ParseRubyClient-Retries' header the number of
-  #        remaining retries. Used in ExtendedParseJson middleware
+  # Custom version of Request::Retry with few additions:
+  #    - keeps default exceptions
+  #    - logs (on warn level) each retry attempt
+  #    - stores in 'X-ParseRubyClient-Retries' header the number of
+  #      remaining retries. Used in ExtendedParseJson middleware
   class BetterRetry < Request::Retry
     def initialize(app, options = nil)
       @logger = options.delete(:logger) if options
@@ -42,8 +43,12 @@ module Faraday
     private
 
     def log(env, exception)
-      msg = "Retrying Parse Error #{exception.inspect} on request #{env[:url]} #{env[:body].inspect} response #{env[:response].inspect}"
-      @logger.warn(msg) if @logger
+      if @logger
+        msg = [
+          "Retrying Parse Error #{exception.inspect} on request #{env[:url]}",
+          "#{env[:body].inspect} response #{env[:response].inspect}"]
+        @logger.warn(msg.join(' '))
+      end
     end
 
     def retries_header(env, retries)
