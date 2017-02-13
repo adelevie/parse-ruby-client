@@ -35,9 +35,9 @@ We support Ruby 2.1 and newer and JRuby 9000. Older versions are not supported, 
 require 'parse-ruby-client'
 
 Parse.create :application_id      => "<your_app_id>", # required
-             :master_key          => "<your_master_key>", # required
              :host                => 'http://localhost:1337', # required
              :path                => '/parse', # optional, defaults to '/1'
+             :master_key          => "<your_master_key>", # optional, defaults to nil
              :api_key             => "<your_api_key>", # optional, defaults to nil
              :quiet               => true | false,  # optional, defaults to false
              :get_method_override => true | false, # optional, defaults to true

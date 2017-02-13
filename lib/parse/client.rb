@@ -172,13 +172,14 @@ module Parse
     # This should be preferred over Parse.init which uses a singleton
     # client object for all API calls.
     def create(data = {}, &blk)
-      defaults = {
+      options = defaults = {
         application_id: ENV['PARSE_APPLICATION_ID'],
         master_key: ENV['PARSE_MASTER_API_KEY'],
+        api_key: ENV['PARSE_REST_API_KEY'],
         get_method_override: true
-      }
+      }.merge(data)
 
-      Client.new(defaults.merge(data), &blk)
+      Client.new(options, &blk)
     end
 
     # DEPRECATED: Please use create instead.
