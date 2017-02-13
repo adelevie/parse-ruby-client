@@ -1,8 +1,6 @@
 # encoding: utf-8
 module Parse
-  # Base exception class for errors thrown by the Parse
-  # client library. ParseError will be raised by any
-  # network operation if Parse.init() has not been called.
+  # Base exception class for errors thrown by the Parse client library.
   class ParseError < StandardError
   end
 

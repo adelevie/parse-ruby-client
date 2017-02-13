@@ -164,13 +164,7 @@ module Parse
   # Module methods
   # ------------------------------------------------------------
   class << self
-    # A singleton client for use by methods in Object.
-    # Always use Parse.client to retrieve the client object.
-    @client = nil
-
     # Factory to create instances of Client.
-    # This should be preferred over Parse.init which uses a singleton
-    # client object for all API calls.
     def create(data = {}, &blk)
       options = defaults = {
         application_id: ENV['PARSE_APPLICATION_ID'],
@@ -181,15 +175,7 @@ module Parse
 
       Client.new(options, &blk)
     end
-
-    # DEPRECATED: Please use create instead.
-    # Initialize the singleton instance of Client which is used
-    # by all API methods. Parse.init must be called before saving
-    # or retrieving any objects.
-    def init(data = {}, &blk)
-      warn '[DEPRECATION] `init` is deprecated.  Please use `create` instead.'
-      @@client = create(data, &blk)
-    end
+    alias :init :create
 
     # A convenience method for using global.json
     def init_from_cloud_code(path = '../config/global.json', app_name = nil)
@@ -199,17 +185,6 @@ module Parse
       application_id = applications[app_name]['applicationId']
       master_key = applications[app_name]['masterKey']
       create(application_id: application_id, master_key: master_key)
-    end
-
-    # Used mostly for testing. Lets you delete the api key global vars.
-    def destroy
-      @@client = nil
-      self
-    end
-
-    def client
-      raise ParseError, 'API not initialized' unless @@client
-      @@client
     end
 
     # Perform a simple retrieval of a simple object, or all objects of a

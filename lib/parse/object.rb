@@ -18,7 +18,7 @@ module Parse
       @class_name = class_name
       @op_fields = {}
       parse data if data
-      @client = client || Parse.client
+      @client = client
     end
 
     def eql?(other)
