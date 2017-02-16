@@ -33,11 +33,13 @@ module Parse
     attr_reader :get_method_override
 
     def initialize(data = {}, &_blk)
-      @host           = data[:host] || Protocol::HOST
+      @host           = data[:host]
       @path           = data[:path] || Protocol::PATH
+
       @application_id = data[:application_id]
-      @api_key        = data[:api_key]
       @master_key     = data[:master_key]
+
+      @api_key        = data[:api_key]
       @session_token  = data[:session_token]
       @max_retries    = data[:max_retries] || 3
       @logger         = data[:logger] || Logger
@@ -170,19 +172,14 @@ module Parse
     # This should be preferred over Parse.init which uses a singleton
     # client object for all API calls.
     def create(data = {}, &blk)
-      defaults = {
+      options = defaults = {
         application_id: ENV['PARSE_APPLICATION_ID'],
+        master_key: ENV['PARSE_MASTER_API_KEY'],
         api_key: ENV['PARSE_REST_API_KEY'],
         get_method_override: true
-      }
-      defaults.merge!(data)
+      }.merge(data)
 
-      # use less permissive key if both are specified
-      unless data[:master_key] || defaults[:api_key]
-        defaults[:master_key] = ENV['PARSE_MASTER_API_KEY']
-      end
-
-      Client.new(defaults, &blk)
+      Client.new(options, &blk)
     end
 
     # DEPRECATED: Please use create instead.

@@ -2,7 +2,7 @@
 module Parse
   module Cloud
     # Call cloud functions
-    # https://parse.com/docs/rest/guide/#cloud-code-cloud-functions
+    # https://parseplatform.github.io/docs/cloudcode/guide/
     class Function
       attr_accessor :function_name
       attr_accessor :client

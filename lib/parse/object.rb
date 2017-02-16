@@ -5,7 +5,7 @@ require 'parse/error'
 
 module Parse
   # A Parse object
-  # https://parse.com/docs/rest/guide/#objects
+  # https://parseplatform.github.io/docs/rest/guide/#object-format
   class Object < Hash
     attr_reader :parse_object_id
     attr_reader :class_name

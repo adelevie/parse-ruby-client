@@ -6,7 +6,7 @@ require 'parse/object'
 
 module Parse
   # A Parse User
-  # https://parse.com/docs/rest/guide/#users
+  # https://parseplatform.github.io/docs/rest/guide/#users
   class User < Parse::Object
     def self.authenticate(username, password, client = nil)
       body = {

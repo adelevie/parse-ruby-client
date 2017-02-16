@@ -1,7 +1,7 @@
 # encoding: utf-8
 module Parse
   # Query objects
-  # https://parse.com/docs/rest/guide/#queries
+  # https://parseplatform.github.io/docs/rest/guide/#queries
   class Query
     attr_accessor :where
     attr_accessor :class_name

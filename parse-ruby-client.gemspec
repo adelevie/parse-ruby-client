@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Alan deLevie", "Adam Alpern", "David Brownman", "rhymes"]
 
 
-  spec.summary       = %q{A simple Ruby client for the parse.com REST API}
+  spec.summary       = %q{A simple Ruby client for the Parse REST API}
   spec.homepage      = "http://github.com/adelevie/parse-ruby-client"
   spec.license       = "MIT"
 
