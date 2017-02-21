@@ -12,6 +12,18 @@ gem 'parse-ruby-client', git: 'https://github.com/adelevie/parse-ruby-client.git
 
 and it'll use the current master branch in your app.
 
+## Deprecated Functions
+
+In Feb 2017 we merged breakging changes in preparation for a `v1.0` release. After a year of deprecation notices, we felt it was reasonable to do now. Unfortunately, not being current on rubygems this was hard to do safely and we apologize for any headache this may cause. 
+
+If you want to freeze your build and continue using the (now unsupported) `Parse.init`, change your gemfile to the following line:
+
+```ruby
+gem 'parse-ruby-client', git: 'https://github.com/adelevie/parse-ruby-client.git', ref: '98596a04dfc30295c1d078c58c31b4cea299e8ca'
+```
+
+Thanks for sticking with us!
+
 ## Summary
 
 parse-ruby-client lets you interact with Parse using Ruby. There are many uses. For example:
