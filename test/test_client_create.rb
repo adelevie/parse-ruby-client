@@ -197,4 +197,16 @@ class TestClientCreate < ParseTestCase
     refute client.get_method_override
     refute client.session.builder.handlers.include? Faraday::GetMethodOverride
   end
+
+  def test_no_api_keys_error
+    skip('this is skipped in the meantime because env vars override everything')
+    VCR.use_cassette('test_no_api_keys_error') do
+      assert_raises(Parse::ParseError) do
+        client = Parse.create(master_key: nil, api_key: nil)
+        fake = client.object('shouldNeverExist')
+        fake['foo'] = 'bar'
+        fake.save
+      end
+    end
+  end
 end
