@@ -23,7 +23,7 @@ module Parse
       if !channel || channel.empty?
         @where = {}
       else
-        @channels = [channel]
+        @channels = [channel].flatten
       end
 
       @client = client || Parse.client
