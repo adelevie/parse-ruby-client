@@ -104,7 +104,7 @@ module Parse
 
     # NOTE: Don't leak our internal libraries to our clients.
     # Extend this list of exceptions as needed.
-    rescue Faraday::Error::ClientError => e
+    rescue Faraday::ClientError => e
       raise Parse::ConnectionError, e.message
     end
 
