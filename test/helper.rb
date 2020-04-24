@@ -26,7 +26,7 @@ require 'minitest/focus'
 
 # mocha + minitest
 require 'minitest/unit'
-require 'mocha/mini_test'
+require 'mocha/minitest'
 
 require 'vcr'
 
