@@ -40,10 +40,6 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'parse-ruby-client'
 
-if RUBY_VERSION[0..2] < '2.2'
-  YAML::ENGINE.yamler = 'syck' # get ascii strings as strings in fixtures
-end
-
 VCR.configure do |c|
   c.cassette_library_dir = 'test/fixtures/vcr_cassettes'
   c.default_cassette_options = { record: :once }

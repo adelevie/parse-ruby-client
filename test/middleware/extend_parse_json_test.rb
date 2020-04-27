@@ -18,7 +18,7 @@ module Middleware
     end
 
     def test_invalid_json
-      assert_raises(Faraday::Error::ParsingError) { conn.get('/invalid_json') }
+      assert_raises(Faraday::ParsingError) { conn.get('/invalid_json') }
     end
 
     def test_valid_json

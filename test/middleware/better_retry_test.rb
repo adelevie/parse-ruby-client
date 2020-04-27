@@ -14,8 +14,8 @@ module Middleware
       default_options = {
         logger: @logger,
         exceptions: [
-          'Faraday::Error::TimeoutError',
-          'Faraday::Error::ParsingError',
+          'Faraday::TimeoutError',
+          'Faraday::ParsingError',
           'Parse::ParseProtocolRetry'
         ]
       }

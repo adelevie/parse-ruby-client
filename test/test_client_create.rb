@@ -61,7 +61,7 @@ class TestClientCreate < ParseTestCase
     VCR.use_cassette('test_client_wraps_connection_errors') do
       _stubs, client = stubbed_client do |stub|
         stub.get(stub_path) do
-          raise Faraday::Error::ConnectionFailed, 'message'
+          raise Faraday::ConnectionFailed, 'message'
         end
       end
 

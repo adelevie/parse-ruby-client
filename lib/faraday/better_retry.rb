@@ -33,8 +33,10 @@ module Faraday
           log(env, exception)
           retries -= 1
           retries_header(env, retries)
-          sleep sleep_amount(retries + 1)
-          retry
+          if (sleep_amount = calculate_sleep_amount(retries + 1, env))
+            sleep sleep_amount
+            retry
+          end
         end
         raise
       end
