@@ -10,9 +10,9 @@ module Parse
   # The client that communicates with the Parse server via REST
   class Client
     RETRIED_EXCEPTIONS = [
-      'Faraday::Error::TimeoutError',
-      'Faraday::Error::ParsingError',
-      'Faraday::Error::ConnectionFailed',
+      'Faraday::TimeoutError',
+      'Faraday::ParsingError',
+      'Faraday::ConnectionFailed',
       'Parse::ParseProtocolRetry'
     ]
 
@@ -104,7 +104,7 @@ module Parse
 
     # NOTE: Don't leak our internal libraries to our clients.
     # Extend this list of exceptions as needed.
-    rescue Faraday::Error::ClientError => e
+    rescue Faraday::ClientError, Faraday::ConnectionFailed => e
       raise Parse::ConnectionError, e.message
     end
 

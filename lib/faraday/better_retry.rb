@@ -12,11 +12,11 @@ module Faraday
       super(app, options)
 
       # NOTE: Faraday 0.9.1 by default does not retry on POST requests
-      @options.methods << :post
+      @options.methods = @options.methods + [:post]
 
       # NOTE: the default exceptions are lost when custom ones are given
       default_exceptions = [
-        Errno::ETIMEDOUT, 'Timeout::Error', Error::TimeoutError]
+        Errno::ETIMEDOUT, 'Timeout::Error', TimeoutError]
       @options.exceptions.concat(default_exceptions)
     end
 
@@ -33,8 +33,10 @@ module Faraday
           log(env, exception)
           retries -= 1
           retries_header(env, retries)
-          sleep sleep_amount(retries + 1)
-          retry
+          if (sleep_amount = calculate_sleep_amount(retries + 1, env))
+            sleep sleep_amount
+            retry
+          end
         end
         raise
       end
